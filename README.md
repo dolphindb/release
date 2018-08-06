@@ -2,9 +2,9 @@ This document lists the release notes from DolphinDB version 0.6 and all subsequ
 
 ---
 
-[DolphinDB V0.7 Release Notes](https://2xdb.net/dolphindb/release/blob/master/0.7/README.md) (release date : 20180731)
+[DolphinDB V0.7 Release Notes](https://github.com/dolphindb/release/blob/master/0.7/README.md) (release date : 20180731)
 
-[DolphinDB V0.6 Release Notes](https://2xdb.net/dolphindb/release/blob/master/0.6/README.md) (release date : 20180630)
+[DolphinDB V0.6 Release Notes](https://github.com/dolphindb/release/blob/master/0.6/README.md) (release date : 20180630)
 
 ---
 

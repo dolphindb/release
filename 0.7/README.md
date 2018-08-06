@@ -18,16 +18,16 @@ Version : 0.7
 * Improve function name autocomplete and function parameter hinting. <font size=1 color=#00ee66> [*Enhancement*]</font>
 
 ## DolphinDB APIs
-* Java API [binary](http://www.dolphindb.com/downloads/DolphinDB_JavaAPI_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_JavaAPI_V0.7_src.zip)
+* Java API [binary](http://www.dolphindb.com/downloads/DolphinDB_JavaAPI_V0.7.zip) | [source](DolphinDB_JavaAPI_V0.7_src.zip)
 
-* C# API [binary](http://www.dolphindb.com/downloads/DolphinDB_CSharpAPI_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_CSharpAPI_V0.7_src.zip)
+* C# API [binary](http://www.dolphindb.com/downloads/DolphinDB_CSharpAPI_V0.7.zip) | [source](DolphinDB_CSharpAPI_V0.7_src.zip)
 
-* Python API [binary](http://www.dolphindb.com/downloads/DolphinDB_PythonAPI_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_PythonAPI_V0.7_src.zip)
+* Python API [binary](http://www.dolphindb.com/downloads/DolphinDB_PythonAPI_V0.7.zip) | [source](DolphinDB_PythonAPI_V0.7_src.zip)
 
 * JSON API [source](DolphinDB_JsonAPI_V0.7_src.zip)
 
 ## DolphinDB Plugins
-* Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_Excel_V0.7_src.zip)
-* ODBC plugin [binary](http://www.dolphindb.com/downloads/ODBC_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_Plugin_V0.7_src.zip)
-* AWS S3 plugin [binary](http://www.dolphindb.com/downloads/AWSS3_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_Plugin_V0.7_src.zip)
-* zlib plugin [binary](http://www.dolphindb.com/downloads/ZLIB_V0.7.zip) | [source](https://2xdb.net/dolphindb/release/blob/master/0.7/DolphinDB_Plugin_V0.7_src.zip)
+* Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.7.zip) | [source](DolphinDB_Excel_V0.7_src.zip)
+* ODBC plugin [binary](http://www.dolphindb.com/downloads/ODBC_V0.7.zip) | [source](DolphinDB_Plugin_V0.7_src.zip)
+* AWS S3 plugin [binary](http://www.dolphindb.com/downloads/AWSS3_V0.7.zip) | [source](DolphinDB_Plugin_V0.7_src.zip)
+* zlib plugin [binary](http://www.dolphindb.com/downloads/ZLIB_V0.7.zip) | [source](DolphinDB_Plugin_V0.7_src.zip)
