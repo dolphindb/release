@@ -9,15 +9,15 @@ Version : 0.8
 
 > New Features
 
-* DolphinDB driver for Grafana to display streaming data more conveniently.
-* Add a streaming data aggregation engine.
+* DolphinDB driver for Grafana to present streaming data more conveniently.
+* Add an aggregation engine for streaming data.
 * Add function quadprog for quadratic programming.
-* Add many functions for job scheduling.
-* Add machine learning functions randomForestClassifier and randomForestRegressor.
-* Add function addValuePartitions to dynamically increase partitions for value domain. 
+* Add the feature of resource scheduling and management.
+* Add random forest classifier and random forest regressor.
+* Add function addValuePartitions to dynamically add partitions for value domain. 
 * Add 14 cumulative distribution functions, 12 inverse cumulative distribution functions and 13 random numbers generator functions for frequently used distributions.
-* Add functions atImax and atImin.
-* Add functions skew and kurtosis.
+* Add aggregated functions atImax and atImin.
+* Add aggregated functions skew and kurtosis.
 * Support Chinese column names and variable names.
 
 > Improvements
@@ -33,8 +33,8 @@ Version : 0.8
 ## DolphinDB GUI
 [binary](http://www.dolphindb.com/downloads/DolphinDB_GUI_V0.8.zip)
 
-*  Improve formatting when INT and CHAR data types are exported to EXCEL.
-*  Support script with UTF-8 encoding.
+ *  Improve formatting when INT and CHAR data types are exported to EXCEL.
+ *  Support script with UTF-8 encoding.
 
 ## DolphinDB APIs
 JDBC [source](https://github.com/dolphindb/jdbc)
@@ -43,13 +43,18 @@ JDBC [source](https://github.com/dolphindb/jdbc)
 
 C# API [source](https://github.com/dolphindb/api-csharp)
  
- * support UTF-8 encoding.
- * try reconnect and login when network anomaly detected.
+ > Improvements
+ * Support UTF-8 encoding.
+ * Try reconnect and login when network anomaly detected.
 
 Python API [source](https://github.com/dolphindb/api-python3)
+ 
+ > Improvements
+ * Support UTF-8 encoding.
+ * Add Nan value for every data type. 
+ > Fixed 
+ * NULL value upload error 
 
- * support UTF-8 encoding.
- * add Nan value for every datatype. 
 ## DolphinDB Plugins
 
 * Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Excel_V0.8_src.zip)
