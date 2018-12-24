@@ -39,7 +39,7 @@ Version : 0.8
 ## DolphinDB APIs
 JDBC [source](https://github.com/dolphindb/jdbc)
 
- * new released API
+ * new released.
 
 C# API [source](https://github.com/dolphindb/api-csharp)
  
