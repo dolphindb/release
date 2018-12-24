@@ -5,7 +5,7 @@ Release Date : 2018-12-24
 Version : 0.8
 
 ## DolphinDB Server
-[Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.7.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.7.zip)
+[Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.8.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.8.zip)
 
 > New Features
 
