@@ -37,20 +37,19 @@ Version : 0.8
 *  Support script with UTF-8 encoding.
 
 ## DolphinDB APIs
-* Java API [source](https://github.com/dolphindb/api-java)
+JDBC [source](https://github.com/dolphindb/jdbc)
+
+ * new released API
+
+C# API [source](https://github.com/dolphindb/api-csharp)
  
-* JDBC [source](https://github.com/dolphindb/jdbc)
+ * support UTF-8 encoding.
+ * try reconnect and login when network anomaly detected.
 
-* C# API [source](https://github.com/dolphindb/api-csharp)
+Python API [source](https://github.com/dolphindb/api-python3)
 
-* Python API [source](https://github.com/dolphindb/api-python3)
-
-* JSON API [source](https://github.com/dolphindb/api-json)
-
-* C++ API [source](https://github.com/dolphindb/api-cplusplus)
-
-* R API [source](https://github.com/dolphindb/api-r)
-
+ * support UTF-8 encoding.
+ * add Nan value for every datatype. 
 ## DolphinDB Plugins
 
 * Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Excel_V0.8_src.zip)
