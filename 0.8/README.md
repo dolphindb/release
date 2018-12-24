@@ -51,7 +51,7 @@ Version : 0.8
 
 ## DolphinDB Plugins
 * [JDBC](https://github.com/dolphindb/jdbc)
-* Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.7.zip) | [source](https://github.com/dolphindb/release/blob/master/0.7/DolphinDB_Excel_V0.7_src.zip)
-* ODBC plugin [binary](http://www.dolphindb.com/downloads/ODBC_V0.7.zip) | [source](https://github.com/dolphindb/release/blob/master/0.7/DolphinDB_Plugin_V0.7_src.zip)
-* AWS S3 plugin [binary](http://www.dolphindb.com/downloads/AWSS3_V0.7.zip) | [source](https://github.com/dolphindb/release/blob/master/0.7/DolphinDB_Plugin_V0.7_src.zip)
-* zlib plugin [binary](http://www.dolphindb.com/downloads/ZLIB_V0.7.zip) | [source](https://github.com/dolphindb/release/blob/master/0.7/DolphinDB_Plugin_V0.7_src.zip)
+* Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Excel_V0.8_src.zip)
+* ODBC plugin [binary](http://www.dolphindb.com/downloads/ODBC_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
+* AWS S3 plugin [binary](http://www.dolphindb.com/downloads/AWSS3_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
+* zlib plugin [binary](http://www.dolphindb.com/downloads/ZLIB_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
