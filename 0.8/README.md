@@ -38,6 +38,8 @@ Version : 0.8
 
 ## DolphinDB APIs
 * Java API [source](https://github.com/dolphindb/api-java)
+ 
+* JDBC [source](https://github.com/dolphindb/jdbc)
 
 * C# API [source](https://github.com/dolphindb/api-csharp)
 
@@ -50,7 +52,7 @@ Version : 0.8
 * R API [source](https://github.com/dolphindb/api-r)
 
 ## DolphinDB Plugins
-* JDBC [binary](http://www.dolphindb.com/downloads/DolphinDB_JDBC_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_JDBC_V0.8_src.zip)
+
 * Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Excel_V0.8_src.zip)
 * ODBC plugin [binary](http://www.dolphindb.com/downloads/ODBC_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
 * AWS S3 plugin [binary](http://www.dolphindb.com/downloads/AWSS3_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
