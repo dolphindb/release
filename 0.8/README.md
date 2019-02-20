@@ -13,7 +13,6 @@ Version : 0.8
 * Add an aggregation engine for streaming data.
 * Add function quadprog for quadratic programming.
 * Add the feature of resource scheduling and management.
-* Add random forest classifier and random forest regressor.
 * Add function addValuePartitions to dynamically add partitions for value domain. 
 * Add 14 cumulative distribution functions, 12 inverse cumulative distribution functions and 13 random numbers generator functions for frequently used distributions.
 * Add aggregated functions atImax and atImin.
