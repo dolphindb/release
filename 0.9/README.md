@@ -40,6 +40,7 @@ C# API [source](https://github.com/dolphindb/api-csharp)
 ## DolphinDB Plugins
 
 * Provide MySql plugin to import data or query results from MySql to DolphinDB. 
-MySql Plugin [binary](http://www.dolphindb.com/downloads/MYSQL_V0.90.zip) | [source](https://github.com/dolphindb/DolphinDBPlugin/tree/master/mysql)
+
+    MySql Plugin [binary](http://www.dolphindb.com/downloads/MYSQL_V0.90.zip) | [source](https://github.com/dolphindb/DolphinDBPlugin/tree/master/mysql)
 
   
