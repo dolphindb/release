@@ -20,6 +20,6 @@ Version : 0.92
 
 ## DolphinDB Plugin
 
-* Updated include header files
-
 [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.92/DolphinDB_Plugin_V0.92_src.zip)
+
+* Updated include header files
