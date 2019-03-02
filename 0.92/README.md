@@ -18,3 +18,8 @@ Version : 0.92
 
 * Optimize the performance of return statement to avoid unnecessary data copy
 
+## DolphinDB Plugin
+
+* Updated include header files
+
+[DolphinDBPlugin](release/0.92/DolphinDB_Plugin_V0.92_src.zip)
