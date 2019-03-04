@@ -27,7 +27,7 @@ C++ API
 
 * Updated plugin header files
   
-    [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.92/DolphinDB_Plugin_V0.93_src.zip)
+    [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.93/DolphinDB_Plugin_V0.93_src.zip)
 
 * Updated plugin binary files
 
