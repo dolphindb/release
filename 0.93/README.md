@@ -28,3 +28,16 @@ C++ API
 * Updated plugin header files
   
     [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.92/DolphinDB_Plugin_V0.93_src.zip)
+
+* Updated plugin binary files
+
+    [DolphinDB AWS S3 Plugin](http://www.dolphindb.com/downloads/AWSS3_V0.93.zip)
+
+    [DolphinDB ZLIB Plugin](http://www.dolphindb.com/downloads/ZLIB_V0.93.zip)
+
+    [DolphinDB HDF5 Plugin](http://www.dolphindb.com/downloads/HDF5_V0.93.zip)
+
+    [DolphinDB MYSQL Plugin](http://www.dolphindb.com/downloads/MYSQL_V0.93.zip)
+
+    [DolphinDB ODBC Plugin](http://www.dolphindb.com/downloads/ODBC_V0.93.zip)
+
