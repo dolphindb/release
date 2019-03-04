@@ -22,4 +22,4 @@ Version : 0.92
 
 [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.92/DolphinDB_Plugin_V0.92_src.zip)
 
-* Updated include header files
+* Updated plugin header files
