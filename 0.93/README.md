@@ -16,14 +16,6 @@ Version : 0.93
 * Optimize the performance of SQL statement: pivot by.
 * Add published streaming tables to the output of getStreamingStat function
 
-> Bug fixes
-
-* Fixed a bug in sorting of bigarray
-* Fixed the bug of pivot by clause
-* Fixed a bug of SQL Engine. It would cause crash of a query with recusive table join on streaming tables
-* Fixed the bug of lowerBound method in bigarray
-* Fixed a bug of parsing a function call that doesn't exist in sql statement
-
 
 ## DolphinDB APIs
 
