@@ -55,17 +55,17 @@ Java API
 
 * Updated plugin header files
   
-    [DolphinDBPlugin](https://github.com/dolphindb/release/raw/master/0.94/DolphinDB_Plugin_V0.94_src.zip)
+    [DolphinDBPlugin](https://github.com/dolphindb/release/raw/master/0.94/DolphinDB_Plugin_V0.94.0_src.zip)
 
 * Updated plugin binary files
 
-    [DolphinDB AWS S3 Plugin](http://www.dolphindb.com/downloads/AWSS3_V0.94.zip)
+    [DolphinDB AWS S3 Plugin](http://www.dolphindb.com/downloads/AWSS3_V0.94.0.zip)
 
-    [DolphinDB ZLIB Plugin](http://www.dolphindb.com/downloads/ZLIB_V0.94.zip)
+    [DolphinDB ZLIB Plugin](http://www.dolphindb.com/downloads/ZLIB_V0.94.0.zip)
 
-    [DolphinDB HDF5 Plugin](http://www.dolphindb.com/downloads/HDF5_V0.94.zip)
+    [DolphinDB HDF5 Plugin](http://www.dolphindb.com/downloads/HDF5_V0.94.0.zip)
 
-    [DolphinDB MYSQL Plugin](http://www.dolphindb.com/downloads/MYSQL_V0.94.zip)
+    [DolphinDB MYSQL Plugin](http://www.dolphindb.com/downloads/MYSQL_V0.94.0.zip)
 
-    [DolphinDB ODBC Plugin](http://www.dolphindb.com/downloads/ODBC_V0.94.zip)
+    [DolphinDB ODBC Plugin](http://www.dolphindb.com/downloads/ODBC_V0.94.0.zip)
 
