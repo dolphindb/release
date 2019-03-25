@@ -24,9 +24,6 @@ Version : 0.94.0
 *  Add new functions and keywords to autocompletion.
   
 
-> Bug fixes
-
-
 ## DolphinDB Web Management
 
 > Improvements
