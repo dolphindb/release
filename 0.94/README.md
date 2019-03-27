@@ -21,7 +21,7 @@ Version : 0.94.0
 
 * When using function "publishTable", the subscription fails if offset=-1, persistence is enabled and getStreamingStat().MemoryOffset > 0. 
 (2019-03-27 0.94.1
-[Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.94.0.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.94.0.zip) )
+[Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.94.1.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.94.1.zip) )
 ## DolphinDB GUI
 [binary](http://www.dolphindb.com/downloads/DolphinDB_GUI_V0.94.zip)
 
