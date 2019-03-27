@@ -17,7 +17,11 @@ Version : 0.94.0
 * Improve the performance of SQL statement with GROUP BY clause which generates a large number of groups.
 * Boost the performance of symbol function and loadText function.
 
+> Bug fixes
 
+* When using function "publishTable", the subscription fails if offset=-1, persistence is enabled and getStreamingStat().MemoryOffset > 0. 
+(2019-03-27 0.94.1
+[Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.94.0.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.94.0.zip) )
 ## DolphinDB GUI
 [binary](http://www.dolphindb.com/downloads/DolphinDB_GUI_V0.94.zip)
 

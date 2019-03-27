@@ -13,7 +13,7 @@ Version : 0.8
 * Add an aggregation engine for streaming data.
 * Add function quadprog for quadratic programming.
 * Add the feature of resource scheduling and management.
-* Add function addValuePartitions to dynamically add partitions for value domain. 
+* Add function addValuePartitions to dynamically increase partitions for value domain. 
 * Add 14 cumulative distribution functions, 12 inverse cumulative distribution functions and 13 random numbers generator functions for frequently used distributions.
 * Add aggregated functions atImax and atImin.
 * Add aggregated functions skew and kurtosis.
@@ -38,7 +38,7 @@ Version : 0.8
 ## DolphinDB APIs
 JDBC [source](https://github.com/dolphindb/jdbc)
 
- * new released.
+ * new release.
 
 C# API [source](https://github.com/dolphindb/api-csharp)
  
@@ -50,12 +50,13 @@ Python API [source](https://github.com/dolphindb/api-python3)
  
  > Improvements
  * Support UTF-8 encoding.
- * Add Nan value for every data type. 
- > Fixed 
- * NULL value upload error 
+ * Add Nan value for every data type of Python pandas to be uploaded to DolphinDB. 
+ 
 
 ## DolphinDB Plugins
-
+* Updated plugin header files
+    
+    [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
 * Excel add-in [binary](http://www.dolphindb.com/downloads/DolphinDB_Excel_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Excel_V0.8_src.zip)
 * ODBC plugin [binary](http://www.dolphindb.com/downloads/ODBC_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)
 * AWS S3 plugin [binary](http://www.dolphindb.com/downloads/AWSS3_V0.8.zip) | [source](https://github.com/dolphindb/release/blob/master/0.8/DolphinDB_Plugin_V0.8_src.zip)

@@ -39,6 +39,10 @@ C# API [source](https://github.com/dolphindb/api-csharp)
 
 ## DolphinDB Plugins
 
+* Updated plugin header files
+
+    [DolphinDBPlugin](https://github.com/dolphindb/release/blob/master/0.9/DolphinDB_Plugin_V0.9_src.zip)
+
 * Provide MySql plugin to import data or query results from MySql to DolphinDB. 
 
     MySql Plugin [binary](http://www.dolphindb.com/downloads/MYSQL_V0.90.zip) | [source](https://github.com/dolphindb/DolphinDBPlugin/tree/master/mysql)
