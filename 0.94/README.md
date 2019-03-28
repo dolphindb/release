@@ -19,7 +19,7 @@ Version : 0.94.0
 
 > Bug fixes
 
-* When using function "publishTable", the subscription fails if offset=-1, persistence is enabled and getStreamingStat().MemoryOffset > 0. 
+* Subscription to a persisted streaming table may fail when parameter offset is set to -1. This is a bug introduced in version 0.94.0. It did not exist in earlier versions.
 (2019-03-27 0.94.1
 [Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.94.1.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.94.1.zip) )
 ## DolphinDB GUI
