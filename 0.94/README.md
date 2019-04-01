@@ -19,7 +19,8 @@ Version : 0.94.0
 
 > Bug fixes
 
-* Subscription to a persisted streaming table may fail when parameter offset is set to -1. This is a bug introduced in version 0.94.0. It did not exist in earlier versions.
+* Fixed a bug of function addValuePartition. After adding value partitions to the same database for a large number of times, opening the database may throw an out-of-memory exception.(2019-04-01 0.94.2 [Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.94.2.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.94.2.zip) ) 
+* Subscription to a persisted streaming table may fail when parameter offset is set to -1. This is a bug introduced in version 0.94.0. It did not exist in earlier versions.  
 (2019-03-27 0.94.1
 [Linux binary](http://www.dolphindb.com/downloads/DolphinDB_Linux_V0.94.1.zip) | [Windows binary](http://www.dolphindb.com/downloads/DolphinDB_Win_V0.94.1.zip) )
 ## DolphinDB GUI
