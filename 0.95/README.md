@@ -48,7 +48,7 @@ C# API
 
 * Updated plugin header file:
   
-    [DolphinDBPlugin](https://github.com/dolphindb/release/raw/master/0.94/DolphinDB_Plugin_V0.95.0_src.zip)
+    [DolphinDBPlugin](https://github.com/dolphindb/release/raw/master/0.95/DolphinDB_Plugin_V0.95.0_src.zip)
 
 * Updated plugin binary files:
 
