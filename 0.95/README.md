@@ -9,7 +9,7 @@ Version : 0.95.0
 [Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.95.0.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.95.0.zip) | 
 [Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.95.0.zip) | 
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.95.0.zip) | 
-[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.95.0.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.95.0.zip) 
 
 > New Features
 
@@ -25,6 +25,16 @@ Version : 0.95.0
 > Improvements
 
 * Integrated OpenBLAS for matrix multiplication optimization. The performance of large matrix multiplication speeds up 10~20 times.
+
+> Bug fixes
+
+* Fixed a bug of replay function in the case of multiple table replay. With this fix, the playback of all tables keep pace with each other. (2019-04-11 0.95.1.   [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.95.1.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.95.1.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.95.1.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.95.1.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.95.1.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.95.1.zip) )
+
+
 
 ## DolphinDB APIs
 
