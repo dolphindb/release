@@ -27,14 +27,24 @@ Version : 0.95.0
 * Integrated OpenBLAS for matrix multiplication optimization. The performance of large matrix multiplication speeds up 10~20 times.
 
 > Bug fixes
-* Fixed a performance issue of IF statement that executes the branch condition twice. (2019-04-15 0.95.2   [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.95.2.zip) | 
+
+* Fixed a bug in saving a symbol-type column in a partitioned local table on disk. When appending a string vector to a symbol-type column of an empty partitioned local table on disk, the underlying symbol base wouldn't be saved.  (2019-04-16 0.95.3   [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.95.3.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.95.3.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.95.3.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.95.3.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.95.3.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.95.3.zip) )
+
+* Fixed a bug of mvcc table with persistence. The system crashes when erasing all rows of a mvcc table that enables persistence. (2019-04-16 0.95.3 )
+
+
+* Fixed a performance issue of conditional statements that executes the "if" statement twice. (2019-04-15 0.95.2   [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.95.2.zip) | 
 [Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.95.2.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.95.2.zip) | 
 [Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.95.2.zip) | 
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.95.2.zip) | 
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.95.2.zip) )
 * Fixed a potential deadlock issue of function `getJobReturn`. (2019-04-15 0.95.2 )
 
-* Fixed a bug of replay function in the case of multiple table replay. With this fix, the playback of all tables keep pace with each other. (2019-04-11 0.95.1   [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.95.1.zip) | 
+* Fixed a bug of function `replay` with multiple tables. With this fix, all tables are replayed at the same speed. (2019-04-11 0.95.1   [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.95.1.zip) | 
 [Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.95.1.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.95.1.zip) | 
 [Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.95.1.zip) | 
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.95.1.zip) | 
