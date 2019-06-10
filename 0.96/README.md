@@ -50,6 +50,7 @@ Version : 0.96.0
 
 * Added the new plugin of trade matching engine, which matches up bids and offers to complete trades. (2019-06-10 0.96.1)
 
+   [DolphinDB MatchingEngine Plugin](https://github.com/dolphindb/DolphinDBPlugin/tree/master/MatchingEngine)
 * Updated plugin header file:
   
     [DolphinDBPlugin](https://github.com/dolphindb/release/raw/master/0.96/DolphinDB_Plugin_V0.96.1_src.zip)
