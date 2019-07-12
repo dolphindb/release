@@ -12,24 +12,25 @@ Version : 0.97.0
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.0.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.0.zip) 
 
 > New Features
-* Added settings for data retention policy, with which an user can periodically delete the partition data before a specified time in the database.
-* Added a new data type : datehour. User can use hour with VALUE partition to partition a database table. 
-* Added support for numpy data format. You can now  call function `saveAsNpy` to save DolphinDB object as .npy suffix file, then you can load .npy file by calling function `loadNpy`.
-* Added dynamically adding partition support for VALUE-based partition.
-* Added new function firstNot. [For details, please refer to](https://www.dolphindb.cn/cn/help/firstNot.html)
-* Added three new machine learning algorithms: K-Means, Naive Bayes, and K-nearest neighbors(KNN)
+* Added data retention policy that enables the system to automatically delete expired data according to the given data expiration policy.
+* Added function `saveAsNpy` to save DolphinDB objects as npy files(numpy data files). 
+* Added function `loadNpy` to load npy files as DolphinDB objects.
+* Now supports dynamically adding new partitions based on new data for the VALUE partition type. Use parameter 'newValuePartitionPolicy' to enable this feature
+* Added new function `firstNot`.
+* Added 3 new machine learning algorithms: K-Means, Naive Bayes and K-nearest neighbors(KNN).
 
 > Improvements
-* RepartitionDS is fully functional and supports repartitioning by the original partition schema of the database. [Please refer the manual for the details] (https://www.dolphindb.cn/cn/help/repartitionDS.html)
-* Added the support for high availability of data nodes: Even if some nodes are not available due to power outage or other reasons, as long as each partition has at least one copy in the cluster, the normal write and read of the cluster can be guaranteed.
-* Redo log configuration parameter naming changes: logDir changed to redoLogDir, redoLogGCInterval changed to redoLogPurgeInterval, and redoLogMx changed to redoLogPurgeLimit.
+* For COMPO partitions, function `repartitionDS` allows re-partitioning according to the original partition scheme of a given partition layer.
+* If we are writing to a partition on a node when the node becomes unavailable due to reasons such as power outage, as long as the partition has at least one copy on available data nodes, the writing operation will go through.
+* Redo log configuration parameter name changes: 'logDir' is now 'redoLogDir', 'redoLogGCInterval' is now 'redoLogPurgeInterval', 'redoLogMx' is now 'redoLogPurgeLimit'.
 
 > Bug fixes
-* Fixed a synatx error with the functionView nested call. 
+* Fixed the bug that the command `addFunctionView` fails when a functionView depends on another functionView.
 
 ## DolphinDB GUI
 
-* Added limit, VALUE, RANGE, LIST keyword support.
+* Added keyword highlights for `limit`, `VALUE`, `RANGE` and `LIST`.
+* Published the visual studio code plugin to support editing and executing DolphinDB scripts in visual studio code. [Plugin installation](https://marketplace.visualstudio.com/items?itemName=dolphindb.dolphindb-vscode)
 
 ## DolphinDB Plugin
 
@@ -41,7 +42,7 @@ Version : 0.97.0
 
     [DolphinDB MYSQL Plugin](http://www.dolphindb.com/downloads/MYSQL_V0.97.0.zip)
 
-    * Added the support of converting the long type in mysql directly into the timestamp type of DolphinDB
+    * Supports converting the long type in mysql directly into the timestamp type of DolphinDB.
 
     [DolphinDB ODBC Plugin](http://www.dolphindb.com/downloads/ODBC_V0.97.0.zip)
 
@@ -53,8 +54,8 @@ Version : 0.97.0
 
 java API
 
-* Fixed the streaming API unsubscription bug: ThreadedClient unsubscribe fails when the actionName parameter is not set.
+* Fixed a bug in streaming API unsubscriptioin: ThreadedClient cannot successfully unsubscribe when parameter 'actionName' is not specified.
 
 C# API
 
-* Optimizatized C# API interface: IVector supports the `add` method to dynamically increase row records.
+*  IVector can use method `add` to dynamically append rows.
