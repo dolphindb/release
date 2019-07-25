@@ -1,15 +1,28 @@
 # DolphinDB Release Notes
 
-Release Date : 2019-07-09
 
-Version : 0.97.0
 
 ## DolphinDB Server
+
+Version : 0.97.2
+Release Date : 2019-07-24
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.2.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.2.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.2.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.2.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.2.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.2.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.2.zip) 
+
+Version : 0.97.0
+Release Date : 2019-07-09
+
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.0.zip) | 
 [Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.0.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.0.zip) | 
 [Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.0.zip) | 
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.0.zip) | 
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.0.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.0.zip) 
+
+
 
 > New Features
 * Added data retention policy that enables the system to automatically delete expired data according to the given data expiration policy.
@@ -21,11 +34,13 @@ Version : 0.97.0
 
 > Improvements
 * For COMPO partitions, function `repartitionDS` allows re-partitioning according to the original partition scheme of a given partition layer.
-* If we are writing to a partition on a node when the node becomes unavailable due to reasons such as power outage, as long as the partition has at least one copy on available data nodes, the writing operation will go through.
+* When writing to a partition on a node and the node becomes unavailable due to reasons such as power outage, as long as the partition has at least one copy on available data nodes, the writing operation will finish successfully.
 * Redo log configuration parameter name changes: 'logDir' is now 'redoLogDir', 'redoLogGCInterval' is now 'redoLogPurgeInterval', 'redoLogMx' is now 'redoLogPurgeLimit'.
+* Can set priority and parallelism of jobs in APIs (**0.97.2 2019.07.24**). 
 
 > Bug fixes
 * Fixed the bug that the command `addFunctionView` fails when a functionView depends on another functionView.
+* Fixed a bug with command `dropTable`. Dropping a dfs table for multiple times may cause version inconsistency of tablet chunks. (**0.97.2 2019.07.24**)
 
 ## DolphinDB GUI
 
@@ -42,7 +57,7 @@ Version : 0.97.0
 
     [DolphinDB MYSQL Plugin](http://www.dolphindb.com/downloads/MYSQL_V0.97.0.zip)
 
-    * Supports converting the long type in mysql directly into the timestamp type of DolphinDB.
+    * Supports converting the long type in MySQL directly into the timestamp type of DolphinDB.
 
     [DolphinDB ODBC Plugin](http://www.dolphindb.com/downloads/ODBC_V0.97.0.zip)
 
@@ -52,9 +67,9 @@ Version : 0.97.0
 
 ## DolphinDB APIs
 
-java API
+Java API
 
-* Fixed a bug in streaming API unsubscriptioin: ThreadedClient cannot successfully unsubscribe when parameter 'actionName' is not specified.
+* Fixed a bug in streaming API unsubscription: ThreadedClient cannot successfully unsubscribe when parameter 'actionName' is not specified.
 
 C# API
 
