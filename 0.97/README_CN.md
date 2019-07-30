@@ -11,6 +11,16 @@
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.2.zip) | 
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.2.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.2.zip) 
 
+
+版本号 : 0.97.1
+发行日期 : 2019-07-15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.1.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.1.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.1.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.1.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.1.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.1.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.1.zip) 
+
 版本号 : 0.97.0
 发行日期 : 2019-07-09
 
@@ -40,7 +50,7 @@
 * 若正在进行写入操作时因断电等原因导致写入节点无法使用，只要被写入分区在可用节点上还有至少一份副本，写入操作就不会失败，会顺利完成。
 
 * redo log 配置参数命名变更： logDir变更为redoLogDir，redoLogGCInterval变更为redoLogPurgeInterval，redoLogMx变更为redoLogPurgeLimit。
-* 可以在API中设置作业的优先级和并行性(**0.97.2 2019.07.24**)。
+* 新增在API中设置作业的优先级和并行性的功能 (**0.97.1 2019.07.15**)。
 
 > Bug修复
 
