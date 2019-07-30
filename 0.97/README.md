@@ -13,6 +13,16 @@ Release Date : 2019-07-24
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.2.zip) | 
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.2.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.2.zip) 
 
+Version : 0.97.1
+Release Date : 2019-07-15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.1.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.1.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.1.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.1.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.1.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.1.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.1.zip) 
+
+
 Version : 0.97.0
 Release Date : 2019-07-09
 
@@ -36,7 +46,7 @@ Release Date : 2019-07-09
 * For COMPO partitions, function `repartitionDS` allows re-partitioning according to the original partition scheme of a given partition layer.
 * When writing to a partition on a node and the node becomes unavailable due to reasons such as power outage, as long as the partition has at least one copy on available data nodes, the writing operation will finish successfully.
 * Redo log configuration parameter name changes: 'logDir' is now 'redoLogDir', 'redoLogGCInterval' is now 'redoLogPurgeInterval', 'redoLogMx' is now 'redoLogPurgeLimit'.
-* Can set priority and parallelism of jobs in APIs (**0.97.2 2019.07.24**). 
+* Can set priority and parallelism of jobs in APIs (**0.97.1 2019.07.15**). 
 
 > Bug fixes
 * Fixed the bug that the command `addFunctionView` fails when a functionView depends on another functionView.
