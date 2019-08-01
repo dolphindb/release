@@ -1,35 +1,73 @@
 # DolphinDB Release Notes
 
-Release Date : 2019-07-09
 
-Version : 0.97.0
 
 ## DolphinDB Server
+
+Version: 0.97.3
+Release Date: 2019-07-29
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.3.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.3.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.3.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.3.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.3.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.3.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.3.zip) 
+
+
+Version : 0.97.2
+Release Date : 2019-07-24
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.2.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.2.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.2.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.2.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.2.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.2.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.2.zip) 
+
+Version : 0.97.1
+Release Date : 2019-07-15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.1.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.1.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.1.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.1.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.1.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.1.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.1.zip) 
+
+
+Version : 0.97.0
+Release Date : 2019-07-09
+
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.0.zip) | 
 [Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.0.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.0.zip) | 
 [Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.0.zip) | 
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.0.zip) | 
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.0.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.0.zip) 
 
+
+
 > New Features
-* Added settings for data retention policy, with which an user can periodically delete the partition data before a specified time in the database.
-* Added a new data type : datehour. User can use hour with VALUE partition to partition a database table. 
-* Added support for numpy data format. You can now  call function `saveAsNpy` to save DolphinDB object as .npy suffix file, then you can load .npy file by calling function `loadNpy`.
-* Added dynamically adding partition support for VALUE-based partition.
-* Added new function firstNot. [For details, please refer to](https://www.dolphindb.cn/cn/help/firstNot.html)
-* Added three new machine learning algorithms: K-Means, Naive Bayes, and K-nearest neighbors(KNN)
+* Added data retention policy that enables the system to automatically delete expired data according to the given data expiration policy.
+* Added function `saveAsNpy` to save DolphinDB objects as npy files(numpy data files). 
+* Added function `loadNpy` to load npy files as DolphinDB objects.
+* Now supports dynamically adding new partitions based on new data for the VALUE partition type. Use parameter 'newValuePartitionPolicy' to enable this feature
+* Added new function `firstNot`.
+* Added 3 new machine learning algorithms: K-Means, Naive Bayes and K-nearest neighbors(KNN).
+* When appending data to a partitioned table, if the temporal data type in the new data does not match that in the original data, 
+  the system automatically converts the temporal type in the new data to that in the original data. (**0.97.3 2019-07-29**)
 
 > Improvements
-* RepartitionDS is fully functional and supports repartitioning by the original partition schema of the database. [Please refer the manual for the details] (https://www.dolphindb.cn/cn/help/repartitionDS.html)
-* Added the support for high availability of data nodes: Even if some nodes are not available due to power outage or other reasons, as long as each partition has at least one copy in the cluster, the normal write and read of the cluster can be guaranteed.
-* Redo log configuration parameter naming changes: logDir changed to redoLogDir, redoLogGCInterval changed to redoLogPurgeInterval, and redoLogMx changed to redoLogPurgeLimit.
+* For COMPO partitions, function `repartitionDS` allows re-partitioning according to the original partition scheme of a given partition layer.
+* When writing to a partition on a node and the node becomes unavailable due to reasons such as power outage, as long as the partition has at least one copy on available data nodes, the writing operation will finish successfully.
+* Redo log configuration parameter name changes: 'logDir' is now 'redoLogDir', 'redoLogGCInterval' is now 'redoLogPurgeInterval', 'redoLogMx' is now 'redoLogPurgeLimit'.
+* Can set priority and parallelism of jobs in APIs (**0.97.1 2019.07.15**). 
 
 > Bug fixes
-* Fixed a synatx error with the functionView nested call. 
+* Fixed the bug that the command `addFunctionView` fails when a functionView depends on another functionView.
+* Fixed a bug with command `dropTable`. Dropping a dfs table for multiple times may cause version inconsistency of tablet chunks. (**0.97.2 2019.07.24**)
 
 ## DolphinDB GUI
 
-* Added limit, VALUE, RANGE, LIST keyword support.
+* Added keyword highlights for `limit`, `VALUE`, `RANGE` and `LIST`.
+* Published the visual studio code plugin to support editing and executing DolphinDB scripts in visual studio code. [Plugin installation](https://marketplace.visualstudio.com/items?itemName=dolphindb.dolphindb-vscode)
 
 ## DolphinDB Plugin
 
@@ -41,7 +79,7 @@ Version : 0.97.0
 
     [DolphinDB MYSQL Plugin](http://www.dolphindb.com/downloads/MYSQL_V0.97.0.zip)
 
-    * Added the support of converting the long type in mysql directly into the timestamp type of DolphinDB
+    * Supports converting the long type in MySQL directly into the timestamp type of DolphinDB.
 
     [DolphinDB ODBC Plugin](http://www.dolphindb.com/downloads/ODBC_V0.97.0.zip)
 
@@ -51,10 +89,10 @@ Version : 0.97.0
 
 ## DolphinDB APIs
 
-java API
+Java API
 
-* Fixed the streaming API unsubscription bug: ThreadedClient unsubscribe fails when the actionName parameter is not set.
+* Fixed a bug in streaming API unsubscription: ThreadedClient cannot successfully unsubscribe when parameter 'actionName' is not specified.
 
 C# API
 
-* Optimizatized C# API interface: IVector supports the `add` method to dynamically increase row records.
+*  IVector can use method `add` to dynamically append rows.
