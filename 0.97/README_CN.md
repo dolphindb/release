@@ -2,6 +2,15 @@
 
 ## DolphinDB服务器
 
+版本号 : 0.97.4
+发行日期 : 2019-08-16
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.97.4.zip) | 
+[Linux32 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux32_V0.97.4.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.97.4.zip) | 
+[Windows32 binary](http://www.dolphindb.com/downloads/DolphinDB_Win32_V0.97.4.zip) | 
+[ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.97.4.zip) | 
+[ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.97.4.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.4.zip) 
+
 版本号 : 0.97.3
 发行日期 : 2019-07-29
 
@@ -63,10 +72,22 @@
 * redo log 配置参数命名变更： logDir变更为redoLogDir，redoLogGCInterval变更为redoLogPurgeInterval，redoLogMx变更为redoLogPurgeLimit。
 * 新增在API中设置作业的优先级和并行性的功能 (**0.97.1 2019.07.15**)。
 
+* 模板函数cross返回值可以是scalar或tuple。若cross返回一个tuple，其元素个数与X的维度一致，每个元素又是一个tuple，这个tuple的元素个数与Y的维度一致(**0.97.4 2019.08.16**)。
+* nullFill函数的替换参数可以不仅是标量，也可以是与被替换对象维度相同的vector或matrix (**0.97.4 2019.08.16**)。
+* 分布式数据库路径中`dfs`关键字不再大小写敏感 (**0.97.4 2019.08.16**)。
+* sql语句分多行写时，中间允许注释 (**0.97.4 2019.08.16**)。
+* 增强对VALUE分区partitionScheme参数的检查，不允许包含负值 (**0.97.4 2019.08.16**)。
+
+
 > Bug修复
 
 * 解决当一个functionView依赖另一个functionView时，会导致addFunctionView失败的bug。
+
 * 修复了dropTable的错误。多次删除dfs表可能会导致数据块的版本不一致(**0.97.2 2019.07.24**)。
+
+* where 从句中存在时序相关函数时，取消分步执行的优化 (**0.97.4 2019.08.16**)。
+
+* 对同一个sql query重复执行replayDS函数，第二次以及之后的执行结果有误 (**0.97.4 2019.07.15**)。
 
 ## DolphinDB GUI
 
