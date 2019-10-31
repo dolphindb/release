@@ -35,8 +35,9 @@ Release Date: 2019-10-25
 
 * Added function `hex` to display integers in hexadecimal format.
 
-* Added function concatDateTime that combine date and time object to one temporal object.  
+* Added function `concatDateTime` that combines a DATE-type object and an object of type SECOND, TIME or NANOTIME to one object.  
 
+* Added function `isDuplicated` to mark duplicate values in one or multiple vectors.
 
 > Improvements
 
@@ -44,6 +45,15 @@ Release Date: 2019-10-25
 
 * Improved the performance of string functions including left, right, startsWith, endsWith, substr, substru, lpad, rpad, strReplace, and strpos
 
+* Function `transpose` now supports dictionaries and tables.
+
+> Upgrade Instructions
+
+* Many new features such as the new data types, dimension table and column comments in this release require the latest version of GUI.
+
+* Must use the latest version of GUI to browse partitioned tables in the variable panel.
+
+* The folder server/web needs to be updated.
 
 ## DolphinDB GUI
 
@@ -77,8 +87,8 @@ Release Date: 2019-10-25
 
 * JAVA API:
 
-    Added login information loss detection and automatic re-login feature
+    Now support login information loss detection and automatic re-login. 
 
 * C# API:
  
-    Added login information loss detection and automatic re-login feature
+    Now support login information loss detection and automatic re-login.
