@@ -26,7 +26,7 @@
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.3.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.99.3.zip) 
 
-版本号 : 0.99.4 [西部数据紧急修复]
+版本号 : 0.99.4 
 发行日期 : 2019-11-19
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.4.zip) 
