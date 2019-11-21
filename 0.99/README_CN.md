@@ -11,6 +11,26 @@
 [ARM64 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM64_V0.99.0.zip) | 
 [ARM32 binary](http://www.dolphindb.com/downloads/DolphinDB_ARM32_V0.99.0.zip) | [Loongson64 binary](http://www.dolphindb.com/downloads/DolphinDB_Loongson64_V0.97.0.zip) 
 
+版本号 : 0.99.1
+发行日期 : 2019-11-5
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.1.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.99.1.zip) 
+
+版本号 : 0.99.2
+发行日期 : 2019-11-10
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.2.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.99.2.zip) 
+
+版本号 : 0.99.3 [官网下载]
+发行日期 : 2019-11-14
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.3.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.99.3.zip) 
+
+版本号 : 0.99.4 [西部数据紧急修复]
+发行日期 : 2019-11-19
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.4.zip) 
+
 
 > 新功能
 
@@ -36,6 +56,10 @@
  
 * 增加了`concatDateTime`函数，将Date和Second、Time、Nanotime等时间类型合并。
 
+* 新增dailyAlignedBar, charAt, weekOfMonth 函数(**0.99.4**)
+
+
+
 > 改进
 
 * 增加了`enableTableShareAndPersistence`函数，用于保证流数据表`share`和`enableTablePersistence`的两个操作的原子性，从而解决多客户端并发订阅时可能导致订阅失败的问题。
@@ -45,6 +69,25 @@
 * `transpose`(`flip`)函数增加了对 dictionary 和 table 的支持。
 
 * 增加了`isDuplicated`函数，标记出向量中重复值或表中的重复行。
+
+* streReplace参数允许SYMBOL类型 (**0.99.1**)
+
+* flip函数支持tuple类型(**0.99.4**)
+
+* 优化 recorderColumns!函数，重排列序时不需要指定所有列。(**0.99.4**)
+
+* 当使用update创建新的列时，即使数据为空向量，也创建新列。(**0.99.4**)
+
+> Bug fix:
+
+* 当symbol数量超出限制时，抛出异常之后再次尝试写入成功，导致后续访问越界crash (**0.99.1**)
+
+* 修复mpercentile函数对有空值的向量操作时，多次重复执行会发生crash的问题 (**0.99.2**)
+
+* 修复流数据订阅下标为-1时重连失败的问题。(**0.99.2**)
+
+* 在高写入压力下, 高可用集群有小概率发生控制节点死锁。(**0.99.3**)
+
 
 > 升级说明
 
