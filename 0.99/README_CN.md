@@ -21,7 +21,7 @@
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.2.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.99.2.zip) 
 
-版本号 : 0.99.3 [官网下载]
+版本号 : 0.99.3 
 发行日期 : 2019-11-14
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V0.99.3.zip) | [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V0.99.3.zip) 
