@@ -1,6 +1,8 @@
 This document lists the release notes from DolphinDB version 0.60 and all subsequent versions. Each notes includes updates and download links of DolphinDB server, GUI, APIs and plugins.
 
 ---
+[DolphinDB V1.00 Release Notes](https://github.com/dolphindb/release/blob/master/1.00/README.md) (release date : 2019-12-02)
+
 [DolphinDB V0.99 Release Notes](https://github.com/dolphindb/release/blob/master/0.99/README.md) (release date : 2019-10-25)
 
 [DolphinDB V0.98 Release Notes](https://github.com/dolphindb/release/blob/master/0.98/README.md) (release date : 2019-09-23)
