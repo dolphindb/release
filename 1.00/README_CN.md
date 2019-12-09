@@ -8,6 +8,13 @@
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.0.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.0.zip) | 
 
+
+版本号： 1.00.1
+发行日期： 2019.12.08
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.1.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.1.zip) | 
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -26,9 +33,19 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * SQL中支持hint常量 HINT_HASH，HINT_SNAPSHOT，HINT_KEEPORDER，具体用法参考用户手册`sql`函数。
 
+* 新增函数`getOS`, `getOSBit`, `parseExpr`, `dayOfWeek` (**1.00.1**)
+
+* 对于不可分解的简单任务，其循环执行过程也可以被`cancelJob`与`cancelConsoleJob`函数终止。 (**1.00.1**)
+
 > Bug修复:
 
 * 对数据表使用`reorderColumns!`函数之后，再进行更新操作会导致crash。
+
+* 针对内存分区表的sql update和sql delete语句如果使用了本地变量会导致crash。 (**1.00.1**)
+
+* 修复在元数据高可用场景下，Follower控制节点内存泄漏问题。 (**1.00.1**)
+
+* 修复job序列化问题。 当一个module函数被多个module调用导致反序列化失败。 (**1.00.1**)
 
 > 改进:
 
@@ -37,7 +54,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 ## DolphinDB GUI
 
-* 支持远程同步 DolphinDB module的功能（Synchronize module to server）。
+* 支持远程同步 DolphinDB module的功能(Synchronize module to server)。
 
 
 ## DolphinDB plugin binary files

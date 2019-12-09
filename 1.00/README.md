@@ -21,10 +21,16 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * Math functions: `isMonotonic,isMonotonicIncreasing,isMonotonicDecreasing,quantile,quantileSeries`
     * Function `nunique` calculates the number of unique elements in a vector    
     * Function `interpolate`
+* Added functions `getOS`, `getOSBit`, `parseExpr`, and `dayOfWeek` (**1.00.1**)
+* Can specify the startup script through the system parameter 'startup' (**1.00.1**)
+* Functions `cancelJob` and `cancelConsoleJob` can cancel tasks that cannot be decomposed into subtasks in for loops (**1.00.1**)
 
 > Bug fix:
 
-* Fixed the bug that causes system crash when updating a table after applying function `reorderColumns!`.
+* Fixed the bug that causes system crash when updating a table after using function `reorderColumns!`. 
+* Fixed the bug that causes system crash when SQL update and delete statements on partitioned in-memory tables are used with local variables. (**1.00.1**)
+* Fixed memory leaking problem of Raft follower nodes. (**1.00.1**)
+* Fixed problems from using module when jobs are serialized to disk. (**1.00.1**)
 
 > Improvement:
 
