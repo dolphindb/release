@@ -10,10 +10,41 @@
 
 
 版本号： 1.00.1
-发行日期： 2019.12.08
+发行日期： 2019.12.11
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.1.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.1.zip) | 
+
+版本号： 1.00.2
+发行日期： 2019.12.16
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.2.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.2.zip) | 
+
+版本号： 1.00.3
+发行日期： 2019.12.18
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.3.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.3.zip) | 
+
+
+版本号： 1.00.4
+发行日期： 2019.12.20
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.4.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.4.zip) | 
+
+版本号： 1.00.5
+发行日期： 2019.12.23
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.5.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.5.zip) | 
+
+版本号： 1.00.6
+发行日期： 2020.1.6
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.6.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.6.zip) | 
 
 > 新功能
 
@@ -37,6 +68,12 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 对于不可分解的简单任务，其循环执行过程也可以被`cancelJob`与`cancelConsoleJob`函数终止。 (**1.00.1**)
 
+* 增加了函数`mmse`(**1.00.3**)
+
+* `replay`函数增加了 absoluteRate 参数，支持以数据产生速度的指定倍数进行回放。 (**1.00.4**)
+
+* 增加了`ffill!`函数。 (**1.00.5**)
+
 > Bug修复:
 
 * 对数据表使用`reorderColumns!`函数之后，再进行更新操作会导致crash。
@@ -47,15 +84,35 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 修复job序列化问题。 当一个module函数被多个module调用导致反序列化失败。 (**1.00.1**)
 
+* 修复 single mode 元数据未及时做checkpoint导致重启慢的问题。(**1.00.1**)
+
+* 修复 `createTimeSeriesAggregator` 函数指定多个keyColumn时引起crash问题。(**1.00.2**)
+
+* 修复在多层分区数据库中使用`loadTableBySQL`读取数据为空的问题。 (**1.00.2**)
+
+* 包含多表的分布式库，多次对其中一个表做dropPartition和写入数据后，可能发生缓存数据corrupted异常。 (**1.00.4**)
+
+* 修复sql中涉及1970年之前的日期数据时可能引起crash的问题。 (**1.00.5**)
+
+* 函数视图中常量序列化错误，多次运行函数会发生crash。 (**1.00.6**)
+
 > 改进:
 
 * 允许`scheduleJob`直接或间接调用module中定义的函数。
+
+* isMonotonic, isMonotonicIncreasing, isMonotonicDecreasing函数对相邻值相等的情况，不改变其单调递增或单调递减属性。(**1.00.2**)
+
+* 除了vector和matrix, nullFill!, bfill!, ffill!, lfill! 可以接受内存表作为输入参数，支持对整表所有列替换null值。(**1.00.2**)
+
+* 完善了时序聚合引擎，可以处理仅能保证时间戳在分组内有序的数据流（即不是全局有序数据流）。(**1.00.3**)
+
+* 时序聚合引擎的窗口对齐尺度扩展到支持分钟级别。(**1.00.3**)
+
 
 
 ## DolphinDB GUI
 
 * 支持远程同步 DolphinDB module的功能(Synchronize module to server)。
-
 
 ## DolphinDB plugin binary files
 
