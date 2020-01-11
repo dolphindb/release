@@ -72,7 +72,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * `replay`函数增加了 absoluteRate 参数，支持以数据产生速度的指定倍数进行回放。 (**1.00.4**)
 
-* 增加了`ffill!`函数。 (**1.00.5**)
+* 增加了`fill!`函数。 (**1.00.5**)
 
 > Bug修复:
 
@@ -93,8 +93,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 包含多表的分布式库，多次对其中一个表做dropPartition和写入数据后，可能发生缓存数据corrupted异常。 (**1.00.4**)
 
 * 修复sql中涉及1970年之前的日期数据时可能引起crash的问题。 (**1.00.5**)
-
-* 函数视图中常量序列化错误，多次运行函数会发生crash。 (**1.00.6**)
+* 
+* 修复了序列化函数视图中赋值语句的一个bug。如果赋值语句右边是常数组，序列化后多次运行该视图函数，这个常数组可能会被修改，导致计算结果有误或crash。 (**1.00.6**)
 
 > 改进:
 
@@ -108,11 +108,23 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 时序聚合引擎的窗口对齐尺度扩展到支持分钟级别。(**1.00.3**)
 
+* 改进了csv加载的功能。（**1.00.6**） 
+    * 增加了可选参数skipRows。
+    * 允许在schema中添加字段名称为`format`的列，为日期和时间类型指定格式。
+    * 允许在schema中添加字段名称为`col`的列，用于指定需要加载的列。
+    * 解析整型的时候允许前后有文字，数字用逗号分隔。
+    * 解析浮点数的时候，允许在数字前面有一个货币符号，譬如$。
+    * loadTextEx允许指定一个transforming function，转换解析的数据表后添加到数据库中。
+
+
 
 
 ## DolphinDB GUI
 
 * 支持远程同步 DolphinDB module的功能(Synchronize module to server)。
+
+* 修复保存用户名密码后不生效的问题。
+
 
 ## DolphinDB plugin binary files
 
@@ -130,6 +142,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * JAVA
 
     优化流数据重连稳定性
+    
+    修复了1970年之前的日期转换错误的问题
 
 * C++ 
 
