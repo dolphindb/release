@@ -100,9 +100,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 允许`scheduleJob`直接或间接调用module中定义的函数。
 
-* isMonotonic, isMonotonicIncreasing, isMonotonicDecreasing函数对相邻值相等的情况，不改变其单调递增或单调递减属性。(**1.00.2**)
+* `isMonotonic`, `isMonotonicIncreasing`, `isMonotonicDecreasing`函数由严格单调递增或递减改为非严格递增或递减。(**1.00.2**)
 
-* 除了vector和matrix, nullFill!, bfill!, ffill!, lfill! 可以接受内存表作为输入参数，支持对整表所有列替换null值。(**1.00.2**)
+* 除了vector和matrix, `nullFill!`, `bfill!`, `ffill!`, `lfill!` 可以接受内存表作为输入参数，支持对整表所有列替换null值。(**1.00.2**)
 
 * 完善了时序聚合引擎，可以处理仅能保证时间戳在分组内有序的数据流（即不是全局有序数据流）。(**1.00.3**)
 
