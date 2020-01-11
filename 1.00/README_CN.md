@@ -108,13 +108,13 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 时序聚合引擎的窗口对齐尺度扩展到支持分钟级别。(**1.00.3**)
 
-* 改进了csv加载的功能。（**1.00.6**） 
-    * 增加了可选参数skipRows。
-    * 允许在schema中添加字段名称为`format`的列，为日期和时间类型指定格式。
-    * 允许在schema中添加字段名称为`col`的列，用于指定需要加载的列。
-    * 解析整型的时候允许前后有文字，数字用逗号分隔。
-    * 解析浮点数的时候，允许在数字前面有一个货币符号，譬如$。
-    * loadTextEx允许指定一个transforming function，转换解析的数据表后添加到数据库中。
+* 改进了文本文件数据导入的相关函数`loadText`、`ploadText`、`loadTextEx`、`textChunkDS`以及`extractTextScheama`。（**1.00.6**） 
+    * 允许忽略文件开始指定行数。
+    * 允许为日期和时间类型指定解析格式。
+    * 允许仅导入指定的部分列。
+    * 整型或者浮点类型前后有非数字字符则忽略，如果不包含任何数字则返回空值（以前版本返回0）。
+    * 可以解析整数或浮点数中的逗号分隔符。
+    * `loadTextEx`可以指定一个转换函数。导入的数据转换后再追加到数据库表中。
 
 
 
