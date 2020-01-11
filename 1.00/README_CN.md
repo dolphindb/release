@@ -93,7 +93,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 包含多表的分布式库，多次对其中一个表做dropPartition和写入数据后，可能发生缓存数据corrupted异常。 (**1.00.4**)
 
 * 修复sql中涉及1970年之前的日期数据时可能引起crash的问题。 (**1.00.5**)
-* 
+
 * 修复了序列化函数视图中赋值语句的一个bug。如果赋值语句右边是常数组，序列化后多次运行该视图函数，这个常数组可能会被修改，导致计算结果有误或crash。 (**1.00.6**)
 
 > 改进:
