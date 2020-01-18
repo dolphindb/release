@@ -46,6 +46,12 @@
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.6.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.6.zip) | 
 
+版本号： 1.00.7
+发行日期： 2020.1.17
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.7.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.7.zip) | 
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -74,6 +80,12 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 增加了`fill!`函数。 (**1.00.5**)
 
+* 新增数学函数: `sinh, cosh, tanh, asinh, acosh, atanh, deg2rad, rad2deg`。(**1.00.7**)
+
+* 新增线性规划函数：`linprog`。(**1.00.7**)
+
+
+
 > Bug修复:
 
 * 对数据表使用`reorderColumns!`函数之后，再进行更新操作会导致crash。
@@ -94,7 +106,14 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 修复sql中涉及1970年之前的日期数据时可能引起crash的问题。 (**1.00.5**)
 
-* 修复了序列化函数视图中赋值语句的一个bug。如果赋值语句右边是常数组，序列化后多次运行该视图函数，这个常数组可能会被修改，导致计算结果有误或crash。 (**1.00.6**)
+* 修复了序列化函数视图中赋值语句的一个bug：如果赋值语句右边是常数组，序列化后多次运行该视图函数，这个常数组可能会被修改，导致计算结果有误或crash。 (**1.00.6**)
+
+* 修复了loadTable加载顺序分区表数据不准确的一个bug：使用loadTable加载顺序(SEQ)分区的磁盘表时，指定分区参数是一个长度为N向量，那么实际加载的数据是前N个分区的数据， 而不是向量中指定的分区中的数据。(**1.00.7**)
+
+* 修复了定时任务(Scheduled Job)无法正常加载的bug： 定时任务若引用了视图函数，会无法加载视图函数，导致系统启动失败。(**1.00.7**)
+
+* 修复了删除数据库(dropDatabase)的一个bug：如果数据库的分区数据只存在于集群中的部分数据节点， 删除时会在控制节点的元数据日志中写入一些空的Chunk编号，进而导致下次启动时重放日志失败。(**1.00.7**)
+
 
 > 改进:
 
@@ -115,8 +134,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * 整型或者浮点类型前后有非数字字符则忽略，如果不包含任何数字则返回空值（以前版本返回0）。
     * 可以解析整数或浮点数中的逗号分隔符。
     * `loadTextEx`可以指定一个转换函数。导入的数据转换后再追加到数据库表中。
-
-
+* 改进了函数 `sum3`、`sum4`。当应用于矩阵时，sum3和sum4计算每行的统计信息。之前计算的是矩阵整体的统计信息。(**1.00.7**)
+* 修改了函数 `percentile`和`mpercentile`。 从最近序数(nearest rank)方法改为插值(interpolation)方法，与pandas保持一致。插值方法有linear, lower, higher, midpoint, nearest 5种。(**1.00.7**)
 
 
 ## DolphinDB GUI
