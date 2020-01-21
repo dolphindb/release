@@ -52,6 +52,14 @@
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.7.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.7.zip) | 
 
+版本号： 1.00.8
+发行日期： 2020.1.19
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.8.zip) | 
+
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -84,6 +92,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 新增线性规划函数：`linprog`。(**1.00.7**)
 
+* 新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。
+
 
 
 > Bug修复:
@@ -113,6 +123,13 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复了定时任务(Scheduled Job)无法正常加载的bug： 定时任务若引用了视图函数，会无法加载视图函数，导致系统启动失败。(**1.00.7**)
 
 * 修复了删除数据库(`dropDatabase`)的一个bug：如果分区数据库的数据只存在于集群中的部分数据节点， 删除数据库时会在控制节点的元数据日志中写入一些空的Chunk编号，进而导致下次启动时重放日志失败。(**1.00.7**)
+
+* 修复了字符串数组的潜在内存泄漏问题。数组中某些字符串的字节长度超过22，执行以下操作可能导致内存泄漏：(**1.00.8**)
+    * 在SQL语句中，对该字符串列用排序方法进行分组 
+    * 在SQL语句中，按多个列进行排序，其中第一个列是字符串类型。
+    * 在SQL语句中，对字符串列进行转置（pivot by）操作。
+    * 使用pivotby，contextby，groupby，semgentby以及cutpoints函数
+
 
 
 > 改进:
@@ -163,10 +180,18 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     优化流数据重连稳定性
     
     修复了1970年之前的日期转换错误的问题
+    
+    新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。(**1.00.8**)
 
 * C++ 
 
     优化流数据重连稳定性
+    
+    新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。(**1.00.8**)
+    
+* go  
+
+    新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。(**1.00.8**)
    
 * C# 
 
