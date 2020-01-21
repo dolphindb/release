@@ -51,11 +51,18 @@ Release date: 2020.1.17
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.7.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.7.zip) | 
 
-> New feature
+Version: 1.00.8
+Release date: 2020.1.19
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.8.zip) | 
+
+> New features
 
 * Support high-availability of streaming based on Raft protocol.
 
-* New functions:a
+* New functions:
     * Temporal functions: `dayOfYear,dayOfMonth,
 quarterOfYear,monthOfYear,weekOfYear,hourOfDay,minuteOfHour,secondOfMinute,weekday,yearBegin,yearEnd,businessYearBegin,businessYearEnd,monthBegin,monthEnd,semiMonthBegin,semiMonthEnd,businessMonthBegin,businessMonthEnd,quarterBegin,quarterEnd,quarterBusinessBegin,quarterBusinessEnd,week,lastWeekOfMonth,weekOfMonth,
 fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthStart,isMonthEnd,isLeapYear,daysInMonth,weekBegin`
@@ -73,6 +80,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added function `fill!` (**1.00.5**)
 * Added math functions:`sinh, cosh, tanh, asinh, acosh, atanh, deg2rad, rad2deg`. (**1.00.7**)
 * Added linear programming function: `linprog`. (**1.00.7**)
+* Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
 
 > Bug fix:
 
@@ -89,6 +97,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug related to function `loadTable`. When using `loadTable` to load a disk-based sequential (SEQ) partitioned table, if parameter 'partitions' is a vector with N elements, then the first N partitions are loaded instead of the partitions specified in 'partitions'. (**1.00.7**)
 * Fixed a scheduled job loading problem. If scheduled jobs use function views, data nodes would fail to restart as these scheduled jobs cannot be loaded. (**1.00.7**)
 * Fixed a bug of `dropDatabase`: If the data of a partitioned database only exist in a subset of data nodes in the cluster, empty chunk numbers will be written to the metadata log of the controller node when `dropDatabase` is executed. This will cause the controller node to fail to restart as it fails to replay the log. (**1.00.7**)
+* Fixed a potential memory leak problem for string arrays. If some strings in the array are longer than 22 bytes in length, performing the following operations may cause a memory leak: (**1.00.8**)
+    * In the SQL statement, `grouped by` is applied on the string column by a sorting method.
+    * In SQL statements, `order by` is used on multiple columns, where the first column is the string column.
+    * In a SQL statement, `pivot by` is operated on a string column.
+    * Employ `pivotby`, `contextby`, `groupby`, `semgentby`, and `cutpoints` functions on the string column or array. 
 
 > Improvement:
 
@@ -129,12 +142,20 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * JAVA
 
     Optimized streaming reconnection stability.
+    
+    Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
 
 * C++ 
 
     Optimized streaming reconnection stability.
-   
+    
+    Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
+    
+* go 
+
+    Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
+    
 * C# 
 
-    Support for new data types UUID and IPADDR.
+    Support new data types UUID and IPADDR.
 
