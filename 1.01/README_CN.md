@@ -24,17 +24,17 @@ Release date: 2020-1-19
 
 * 发布了DolphinDB server 即时编译(JIT)版。详情请参阅 [DolphinDB即时编译(JIT)教程](https://github.com/dolphindb/Tutorials_CN/blob/master/jit.md)。
 
-* 新增函数`capacity`,用于查看一个vector在当前分配的内存中的容量即可以容纳元素的个数。(**1.00.9**)
+* 新增函数`capacity`,用于查看一个vector在当前分配的内存中的容量即可以容纳元素的个数。(**1.01.1**)
 
 > 改进
 
 * 字典(Dictionary)和集合(Set)现在支持新的键值类型: UUID、IPADDR、 以及INT128。
 
-* 提升共享内存表的并发性能。(**1.00.9**)
+* 提升共享内存表的并发性能。(**1.01.1**)
 
-* 提升vector和matrix对内存的使用效率。(**1.00.9**)
+* 提升vector和matrix对内存的使用效率。(**1.01.1**)
 
-* 增加对matrix行数的校验，不允许创建行数为0的matrix。(**1.00.9**)
+* 增加对matrix行数的校验，不允许创建行数为0的matrix。(**1.01.1**)
 
 ## DolphinDB Orca
 
