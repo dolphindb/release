@@ -58,7 +58,16 @@ Release date: 2020.1.19
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.8.zip) | 
 
-> New features
+Version: 1.00.9
+Release date: 2020.1.30
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.9.zip) | 
+
+
+
+> New feature
 
 * Support high-availability of streaming based on Raft protocol.
 
@@ -81,6 +90,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added math functions:`sinh, cosh, tanh, asinh, acosh, atanh, deg2rad, rad2deg`. (**1.00.7**)
 * Added linear programming function: `linprog`. (**1.00.7**)
 * Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
+* Added function `capacity` to get the capacity of a vector, i.e. the number of elements it can hold based on the current memory allocation. (**1.00.9**)
 
 > Bug fix:
 
@@ -97,11 +107,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug related to function `loadTable`. When using `loadTable` to load a disk-based sequential (SEQ) partitioned table, if parameter 'partitions' is a vector with N elements, then the first N partitions are loaded instead of the partitions specified in 'partitions'. (**1.00.7**)
 * Fixed a scheduled job loading problem. If scheduled jobs use function views, data nodes would fail to restart as these scheduled jobs cannot be loaded. (**1.00.7**)
 * Fixed a bug of `dropDatabase`: If the data of a partitioned database only exist in a subset of data nodes in the cluster, empty chunk numbers will be written to the metadata log of the controller node when `dropDatabase` is executed. This will cause the controller node to fail to restart as it fails to replay the log. (**1.00.7**)
-* Fixed a potential memory leak problem for string arrays. If some strings in the array are longer than 22 bytes in length, performing the following operations may cause a memory leak: (**1.00.8**)
-    * In the SQL statement, `grouped by` is applied on the string column by a sorting method.
-    * In SQL statements, `order by` is used on multiple columns, where the first column is the string column.
-    * In a SQL statement, `pivot by` is operated on a string column.
-    * Employ `pivotby`, `contextby`, `groupby`, `semgentby`, and `cutpoints` functions on the string column or array. 
+* Fixed a potential memory leak problem for string arrays. If some strings in an array or column are longer than 22 bytes, the following operations involving the string array or column may cause a memory leak: (**1.00.8**)
+    * In SQL statements, 'group by' is used on the string column and is implemented by a sorting method.
+    * In SQL statements, 'order by' is used on multiple columns and the first column is the string column.
+    * In SQL statements, 'pivot by' is used on the string column.
+    * Apply functions `pivotby`, `contextby`, `groupby`, `semgentby` or `cutpoints` on the string column or array. 
 
 > Improvement:
 
@@ -118,7 +128,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * Can parse comma separators in integers or floating point numbers.
     * Can specify a conversion function in `loadTextEx`. The imported data is processed and then appended to the database table.
 *  Modified functions `sum3` and `sum4`. When applied to a matrix, `sum3` and `sum4` calculate the statistics of each row instead of the entire matrix. (**1.00.7**)
-*  Modified functions `percentile` and `mpercentile`. Now they use the interpolation method to be consistent with Python pandas instead of the nearest rank method. The interpolation method has 5 options: linear, lower, higher, midpoint and nearest. (**1.00.7**)
+*  Modified functions `percentile` and `mpercentile`. Now they use the interpolation method to be consistent with Python pandas instead of the nearest rank method. The interpolation method has 5 options: 'linear', 'lower', 'higher', 'midpoint' and 'nearest'. (**1.00.7**)
+*  Improved performance of concurrent operations (query and append) on shared in-memory tables. (**1.00.9**)
+*  Improved the efficiency of vector and matrix memory usage. (**1.00.9**)
+*  Added checks on the number of rows of a matrix. Now it is not allowed to create a matrix with zero rows. (**1.00.9**)
 
 
 ## DolphinDB GUI
