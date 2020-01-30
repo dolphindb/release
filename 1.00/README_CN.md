@@ -59,6 +59,13 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.8.zip) | 
 
+版本号： 1.00.9
+发行日期： 2020.1.30
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.9.zip) | 
+
 
 > 新功能
 
@@ -92,7 +99,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 新增线性规划函数：`linprog`。(**1.00.7**)
 
-* 新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。
+* 新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。(**1.00.8**)
+
+* 新增函数`capacity`,用于查看一个vector在当前分配的内存中的容量即可以容纳元素的个数。(**1.00.9**)
 
 
 
@@ -120,15 +129,16 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 修复了`loadTable`加载顺序(SEQ)分区表数据有误的一个bug：使用`loadTable`加载顺序分区的磁盘表时，若指定分区参数是一个长度为N的向量，那么实际加载的数据是前N个分区的数据， 而不是向量中指定的分区中的数据。(**1.00.7**)
 
-* 修复了定时任务(Scheduled Job)无法正常加载的bug： 定时任务若引用了视图函数，会无法加载视图函数，导致系统启动失败。(**1.00.7**)
+* 修复了定时任务(Scheduled Job)无法正常加载的bug：定时任务若引用了视图函数，会无法加载视图函数，导致系统启动失败。(**1.00.7**)
 
 * 修复了删除数据库(`dropDatabase`)的一个bug：如果分区数据库的数据只存在于集群中的部分数据节点， 删除数据库时会在控制节点的元数据日志中写入一些空的Chunk编号，进而导致下次启动时重放日志失败。(**1.00.7**)
 
-* 修复了字符串数组的潜在内存泄漏问题。数组中某些字符串的字节长度超过22，执行以下操作可能导致内存泄漏：(**1.00.8**)
-    * 在SQL语句中，对该字符串列用排序方法进行分组 
-    * 在SQL语句中，按多个列进行排序，其中第一个列是字符串类型。
-    * 在SQL语句中，对字符串列进行转置（pivot by）操作。
-    * 使用pivotby，contextby，groupby，semgentby以及cutpoints函数
+* 修复了字符串数组的潜在内存泄漏问题。若数组中某些字符串的字节长度超过22，执行以下操作可能导致内存泄漏：(**1.00.8**)
+    * 在SQL语句中，对该字符串列使用group by, 且内部实现采用排序方法。 
+    * 在SQL语句中，按多个列进行排序(order by)，其中第一个列是该字符串列。
+    * 在SQL语句中，对该字符串列进行转置(pivot by)操作。
+    * 对该字符串列使用`pivotby`, `contextby`, `groupby`, `semgentby` 或 `cutpoints`函数。
+    
 
 
 
@@ -152,7 +162,15 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * 可以解析整数或浮点数中的逗号分隔符。
     * `loadTextEx`可以指定一个转换函数。导入的数据转换后再追加到数据库表中。
 * 改进了函数 `sum3`与`sum4`。当应用于矩阵时，`sum3`和`sum4`计算每行的统计信息。之前计算的是整个矩阵的统计信息。(**1.00.7**)
-* 修改了函数 `percentile`和`mpercentile`：从最近序数(nearest rank)方法改为插值(interpolation)方法，与pandas保持一致。插值方法有linear, lower, higher, midpoint, nearest 这5种。(**1.00.7**)
+
+* 修改了函数 `percentile`和`mpercentile`：从最近序数(nearest rank)方法改为插值(interpolation)方法，与pandas保持一致。插值方法有'linear', 'lower', 'higher', 'midpoint' 与 'nearest' 这5种。(**1.00.7**)
+
+* 提升共享内存表的并发性能。(**1.00.9**)
+
+* 提升vector和matrix对内存的使用效率。(**1.00.9**)
+
+* 增加对matrix行数的校验，不允许创建行数为0的matrix。(**1.00.9**)
+
 
 
 ## DolphinDB GUI
