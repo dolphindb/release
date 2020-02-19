@@ -65,6 +65,12 @@ Release date: 2020.1.30
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.9.zip) | 
 
+Version: 1.00.10
+Release date: 2020.2.15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.10.zip) | 
 
 
 > New feature
@@ -91,6 +97,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added linear programming function: `linprog`. (**1.00.7**)
 * Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
 * Added function `capacity` to get the capacity of a vector, i.e. the number of elements it can hold based on the current memory allocation. (**1.00.9**)
+* Added keyedTable. When the newly added data has the same primary key value in the keyedTable, it will overwrite the data of the same primary key. (** 1.00.10 **)
 
 > Bug fix:
 
@@ -112,6 +119,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * In SQL statements, 'order by' is used on multiple columns and the first column is the string column.
     * In SQL statements, 'pivot by' is used on the string column.
     * Apply functions `pivotby`, `contextby`, `groupby`, `semgentby` or `cutpoints` on the string column or array. 
+* Lingpro adds parameter verification, otherwise illegal parameters may cause crash. (**1.00.10**)
 
 > Improvement:
 
@@ -132,13 +140,18 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 *  Improved performance of concurrent operations (query and append) on shared in-memory tables. (**1.00.9**)
 *  Improved the efficiency of vector and matrix memory usage. (**1.00.9**)
 *  Added checks on the number of rows of a matrix. Now it is not allowed to create a matrix with zero rows. (**1.00.9**)
-
+*  Added` updateTime` and `useWindowStartTime` parameters to function `createTimeSeriesAggregator`. `updateTime` can trigger calculations at smaller intervals than the` step` parameter. `useWindowStartTime` is used to set whether to use the start time of the current window. (**1.00.10**)
+*  Improve deserialization of delete statements. Previously it was required that the filter condition after where must be an expression (with an operator). There is no longer this requirement. (**1.00.10**)
 
 ## DolphinDB GUI
 
 * Support synchronizing DolphinDB modules to remote servers.
 
 * Fixed an issue that saving password doesn't take effect. 
+
+* Fixed the problem that module synchronization fails under Microsoft Windows OS enviroment. (**1.00.10**)
+
+* Added the web performance monitoring interface for single mode dolphindb server. (**1.00.10**)
 
 ## DolphinDB plugin binary files
 

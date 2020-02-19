@@ -67,6 +67,14 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.9.zip) | 
 
 
+版本号： 1.00.10
+发行日期： 2020.2.17
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.10.zip) | 
+
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -102,6 +110,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 新增hashBucket函数，用于计算即将写入数据的哈希分区值，便于并行写入。(**1.00.8**)
 
 * 新增函数`capacity`,用于查看一个vector在当前分配的内存中的容量即可以容纳元素的个数。(**1.00.9**)
+
+* 支持键值表keyedTable。新增加的数据在keyedTable中存在相同主键值时，会覆盖相同主键的数据。（**1.00.10**）
+
 
 
 
@@ -139,6 +150,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * 在SQL语句中，对该字符串列进行转置(pivot by)操作。
     * 对该字符串列使用`pivotby`, `contextby`, `groupby`, `semgentby` 或 `cutpoints`函数。
     
+* 增加了lingpro函数的参数校验，修复非法参数导致crash的问题。(**1.00.10**)
+
+* 修复了在自定义函数中调用函数parseExpr导致crash的bug。(**1.00.10**)
 
 
 
@@ -171,13 +185,21 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 增加对matrix行数的校验，不允许创建行数为0的matrix。(**1.00.9**)
 
+* 函数`createTimeSeriesAggregator`增加了`updateTime`和`useWindowStartTime`参数。`updateTime`可以以比参数`step`更小的时间间隔触发计算。`useWindowStartTime`用于设置是否采用当前窗口的起始时间。(**1.00.10**)
 
+* 完善delete语句的反序列化，取消了where子句过滤条件必须是一个表达式（有运算符）的规则。(**1.00.10**)
+
+* getSessionMemoryStat函数会输出客户端的ip地址和端口。(**1.00.10**)
 
 ## DolphinDB GUI
 
 * 支持远程同步 DolphinDB module的功能(Synchronize module to server)。
 
 * 修复保存用户名密码后不生效的问题。
+
+* 修复了在 windows下同步module失败的问题。 (**1.00.10**)
+
+* single mode下web界面增加性能观察界面。(**1.00.10**)
 
 
 ## DolphinDB plugin binary files
