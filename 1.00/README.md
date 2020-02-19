@@ -97,8 +97,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added linear programming function: `linprog`. (**1.00.7**)
 * Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
 * Added function `capacity` to get the capacity of a vector, i.e. the number of elements it can hold based on the current memory allocation. (**1.00.9**)
-* * Added function `keyedTable` to create a keyed table. When appending to a keyed table, if a new row has the same primary key value as an existing row, the existing row will be overwritten with the new row. (**1.00.10**)
-
+* Added keyedTable. When the newly added data has the same primary key value in the keyedTable, it will overwrite the data of the same primary key. (** 1.00.10 **)
 
 > Bug fix:
 
@@ -120,8 +119,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * In SQL statements, 'order by' is used on multiple columns and the first column is the string column.
     * In SQL statements, 'pivot by' is used on the string column.
     * Apply functions `pivotby`, `contextby`, `groupby`, `semgentby` or `cutpoints` on the string column or array. 
-* Fixed the bug that certain invalid parameters for function `linprog` would cause system crash. (**1.00.10**)
-* Fixed the bug that causes system crash when user-defined functions call function `parseExpr`. (**1.00.10**)
+* Lingpro adds parameter verification, otherwise illegal parameters may cause crash. (**1.00.10**)
 
 > Improvement:
 
@@ -142,8 +140,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 *  Improved performance of concurrent operations (query and append) on shared in-memory tables. (**1.00.9**)
 *  Improved the efficiency of vector and matrix memory usage. (**1.00.9**)
 *  Added checks on the number of rows of a matrix. Now it is not allowed to create a matrix with zero rows. (**1.00.9**)
-*  Added` updateTime` and `useWindowStartTime` parameters to function `createTimeSeriesAggregator`. `updateTime` can trigger calculations at smaller intervals than the` step` parameter. `useWindowStartTime` is used to set whether to use the start time of the current window. (**1.00.10**)
-* Improved deserialization for 'delete' statements by removing the requirement that the 'where' clause of a 'delete' statement must be an expression object.  (**1.00.10**)
+* Function `createTimeSeriesAggregator` now supports 2 new parameters: 'updateTime' and 'useWindowStartTime'. 'updateTime' can trigger calculations at intervals shorter than those specified by parameter 'step'. 'useWindowStartTime' specifies whether to use the start time or end time of moving windows as the temporal column in the output table. (**1.00.10**)
+* Improved deserialization for 'delete' statements by removing the requirement that the 'where' clause of a 'delete' statement must be an expression object. (**1.00.10**)
+* Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
 
 ## DolphinDB GUI
 
