@@ -40,38 +40,49 @@ Release date: 2019.12.23
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.5.zip) | 
 
 Version: 1.00.6
-Release date: 2020.1.6
+Release date: 2020.01.06
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.6.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.6.zip) | 
 
 Version: 1.00.7
-Release date: 2020.1.17
+Release date: 2020.01.17
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.7.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.7.zip) | 
 
 Version: 1.00.8
-Release date: 2020.1.19
+Release date: 2020.01.19
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8.zip) | 
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.8.zip) | 
 
 Version: 1.00.9
-Release date: 2020.1.30
+Release date: 2020.01.30
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9.zip) | 
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.9.zip) | 
 
 Version: 1.00.10
-Release date: 2020.2.15
+Release date: 2020.02.15
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10.zip) | 
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.10.zip) | 
 
+Version: 1.00.11
+Release date: 2020.02.28
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.11.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.11.zip) | 
+
+Version: 1.00.12
+Release date: 2020.03.05
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.12.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.12.zip) | 
 
 > New feature
 
@@ -97,7 +108,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added linear programming function: `linprog`. (**1.00.7**)
 * Added function `hashBucket` to calculate the partition index of the data to be written, which is convenient for parallel writing. (**1.00.8**)
 * Added function `capacity` to get the capacity of a vector, i.e. the number of elements it can hold based on the current memory allocation. (**1.00.9**)
-* Added keyedTable. When the newly added data has the same primary key value in the keyedTable, it will overwrite the data of the same primary key. (** 1.00.10 **)
+* Added `keyedTable`. When the newly added data has the same primary key value in the keyedTable, it will overwrite the data of the same primary key. (**1.00.10**)
+* Added 3 new parameters for function `linprog`: `lb`, `ub` and `method`. `lb` represents the lower bound of the variable; `ub` represents the upper bound of the variable;  `method` represents the optimization algorithm and currently supports 'simplex' and 'interior-point'. (**1.00.11**)
 
 > Bug fix:
 
@@ -120,6 +132,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * In SQL statements, 'pivot by' is used on the string column.
     * Apply functions `pivotby`, `contextby`, `groupby`, `semgentby` or `cutpoints` on the string column or array. 
 * Lingpro adds parameter verification, otherwise illegal parameters may cause crash. (**1.00.10**)
+* Fixed a bug of function `loadText`: when format is specified for nanotimestamp data type, a parsing error will occur. (**1.00.11**)
+* Fixed the problem of duplicate key values when appending data to a keyed table. (**1.00.12**)
+* Fixed the problem that when applying function `iif` on SYMBOL columns in SQL statements, the server will crash. (**1.00.12**)
+* Fixed the problem that when a dimension table is deleted and then recreated, querying the table before the table is populated with data will throw an exception that the table does not exist. (**1.00.12**)
+* Fixed a bug: the system throws an exception about inconsistent column lengths when conducting aggregation on a SYMBOL column or a STRING column with a context by clause. (**1.00.12**)
 
 > Improvement:
 
@@ -143,6 +160,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Function `createTimeSeriesAggregator` now supports 2 new parameters: 'updateTime' and 'useWindowStartTime'. 'updateTime' can trigger calculations at intervals shorter than those specified by parameter 'step'. 'useWindowStartTime' specifies whether to use the start time or end time of moving windows as the temporal column in the output table. (**1.00.10**)
 * Improved deserialization for 'delete' statements by removing the requirement that the 'where' clause of a 'delete' statement must be an expression object. (**1.00.10**)
 * Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
+* Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.00.11**)
+* Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.00.11**)
 
 ## DolphinDB GUI
 
