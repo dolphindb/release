@@ -4,7 +4,7 @@
 
 Version: 1.01.0
 
-Release date: 2020-1-19
+Release date: 2020-01-19
 
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.0.zip) | 
@@ -15,7 +15,7 @@ Release date: 2020-1-19
 
 Version: 1.01.1
 
-Release date: 2020-1-30
+Release date: 2020-01-30
 
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.1.zip) | 
@@ -26,7 +26,7 @@ Release date: 2020-1-30
 
 Version: 1.01.2
 
-Release date: 2020-2-15
+Release date: 2020-02-15
 
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.2.zip) | 
@@ -34,12 +34,28 @@ Release date: 2020-2-15
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.2_JIT.zip) | 
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.2_JIT.zip) | 
 
+Version: 1.01.3
+
+Release date: 2020-02-28
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.3.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.3.zip) | 
+
+Version: 1.01.4
+
+Release date: 2020-03-05
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.4.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.4.zip) | 
+
+
 > New features
 
 * Support Just-In-Time (JIT) compiling. For details please refer to [DolphinDB Tutorial: Just-in-time (JIT) Compilation](https://github.com/dolphindb/Tutorials_EN/blob/master/jit.md)
 * Added function `capacity` to get the capacity of a vector, i.e., the number of elements it can hold based on the current memory allocation for the vector. (**1.01.1**)
 * Support 'break' and 'continue' statements in JIT. (**1.01.2**) 
 * Added function `keyedTable` to create a keyed table. When appending to a keyed table, if a new row has the same primary key value as an existing row, the existing row will be overwritten with the new row. (**1.01.2**)
+* Added 3 new parameters for function `linprog`: 'lb', 'ub' and 'method'. 'lb' represents the lower bound of the variable; 'ub' represents the upper bound of the variable;  'method' represents the optimization algorithm and currently supports 'simplex' and 'interior-point'. (**1.01.3**)
 
 > Improvements
 
@@ -51,16 +67,23 @@ Release date: 2020-2-15
 * Improved deserialization for 'delete' statements by removing the requirement that the 'where' clause of a 'delete' statement must be an expression object. (**1.01.2**)
 * Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.01.2**)
 * Optimized the use of llvm, which significantly improved the performance of JIT. (**1.01.2**)    
+* Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.01.3**)
+* Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.01.3**)
 
 > Bug fix
 
 * Fixed the bug that certain invalid parameters for function `linprog` would cause system crash. (**1.01.2**)
 * Fixed the bug that causes system crash when user-defined functions call function `parseExpr`. (**1.01.2**)
+* Fixed a bug of function `loadText`: when format is specified for nanotimestamp data type, a parsing error will occur. (**1.01.3**)
+* Fixed the problem of duplicate key values when appending data to a keyed table. (**1.01.4**)
+* Fixed the problem that when applying function `iif` on SYMBOL columns in SQL statements, the server will crash. (**1.01.4**)
+* Fixed the problem that when a dimension table is deleted and then recreated, querying the table before the table is populated with data will throw an exception that the table does not exist. (**1.01.4**)
+* Fixed a bug: the system throws an exception about inconsistent column lengths when conducting aggregation on a SYMBOL column or a STRING column with a context by clause. (**1.01.4**)
 
 ## DolphinDB orca
 
-* Released [DolphinDB orca](https://github.com/dolphindb/Orca). It implements a pandas API on DolphinDB, enabling users to process and analyze massive amounts of data more conveniently and efficiently.
-* Released DolphinDB NumPy. DolphinDB NumPy functions can support orca objects more efficiently than NumPy functions. (**1.01.2**)
+* Released [DolphinDB orca](https://github.com/dolphindb/Orca). It implements a pandas API on top of DolphinDB, enabling users to utilize DolphinDB to process and analyze massive amounts of data more conveniently and efficiently in pandas.
+* Released DolphinDB NumPy. DolphinDB NumPy functions can work with orca objects more efficiently than NumPy functions. (**1.01.2**)
 * Added function `read_shared_table` to read shared stream table in DolphinDB. (**1.01.2**)
 
 
