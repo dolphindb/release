@@ -41,26 +41,26 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.5.zip) | 
 
 版本号： 1.00.6
-发行日期： 2020.1.6
+发行日期： 2020.01.06
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.6.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.6.zip) | 
 
 版本号： 1.00.7
-发行日期： 2020.1.17
+发行日期： 2020.01.17
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.7.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.7.zip) | 
 
 版本号： 1.00.8
-发行日期： 2020.1.19
+发行日期： 2020.01.19
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8.zip) | 
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.8_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.8.zip) | 
 
 版本号： 1.00.9
-发行日期： 2020.1.30
+发行日期： 2020.01.30
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9.zip) | 
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.9_ABI.zip) | 
@@ -68,12 +68,23 @@
 
 
 版本号： 1.00.10
-发行日期： 2020.2.17
+发行日期： 2020.02.17
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10.zip) | 
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.10_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.10.zip) | 
 
+版本号： 1.00.11
+发行日期： 2020.02.28
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.11.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.11.zip) | 
+
+版本号： 1.00.12
+发行日期： 2020.03.05
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.12.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.12.zip) | 
 
 > 新功能
 
@@ -113,7 +124,46 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 支持键值表keyedTable。新增加的数据在keyedTable中存在相同主键值时，会覆盖相同主键的数据。（**1.00.10**）
 
+* `linprog`函数新增三个参数：lb, ub 与 method。lb表示变量的下界。ub表示变量的上界。method表示算法，目前支持'simplex'和'interior-point'。(**1.00.11**)
 
+> 改进:
+
+* 允许`scheduleJob`直接或间接调用module中定义的函数。
+
+* `isMonotonic`, `isMonotonicIncreasing`, `isMonotonicDecreasing`函数由严格单调递增或递减改为非严格递增或递减。(**1.00.2**)
+
+* 除了vector和matrix, `nullFill!`, `bfill!`, `ffill!`, `lfill!` 可以接受内存表作为输入参数，支持对整表所有列替换null值。(**1.00.2**)
+
+* 完善了时序聚合引擎，可以处理仅能保证时间戳在分组内有序的数据流（即不是全局有序数据流）。(**1.00.3**)
+
+* 时序聚合引擎的窗口对齐尺度扩展到支持分钟级别。(**1.00.3**)
+
+* 改进了文本文件数据导入的相关函数`loadText`、`ploadText`、`loadTextEx`、`textChunkDS`以及`extractTextScheama`。（**1.00.6**） 
+    * 允许忽略文件开始指定行数。
+    * 允许为日期和时间类型指定解析格式。
+    * 允许仅导入指定的部分列。
+    * 整型或者浮点类型前后有非数字字符则忽略，如果不包含任何数字则返回空值（以前版本返回0）。
+    * 可以解析整数或浮点数中的逗号分隔符。
+    * `loadTextEx`可以指定一个转换函数。导入的数据转换后再追加到数据库表中。
+* 改进了函数 `sum3`与`sum4`。当应用于矩阵时，`sum3`和`sum4`计算每行的统计信息。之前计算的是整个矩阵的统计信息。(**1.00.7**)
+
+* 修改了函数 `percentile`和`mpercentile`：从最近序数(nearest rank)方法改为插值(interpolation)方法，与pandas保持一致。插值方法有'linear', 'lower', 'higher', 'midpoint' 与 'nearest' 这5种。(**1.00.7**)
+
+* 提升共享内存表的并发性能。(**1.00.9**)
+
+* 提升vector和matrix对内存的使用效率。(**1.00.9**)
+
+* 增加对matrix行数的校验，不允许创建行数为0的matrix。(**1.00.9**)
+
+* 函数`createTimeSeriesAggregator`增加了`updateTime`和`useWindowStartTime`参数。`updateTime`可以以比参数`step`更小的时间间隔触发计算。`useWindowStartTime`用于设置是否采用当前窗口的起始时间。(**1.00.10**)
+
+* 完善delete语句的反序列化，取消了where子句过滤条件必须是一个表达式（有运算符）的规则。(**1.00.10**)
+
+* getSessionMemoryStat函数会输出客户端的ip地址和端口。(**1.00.10**)
+
+* 改进了`loadText`的一个功能：对只包含header的文本文件，若用户指定了schema, `loadText`函数不再抛出异常，而是返回一个空表。(**1.00.11**)
+
+* 改进了流数据时间序列聚合引擎。当时间列出现空值或前后两条数据时间跨度较大时，性能不会下降。(**1.00.11**)
 
 
 > Bug修复:
@@ -154,42 +204,15 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 修复了在自定义函数中调用函数parseExpr导致crash的bug。(**1.00.10**)
 
+* 修复了`loadText`的一个bug：为nanotimestamp数据类型指定format时出现解析错误。(**1.00.11**) 
 
+* 修复了向键值表中追加(append)数据会产生重复键值的问题。(**1.00.12**)
+ 
+* 修复了在SQL语句中对SYMBOL类型字段使用`iif`函数时，发生crash的问题。(**1.00.12**)
 
-> 改进:
+* 修复了已存有数据的维度表被删除并重建后，查询数据时，显示该表不存在的bug。此bug仅发生在重建维度表之后，未写入数据之前。(**1.00.12**)
 
-* 允许`scheduleJob`直接或间接调用module中定义的函数。
-
-* `isMonotonic`, `isMonotonicIncreasing`, `isMonotonicDecreasing`函数由严格单调递增或递减改为非严格递增或递减。(**1.00.2**)
-
-* 除了vector和matrix, `nullFill!`, `bfill!`, `ffill!`, `lfill!` 可以接受内存表作为输入参数，支持对整表所有列替换null值。(**1.00.2**)
-
-* 完善了时序聚合引擎，可以处理仅能保证时间戳在分组内有序的数据流（即不是全局有序数据流）。(**1.00.3**)
-
-* 时序聚合引擎的窗口对齐尺度扩展到支持分钟级别。(**1.00.3**)
-
-* 改进了文本文件数据导入的相关函数`loadText`、`ploadText`、`loadTextEx`、`textChunkDS`以及`extractTextScheama`。（**1.00.6**） 
-    * 允许忽略文件开始指定行数。
-    * 允许为日期和时间类型指定解析格式。
-    * 允许仅导入指定的部分列。
-    * 整型或者浮点类型前后有非数字字符则忽略，如果不包含任何数字则返回空值（以前版本返回0）。
-    * 可以解析整数或浮点数中的逗号分隔符。
-    * `loadTextEx`可以指定一个转换函数。导入的数据转换后再追加到数据库表中。
-* 改进了函数 `sum3`与`sum4`。当应用于矩阵时，`sum3`和`sum4`计算每行的统计信息。之前计算的是整个矩阵的统计信息。(**1.00.7**)
-
-* 修改了函数 `percentile`和`mpercentile`：从最近序数(nearest rank)方法改为插值(interpolation)方法，与pandas保持一致。插值方法有'linear', 'lower', 'higher', 'midpoint' 与 'nearest' 这5种。(**1.00.7**)
-
-* 提升共享内存表的并发性能。(**1.00.9**)
-
-* 提升vector和matrix对内存的使用效率。(**1.00.9**)
-
-* 增加对matrix行数的校验，不允许创建行数为0的matrix。(**1.00.9**)
-
-* 函数`createTimeSeriesAggregator`增加了`updateTime`和`useWindowStartTime`参数。`updateTime`可以以比参数`step`更小的时间间隔触发计算。`useWindowStartTime`用于设置是否采用当前窗口的起始时间。(**1.00.10**)
-
-* 完善delete语句的反序列化，取消了where子句过滤条件必须是一个表达式（有运算符）的规则。(**1.00.10**)
-
-* getSessionMemoryStat函数会输出客户端的ip地址和端口。(**1.00.10**)
+* 修复了在使用context by的SQL语句中对字符串或SYMBOL类型字段分组求聚合时，系统报告列长不一致的bug。(**1.00.12**)
 
 ## DolphinDB GUI
 
