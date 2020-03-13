@@ -75,10 +75,10 @@ Release date: 2020-03-05
 * Fixed the bug that certain invalid parameters for function `linprog` would cause system crash. (**1.01.2**)
 * Fixed the bug that causes system crash when user-defined functions call function `parseExpr`. (**1.01.2**)
 * Fixed a bug of function `loadText`: when format is specified for nanotimestamp data type, a parsing error will occur. (**1.01.3**)
-* Fixed the problem of duplicate key values when appending data to a keyed table. (**1.01.4**)
-* Fixed the problem that when applying function `iif` on SYMBOL columns in SQL statements, the server will crash. (**1.01.4**)
-* Fixed the problem that when a dimension table is deleted and then recreated, querying the table before the table is populated with data will throw an exception that the table does not exist. (**1.01.4**)
-* Fixed a bug: the system throws an exception about inconsistent column lengths when conducting aggregation on a SYMBOL column or a STRING column with a context by clause. (**1.01.4**)
+* Fixed an issue of inserting duplicate keys to a keyed table. (**1.01.4**)
+* Fixed a crashing bug of calling functions over a symbol-typed grouping column in SQL statements with 4 or more grouping columns.  (**1.01.4**)
+* Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.01.4**)
+* Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.01.4**)
 
 ## DolphinDB orca
 
