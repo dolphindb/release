@@ -162,6 +162,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
 * Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.00.11**)
 * Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.00.11**)
+* Fixed an issue of inserting duplicate keys to a keyed table. (**1.00.12**)
+* Fixed a crashing bug of calling functions over a symbol-typed grouping column in SQL statements with 4 or more grouping columns.  (**1.00.12**)
+* Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.00.12**)
+* Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.00.12**)
+
 
 ## DolphinDB GUI
 
