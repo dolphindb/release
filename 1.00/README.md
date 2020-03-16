@@ -111,6 +111,32 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added `keyedTable`. When the newly added data has the same primary key value in the keyedTable, it will overwrite the data of the same primary key. (**1.00.10**)
 * Added 3 new parameters for function `linprog`: `lb`, `ub` and `method`. `lb` represents the lower bound of the variable; `ub` represents the upper bound of the variable;  `method` represents the optimization algorithm and currently supports 'simplex' and 'interior-point'. (**1.00.11**)
 
+> Improvement:
+
+* `scheduleJob` can call functions defined in DolphinDB modules. 
+* Functions `isMonotonic` and `isMonotonicIncreasing` now return true for weakly increasing vectors; function  `isMonotonicDecreasing` now returns true for weakly increasing vectors. (**1.00.2**)
+* Besides vector and matrix, functions `nullFill!`, `bfill!`, `ffill!` and `lfill!` can accept in-memory tables as an input parameter and support replacing NULL values in all columns in the entire table. (**1.00.2**)
+* Improved time-series aggregator engine to support handling data that are ordered within each group but not in the entire table (**1.00.3**). 
+* The window alignment scale of the time-series aggregator engine has been extended to support the minute level. (**1.00.3**)
+* Improved the functions for importing text files: `loadText`, `ploadText`, `loadTextEx`, `textChunkDS` and `extractTextScheama`. (**1.00.6**)
+    * Can skip a specified number of rows at the beginning of the input files.
+    * Can specify a parsing format for date and time types.
+    * Can import only the specified columns.
+    * For a column that is specified as numeric type, non-numeric characters are ignored. If there are no numbers, a NULL value is returned (previous versions return 0).
+    * Can parse comma separators in integers or floating point numbers.
+    * Can specify a conversion function in `loadTextEx`. The imported data is processed and then appended to the database table.
+*  Modified functions `sum3` and `sum4`. When applied to a matrix, `sum3` and `sum4` calculate the statistics of each row instead of the entire matrix. (**1.00.7**)
+*  Modified functions `percentile` and `mpercentile`. Now they use the interpolation method to be consistent with Python pandas instead of the nearest rank method. The interpolation method has 5 options: 'linear', 'lower', 'higher', 'midpoint' and 'nearest'. (**1.00.7**)
+*  Improved performance of concurrent operations (query and append) on shared in-memory tables. (**1.00.9**)
+*  Improved the efficiency of vector and matrix memory usage. (**1.00.9**)
+*  Added checks on the number of rows of a matrix. Now it is not allowed to create a matrix with zero rows. (**1.00.9**)
+* Function `createTimeSeriesAggregator` now supports 2 new parameters: 'updateTime' and 'useWindowStartTime'. 'updateTime' can trigger calculations at intervals shorter than those specified by parameter 'step'. 'useWindowStartTime' specifies whether to use the start time or end time of moving windows as the temporal column in the output table. (**1.00.10**)
+* Improved deserialization for 'delete' statements by removing the requirement that the 'where' clause of a 'delete' statement must be an expression object. (**1.00.10**)
+* Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
+* Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.00.11**)
+* Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.00.11**)
+
+
 > Bug fix:
 
 * Fixed a bug that causes system crash when updating a table after executing function `reorderColumns!`. 
@@ -138,30 +164,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.00.12**)
 * Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.00.12**)
 
-> Improvement:
 
-* `scheduleJob` can call functions defined in DolphinDB modules. 
-* Functions `isMonotonic` and `isMonotonicIncreasing` now return true for weakly increasing vectors; function  `isMonotonicDecreasing` now returns true for weakly increasing vectors. (**1.00.2**)
-* Besides vector and matrix, functions `nullFill!`, `bfill!`, `ffill!` and `lfill!` can accept in-memory tables as an input parameter and support replacing NULL values in all columns in the entire table. (**1.00.2**)
-* Improved time-series aggregator engine to support handling data that are ordered within each group but not in the entire table (**1.00.3**). 
-* The window alignment scale of the time-series aggregator engine has been extended to support the minute level. (**1.00.3**)
-* Improved the functions for importing text files: `loadText`, `ploadText`, `loadTextEx`, `textChunkDS` and `extractTextScheama`. (**1.00.6**)
-    * Can skip a specified number of rows at the beginning of the input files.
-    * Can specify a parsing format for date and time types.
-    * Can import only the specified columns.
-    * For a column that is specified as numeric type, non-numeric characters are ignored. If there are no numbers, a NULL value is returned (previous versions return 0).
-    * Can parse comma separators in integers or floating point numbers.
-    * Can specify a conversion function in `loadTextEx`. The imported data is processed and then appended to the database table.
-*  Modified functions `sum3` and `sum4`. When applied to a matrix, `sum3` and `sum4` calculate the statistics of each row instead of the entire matrix. (**1.00.7**)
-*  Modified functions `percentile` and `mpercentile`. Now they use the interpolation method to be consistent with Python pandas instead of the nearest rank method. The interpolation method has 5 options: 'linear', 'lower', 'higher', 'midpoint' and 'nearest'. (**1.00.7**)
-*  Improved performance of concurrent operations (query and append) on shared in-memory tables. (**1.00.9**)
-*  Improved the efficiency of vector and matrix memory usage. (**1.00.9**)
-*  Added checks on the number of rows of a matrix. Now it is not allowed to create a matrix with zero rows. (**1.00.9**)
-* Function `createTimeSeriesAggregator` now supports 2 new parameters: 'updateTime' and 'useWindowStartTime'. 'updateTime' can trigger calculations at intervals shorter than those specified by parameter 'step'. 'useWindowStartTime' specifies whether to use the start time or end time of moving windows as the temporal column in the output table. (**1.00.10**)
-* Improved deserialization for 'delete' statements by removing the requirement that the 'where' clause of a 'delete' statement must be an expression object. (**1.00.10**)
-* Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
-* Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.00.11**)
-* Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.00.11**)
 
 
 
