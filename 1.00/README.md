@@ -133,10 +133,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * Apply functions `pivotby`, `contextby`, `groupby`, `semgentby` or `cutpoints` on the string column or array. 
 * Lingpro adds parameter verification, otherwise illegal parameters may cause crash. (**1.00.10**)
 * Fixed a bug of function `loadText`: when format is specified for nanotimestamp data type, a parsing error will occur. (**1.00.11**)
-* Fixed the problem of duplicate key values when appending data to a keyed table. (**1.00.12**)
-* Fixed the problem that when applying function `iif` on SYMBOL columns in SQL statements, the server will crash. (**1.00.12**)
-* Fixed the problem that when a dimension table is deleted and then recreated, querying the table before the table is populated with data will throw an exception that the table does not exist. (**1.00.12**)
-* Fixed a bug: the system throws an exception about inconsistent column lengths when conducting aggregation on a SYMBOL column or a STRING column with a context by clause. (**1.00.12**)
+* Fixed an issue of inserting duplicate keys to a keyed table. (**1.00.12**)
+* Fixed a crashing bug of calling functions over a symbol-typed grouping column in SQL statements with 4 or more grouping columns.  (**1.00.12**)
+* Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.00.12**)
+* Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.00.12**)
 
 > Improvement:
 
@@ -162,10 +162,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
 * Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.00.11**)
 * Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.00.11**)
-* Fixed an issue of inserting duplicate keys to a keyed table. (**1.00.12**)
-* Fixed a crashing bug of calling functions over a symbol-typed grouping column in SQL statements with 4 or more grouping columns.  (**1.00.12**)
-* Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.00.12**)
-* Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.00.12**)
+
 
 
 ## DolphinDB GUI
