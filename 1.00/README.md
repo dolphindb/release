@@ -84,6 +84,15 @@ Release date: 2020.03.05
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.12.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.12.zip) | 
 
+Version: 1.00.13
+Release date: 2020.03.15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.13.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.13_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.13.zip) | 
+
+
+
 > New feature
 
 * Support high-availability of streaming based on Raft protocol.
@@ -111,6 +120,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Added `keyedTable`. When the newly added data has the same primary key value in the keyedTable, it will overwrite the data of the same primary key. (**1.00.10**)
 * Added 3 new parameters for function `linprog`: `lb`, `ub` and `method`. `lb` represents the lower bound of the variable; `ub` represents the upper bound of the variable;  `method` represents the optimization algorithm and currently supports 'simplex' and 'interior-point'. (**1.00.11**)
 
+
 > Improvement:
 
 * `scheduleJob` can call functions defined in DolphinDB modules. 
@@ -135,6 +145,12 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Function `getSessionMemoryStat` can now output the IP address and port number of the client. (**1.00.10**)
 * Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.00.11**)
 * Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.00.11**)
+* Improved the data type recognition algorithm of the loadText function. Avoid misrecognizing numeric types as strings or symbol types due to occasional occurrences of symbols representing null values such as null, N / A, etc. (**1.00.13**)
+* Improved the function isDuplicated so that it can accept subarray, which is used in partitioned or in-memory tables. (**1.00.13**)
+* Function createPartitionedTable can now take a stream table or a mvcc table as a model table. (**1.00.13**)
+* Improved code deserialization. That is, when the code is deserialized, if it refers to a shared table that does not exist, an exception is no longer thrown, but the shared table is obtained by calling the function objByName, so that deserialization can continue. (**1.00.13**)
+
+
 
 
 > Bug fix:
@@ -159,12 +175,13 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
     * Apply functions `pivotby`, `contextby`, `groupby`, `semgentby` or `cutpoints` on the string column or array. 
 * Lingpro adds parameter verification, otherwise illegal parameters may cause crash. (**1.00.10**)
 * Fixed a bug of function `loadText`: when format is specified for nanotimestamp data type, a parsing error will occur. (**1.00.11**)
-* Fixed an issue of inserting duplicate keys to a keyed table. (**1.00.12**)
-* Fixed a crashing bug of calling functions over a symbol-typed grouping column in SQL statements with 4 or more grouping columns.  (**1.00.12**)
-* Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.00.12**)
-* Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.00.12**)
-
-
+* Fixed the problem of duplicate key values when appending data to a keyed table. (**1.00.12**)
+* Fixed the problem that when applying function `iif` on SYMBOL columns in SQL statements, the server will crash. (**1.00.12**)
+* Fixed the problem that when a dimension table is deleted and then recreated, querying the table before the table is populated with data will throw an exception that the table does not exist. (**1.00.12**)
+* Fixed a bug: the system throws an exception about inconsistent column lengths when conducting aggregation on a SYMBOL column or a STRING column with a context by clause. (**1.00.12**)
+* Fix the bug that parameter `hash` of function `subscribeTable` does not work. (**1.00.13**)
+* Fix the bug of calling function `std` in the time series aggregation engine, which returns 0 instead of null when all values are the same. (**1.00.13**)
+* Fixed a bug where deserializing a partial application could cause the system to crash. (**1.00.13**)
 
 
 
