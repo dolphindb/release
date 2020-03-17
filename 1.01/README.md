@@ -48,6 +48,13 @@ Release date: 2020-03-05
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.4.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.4.zip) | 
 
+Version: 1.01.5
+
+Release date: 2020-03-15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.5.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.5.zip) |
+
 
 > New features
 
@@ -69,6 +76,10 @@ Release date: 2020-03-05
 * Optimized the use of llvm, which significantly improved the performance of JIT. (**1.01.2**)    
 * Improved function `loadText`. When importing a text file with only the header row and the schema is specified, an empty table is returned instead of throwing an exception. (**1.01.3**)
 * Improved the time-series aggregator for streaming data. If there are NULL values in the temporal column or if there are large gaps between two adjacent timestamps, the performance is not affected. (**1.01.3**)
+* Improved the data type recognition algorithm of the loadText function. Avoid misrecognizing numeric types as strings or symbol types due to occasional occurrences of symbols representing null values such as null, N / A, etc. (**1.01.5**)
+* Improved the function isDuplicated so that it can accept subarray, which is used in partitioned or in-memory tables. (**1.01.5**)
+* Function createPartitionedTable can now take a stream table or a mvcc table as a model table. (**1.01.5**)
+* Improved code deserialization. That is, when the code is deserialized, if it refers to a shared table that does not exist, an exception is no longer thrown, but the shared table is obtained by calling the function objByName, so that deserialization can continue. (**1.01.5**)
 
 > Bug fix
 
@@ -79,6 +90,10 @@ Release date: 2020-03-05
 * Fixed a crashing bug of calling functions over a symbol-typed grouping column in SQL statements with 4 or more grouping columns.  (**1.01.4**)
 * Fixed the false reporting of nonexistent table upon querying an empty dimension table when it is recreated after dropping it. (**1.01.4**)
 * Fixed a bug of string vector ingestion, which affects the use of aggregate function (e.g. last) over string or symbol columns in SQL statements with context-by clause. (**1.01.4**)
+* Fix the bug that parameter `hash` of function `subscribeTable` does not work. (**1.01.5**)
+* Fix the bug of calling function `std` in the time series aggregation engine, which returns 0 instead of null when all values are the same. (**1.01.5**)
+* Fixed a bug where deserializing a partial application could cause the system to crash. (**1.01.5**)
+* 
 
 ## DolphinDB orca
 
