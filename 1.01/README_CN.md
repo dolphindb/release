@@ -57,6 +57,13 @@
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.4.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.4.zip) | 
 
+版本号： 1.01.5
+
+发行日期： 2020-03-15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.01.5.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.01.5.zip) | 
+
 
 > 新功能
 
@@ -93,6 +100,14 @@
 
 * 改进了流数据时间序列聚合引擎。当时间列出现空值或前后两条数据时间跨度较大时，性能不会下降。(**1.01.3**)
 
+* 改进了loadText函数的类型识别算法。避免因为文本中偶尔出现的代表null值的文本（null, N/A等）而将数值类型错误识别为字符串或符号类型。(**1.01.5**)
+
+* 改进了函数isDuplicated，使其可以接受用SubVector封装的数组，这在支持多版本的分布式表或内存表中会用到。(**1.01.5**)
+
+* 改进了函数createPartitionedTable，可以使用流数据表和mvcc表作为样例表（model table）(**1.01.5**)
+
+* 改进了代码反序列化。即当代码反序列化时，若遇到共享表不存在，不再抛出异常，而是通过调用函数objByName来取得共享表，使得反序列化可以继续。(**1.01.5**)
+
 
 > bug 修复
 
@@ -109,6 +124,12 @@
 * 修复了已存有数据的维度表被删除并重建后，查询数据时，显示该表不存在的bug。此bug仅发生在重建维度表之后，未写入数据之前。(**1.01.4**)
 
 * 修复了提取字符串向量的错误，该错误会影响对带有context-by子句的SQL语句中的字符串或符号列使用聚合函数（例如last）。(**1.01.4**)
+ 
+* 修复函数subscribeTable参数hash不起作用的bug。(**1.01.5**)
+
+* 修复时间序列聚合引擎中调用std函数的bug，即当所有值相同时返回0，而不是null。。(**1.01.5**)
+
+* 修复反序列化部分应用（Partial Application）可能导致系统崩溃的bug。。(**1.01.5**)
 
 ## DolphinDB orca
 
