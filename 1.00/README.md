@@ -193,7 +193,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed the problem that if a function in a module is used in a scheduled job, the module cannot be used after server restart. (**1.00.14**)
 * Fixed a bug in linear programming (`linprog`) that the accumulation of rounding errors in iterations may lead to incorrect results. (**1.00.14**)
 * Fixed a bug in selecting the top rows after sorting string arrays and non-string arrays sequentially. It may lead to incorrect results of function `isortTop`. (**1.00.14**)
-* Fixed a bug where the system would register duplicate module functions when a module file is executed in the console or GUI multiple times. It may lead to system crash or thrown exceptions. (**1.10.1**)
+* Fixed a bug where the system would register duplicate module functions when a module file is executed in the console or GUI multiple times. It may lead to system crash or thrown exceptions. (**1.00.14**)
 
 
 
