@@ -91,7 +91,11 @@ Release date: 2020.03.15
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.13_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.13.zip) | 
 
+Version: 1.00.14
+Release date: 2020.03.24
 
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.14.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.14.zip) | 
 
 > New feature
 
@@ -182,6 +186,15 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fix the bug that parameter `hash` of function `subscribeTable` does not work. (**1.00.13**)
 * Fix the bug of calling function `std` in the time series aggregation engine, which returns 0 instead of null when all values are the same. (**1.00.13**)
 * Fixed a bug where deserializing a partial application could cause the system to crash. (**1.00.13**)
+* Fixed a bug that when function `sum` or `avg` is used in function `createTimeSeriesAggregator` and all rows in a group contain NULL values, the result should be a NULL value instead of 0. (**1.00.14**)
+* Fixed a bug in the computation of `sum` or `avg` using a hash approach in SQL statements. If all rows in a group contain NULL values, the result should be a NULL value instead of 0. (**1.00.14**)
+* Fixed a bug in Windows version of DolphinDB server where closing a client subscription would cause other subscribers on the same node to fail to accept new messages. (**1.00.14**)
+* Fixed parsing errors for strings ending with '\\\\', e.g., "hello\\\\". It no longer throws an exception. (**1.00.14**)
+* Fixed the problem that if a function in a module is used in a scheduled job, the module cannot be used after server restart. (**1.00.14**)
+* Fixed a bug in linear programming (`linprog`) that the accumulation of rounding errors in iterations may lead to incorrect results. (**1.00.14**)
+* Fixed a bug in selecting the top rows after sorting string arrays and non-string arrays sequentially. It may lead to incorrect results of function `isortTop`. (**1.00.14**)
+* Fixed a bug where the system would register duplicate module functions when a module file is executed in the console or GUI multiple times. It may lead to system crash or thrown exceptions. (**1.10.1**)
+
 
 
 
