@@ -93,6 +93,11 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.13_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.13.zip) | 
 
+版本号： 1.00.14
+发行日期： 2020.03.24
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.14.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.14.zip) | 
 
 
 > 新功能
@@ -236,6 +241,24 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复时间序列聚合引擎中调用std函数的bug，即当所有值相同时返回0，而不是null。(**1.00.13**)
 
 * 修复反序列化部分应用（Partial Application）可能导致系统崩溃的bug。(**1.00.13**)
+
+* 修复bug：在函数`createTimeSeriesAggregator`中进行`sum`或者`avg`运算时，当一组中所有行的某个被计算列均为空值时，应该返回空值而不是返回0。(**1.00.14**)
+
+* 修复bug：在SQL语句中，通过哈希算法计算`sum`或者`avg`，并且一组中所有行的某个被计算列均为空值时，应该返回空值而不是返回0。(**1.00.14**)
+
+* 修复bug：Windows版本中，一个客户端订阅关闭导致同一个节点上其它订阅端无法继续接受消息。(**1.00.14**)
+
+* 修复对以字符'\\\\'结尾的字符串（例如"hello\\\\"）的解析错误，不再抛出异常。(**1.00.14**)
+
+* 修复bug：定时作业（scheduled job）中，如果用到了一个module中的函数，server重启后无法使用该module。(**1.00.14**)
+
+* 修复bug：线性规划（`linprog`）中，迭代计算中的舍入误差累积可能会导致计算错误。(**1.00.14**)
+
+* 修复bug：字符串数组与非字符串数组先后进行排序后，选择位置最前的指定数量的行的结果有误。这个bug会影响`isortTop`函数的正确性。(**1.00.14**)
+
+* 修复bug：若通过console或者GUI多次运行module文件，系统会重复注册module函数，导致系统crash或者抛出异常。(**1.00.14**)
+
+
 
 ## DolphinDB GUI
 
