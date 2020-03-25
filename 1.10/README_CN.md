@@ -7,19 +7,9 @@
 发行日期： 2020-03-16
 
 
-# DolphinDB Release Notes
-
-## DolphinDB Server
-
-版本号： 1.10.0
-
-发行日期： 2020-03-16
-
-
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) 
-
 
 
 版本号： 1.10.1
