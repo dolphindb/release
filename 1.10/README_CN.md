@@ -21,6 +21,16 @@
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) 
 
+版本号： 1.10.2
+
+发行日期： 2020-03-27
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) 
+
+
 
 > 新功能
 
@@ -36,6 +46,7 @@
 * 高阶函数`moving`的性能提升约20%。
 * 提升了DFS和Raft的稳定性。
 * 优化了查询多字段键值内存表时使用in谓词过滤的性能。(**1.10.1**)
+* 允许用subarray表示一个空的子数组。子数组的范围允许不指定开始和结束位置。例如:subarray(1..10, 2:)或 subarray(1..10, :5)。(**1.10.2**)
 
 > bug 修复
 
@@ -50,6 +61,10 @@
 * 修复bug：字符串数组与非字符串数组先后进行排序后，选择位置最前的指定数量的行的结果有误。这个bug会影响`isortTop`函数的正确性。(**1.10.1**)
 * 修复bug：若通过console或者GUI多次运行module文件，系统会重复注册module函数，导致系统crash或者抛出异常。(**1.10.1**)
 * 删除对矩阵应用`slice`函数的某些情况下console中不必要的输出。(**1.10.1**)
+* 修复windows jit版本因为jit用户自定义函数抛出异常导致系统crash的bug。(**1.10.1**)
+* 修复函数`update！`在有多个过滤条件时更新不正确的bug。(**1.10.2**)
+* 修复维度表插入空表导致查询抛出异常的问题。（**1.10.2**）
+* 修复函数`iterate`中对参数`input`是否含有空值的错误判断。（**1.10.2**）
 
 ## DolphinDB GUI
 
