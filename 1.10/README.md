@@ -23,6 +23,17 @@ Release date: 2020-03-24
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) 
 
 
+Version: 1.10.2
+
+Release date: 2020-03-27
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) 
+
+
+
 > New Features
 
 * When an exception is thrown, the call stack is displayed.
@@ -38,6 +49,8 @@ Release date: 2020-03-24
 * Improved the performance of higher-order function `moving` by about 20%.
 * Improved the stability of DFS and RAFT.
 * Improved the performance of "in" filtering condition when querying a keyed table with multiple keys. (**1.10.1**)
+* An empty subarray can be obtained by specifying the same value for the starting and the ending position for the subarray in function `subarray`. For example: subarray(x, 0:0). (**1.10.2**) 
+* In function `subarray`, the starting or the ending position of the subarray can now be empty. For examples: subarray(x, 2 :) or subarray(x,: 5). (**1.10.2**)
 
 
 > Bug Fixes
@@ -53,6 +66,10 @@ Release date: 2020-03-24
 * Fixed a bug in selecting the top rows after sorting string arrays and non-string arrays sequentially. It may lead to incorrect results of function `isortTop`. (**1.10.1**)
 * Fixed a bug where the system would register duplicate module functions when a module file is executed in the console or GUI multiple times. It may lead to system crash or thrown exceptions. (**1.10.1**)
 * Removed unnecessary output in the console in certain situations when function `slice` is applied to a matrix. (**1.10.1**)
+* Fixed a crash bug in the Windows jit version. The system would crash if a user-defined jit function throws an exception. (**1.10.1**)
+* Fixed a bug that function `update!` used with multiple filtering conditions generates incorrect result. (**1.10.2**)
+* Fixed a bug that queries throw exceptions after inserting an empty table into an empty dimension table. (**1.10.2**)
+* Fixed a bug with function `iterate`. The system may erroneously determine the parameter 'input' contains Null value, which causes parameter validation failure. (**1.10.2**)
 
 
 
