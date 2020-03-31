@@ -10,7 +10,8 @@ Release date: 2020-03-16
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0_JIT.zip)
 
 
 Version: 1.10.1
@@ -20,7 +21,8 @@ Release date: 2020-03-24
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1_JIT.zip)
 
 
 Version: 1.10.2
@@ -30,8 +32,17 @@ Release date: 2020-03-27
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2_JIT.zip)
 
+Version: 1.10.3
+
+Release date: 2020-03-30
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
 
 
 > New Features
@@ -40,6 +51,7 @@ Release date: 2020-03-27
 * Allow the limit value in the 'context by limit' statement to be negative, which means the last few rows of data of each group are selected.
 * Just-in-time compilation (JIT) version added new mathematical functions: all cumulative distribution functions and their inverse functions, and functions `sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `deg2rad`, `rad2deg`. 
 * Added mathematical functions: `exp2`, `expm1`, `log2`, `log10`, `log1p`, `cbrt`, `square`.
+* Added functions: `mmad`, `groups`, `ifirstNot`, `ilastNot`, `kama` and `trueRange`. (**1.10.3**)
  
 
 > Improvements
@@ -51,6 +63,7 @@ Release date: 2020-03-27
 * Improved the performance of "in" filtering condition when querying a keyed table with multiple keys. (**1.10.1**)
 * An empty subarray can be obtained by specifying the same value for the starting and the ending position for the subarray in function `subarray`. For example: subarray(x, 0:0). (**1.10.2**) 
 * In function `subarray`, the starting or the ending position of the subarray can now be empty. For examples: subarray(x, 2 :) or subarray(x,: 5). (**1.10.2**)
+* Parameter 'input' of function `iterate` can contain NULL values. A NULL value is treated as 0 in calculation. (** 1.10.3 **)
 
 
 > Bug Fixes
@@ -70,9 +83,8 @@ Release date: 2020-03-27
 * Fixed a bug that function `update!` used with multiple filtering conditions generates incorrect result. (**1.10.2**)
 * Fixed a bug that queries throw exceptions after inserting an empty table into an empty dimension table. (**1.10.2**)
 * Fixed a bug with function `iterate`. The system may erroneously determine the parameter 'input' contains Null value, which causes parameter validation failure. (**1.10.2**)
-
-
-
+* Fixed a bug with function `array`. For a FLOAT or DOUBLE array, if parameter 'defaultValue' of function `array` is set to between 0 and 0.5, the elements of the array will be erroneously assigned the value of 0. (**1.10.3**)
+* Fix a bug introduced in version 1.10.0. When some columns in a SQL query explicitly or implicitly use the same alias, the system crashes. (**1.10.3**)
 
 ## DolphinDB GUI
 

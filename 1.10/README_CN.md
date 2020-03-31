@@ -9,7 +9,8 @@
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0_JIT.zip)
 
 
 版本号： 1.10.1
@@ -19,7 +20,8 @@
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1_JIT.zip)
 
 版本号： 1.10.2
 
@@ -28,9 +30,18 @@
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2_JIT.zip)
+
+版本号： 1.10.3
+
+发行日期： 2020-03-30
 
 
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
 
 > 新功能
 
@@ -38,7 +49,8 @@
 * 允许 context by limit 语句中的limit值为负数，表示取每个组的最后几行数据。
 * 即时编译(JIT)版本增加大量数学函数：支持所有累积分布函数及其反函数，以及`sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `deg2rad`, `rad2deg`函数。 
 * 新增数学函数：`exp2`, `expm1`, `log2`, `log10`, `log1p`, `cbrt`, `square`。
- 
+* 新增函数：`mmad`, `groups`, `ifirstNot`, `ilastNot`, `kama`, `trueRange`。(**1.10.3**)
+
 > 改进
 
 * 函数`slice`的参数 rowIndex 和 colIndex 新增了对数组的支持。
@@ -48,6 +60,8 @@
 * 优化了查询多字段键值内存表时使用in谓词过滤的性能。(**1.10.1**)
 * 函数`subarray`中子数组的起始与结束位置相同，可以指定一个空的子数组。例如：subarray(x, 0:0)。(**1.10.2**)
 * 函数`subarray`中子数组允许不指定开始或结束位置。例如：subarray(x, 2:) 或 subarray(x, :5)。(**1.10.2**)
+* 函数`iterate`的input参数允许包含空值。空值在计算时视为0处理。(**1.10.3**)
+
 
 > bug 修复
 
@@ -66,6 +80,8 @@
 * 修复bug：函数`update!`在有多个过滤条件时结果不正确。(**1.10.2**)
 * 修复bug：对空的维度表插入空表导致查询抛出异常。（**1.10.2**）
 * 修复bug：函数`iterate`的参数input不含空值时，系统可能会误认为含有空值，导致参数校验失败。（**1.10.2**）
+* 修复bug：对一个FLOAT或DOUBLE向量，当`array`函数的default参数设为0-0.5之间时，会错误地对该向量元素赋值为0。(**1.10.3**)
+* 修复bug：若SQL查询语句中列出的字段显式或隐式的使用了相同的别名，会导致系统崩溃。该bug自版本1.10.0中引入。(**1.10.3**)
 
 ## DolphinDB GUI
 
