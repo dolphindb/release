@@ -101,6 +101,15 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.14.zip) | 
 
 
+
+版本号： 1.00.15
+发行日期： 2020.04.08
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.15.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.15_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.15.zip) |
+
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -187,7 +196,28 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 改进了函数createPartitionedTable，可以使用流数据表和mvcc表作为样例表（model table）(**1.00.13**)
 
 * 改进了代码反序列化。即当代码反序列化时，若遇到共享表不存在，不再抛出异常，而是通过调用函数objByName来取得共享表，使得反序列化可以继续。(**1.00.13**)
-* 
+
+* 函数`subarray`中子数组的起始与结束位置相同，可以指定一个空的子数组。例如：subarray(x, 0:0)。(**1.00.15**)
+
+* 函数`subarray`中子数组允许不指定开始或结束位置。例如：subarray(x, 2:) 或 subarray(x, :5)。(**1.00.15**)
+
+* 函数`iterate`的input参数允许包含空值。空值在计算时视为0处理。(**1.00.15**)
+
+* 提高了函数`iif`的性能。大部分情况下可以提升1倍的性能。(**1.00.15**)
+
+* 函数`loadText`支持以carriage return （'\r'）为换行符的文件。(**1.00.15**)
+
+* 把空字符串解析为IP地址时，不再抛出异常，而是解析为空IP地址。(**1.00.15**)
+
+* 函数`char`, `short`, `int`, `long`, `float`和`double`解析字符串时，如果输入的字符串为空或者不是一个数值，返回相应数据类型的空值而不是0。(**1.00.15**)
+
+* 在使用函数`restore`数据的过程中，如果出错会抛出异常。之前只记log。(**1.00.15**)
+
+* 函数`migrate`新增支持一次性回复备份文件夹内所有数据库和表。(**1.00.15**)
+
+* 函数`dropDatabase`和`existsDatabase`的路径最后一个字符如果是斜杠或反斜杠，会自动删除。(**1.00.15**)
+
+
 
 > Bug修复:
 
@@ -258,6 +288,18 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug：字符串数组与非字符串数组先后进行排序后，选择位置最前的指定数量的行的结果有误。这个bug会影响`isortTop`函数的正确性。(**1.00.14**)
 
 * 修复bug：若通过console或者GUI多次运行module文件，系统会重复注册module函数，导致系统crash或者抛出异常。(**1.00.14**)
+
+* 修复bug：函数`update!`在有多个过滤条件时结果不正确。(**1.00.15**)
+
+* 修复bug：对空的维度表插入空表导致查询抛出异常。（**1.00.15**）
+
+* 修复bug：函数`iterate`的参数input不含空值时，系统可能会误认为含有空值，导致参数校验失败。（**1.00.15**）
+
+* 修复bug：对一个FLOAT或DOUBLE向量，当`array`函数的default参数设为0-0.5之间时，会错误地对该向量元素赋值为0。(**1.00.15**)
+
+* 修复bug：在context by查询语句中，如果同时使用通配符字段`*`以及返回多个结果的自定义函数，会导致查询结果不正确。(**1.00.15**)
+
+* 修复bug：在context by或group by之后使用order by，如果需要排序的字段已经是用户指定的顺序（不需要重排），产生的查询结果（内存表）若继续用于计算，在对排序字段进行处理时可能产生不正确的结果。
 
 
 

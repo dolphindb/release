@@ -45,6 +45,16 @@ Release date: 2020-03-30
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
 
 
+Version: 1.10.4
+
+Release date: 2020-04-08
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4_JIT.zip)
+
+
 > New Features
 
 * When an exception is thrown, the call stack is displayed.
@@ -52,6 +62,9 @@ Release date: 2020-03-30
 * Just-in-time compilation (JIT) version added new mathematical functions: all cumulative distribution functions and their inverse functions, and functions `sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `deg2rad`, `rad2deg`. 
 * Added mathematical functions: `exp2`, `expm1`, `log2`, `log10`, `log1p`, `cbrt`, `square`.
 * Added functions: `mmad`, `groups`, `ifirstNot`, `ilastNot`, `kama` and `trueRange`. (**1.10.3**)
+* Added function `segment` to divide a vector into groups. Each group is composed of identical values next to each other. For example, [1,1,2,2,1,1,1] is divided into 3 groups: [1,1], [2,2] and [1,1,1]. (**1.10.4**)
+* Can use top/limit 0 or an invalid where condition such as 1=0 in a SQL query to generate an empty table. (**1.10.4**)
+* Added configuration parameters 'remoteHost' and 'remotePort'. If these parameters are specified, DolphinDB program can be started as a terminal for a remote server. (**1.10.4**)
  
 
 > Improvements
@@ -63,7 +76,14 @@ Release date: 2020-03-30
 * Improved the performance of "in" filtering condition when querying a keyed table with multiple keys. (**1.10.1**)
 * An empty subarray can be obtained by specifying the same value for the starting and the ending position for the subarray in function `subarray`. For example: subarray(x, 0:0). (**1.10.2**) 
 * In function `subarray`, the starting or the ending position of the subarray can now be empty. For examples: subarray(x, 2 :) or subarray(x,: 5). (**1.10.2**)
-* Parameter 'input' of function `iterate` can contain NULL values. A NULL value is treated as 0 in calculation. (** 1.10.3 **)
+* Parameter 'input' of function `iterate` can contain NULL values. A NULL value is treated as 0 in calculation. (**1.10.3**)
+* Improved the performance of the function `iif`. In most cases, performance can be doubled. (**1.10.4**)
+* Function `loadText` supports files with carriage return ('\r') as line breaks. (**1.10.4**)
+* When using an empty string as an IP address, it no longer throws an exception, but returns an empty IP address. (**1.10.4**)
+* When the functions `char`,` short`, `int`,` long`, `float` and` double` parse strings, if the input string is empty or not a numeric value, a null value of the corresponding data type is returned Not 0. (**1.10.4**)
+* In the process of using the function `restore` data, if an error occurs, an exception will be thrown. It was only logged before. (**1.10.4**)
+* The function `migrate` adds support to restore all databases and tables in the backup folder at once. (**1.10.4**)
+* If the last character of the database directory parameter of the functions `dropDatabase` and` existsDatabase` is a slash or a backslash, it will be automatically removed. (**1.10.4**)
 
 
 > Bug Fixes
@@ -84,7 +104,9 @@ Release date: 2020-03-30
 * Fixed a bug that queries throw exceptions after inserting an empty table into an empty dimension table. (**1.10.2**)
 * Fixed a bug with function `iterate`. The system may erroneously determine the parameter 'input' contains Null value, which causes parameter validation failure. (**1.10.2**)
 * Fixed a bug with function `array`. For a FLOAT or DOUBLE array, if parameter 'defaultValue' of function `array` is set to between 0 and 0.5, the elements of the array will be erroneously assigned the value of 0. (**1.10.3**)
-* Fix a bug introduced in version 1.10.0. When some columns in a SQL query explicitly or implicitly use the same alias, the system crashes. (**1.10.3**)
+* Fixed a bug introduced in version 1.10.0. When some columns in a SQL query explicitly or implicitly use the same alias, the system crashes. (**1.10.3**)
+* Fixed a bug that the result of function `trueRange` in 'context by' statement may be incorrect. (**1.10.4**)
+* Fixed a bug introduced in version 1.10.0. When remotely calling a partial application function in API or with function `remoteRun`, if an exception is thrown, the system may crash. (**1.10.4**)
 
 ## DolphinDB GUI
 

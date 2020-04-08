@@ -43,6 +43,18 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
 
+
+版本号： 1.10.4
+
+发行日期： 2020-04-08
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4_JIT.zip)
+
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -50,6 +62,9 @@
 * 即时编译(JIT)版本增加大量数学函数：支持所有累积分布函数及其反函数，以及`sinh`, `cosh`, `tanh`, `asinh`, `acosh`, `atanh`, `deg2rad`, `rad2deg`函数。 
 * 新增数学函数：`exp2`, `expm1`, `log2`, `log10`, `log1p`, `cbrt`, `square`。
 * 新增函数：`mmad`, `groups`, `ifirstNot`, `ilastNot`, `kama`, `trueRange`。(**1.10.3**)
+* 新增`segment`函数，对向量分组，每组为相邻的相同值。例如，[1,1,2,2,1,1,1]被分为3组：[1,1]，[2,2]与[1,1,1]。(**1.10.4**)
+* 支持在SQL查询中用top/limit 0或在where条件中使用不成立的标量条件譬如1=0获取一个空表。(**1.10.4**)
+* 新增设置参数remoteHost和remotePort。若启动DolphinDB时指定，DolphinDB程序可以作为远端服务器的终端使用。(**1.10.4**)
 
 > 改进
 
@@ -61,6 +76,13 @@
 * 函数`subarray`中子数组的起始与结束位置相同，可以指定一个空的子数组。例如：subarray(x, 0:0)。(**1.10.2**)
 * 函数`subarray`中子数组允许不指定开始或结束位置。例如：subarray(x, 2:) 或 subarray(x, :5)。(**1.10.2**)
 * 函数`iterate`的input参数允许包含空值。空值在计算时视为0处理。(**1.10.3**)
+* 提高了函数`iif`的性能。大部分情况下可以提升1倍的性能。(**1.10.4**)
+* 函数`loadText`支持以carriage return （'\r'）为换行符的文件。(**1.10.4**)
+* 把空字符串解析为IP地址时，不再抛出异常，而是解析为空IP地址。(**1.10.4**)
+* 函数`char`, `short`, `int`, `long`, `float`和`double`解析字符串时，如果输入的字符串为空或者不是一个数值，返回相应数据类型的空值而不是0。(**1.10.4**)
+* 在使用函数`restore`数据的过程中，如果出错会抛出异常。之前只记log。(**1.10.4**)
+* 函数`migrate`新增支持一次性回复备份文件夹内所有数据库和表。(**1.10.4**)
+* 函数`dropDatabase`和`existsDatabase`的路径最后一个字符如果是斜杠或反斜杠，会自动删除。(**1.10.4**)
 
 
 > bug 修复
@@ -82,6 +104,8 @@
 * 修复bug：函数`iterate`的参数input不含空值时，系统可能会误认为含有空值，导致参数校验失败。（**1.10.2**）
 * 修复bug：对一个FLOAT或DOUBLE向量，当`array`函数的default参数设为0-0.5之间时，会错误地对该向量元素赋值为0。(**1.10.3**)
 * 修复bug：若SQL查询语句中列出的字段显式或隐式的使用了相同的别名，会导致系统崩溃。该bug自版本1.10.0中引入。(**1.10.3**)
+* 修复bug: 修复在context by查询语句中使用`trueRange`函数结果可能不正确的bug。(**1.10.4**)
+* 修复bug: 当在API或`remoteRun`函数中远程调用一个部分应用函数时，如果生成部分应用函数之时抛出异常，会导致系统crash。该bug自版本1.10.0中引入。(**1.10.4**)
 
 ## DolphinDB GUI
 

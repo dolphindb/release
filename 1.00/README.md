@@ -95,8 +95,14 @@ Version: 1.00.14
 Release date: 2020.03.24
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.14.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.14_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.14.zip) | 
+
+Version: 1.00.15
+Release date: 2020.04.08
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.15.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.15.zip) | 
+
 
 > New feature
 
@@ -154,6 +160,16 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Improved the function isDuplicated so that it can accept subarray, which is used in partitioned or in-memory tables. (**1.00.13**)
 * Function createPartitionedTable can now take a stream table or a mvcc table as a model table. (**1.00.13**)
 * Improved code deserialization. That is, when the code is deserialized, if it refers to a shared table that does not exist, an exception is no longer thrown, but the shared table is obtained by calling the function objByName, so that deserialization can continue. (**1.00.13**)
+* An empty subarray can be obtained by specifying the same value for the starting and the ending position for the subarray in function `subarray`. For example: subarray(x, 0:0). (**1.00.15**) 
+* In function `subarray`, the starting or the ending position of the subarray can now be empty. For examples: subarray(x, 2 :) or subarray(x,: 5). (**1.00.15**)
+* Parameter 'input' of function `iterate` can contain NULL values. A NULL value is treated as 0 in calculation. (**1.00.15**)
+* Improved the performance of the function `iif`. In most cases, performance can be doubled. (**1.00.15**)
+* Function `loadText` supports files with carriage return ('\r') as line breaks. (**1.00.15**)
+* When using an empty string as an IP address, it no longer throws an exception, but returns an empty IP address. (**1.00.15**)
+* When the functions `char`,` short`, `int`,` long`, `float` and` double` parse strings, if the input string is empty or not a numeric value, a null value of the corresponding data type is returned Not 0. (**1.00.15**)
+* In the process of using the function `restore` data, if an error occurs, an exception will be thrown. It was only logged before. (**1.00.15**)
+* The function `migrate` adds support to restore all databases and tables in the backup folder at once. (**1.00.15**)
+* If the last character of the database directory parameter of the functions `dropDatabase` and` existsDatabase` is a slash or a backslash, it will be automatically removed. (**1.00.15**)
 
 
 
@@ -195,7 +211,12 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug in linear programming (`linprog`) that the accumulation of rounding errors in iterations may lead to incorrect results. (**1.00.14**)
 * Fixed a bug in selecting the top rows after sorting string arrays and non-string arrays sequentially. It may lead to incorrect results of function `isortTop`. (**1.00.14**)
 * Fixed a bug where the system would register duplicate module functions when a module file is executed in the console or GUI multiple times. It may lead to system crash or thrown exceptions. (**1.00.14**)
-
+* Fixed a bug that function `update!` used with multiple filtering conditions generates incorrect result. (**1.00.15**)
+* Fixed a bug that queries throw exceptions after inserting an empty table into an empty dimension table. (**1.00.15**)
+* Fixed a bug with function `iterate`. The system may erroneously determine the parameter 'input' contains Null value, which causes parameter validation failure. (**1.00.15**)
+* Fixed a bug with function `array`. For a FLOAT or DOUBLE array, if parameter 'defaultValue' of function `array` is set to between 0 and 0.5, the elements of the array will be erroneously assigned the value of 0. (**1.00.15**)
+* Fixed a bug that in the `context by` query statement, if you use the wildcard field `*` and a custom function that returns multiple results at the same time, the query result will be incorrect. (**1.00.15**)
+* Fixed a bug about using order by after context by or group by. If the field to be sorted is already in the order specified by the user (no need to rearrange), the generated query result (in-memory table) will continue to be used for calculation. Fields may produce incorrect results. (**1.00.15**)
 
 
 
