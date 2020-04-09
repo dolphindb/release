@@ -213,7 +213,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 在使用函数`restore`数据的过程中，如果出错会抛出异常。之前只记log。(**1.00.15**)
 
-* 函数`migrate`新增支持一次性回复备份文件夹内所有数据库和表。(**1.00.15**)
+* 函数`migrate`新增支持一次性恢复备份文件夹内所有数据库和表。(**1.00.15**)
 
 * 函数`dropDatabase`和`existsDatabase`的路径最后一个字符如果是斜杠或反斜杠，会自动删除。(**1.00.15**)
 

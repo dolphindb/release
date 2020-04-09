@@ -105,8 +105,8 @@ Release date: 2020-04-08
 * Fixed a bug with function `iterate`. The system may erroneously determine the parameter 'input' contains Null value, which causes parameter validation failure. (**1.10.2**)
 * Fixed a bug with function `array`. For a FLOAT or DOUBLE array, if parameter 'defaultValue' of function `array` is set to between 0 and 0.5, the elements of the array will be erroneously assigned the value of 0. (**1.10.3**)
 * Fixed a bug introduced in version 1.10.0. When some columns in a SQL query explicitly or implicitly use the same alias, the system crashes. (**1.10.3**)
-* Fixed a bug that the result of function `trueRange` in 'context by' statement may be incorrect. (**1.10.4**)
-* Fixed a bug introduced in version 1.10.0. When remotely calling a partial application function in API or with function `remoteRun`, if an exception is thrown, the system may crash. (**1.10.4**)
+* Fixed a bug that the result of function `trueRange` in a SQL query with 'context by' clause may be incorrect. (**1.10.4**)
+* Fixed a bug introduced in version 1.10.0. When remotely calling a partial application function in API or with function `remoteRun`, if an exception is thrown during the construction of the partial application function, the system may crash. (**1.10.4**)
 
 ## DolphinDB GUI
 
