@@ -299,7 +299,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 修复bug：在context by查询语句中，如果同时使用通配符字段`*`以及返回多个结果的自定义函数，会导致查询结果不正确。(**1.00.15**)
 
-* 修复bug：在context by或group by之后使用order by，如果需要排序的字段已经是用户指定的顺序（不需要重排），产生的查询结果（内存表）若继续用于计算，在对排序字段进行处理时可能产生不正确的结果。
+* 修复bug：在context by或group by之后使用order by，如果需要排序的字段已经是用户指定的顺序（不需要重排），产生的查询结果（内存表）若继续用于计算，在对排序字段进行处理时可能产生不正确的结果。(**1.00.15**)
 
 
 
