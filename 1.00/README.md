@@ -217,6 +217,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug with function `array`. For a FLOAT or DOUBLE array, if parameter 'defaultValue' of function `array` is set to between 0 and 0.5, the elements of the array will be erroneously assigned the value of 0. (**1.00.15**)
 * Fixed a bug that in the `context by` query statement, if you use the wildcard field `*` and a custom function that returns multiple results at the same time, the query result will be incorrect. (**1.00.15**)
 * Fixed a bug about using order by after context by or group by. If the field to be sorted is already in the order specified by the user (no need to rearrange), the generated query result (in-memory table) will continue to be used for calculation. Fields may produce incorrect results. (**1.00.15**)
+* Fixed a bug introduced in version 1.00.6. Functions `loadText`, `ploadText` and `loadTextEx` generate incorrect result when loading strings representing DOUBLE or FLOAT types starting with '.' or '-.'. For example, '.12' and '-.12' are incorrectly parsed as 12. (**1.00.15**) 
+
 
 
 
