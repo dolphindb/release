@@ -108,6 +108,8 @@ Release date: 2020-04-08
 * Fixed a bug about using order by after context by or group by. If the field to be sorted is already in the order specified by the user (no need to rearrange), the generated query result (in-memory table) will continue to be used for calculation. Fields may produce incorrect results. (**1.10.4**)
 * Fixed a bug that the result of function `trueRange` in a SQL query with 'context by' clause may be incorrect. (**1.10.4**)
 * Fixed a bug introduced in version 1.10.0. When remotely calling a partial application function in API or with function `remoteRun`, if an exception is thrown during the construction of the partial application function, the system may crash. (**1.10.4**)
+* Fixed a bug introduced in version 1.00.6. Functions `loadText`, `ploadText` and `loadTextEx` generate incorrect result when loading strings representing DOUBLE or FLOAT types starting with '.' or '-.'. For example, '.12' and '-.12' are incorrectly parsed as 12. (**1.10.4**) 
+
 
 ## DolphinDB GUI
 
