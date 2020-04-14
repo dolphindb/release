@@ -95,9 +95,9 @@
 * 函数`migrate`新增支持一次性恢复备份文件夹内所有数据库和表。(**1.10.4**)
 * 函数`dropDatabase`和`existsDatabase`中表示数据库路径的参数最后一个字符如果是斜杠或反斜杠，会自动删除。(**1.10.4**)
 * 函数`rank`的输入为空的向量时，不再抛出异常，而是返回空的向量。(**1.10.5**)
-* 函数`dropPartition`的可选参数forceDelete为true时，即使指定的partition的副本数为0，也允许删除。(**1.10.5**)
-* 函数`dropPartition`的partitionPaths参数如果含有空值则抛出异常。(**1.10.5**)
-* 限制分布式数据库操作相关函数（包括`addValuePartitions`, `addRangePartitions`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`)只能在数据节点上运行。(**1.10.5**)
+* 函数`dropPartition`的参数forceDelete为true时，即使指定的partition的副本数为0，也允许删除。(**1.10.5**)
+* 函数`dropPartition`的partitionPaths参数表示过滤条件时，如果含有空值则抛出异常。(**1.10.5**)
+* 限制分布式数据库操作相关函数(包括 `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, `tableInsert`) 只能在数据节点上运行。(**1.10.5**)
 * 改进if/else语句错误提示：如果if分支或else分支含有不合法内容，会抛出异常。(**1.10.5**)
 
 > bug 修复
