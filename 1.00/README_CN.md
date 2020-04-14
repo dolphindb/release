@@ -110,6 +110,15 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.15.zip) |
 
 
+版本号： 1.00.16
+发行日期： 2020.04.14
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.16.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.16_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.16.zip) |
+
+
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -217,7 +226,15 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 函数`dropDatabase`和`existsDatabase`的路径最后一个字符如果是斜杠或反斜杠，会自动删除。(**1.00.15**)
 
+* 函数`rank`的输入为空的向量时，不再抛出异常，而是返回空的向量。(**1.00.16**)
 
+* 函数`dropPartition`的可选参数forceDelete为true时，即使指定的partition的副本数为0，也允许删除。(**1.00.16**)
+
+* 函数`dropPartition`的partitionPaths参数如果含有空值则抛出异常。(**1.00.16**)
+
+* 限制分布式数据库操作相关函数（包括`addValuePartitions`, `addRangePartitions`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`)只能在数据节点上运行。(**1.00.16**)
+
+* 改进if/else语句错误提示：如果if分支或else分支含有不合法内容，会抛出异常。(**1.00.16**)
 
 > Bug修复:
 
@@ -301,7 +318,13 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 修复bug：在context by或group by之后使用order by，如果需要排序的字段已经是用户指定的顺序（不需要重排），产生的查询结果（内存表）若继续用于计算，在对排序字段进行处理时可能产生不正确的结果。(**1.00.15**)
 
-* 修复bug: 修复函数`loadText`, `ploadText`以及`loadText`解析以'.'或者'-.'为起始的代表数字的字符串会出现错误。例如，'.12'或者'-.12'会被错误地解析为12。该bug自版本1.00.6中引入。(**1.00.15**)
+* 修复bug: 函数`convertEncode`在Linux版本不起作用。(**1.00.16**)
+
+* 修复bug: 若流数据订阅函数(`subscribeTable`)的参数msgAsTable为false，并且最新一批次输入的消息只有一条满足过滤条件时，会把一条不一定满足过滤条件的消息发送给客户端。(**1.00.16**)
+
+* 修复bug: 分区表使用聚合函数时可能产生重复字段异常。例如：在分布式表的group by计算过程中，如果用到MapReduce，中间过程产生的临时字段名为col+数字，例如col1，col2，等等。如果恰巧和分组字段名相同，会产生字段重复错误。(**1.00.16**)
+
+* 修复bug: 极小概率下函数`loadText`将DOUBLE类型解析为DATE类型。(**1.00.16**)
 
 
 

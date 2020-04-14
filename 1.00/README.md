@@ -95,13 +95,23 @@ Version: 1.00.14
 Release date: 2020.03.24
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.14.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.14_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.14.zip) | 
 
 Version: 1.00.15
 Release date: 2020.04.08
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.15.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.15_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.15.zip) | 
+
+Version: 1.00.16
+Release date: 2020.04.14
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.16.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.16_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.16.zip) |
+
 
 
 > New feature
@@ -170,6 +180,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * In the process of using the function `restore` data, if an error occurs, an exception will be thrown. It was only logged before. (**1.00.15**)
 * The function `migrate` adds support to restore all databases and tables in the backup folder at once. (**1.00.15**)
 * If the last character of the database directory parameter of the functions `dropDatabase` and` existsDatabase` is a slash or a backslash, it will be automatically removed. (**1.00.15**)
+* If the input of function `rank` is an empty vector, it returns an empty vector instead of throwing an exception. (**1.00.16**)
+* When the parameter 'forceDelete' of function `dropPartition` is set to be true, partition deletion is allowed even if the number of copies of the specified partition is 0. (**1.00.16**)
+* An exception is thrown if the parameter 'partitionPaths' of function `dropPartition` contains a NULL value. (**1.00.16**)
+* Added the restriction that functions related to DFS database operations (including `addValuePartitions`, `addRangePartitions`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment` and `setRetentionPolicy`) can only be executed on data nodes. (**1.00.16**)
+* If the 'if' branch or 'else' branch of an if/else statement contains illegal components, an exception will be thrown. (**1.00.16**)
 
 
 
@@ -217,7 +232,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug with function `array`. For a FLOAT or DOUBLE array, if parameter 'defaultValue' of function `array` is set to between 0 and 0.5, the elements of the array will be erroneously assigned the value of 0. (**1.00.15**)
 * Fixed a bug that in the `context by` query statement, if you use the wildcard field `*` and a custom function that returns multiple results at the same time, the query result will be incorrect. (**1.00.15**)
 * Fixed a bug about using order by after context by or group by. If the field to be sorted is already in the order specified by the user (no need to rearrange), the generated query result (in-memory table) will continue to be used for calculation. Fields may produce incorrect results. (**1.00.15**)
-* Fixed a bug introduced in version 1.00.6. Functions `loadText`, `ploadText` and `loadTextEx` generate incorrect result when loading strings representing DOUBLE or FLOAT types starting with '.' or '-.'. For example, '.12' and '-.12' are incorrectly parsed as 12. (**1.00.15**) 
+* Fixed a bug that function `convertEncode` does not work in Linux version. (**1.00.16**)
+* Fixed a bug that when the parameter 'msgAsTable' of funciton `subscribeTable` is set to false, and if only one message in the new batch satisfies the filtering condition, a message that does not necessarily satisfies the filtering condition is sent to the client. (**1.00.16**)
+* Fixed a bug that execution of aggregate functions with partitioned tables may cause error of duplicate column names. For example, if MapReduce is used in the execution of a group by statement with a partitioned table, the names of intermediate columns are "col"+number, such as "col1", "col2", etc. If a group-by column happens to have the same name as an intermediate column, an error message about duplicate column names is generated. (**1.00.16**)
+* Fixed a bug that function `loadText` may parse DOUBLE type as DATE type in rare cases. (**1.00.16**)
 
 
 
