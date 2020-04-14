@@ -230,9 +230,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 * 函数`dropPartition`的可选参数forceDelete为true时，即使指定的partition的副本数为0，也允许删除。(**1.00.16**)
 
-* 函数`dropPartition`的partitionPaths参数如果含有空值则抛出异常。(**1.00.16**)
+* 函数`dropPartition`的partitionPaths参数表示过滤条件时，如果含有空值则抛出异常。(**1.00.16**)
 
-* 限制分布式数据库操作相关函数（包括`addValuePartitions`, `addRangePartitions`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`)只能在数据节点上运行。(**1.00.16**)
+* 限制分布式数据库操作相关函数(包括 `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, `tableInsert`) 只能在数据节点上运行。(**1.00.16**)
 
 * 改进if/else语句错误提示：如果if分支或else分支含有不合法内容，会抛出异常。(**1.00.16**)
 
