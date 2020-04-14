@@ -95,8 +95,8 @@ Release date: 2020-04-14
 * If the last character of the parameter indicating database path in functions `dropDatabase` and `existsDatabase` is a slash or a backslash, it will be automatically removed. (**1.10.4**)
 * If the input of function `rank` is an empty vector, it returns an empty vector instead of throwing an exception. (**1.10.5**)
 * When the parameter 'forceDelete' of function `dropPartition` is set to be true, partition deletion is allowed even if the number of copies of the specified partition is 0. (**1.10.5**)
-* An exception is thrown if the parameter 'partitionPaths' of function `dropPartition` contains a NULL value. (**1.10.5**)
-* Added the restriction that functions related to DFS database operations (including `addValuePartitions`, `addRangePartitions`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment` and `setRetentionPolicy`) can only be executed on data nodes. (**1.10.5**)
+* An exception is thrown if the parameter 'partitionPaths' of function `dropPartition` indicates filtering conditions and contains a NULL value. (**1.10.5**)
+* Added the restriction that functions related to DFS database operations (including `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, and `tableInsert`) can only be executed on data nodes. (**1.10.5**)
 * If the 'if' branch or 'else' branch of an if/else statement contains illegal components, an exception will be thrown. (**1.10.5**)
 
 > Bug Fixes
