@@ -65,6 +65,17 @@
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5_JIT.zip)
 
 
+版本号： 1.10.6
+
+发行日期： 2020-04-22
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
+
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -76,6 +87,9 @@
 * 支持在SQL查询中用top/limit 0或在where条件中使用不成立的标量条件譬如1=0获取一个空表。(**1.10.4**)
 * 新增设置参数remoteHost和remotePort。若启动DolphinDB时指定，DolphinDB程序可以作为远端服务器的终端使用。(**1.10.4**)
 * 允许对一个矩阵使用lambda函数对其列进行过滤。(**1.10.5**)
+* 新增数学函数`integral`和`derivative`，用于计算积分和导数。(**1.10.6**)
+* 新增函数`getEnv`，用于获取系统环境变量。例如，在Linux环境下，getEnv("PATH")会返回环境变量PATH的值。(**1.10.6**)
+* 新增函数`conditionalFilter(X,condition,filterMap)`。根据给定的字典参数filterMap，若向量condition中某元素为该字典的key，而且向量X中相应位置元素为字典中该key值对应的value中一个元素时，返回true，否则返回false。(**1.10.6**)
 
 > 改进
 
@@ -99,6 +113,7 @@
 * 函数`dropPartition`的partitionPaths参数表示过滤条件时，如果含有空值则抛出异常。(**1.10.5**)
 * 限制分布式数据库操作相关函数(包括 `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, `tableInsert`) 只能在数据节点上运行。(**1.10.5**)
 * 改进if/else语句错误提示：如果if分支或else分支含有不合法内容，会抛出异常。(**1.10.5**)
+* 使用函数`submitJob`提交作业时，若同一个jobId参数值被反复使用，允许自动生成的以该jobId参数值与当日日期为前缀的 job ID 数量从1000个增加到10000个。(**1.10.6**)
 
 > bug 修复
 
@@ -127,6 +142,9 @@
 * 修复bug: 若流数据订阅函数(`subscribeTable`)的参数msgAsTable为false，并且最新一批次输入的消息只有一条满足过滤条件时，会把一条不一定满足过滤条件的消息发送给客户端。(**1.10.5**)
 * 修复bug: 分区表使用聚合函数时可能产生重复字段异常。例如：在分布式表的group by计算过程中，如果用到MapReduce，中间过程产生的临时字段名为col+数字，例如col1，col2，等等。如果恰巧和分组字段名相同，会产生字段重复错误。(**1.10.5**)
 * 修复bug: 极小概率下函数`loadText`将DOUBLE类型解析为DATE类型。(**1.10.5**)
+* 修复bug: 若共享内存表中至少一列为大数组(big array)，删除全部数据时会出现内存泄漏。(**1.10.6**)
+* 修复bug: JIT中若无法确定变量类型，可能会在后续编译时发生错误，导致运行时crash或者执行效率降低等情况。修复bug后，若无法确定变量类型，会中止编译并报告该变量名称。(**1.10.6**)
+* 修复bug: 在key为LONG类型，value为ANY类型的字典中查找一个key值时可能找不到数据。这是版本1.10.3引入的bug。(**1.10.6**)
 
 ## DolphinDB GUI
 
