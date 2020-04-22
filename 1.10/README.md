@@ -63,6 +63,15 @@ Release date: 2020-04-14
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5_JIT.zip)
 
+Version: 1.10.6
+
+Release date: 2020-04-22
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
+
 > New Features
 
 * When an exception is thrown, the call stack is displayed.
@@ -74,6 +83,9 @@ Release date: 2020-04-14
 * Can use top/limit 0 or an invalid where condition such as 1=0 in a SQL query to generate an empty table. (**1.10.4**)
 * Added configuration parameters 'remoteHost' and 'remotePort'. If these parameters are specified, DolphinDB program can be started as a terminal for a remote server. (**1.10.4**)
 * Allow filtering the columns of a matrix with a lambda function. (**1.10.5**)
+* Added mathematical functions `integral` and `derivative` for calculating integrals and derivatives. (**1.10.6**)
+* Added function `getEnv` to get OS environment variables. For example, under Linux environment, getEnv("PATH") will return the value of the system environment variable `PATH`. (**1.10.6**)
+* Added function `conditionalFilter(X,condition,filterMap)`. The parameter 'filterMap' is a dictionary. If an element in the vector 'condition' is a key of 'filterMap', and the corresponding element in the vector 'X' is an element in the values corresponding to the key in the dictionary, return true; otherwise return false. (**1.10.6**)
  
 
 > Improvements
@@ -98,6 +110,7 @@ Release date: 2020-04-14
 * An exception is thrown if the parameter 'partitionPaths' of function `dropPartition` indicates filtering conditions and contains a NULL value. (**1.10.5**)
 * Added the restriction that functions related to DFS database operations (including `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, and `tableInsert`) can only be executed on data nodes. (**1.10.5**)
 * If the 'if' branch or 'else' branch of an if/else statement contains illegal components, an exception will be thrown. (**1.10.5**)
+* If the same value of the parameter 'jobId' is used repeatedly when submitting jobs with function `submitJob`, the maximum number of automatically generated job IDs prefixed with the value of 'jobId' and today's date is increased from 1,000 to 10,000. (**1.10.6**)
 
 > Bug Fixes
 
@@ -126,6 +139,9 @@ Release date: 2020-04-14
 * Fixed a bug that when the parameter 'msgAsTable' of funciton `subscribeTable` is set to false, and if only one message in the new batch satisfies the filtering condition, a message that does not necessarily satisfies the filtering condition is sent to the client. (**1.10.5**)
 * Fixed a bug that execution of aggregate functions with partitioned tables may cause error of duplicate column names. For example, if MapReduce is used in the execution of a group by statement with a partitioned table, the names of intermediate columns are "col"+number, such as "col1", "col2", etc. If a group-by column happens to have the same name as an intermediate column, an error message about duplicate column names is generated. (**1.10.5**)
 * Fixed a bug that function `loadText` may parse DOUBLE type as DATE type in rare cases. (**1.10.5**)
+* Fixed a memory leak bug when deleting all data of a shared in-memory table if at least one column in the table is a big array). (**1.10.6**)
+* Fixed a bug that if a variable type cannot be determined in the JIT, errors may occur during compilation, resulting in crashes or reduced execution efficiency. After fixing the bug, if a variable type cannot be determined, the compilation will be aborted and the variable name will be reported. (**1.10.6**)
+* Fixed a bug introduced in version 1.10.3. If the keys of a dictionary are of LONG type and the values are of ANY type, searching the dictionary for a key may incorrectly return nothing. (**1.10.6**)
 
 
 ## DolphinDB GUI
