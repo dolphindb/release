@@ -118,6 +118,14 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.16.zip) |
 
 
+版本号： 1.00.17
+发行日期： 2020.04.24
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.17.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.17_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.17.zip) |
+
+
 
 > 新功能
 
@@ -325,6 +333,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug: 分区表使用聚合函数时可能产生重复字段异常。例如：在分布式表的group by计算过程中，如果用到MapReduce，中间过程产生的临时字段名为col+数字，例如col1，col2，等等。如果恰巧和分组字段名相同，会产生字段重复错误。(**1.00.16**)
 
 * 修复bug: 极小概率下函数`loadText`将DOUBLE类型解析为DATE类型。(**1.00.16**)
+
+* 修复bug: 若共享内存表中至少一列为大数组(big array)，删除全部数据时会出现内存泄漏。(**1.00.17**)
+
+* 修复bug: 修复共享内存表进行等值关联（ej）时可能导致crash的bug。若一个线程删除两个共享内存表的全部数据然后添加新数据，而另一个线程对这两个共享内存表按多个字段进行等值关联，并且关联字段中包括字符串类型字段，可能导致系统crash。(**1.00.17**)
 
 
 
