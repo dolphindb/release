@@ -112,6 +112,13 @@ Release date: 2020.04.14
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.16_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.16.zip) |
 
+Version: 1.00.17
+Release date: 2020.04.24
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.17.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.17_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.17.zip) |
+
 
 
 > New feature
@@ -236,8 +243,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug that when the parameter 'msgAsTable' of funciton `subscribeTable` is set to false, and if only one message in the new batch satisfies the filtering condition, a message that does not necessarily satisfies the filtering condition is sent to the client. (**1.00.16**)
 * Fixed a bug that execution of aggregate functions with partitioned tables may cause error of duplicate column names. For example, if MapReduce is used in the execution of a group by statement with a partitioned table, the names of intermediate columns are "col"+number, such as "col1", "col2", etc. If a group-by column happens to have the same name as an intermediate column, an error message about duplicate column names is generated. (**1.00.16**)
 * Fixed a bug that function `loadText` may parse DOUBLE type as DATE type in rare cases. (**1.00.16**)
-
-
+* Fixed a memory leak bug when deleting all data of a shared in-memory table if at least one column in the table is a big array). (**1.00.17**)
+* Fixed a bug that may cause crash when performing equal join (ej) on two shared in-memory tables. The system may crash if one thread deletes all the data of two shared in-memory tables and then adds new data, and if another thread performs equal join on them with multiple joining columns that include at least a STRING type column. (**1.00.17**)
 
 
 ## DolphinDB GUI
