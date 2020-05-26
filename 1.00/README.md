@@ -119,6 +119,13 @@ Release date: 2020.04.24
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.17_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.17.zip) |
 
+Version: 1.00.18
+Release date: 2020.05.23
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.18.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.18_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.18.zip) |
+
 
 
 > New feature
@@ -192,7 +199,12 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * An exception is thrown if the parameter 'partitionPaths' of function `dropPartition` indicates filtering conditions and contains a NULL value.  (**1.00.16**)
 * Added the restriction that functions related to DFS database operations (including `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, and `tableInsert`)  can only be executed on data nodes. (**1.00.16**)
 * If the 'if' branch or 'else' branch of an if/else statement contains illegal components, an exception will be thrown. (**1.00.16**)
-
+* SQL update and delete statements now support scalar-based logical expressions such as 1 = 1 or 1 = 0. (**1.00.18**)
+* In the table returned by `getStreamingStat.subWorkers` about workers of subscriber nodes, each row represents a subscription topic. (**1.00.18**)
+* When unsubscribing to a stream table (`unsubscribeTable`), all messages of the topic in the message queue of the execution thread will be deleted. (**1.00.18**)
+* If a SQL statement involves multiple partitions of a table, it is forbidden to use functions whose results are sensitive to the order of rows such as `mavg`, `isDuplicated`, etc. in the 'where' clause. (**1.00.18**)
+* In a SQL 'context by' or 'group by' statement, if there is an error in the calculation of an individual group due to the data (such as calculating the inversion of a singluar matrix), the result of the group is set to be Null and the statement will be executed successfully. The system no longer throws an exception to interrupt the execution. (**1.00.18**)
+* When clearing persistent data with function `clearTablePersistence`, the system no longer prevents other functions (such as `getStreamingStat`) from accessing the persistence manager. (**1.00.18**)
 
 
 
@@ -243,26 +255,27 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug that when the parameter 'msgAsTable' of funciton `subscribeTable` is set to false, and if only one message in the new batch satisfies the filtering condition, a message that does not necessarily satisfies the filtering condition is sent to the client. (**1.00.16**)
 * Fixed a bug that execution of aggregate functions with partitioned tables may cause error of duplicate column names. For example, if MapReduce is used in the execution of a group by statement with a partitioned table, the names of intermediate columns are "col"+number, such as "col1", "col2", etc. If a group-by column happens to have the same name as an intermediate column, an error message about duplicate column names is generated. (**1.00.16**)
 * Fixed a bug that function `loadText` may parse DOUBLE type as DATE type in rare cases. (**1.00.16**)
-* Fixed a memory leak bug when deleting all data of a shared in-memory table if at least one column in the table is a big array). (**1.00.17**)
-* Fixed a bug that may cause crash when performing equal join (ej) on two shared in-memory tables. The system may crash if one thread deletes all the data of two shared in-memory tables and then adds new data, and if another thread performs equal join on them with multiple joining columns that include at least a STRING type column. (**1.00.17**)
+* Fixed a memory leak bug when deleting all data of a shared in-memory table if at least one column in the table is a big array). (**1.00.18**)
+* Fixed a bug that may cause crash when performing equal join (ej) on two shared in-memory tables. The system may crash if one thread deletes all the data of two shared in-memory tables and then adds new data, and if another thread performs equal join on them with multiple joining columns that include at least a STRING type column. (**1.00.18**)
+* Fixed a bug in function `createCrossSectionalAggregator` when the parameter triggeringPattern is set to "interval". The calculation is triggered not only at prescribed intervals, but also possibly every time data is inserted. (**1.00.18**)
+* Fixed a bug that may cause system crash if the parameters of partial application in a RPC call do not use the correct format. (**1.00.18**)
+* Fixed a bug that if a complicated SQL query (for example, multiple OR conditions that contain both partitioning columns and non-partitioning columns) is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.00.18**)
+* Fixed a bug that function `wsum` returns 0 when both parameters contain only Null values. Now it returns Null. (**1.00.18**)
+
+
 
 
 ## DolphinDB GUI
 
 * Support synchronizing DolphinDB modules to remote servers.
-
 * Fixed an issue that saving password doesn't take effect. 
-
 * Fixed the problem that module synchronization fails under Microsoft Windows OS enviroment. (**1.00.10**)
-
 * Added the web performance monitoring interface for single mode dolphindb server. (**1.00.10**)
 
 ## DolphinDB plugin binary files
 
 *  Plugins including AWS S3, ZLIB, MYSQL, ODBC and HDF5 are packaged under the folder "server/plugins" for this release. 
-
 * [Plugin source code](https://github.com/dolphindb/DolphinDBPlugin)
-
 * ODBC
 
    The odbc::append method provides an optional parameter 'insertIgnore'. For target databases that support the 'insert ignore' syntax, when parameter 'insertIgore' is specified, duplicate data on the primary key will be ignored. 
