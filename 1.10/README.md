@@ -72,6 +72,16 @@ Release date: 2020-04-22
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
 
+
+Version: 1.10.7
+
+Release date: 2020-05-23
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
+
 > New Features
 
 * When an exception is thrown, the call stack is displayed.
@@ -86,7 +96,13 @@ Release date: 2020-04-22
 * Added mathematical functions `integral` and `derivative` for calculating integrals and derivatives. (**1.10.6**)
 * Added function `getEnv` to get OS environment variables. For example, under Linux environment, getEnv("PATH") will return the value of the system environment variable `PATH`. (**1.10.6**)
 * Added function `conditionalFilter(X,condition,filterMap)`. The parameter 'filterMap' is a dictionary. If an element in the vector 'condition' is a key of 'filterMap', and the corresponding element in the vector 'X' is an element in the values corresponding to the key in the dictionary, return true; otherwise return false. (**1.10.6**)
- 
+* Added function `covertExcelFormula` to convert Excel formulas into DolphinDB expressions. (**1.10.7**)
+* Added function `coevent` to count the number of event pairs that appear together within a given time interval.  (**1.10.7**)
+* Added function `signum` to return the sign of a number. (**1.10.7**)
+* Added horizontal aggregation functions for processing data by rows: `rowAnd`,`rowOr`, `rowXor`,`rowProd`. (**1.10.7**)
+* Added sliding window functions: `mwavg` and `mwsum`. (**1.10.7**)
+* Added cumulative window functions: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`. (**1.10.7**)
+
 
 > Improvements
 
@@ -111,6 +127,14 @@ Release date: 2020-04-22
 * Added the restriction that functions related to DFS database operations (including `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, and `tableInsert`) can only be executed on data nodes. (**1.10.5**)
 * If the 'if' branch or 'else' branch of an if/else statement contains illegal components, an exception will be thrown. (**1.10.5**)
 * If the same value of the parameter 'jobId' is used repeatedly when submitting jobs with function `submitJob`, the maximum number of automatically generated job IDs prefixed with the value of 'jobId' and today's date is increased from 1,000 to 10,000. (**1.10.6**)
+* SQL update and delete statements now support scalar-based logical expressions such as 1 = 1 or 1 = 0. (**1.10.7**)
+* In the table returned by `getStreamingStat.subWorkers` about workers of subscriber nodes, each row represents a subscription topic. (**1.10.7**)
+* When unsubscribing to a stream table (`unsubscribeTable`), all messages of the topic in the message queue of the execution thread will be deleted. (**1.10.7**)
+* If a SQL statement involves multiple partitions of a table, it is forbidden to use functions whose results are sensitive to the order of rows such as `mavg`, `isDuplicated`, etc. in the 'where' clause. (**1.10.7**)
+* Function `sqlColAlias` now supports composite columns. (**1.10.7**)
+* In a SQL 'context by' or 'group by' statement, if there is an error in the calculation of an individual group due to the data (such as calculating the inversion of a singluar matrix), the result of the group is set to be Null and the statement will be executed successfully. The system no longer throws an exception to interrupt the execution. (**1.10.7**)
+* When clearing persistent data with function `clearTablePersistence`, the system no longer prevents other functions (such as `getStreamingStat`) from accessing the persistence manager. (**1.10.7**)
+
 
 > Bug Fixes
 
@@ -142,6 +166,11 @@ Release date: 2020-04-22
 * Fixed a memory leak bug when deleting all data of a shared in-memory table if at least one column in the table is a big array). (**1.10.6**)
 * Fixed a bug that if a variable type cannot be determined in the JIT, errors may occur during compilation, resulting in crashes or reduced execution efficiency. After fixing the bug, if a variable type cannot be determined, the compilation will be aborted and the variable name will be reported. (**1.10.6**)
 * Fixed a bug introduced in version 1.10.3. If the keys of a dictionary are of LONG type and the values are of ANY type, searching the dictionary for a key may incorrectly return nothing. (**1.10.6**)
+* Fixed a bug that may cause crash when performing equal join (ej) on two shared in-memory tables. The system may crash if one thread deletes all the data of two shared in-memory tables and then adds new data, and if another thread performs equal join on them with multiple joining columns that include at least a STRING type column. (**1.10.6**)
+* Fixed a bug in function `createCrossSectionalAggregator` when the parameter triggeringPattern is set to "interval". The calculation is triggered not only at prescribed intervals, but also possibly every time data is inserted. (**1.10.7**)
+* Fixed a bug that may cause system crash if the parameters of partial application in a RPC call do not use the correct format. (**1.10.7**)
+* Fixed a bug that if a complicated SQL query (for example, multiple OR conditions that contain both partitioning columns and non-partitioning columns) is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.10.7**)
+* Fixed a bug that function `wsum` returns 0 when both parameters contain only Null values. Now it returns Null. (**1.10.7**)
 
 
 ## DolphinDB GUI
