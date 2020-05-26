@@ -76,6 +76,17 @@
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
 
 
+版本号： 1.10.7
+
+发行日期： 2020-05-23
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
+
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -90,6 +101,15 @@
 * 新增数学函数`integral`和`derivative`，用于计算积分和导数。(**1.10.6**)
 * 新增函数`getEnv`，用于获取系统环境变量。例如，在Linux环境下，getEnv("PATH")会返回环境变量PATH的值。(**1.10.6**)
 * 新增函数`conditionalFilter(X,condition,filterMap)`。根据给定的字典参数filterMap，若向量condition中某元素为该字典的key，而且向量X中相应位置元素为字典中该key值对应的value中一个元素时，返回true，否则返回false。(**1.10.6**)
+* SQL语句增加map子句。使用map子句后，SQL将在相应的分区上分别执行，并简单的将每个分区的执行结果合并。(**1.10.7**)
+* SQL语句增加`cgroup by`子句。`cgroup`是`cumulative group`的缩写，表示累计分组。譬如对数据按小时累计分组，并求和，则分别计算第1个小时，前2个小时，前3个小时，...， 直至所有时间之和。(**1.10.7**)
+* 新增函数`covertExcelFormula`，将Excel中的公式转化为DolphinDB中的表达式。(**1.10.7**)
+* 新增函数`coevent`，统计给定的时间间隔内出现的事件对的次数。(**1.10.7**)
+* 新增函数`signum`，返回数据的正负号标志。正数为1，0为0，负数为-1，空值返回空值。(**1.10.7**)
+* 新增按行处理数据的横向聚合函数: `rowAnd`，`rowOr`，`rowXor`，`rowProd`。(**1.10.7**)
+* 新增滑动窗口函数: `mwavg`和`mwsum`。(**1.10.7**)
+* 新增累计窗口函数: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`。(**1.10.7**)
+ 
 
 > 改进
 
@@ -114,6 +134,13 @@
 * 限制分布式数据库操作相关函数(包括 `addValuePartitions`, `addRangePartitions`, `append!`, `createPartitionedTable`, `createTable`, `database`, `dropDatabase`, `setColumnComment`, `setRetentionPolicy`, `tableInsert`) 只能在数据节点上运行。(**1.10.5**)
 * 改进if/else语句错误提示：如果if分支或else分支含有不合法内容，会抛出异常。(**1.10.5**)
 * 使用函数`submitJob`提交作业时，若同一个jobId参数值被反复使用，允许自动生成的以该jobId参数值与当日日期为前缀的 job ID 数量从1000个增加到10000个。(**1.10.6**)
+* 在 SQL 的 update 和 delete 语句中允许使用基于标量的逻辑表达式。例如：1=1，1=0。(**1.10.7**)
+* `getStreamingStat().subWorkers` 返回的有关负责订阅的执行线程的数据表中，每个订阅的topic为一行。(**1.10.7**)
+* 反订阅流数据表（`unsubscribeTable`）时，会删除执行线程队列中该topic的所有消息。(**1.10.7**)
+* 若SQL语句涉及一个表的多个分区，禁止在 where 子句中使用对行序敏感的序列函数，例如`mavg`，`isDuplicated`等。(**1.10.7**)
+* 函数`sqlColAlias`增加对 composite column 的支持。(**1.10.7**)
+* SQL语句分组计算（context by 或 group by）时，如果个别组因为数据的原因导致计算异常（例如对singluar matrix求逆），不再抛出异常中断SQL语句的执行，而是将该组的计算结果设为空值。(**1.10.7**)
+* 执行函数`clearTablePersistence`时，不再阻塞其他函数（例如`getStreamingStat`）访问persistence manager。(**1.10.7**)
 
 > bug 修复
 
@@ -145,6 +172,11 @@
 * 修复bug: 若共享内存表中至少一列为大数组(big array)，删除全部数据时会出现内存泄漏。(**1.10.6**)
 * 修复bug: JIT中若无法确定变量类型，可能会在后续编译时发生错误，导致运行时crash或者执行效率降低等情况。修复bug后，若无法确定变量类型，会中止编译并报告该变量名称。(**1.10.6**)
 * 修复bug: 在key为LONG类型，value为ANY类型的字典中查找一个key值时可能找不到数据。这是版本1.10.3引入的bug。(**1.10.6**)
+* 修复bug: 修复共享内存表进行等值关联（`ej`）时可能导致crash的bug。若一个线程删除两个共享内存表的全部数据然后添加新数据，而另一个线程对这两个共享内存表按多个字段进行等值关联，并且关联字段中包括字符串类型字段，可能导致系统crash。(**1.10.6**)
+* 修复bug：流数据横截面聚合引擎按时间间隔定时输出模式下，每次输入数据时均有可能触发计算。(**1.10.7**)
+* 修复bug：rpc调用时如果部分应用（partial application）的参数不规范可能导致系统crash。(**1.10.7**)
+* 修复bug: 数据表采用值分区时，SQL的where子句如果非常复杂（使用or连接多个同时包含分区字段和非分区字段的过滤条件），可能导致输出的行数比预期更多。(**1.10.7**)
+* 修复bug: `wsum`函数的参数均为空值时返回0，应返回空值。(**1.10.7**)
 
 ## DolphinDB GUI
 
