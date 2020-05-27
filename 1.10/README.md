@@ -170,7 +170,7 @@ Release date: 2020-05-23
 * Fixed a bug that may cause crash when performing equal join (ej) on two shared in-memory tables. The system may crash if one thread deletes all the data of two shared in-memory tables and then adds new data, and if another thread performs equal join on them with multiple joining columns that include at least a STRING type column. (**1.10.6**)
 * Fixed a bug in function `createCrossSectionalAggregator` when the parameter triggeringPattern is set to "interval". The calculation is triggered not only at prescribed intervals, but also possibly every time data is inserted. (**1.10.7**)
 * Fixed a bug that may cause system crash if the parameters of partial application in a RPC call do not use the correct format. (**1.10.7**)
-* Fixed a bug that if a complicated SQL query (for example, multiple OR conditions that contain both partitioning columns and non-partitioning columns) is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.10.7**)
+* Fixed a bug that if a SQL query with multiple OR conditions that contain both partitioning columns and non-partitioning columns in the where clause is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.10.7**)
 * Fixed a bug that function `wsum` returns 0 when both parameters contain only Null values. Now it returns Null. (**1.10.7**)
 
 
