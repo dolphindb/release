@@ -100,7 +100,7 @@ Release date: 2020-05-23
 * Added function `covertExcelFormula` to convert Excel formulas into DolphinDB expressions. (**1.10.7**)
 * Added function `coevent` to count the number of event pairs that appear together within a given time interval.  (**1.10.7**)
 * Added function `signum` to return the sign of a number. (**1.10.7**)
-* Added horizontal aggregation functions for processing data by rows: `rowAnd`,`rowOr`, `rowXor`,`rowProd`. (**1.10.7**)
+* Added horizontal aggregation functions for processing data by rows: `rowAnd`, `rowOr`, `rowXor`, `rowProd`. (**1.10.7**)
 * Added sliding window functions: `mwavg` and `mwsum`. (**1.10.7**)
 * Added cumulative window functions: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`. (**1.10.7**)
 
@@ -176,11 +176,29 @@ Release date: 2020-05-23
 
 ## DolphinDB GUI
 
+> Improvements
+
+* Added new keywords: cgroup and map. (**1.10.7**)
+
 > Bug Fixes
 
 * Fixed the bug that the row numbers of the beginning row and the ending row of the selected script for execution are not displayed correctly in the log panel.
 
 
+## DolphinDB plugin binary files
 
+* [Plugin Source Code](https://github.com/dolphindb/DolphinDBPlugin)
+* MySQL
+    * Fixed a bug that data containing LONGTEXT type columns cannot be imported successfully. (**1.10.7**)
+    
 
+## Python API
+
+> Improvements
+
+* Now check whether column labels of a DataFrame are valid. (**0.1.15.20**)
+
+> Bug Fixes
+
+* Fixed a bug that uploading numpy.matrix to DolphinDB server causes a crash. (**0.1.15.20**)
  
