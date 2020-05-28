@@ -181,9 +181,28 @@
 
 ## DolphinDB GUI
 
+> 改进
+
+* 增加关键字cgroup和map。(**1.10.7**)
+
 > bug 修复
 
 * GUI中选择部分代码执行后，log窗口未能正确显示代码的起始及结束行号。
 
 
+## DolphinDB plugin binary files
+
+* [插件源码](https://github.com/dolphindb/DolphinDBPlugin)
+* MySQL
+    * 修复含有LONGTEXT类型字段的数据无法成功导入的bug。(**1.10.7**)
+
+## Python API
+
+> 改进
+
+* 增加检查DataFrame的column label是否合法。（**0.1.15.20**)
+
+> bug 修复
+
+* 修复了上传numpy.matrix导致crash的bug。（**0.1.15.20**)
 
