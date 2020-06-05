@@ -83,6 +83,16 @@ Release date: 2020-05-23
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
 
+Version: 1.10.8
+
+Release date: 2020-06-02
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
+
 > New Features
 
 * When an exception is thrown, the call stack is displayed.
@@ -103,6 +113,7 @@ Release date: 2020-05-23
 * Added horizontal aggregation functions for processing data by rows: `rowAnd`, `rowOr`, `rowXor`, `rowProd`. (**1.10.7**)
 * Added sliding window functions: `mwavg` and `mwsum`. (**1.10.7**)
 * Added cumulative window functions: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`. (**1.10.7**)
+* Added cumulative window function: `cumrank`. (**1.10.8**)
 
 
 > Improvements
@@ -135,6 +146,11 @@ Release date: 2020-05-23
 * Function `sqlColAlias` now supports composite columns. (**1.10.7**)
 * In a SQL 'context by' or 'group by' statement, if there is an error in the calculation of an individual group due to the data (such as calculating the inversion of a singluar matrix), the result of the group is set to be Null and the statement will be executed successfully. The system no longer throws an exception to interrupt the execution. (**1.10.7**)
 * When clearing persistent data with function `clearTablePersistence`, the system no longer prevents other functions (such as `getStreamingStat`) from accessing the persistence manager. (**1.10.7**)
+* Improved functions `rank` and `mrank`. Added optional parameters 'ignoreNA' and 'tiesMethod'. 'ignoreNA' ignores null values. 'tiesMethod' determines how to rank records with the same value. Now it supports 'min', 'max' and 'average'. (**1.10.8**)
+* Improved parameter verification of function `dropPartition`. If paths of partititon contain duplicate values, an error message will be thrown. (**1.10.8**)
+* Function `convertExcelFormula` added support for Excel functions: countifs, sumifs, averageifs, minifs, maxifs, and rank. (**1.10.8**)
+* Adjusted some parameter names in functions: `nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest` and `fTest` to be consistent with the parameter naming conventions in DolphinDB. (**1.10.8**)
+* Improved function `run` by adding an optional parameter 'newSession'. If set to true (the default value is false), the script is executed in a new session, and the variables of the original session are not deleted. (**1.10.8**) 
 
 
 > Bug Fixes
@@ -172,6 +188,10 @@ Release date: 2020-05-23
 * Fixed a bug that may cause system crash if the parameters of partial application in a RPC call do not use the correct format. (**1.10.7**)
 * Fixed a bug that if a SQL query with multiple OR conditions that contain both partitioning columns and non-partitioning columns in the where clause is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.10.7**)
 * Fixed a bug that function `wsum` returns 0 when both parameters contain only Null values. Now it returns Null. (**1.10.7**)
+* Fixed a bug: When both parameters 'csort' and 'limit' are specified in function `sql`, the generated SQL statement cannot not find the columns specified by 'csort'. (**1.10.8**)
+* Fixed a bug: When the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.10.8**)
+* Fixed a bug: If the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.10.8**)
+* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.10.7. (**1.10.8**)
 
 
 ## DolphinDB GUI
@@ -196,7 +216,7 @@ Release date: 2020-05-23
 
 > Improvements
 
-* Now check whether column labels of a DataFrame are valid. (**0.1.15.20**)
+* Now check whether the column labels of a DataFrame are valid. (**0.1.15.20**)
 
 > Bug Fixes
 
