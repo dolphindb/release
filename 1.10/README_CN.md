@@ -88,6 +88,18 @@
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
 
 
+版本号： 1.10.8
+
+发行日期： 2020-06-02
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) |
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
+
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -110,6 +122,7 @@
 * 新增按行处理数据的横向聚合函数: `rowAnd`，`rowOr`，`rowXor`，`rowProd`。(**1.10.7**)
 * 新增滑动窗口函数: `mwavg`和`mwsum`。(**1.10.7**)
 * 新增累计窗口函数: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`。(**1.10.7**)
+* 新增累计窗口函数: `cumrank`。(**1.10.8**)
  
 
 > 改进
@@ -142,6 +155,11 @@
 * 函数`sqlColAlias`增加对 composite column 的支持。(**1.10.7**)
 * SQL语句分组计算（context by 或 group by）时，如果个别组因为数据的原因导致计算异常（例如对singluar matrix求逆），不再抛出异常中断SQL语句的执行，而是将该组的计算结果设为空值。(**1.10.7**)
 * 执行函数`clearTablePersistence`时，不再阻塞其他函数（例如`getStreamingStat`）访问persistence manager。(**1.10.7**)
+* 改进函数`rank`和`mrank`。新增`ignoreNA`和`tiesMethod`两个可选参数。`ignoreNA`忽略空值。`tiesMethod`设定如何对相同数值排序，目前支持三种处理方法： 'min', 'max', 'average'。(**1.10.8**)
+* 改进`dropPartition`函数的参数校验。如果输入的分区路径有重复值，系统会提示错误。(**1.10.8**)
+* 函数`convertExcelFormula`增加支持Excel函数：countifs, sumifs, averageifs, minifs, maxifs, rank。(**1.10.8**)
+* 调整了`nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest`, `fTest`等函数中部分参数的名称。调整后与其它函数的参数命名规范保持一致。(**1.10.8**)
+* 改进`run`函数，新增一个可选参数'newSession'（默认为false)。设为true时，会在一个新的会话中运行脚本，而不会清理原会话中的变量。(**1.10.8**)
 
 > bug 修复
 
@@ -178,6 +196,10 @@
 * 修复bug：rpc调用时如果部分应用（partial application）的参数不规范可能导致系统crash。(**1.10.7**)
 * 修复bug: 数据表采用值分区时，SQL的where子句如果使用or连接多个同时包含分区字段和非分区字段的过滤条件，可能导致输出的行数比预期更多。(**1.10.7**)
 * 修复bug: `wsum`函数的参数均为空值时返回0，应返回空值。(**1.10.7**)
+* 修复bug: 使用`sql`函数动态生成SQL语句时，若同时指定csort和limit参数，csort中指定的字段会无法被辨别。(**1.10.8**)
+* 修复bug: 修复使用哈希算法进行`group by`分组计算时的一个bug。在使用哈希算法分组计算聚合函数时，对结果列中的空值，系统没有设置空值标志，导致对查询结果进一步使用`isNull`函数过滤时，不能返回正确结果。(**1.10.8**)
+* 修复bug: 在SQL语句中若使用哈希算法进行`wsum`聚合函数的分组计算，当所有输入均为空值时，`wsum`应该返回空值而不是0。(**1.10.8**)
+* 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.10.7引入的bug。(**1.10.8**)
 
 ## DolphinDB GUI
 
