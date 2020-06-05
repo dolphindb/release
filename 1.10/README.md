@@ -85,7 +85,7 @@ Release date: 2020-05-23
 
 Version: 1.10.8
 
-Release date: 2020-06-02
+Release date: 2020-06-05
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) | 
