@@ -90,7 +90,7 @@
 
 版本号： 1.10.8
 
-发行日期： 2020-06-02
+发行日期： 2020-06-05
 
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
