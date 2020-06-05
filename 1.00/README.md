@@ -126,6 +126,13 @@ Release date: 2020.05.23
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.18_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.18.zip) |
 
+Version: 1.00.19
+Release date: 2020.06.05
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.19.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.19_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.19.zip) |
+
 
 
 > New feature
@@ -205,7 +212,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * If a SQL statement involves multiple partitions of a table, it is forbidden to use functions whose results are sensitive to the order of rows such as `mavg`, `isDuplicated`, etc. in the 'where' clause. (**1.00.18**)
 * In a SQL 'context by' or 'group by' statement, if there is an error in the calculation of an individual group due to the data (such as calculating the inversion of a singluar matrix), the result of the group is set to be Null and the statement will be executed successfully. The system no longer throws an exception to interrupt the execution. (**1.00.18**)
 * When clearing persistent data with function `clearTablePersistence`, the system no longer prevents other functions (such as `getStreamingStat`) from accessing the persistence manager. (**1.00.18**)
-
+* Improved parameter verification of function `dropPartition`. If paths of partititon contain duplicate values, an error message will be thrown. (**1.00.19**)
+* Adjusted some parameter names in functions: `nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest` and `fTest` to be consistent with the parameter naming conventions in DolphinDB. (**1.00.19**)
+* Improved function `run` by adding an optional parameter 'newSession'. If set to true (the default value is false), the script is executed in a new session, and the variables of the original session are not deleted. (**1.00.19**) 
+* SQL update and delete statements now support scalar-based logical expressions such as 1 = 1 or 1 = 0. (**1.00.19**)  
 
 
 > Bug fix:
@@ -259,8 +269,13 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug that may cause crash when performing equal join (ej) on two shared in-memory tables. The system may crash if one thread deletes all the data of two shared in-memory tables and then adds new data, and if another thread performs equal join on them with multiple joining columns that include at least a STRING type column. (**1.00.17**)
 * Fixed a bug in function `createCrossSectionalAggregator` when the parameter triggeringPattern is set to "interval". The calculation is triggered not only at prescribed intervals, but also possibly every time data is inserted. (**1.00.18**)
 * Fixed a bug that may cause system crash if the parameters of partial application in a RPC call do not use the correct format. (**1.00.18**)
-* Fixed a bug that if a SQL query with multiple OR conditions that contain both partitioning columns and non-partitioning columns in the where clause is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.10.18**)
+* Fixed a bug that if a SQL query with multiple OR conditions that contain both partitioning columns and non-partitioning columns in the where clause is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.00.18**)
 * Fixed a bug that function `wsum` returns 0 when both parameters contain only Null values. Now it returns Null. (**1.00.18**)
+* Fixed a bug: When both parameters 'csort' and 'limit' are specified in function `sql`, the generated SQL statement cannot not find the columns specified by 'csort'. (**1.00.19**)
+* Fixed a bug: When the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.00.19**)
+* Fixed a bug: If the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.00.19**)
+* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.10.7. (**1.00.19**)
+
 
 
 
