@@ -141,6 +141,13 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.19.zip) |
 
 
+版本号： 1.00.29
+发行日期： 2020.06.15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.20.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.20_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.20.zip) |
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -221,6 +228,14 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 调整了`nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest`, `fTest`等函数中部分参数的名称。调整后与其它函数的参数命名规范保持一致。(**1.00.19**)
 * 改进`run`函数，新增一个可选参数'newSession'（默认为false)。设为true时，会在一个新的会话中运行脚本，而不会清理原会话中的变量。(**1.00.19**)
 * 在 SQL 的 update 和 delete 语句中允许使用基于标量的逻辑表达式。例如：1=1，1=0。(**1.00.19**)
+* 提高了分布式表的稳定性。特别解决了反复删除某一个分区中的数据表可能导致版本不一致问题。(**1.00.20**)
+* `aj`的最后一个连接列（joining column）新增支持数据类型： uuid, ipaddr, int128。(**1.00.20**)
+* 备份和恢复支持维度表。(**1.00.20**)
+* 增加了`aj`与`wj`用于分区表时的校验。若`aj`或`wj`应用于至少一个分区表，则最后一列以外的连接列（joining columns）必须包含全部分区字段。(**1.00.20**)
+* 在时间序列聚合引擎中插入数据时，校验字段的个数。(**1.00.20**)
+* 支持在嵌套关联中使用表别名。(**1.00.20**)
+* 支持在关联中为维度表设置别名。(**1.00.20**)
+
 
 
 > Bug修复:
@@ -281,6 +296,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug: 修复使用哈希算法进行`group by`分组计算时的一个bug。在使用哈希算法分组计算聚合函数时，对结果列中的空值，系统没有设置空值标志，导致对查询结果进一步使用`isNull`函数过滤时，不能返回正确结果。(**1.00.19**)
 * 修复bug: 在SQL语句中若使用哈希算法进行`wsum`聚合函数的分组计算，当所有输入均为空值时，`wsum`应该返回空值而不是0。(**1.00.19**)
 * 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.10.7引入的bug。(**1.00.19**)
+* 修复bug: 分配超过2G的连续内存块导致内存泄漏。(**1.10.9**)
+* 修复bug: 多个调用了`mr`或`imr`函数的批处理作业并发运行时，如果运行过程中出现异常（譬如，某个分区被其它事务占有导致不能写入），可能导致系统crash。(**1.00.20**)
+* 修复bug: 时间序列聚合引擎按系统时间(useSystemTime=true)进行分组聚合时，窗口内没有数据也会输出聚合结果的bug。(**1.00.20**)
+* 修复bug: 内置的并发哈希表的一个bug。这个bug可能导致并发创建与访问共享变量时系统crash。(**1.00.20**)
+
 
 ## DolphinDB GUI
 
