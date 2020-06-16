@@ -93,6 +93,18 @@ Release date: 2020-06-05
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
 
+
+Version: 1.10.9
+
+Release date: 2020-06-15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_JIT.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
+
+
 > New Features
 
 * When an exception is thrown, the call stack is displayed.
@@ -114,6 +126,8 @@ Release date: 2020-06-05
 * Added sliding window functions: `mwavg` and `mwsum`. (**1.10.7**)
 * Added cumulative window functions: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`. (**1.10.7**)
 * Added cumulative window function: `cumrank`. (**1.10.8**)
+* Added machine learning functions: `adaBoostClassifier` and `adaBoostRegressor`. (**1.10.9**)
+* Added function: `getChunkPath` returns the paths of the chunks that the given data sources represent. (**1.10.9**)
 
 
 > Improvements
@@ -151,7 +165,14 @@ Release date: 2020-06-05
 * Function `convertExcelFormula` added support for Excel functions: countifs, sumifs, averageifs, minifs, maxifs, and rank. (**1.10.8**)
 * Adjusted some parameter names in functions: `nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest` and `fTest` to be consistent with the parameter naming conventions in DolphinDB. (**1.10.8**)
 * Improved function `run` by adding an optional parameter 'newSession'. If set to true (the default value is false), the script is executed in a new session, and the variables of the original session are not deleted. (**1.10.8**) 
-
+* The last joining column of `aj` now support 3 more data types: uuid, ipaddr and int128. (**1.10.9**)
+* Can backup and restore dimension tables. (**1.10.9**)
+* Added checks when `aj` or `wj` uses at least one partitioned table. The joining columns except the last one must include all partitioning columns. (**1.10.9**)
+* When a time-series streaming aggregator receives new data, check the number of columns in the new data. (**1.10.9**)
+* Can use table aliases in nested joins. (**1.10.9**)
+* Can use aliases for dimension tables in joins. (**1.10.9**)
+* Added an optional parameter 'minPeriods' to the higher-order function `moving`. (**1.10.9**)
+* Can add or delete columns in shared in-memory tables. (**1.10.9**)
 
 > Bug Fixes
 
@@ -188,10 +209,14 @@ Release date: 2020-06-05
 * Fixed a bug that may cause system crash if the parameters of partial application in a RPC call do not use the correct format. (**1.10.7**)
 * Fixed a bug that if a SQL query with multiple OR conditions that contain both partitioning columns and non-partitioning columns in the where clause is applied on a table with value partitioning scheme, the result may contain more rows than expected. (**1.10.7**)
 * Fixed a bug that function `wsum` returns 0 when both parameters contain only Null values. Now it returns Null. (**1.10.7**)
-* Fixed a bug: When both parameters 'csort' and 'limit' are specified in function `sql`, the generated SQL statement cannot not find the columns specified by 'csort'. (**1.10.8**)
-* Fixed a bug: When the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.10.8**)
-* Fixed a bug: If the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.10.8**)
-* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.10.7. (**1.10.8**)
+* Fixed a bug: when both parameters 'csort' and 'limit' are specified in function `sql`, the generated SQL statement cannot not find the columns specified by 'csort'. (**1.10.8**)
+* Fixed a bug: when the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.10.8**)
+* Fixed a bug: if the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.10.8**)
+* Fixed a bug introduced in 1.10.7. With multiple streaming executors, executing `getStreamingStat` will cause the system to crash. (**1.10.8**)
+* Fixed memory leak caused by allocating more than 2GB to a contiguous memory block. (**1.10.9**)
+* Fixed a bug: when multiple batch jobs that call `mr` or `imr` are running concurrently, if an exception occurs (e.g., a partition is locked by another transaction and cannot be written to), it may cause the system to crash. (**1.10.9**)
+* Fixed a bug: when the time-series aggregator performs grouping calculations with useSystemTime=true, if there is no data in the windows, calculation results are erroneously generated. (**1.10.9**)
+* Fixed a bug with built-in concurrent hash table. This bug may cause the system to crash when creating and accessing shared variables concurrently. (**1.10.9**)
 
 
 ## DolphinDB GUI
@@ -210,6 +235,8 @@ Release date: 2020-06-05
 * [Plugin Source Code](https://github.com/dolphindb/DolphinDBPlugin)
 * MySQL
     * Fixed a bug that data containing LONGTEXT type columns cannot be imported successfully. (**1.10.7**)
+* Released Support Vector Machine(SVM) plugin. (**1.10.9**)
+* Released XGBoost plugin. (**1.10.9**)
     
 
 ## Python API
@@ -221,4 +248,23 @@ Release date: 2020-06-05
 > Bug Fixes
 
 * Fixed a bug that uploading numpy.matrix to DolphinDB server causes a crash. (**0.1.15.20**)
+
+
+## C++ API
+
+> New features
+
+* Released C++ API of Visual Studio 2017 version. (**1.10.9**)
+
+
+> Bug fixes
+
+* Enabled TCP_KEEPALIVE to handle the following situation: The publisher has disconnected but the subscriber is not aware of it. Subsequently, the subscriber does not receive data but does not initiate reconnection. (**1.10.9**)
+
+
+## JDBC
+
+> New features
+
+* Support using semicolon (;) to separate lines of script. (**1.10.9**)
  
