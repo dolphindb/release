@@ -100,6 +100,17 @@
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
 
 
+版本号： 1.10.9
+
+发行日期： 2020-06-15
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_JIT.zip) |
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -120,9 +131,11 @@
 * 新增函数`coevent`，统计给定的时间间隔内出现的事件对的次数。(**1.10.7**)
 * 新增函数`signum`，返回数据的正负号标志。正数为1，0为0，负数为-1，空值返回空值。(**1.10.7**)
 * 新增按行处理数据的横向聚合函数: `rowAnd`，`rowOr`，`rowXor`，`rowProd`。(**1.10.7**)
-* 新增滑动窗口函数: `mwavg`和`mwsum`。(**1.10.7**)
-* 新增累计窗口函数: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`。(**1.10.7**)
+* 新增滑动窗口函数：`mwavg`和`mwsum`。(**1.10.7**)
+* 新增累计窗口函数：`cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`。(**1.10.7**)
 * 新增累计窗口函数: `cumrank`。(**1.10.8**)
+* 新增机器学习函数：`adaBoostClassifier`和`adaBoostRegressor`。(**1.10.9**)
+* 新增函数`getChunkPath`：用于获取data source代表的chunk的路径。(**1.10.9**)
  
 
 > 改进
@@ -160,6 +173,16 @@
 * 函数`convertExcelFormula`增加支持Excel函数：countifs, sumifs, averageifs, minifs, maxifs, rank。(**1.10.8**)
 * 调整了`nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest`, `fTest`等函数中部分参数的名称。调整后与其它函数的参数命名规范保持一致。(**1.10.8**)
 * 改进`run`函数，新增一个可选参数'newSession'（默认为false)。设为true时，会在一个新的会话中运行脚本，而不会清理原会话中的变量。(**1.10.8**)
+* 提高了分布式表的稳定性。特别解决了反复删除某一个分区中的数据表可能导致版本不一致问题。(**1.10.9**)
+* `aj`的最后一个连接列（joining column）新增支持数据类型： uuid, ipaddr, int128。(**1.10.9**)
+* 备份和恢复支持维度表。(**1.10.9**)
+* 增加了`aj`与`wj`用于分区表时的校验。若`aj`或`wj`应用于至少一个分区表，则最后一列以外的连接列（joining columns）必须包含全部分区字段。(**1.10.9**)
+* 在时间序列聚合引擎中插入数据时，校验字段的个数。(**1.10.9**)
+* 支持在嵌套关联中使用表别名。(**1.10.9**)
+* 支持在关联中为维度表设置别名。(**1.10.9**)
+* 高阶函数`moving`新增可选参数minPeriods。(**1.10.9**)
+* 共享的内存表允许添加和删除字段。(**1.10.9**)
+
 
 > bug 修复
 
@@ -191,15 +214,19 @@
 * 修复bug: 若共享内存表中至少一列为大数组(big array)，删除全部数据时会出现内存泄漏。(**1.10.6**)
 * 修复bug: JIT中若无法确定变量类型，可能会在后续编译时发生错误，导致运行时crash或者执行效率降低等情况。修复bug后，若无法确定变量类型，会中止编译并报告该变量名称。(**1.10.6**)
 * 修复bug: 在key为LONG类型，value为ANY类型的字典中查找一个key值时可能找不到数据。这是版本1.10.3引入的bug。(**1.10.6**)
-* 修复bug: 修复共享内存表进行等值关联（`ej`）时可能导致crash的bug。若一个线程删除两个共享内存表的全部数据然后添加新数据，而另一个线程对这两个共享内存表按多个字段进行等值关联，并且关联字段中包括字符串类型字段，可能导致系统crash。(**1.10.6**)
+* 修复bug: 共享内存表进行等值关联（`ej`）时可能导致crash的bug。若一个线程删除两个共享内存表的全部数据然后添加新数据，而另一个线程对这两个共享内存表按多个字段进行等值关联，并且关联字段中包括字符串类型字段，可能导致系统crash。(**1.10.6**)
 * 修复bug：流数据横截面聚合引擎按时间间隔定时输出模式下，每次输入数据时均有可能触发计算。(**1.10.7**)
 * 修复bug：rpc调用时如果部分应用（partial application）的参数不规范可能导致系统crash。(**1.10.7**)
 * 修复bug: 数据表采用值分区时，SQL的where子句如果使用or连接多个同时包含分区字段和非分区字段的过滤条件，可能导致输出的行数比预期更多。(**1.10.7**)
 * 修复bug: `wsum`函数的参数均为空值时返回0，应返回空值。(**1.10.7**)
 * 修复bug: 使用`sql`函数动态生成SQL语句时，若同时指定csort和limit参数，csort中指定的字段会无法被辨别。(**1.10.8**)
-* 修复bug: 修复使用哈希算法进行`group by`分组计算时的一个bug。在使用哈希算法分组计算聚合函数时，对结果列中的空值，系统没有设置空值标志，导致对查询结果进一步使用`isNull`函数过滤时，不能返回正确结果。(**1.10.8**)
+* 修复bug: 使用哈希算法进行`group by`分组计算时的一个bug。在使用哈希算法分组计算聚合函数时，对结果列中的空值，系统没有设置空值标志，导致对查询结果进一步使用`isNull`函数过滤时，不能返回正确结果。(**1.10.8**)
 * 修复bug: 在SQL语句中若使用哈希算法进行`wsum`聚合函数的分组计算，当所有输入均为空值时，`wsum`应该返回空值而不是0。(**1.10.8**)
 * 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.10.7引入的bug。(**1.10.8**)
+* 修复bug: 分配超过2G的连续内存块导致内存泄漏。(**1.10.9**)
+* 修复bug: 多个调用了`mr`或`imr`函数的批处理作业并发运行时，如果运行过程中出现异常（譬如，某个分区被其它事务占有导致不能写入），可能导致系统crash。(**1.10.9**)
+* 修复bug: 时间序列聚合引擎按系统时间(useSystemTime=true)进行分组聚合时，窗口内没有数据也会输出聚合结果的bug。(**1.10.9**)
+* 修复bug: 内置的并发哈希表的一个bug。这个bug可能导致并发创建与访问共享变量时系统crash。(**1.10.9**)
 
 ## DolphinDB GUI
 
@@ -217,6 +244,8 @@
 * [插件源码](https://github.com/dolphindb/DolphinDBPlugin)
 * MySQL
     * 修复含有LONGTEXT类型字段的数据无法成功导入的bug。(**1.10.7**)
+* 发布Support Vector Machine(SVM)插件 (**1.10.9**)
+* 发布XGBoost插件 (**1.10.9**)
 
 ## Python API
 
@@ -227,4 +256,21 @@
 > bug 修复
 
 * 修复了上传numpy.matrix导致crash的bug。（**0.1.15.20**)
+
+## C++ API
+
+> 新功能
+
+* 发布Visual Studio 2017版本的C++ API。(**1.10.9**)
+
+> bug 修复
+
+* 开启TCP_KEEPALIVE：用于解决发布端已经断开连接，但是订阅端无感知，导致后续订阅端收不到数据，却又不主动重连的问题。(**1.10.9**)
+
+## JDBC
+
+> 新功能
+
+* 支持用分号(;)分隔多行脚本。(**1.10.9**)
+
 
