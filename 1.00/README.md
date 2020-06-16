@@ -133,6 +133,14 @@ Release date: 2020.06.05
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.19_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.19.zip) |
 
+Version: 1.00.20
+Release date: 2020.06.15
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.20.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.20_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.20.zip) |
+
+
 
 
 > New feature
@@ -216,6 +224,13 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Adjusted some parameter names in functions: `nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest` and `fTest` to be consistent with the parameter naming conventions in DolphinDB. (**1.00.19**)
 * Improved function `run` by adding an optional parameter 'newSession'. If set to true (the default value is false), the script is executed in a new session, and the variables of the original session are not deleted. (**1.00.19**) 
 * SQL update and delete statements now support scalar-based logical expressions such as 1 = 1 or 1 = 0. (**1.00.19**)  
+* The last joining column of `aj` now support 3 more data types: uuid, ipaddr and int128. (**1.00.20**)
+* Can backup and restore dimension tables. (**1.00.20**)
+* Added checks when `aj` or `wj` uses at least one partitioned table. The joining columns except the last one must include all partitioning columns. (**1.00.20**)
+* When a time-series streaming aggregator receives new data, check the number of columns in the new data. (**1.00.20**)
+* Can use table aliases in nested joins. (**1.00.20**)
+* Can use aliases for dimension tables in joins. (**1.00.20**)
+
 
 
 > Bug fix:
@@ -275,7 +290,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug: When the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.00.19**)
 * Fixed a bug: If the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.00.19**)
 * Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.10.7. (**1.00.19**)
-
+* Fixed memory leak caused by allocating more than 2GB to a contiguous memory block. (**1.00.20**)
+* Fixed a bug: when multiple batch jobs that call `mr` or `imr` are running concurrently, if an exception occurs (e.g., a partition is locked by another transaction and cannot be written to), it may cause the system to crash.  (**1.00.20**)
+* Fixed a bug: when the time-series aggregator performs grouping calculations with useSystemTime=true, if there is no data in the windows, calculation results are erroneously generated.  (**1.00.20**)
+* Fixed a bug with built-in concurrent hash table. This bug may cause the system to crash when creating and accessing shared variables concurrently.  (**1.00.20**)
 
 
 
