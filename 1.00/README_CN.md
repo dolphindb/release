@@ -141,7 +141,7 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.19.zip) |
 
 
-版本号： 1.00.29
+版本号： 1.00.20
 发行日期： 2020.06.15
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.20.zip) | 
