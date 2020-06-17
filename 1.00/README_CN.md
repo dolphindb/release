@@ -295,7 +295,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug: 使用`sql`函数动态生成SQL语句时，若同时指定csort和limit参数，csort中指定的字段会无法被辨别。(**1.00.19**)
 * 修复bug: 修复使用哈希算法进行`group by`分组计算时的一个bug。在使用哈希算法分组计算聚合函数时，对结果列中的空值，系统没有设置空值标志，导致对查询结果进一步使用`isNull`函数过滤时，不能返回正确结果。(**1.00.19**)
 * 修复bug: 在SQL语句中若使用哈希算法进行`wsum`聚合函数的分组计算，当所有输入均为空值时，`wsum`应该返回空值而不是0。(**1.00.19**)
-* 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.10.7引入的bug。(**1.00.19**)
+* 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.00.17引入的bug。(**1.00.19**)
 * 修复bug: 分配超过2G的连续内存块导致内存泄漏。(**1.00.20**)
 * 修复bug: 多个调用了`mr`或`imr`函数的批处理作业并发运行时，如果运行过程中出现异常（譬如，某个分区被其它事务占有导致不能写入），可能导致系统crash。(**1.00.20**)
 * 修复bug: 时间序列聚合引擎按系统时间(useSystemTime=true)进行分组聚合时，窗口内没有数据也会输出聚合结果的bug。(**1.00.20**)
