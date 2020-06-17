@@ -289,7 +289,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug: When both parameters 'csort' and 'limit' are specified in function `sql`, the generated SQL statement cannot not find the columns specified by 'csort'. (**1.00.19**)
 * Fixed a bug: When the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.00.19**)
 * Fixed a bug: If the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.00.19**)
-* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.10.7. (**1.00.19**)
+* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.00.17. (**1.00.19**)
 * Fixed memory leak caused by allocating more than 2GB to a contiguous memory block. (**1.00.20**)
 * Fixed a bug: when multiple batch jobs that call `mr` or `imr` are running concurrently, if an exception occurs (e.g., a partition is locked by another transaction and cannot be written to), it may cause the system to crash.  (**1.00.20**)
 * Fixed a bug: when the time-series aggregator performs grouping calculations with useSystemTime=true, if there is no data in the windows, calculation results are erroneously generated.  (**1.00.20**)
