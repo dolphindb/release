@@ -148,6 +148,15 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.20_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.20.zip) |
 
+
+版本号： 1.00.21
+发行日期： 2020.06.22
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.21.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.21_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.21.zip) |
+
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -235,6 +244,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 在时间序列聚合引擎中插入数据时，校验字段的个数。(**1.00.20**)
 * 支持在嵌套关联中使用表别名。(**1.00.20**)
 * 支持在关联中为维度表设置别名。(**1.00.20**)
+* 禁止对共享内存表和mvcc内存表通过`<tableName>.<colName>`的方式直接访问表中的字段。可以使用字段名称作为索引访问表字段，例如 `t["col1"]`。(**1.00.21**)
+* 禁止共享的内存分区表通过update语句新增字段。(**1.00.21**)
+* DolphinDB集群中的节点之间创建TCP连接时启用TCP_KEEPALIVE。(**1.00.21**)
 
 
 
@@ -295,11 +307,15 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug: 使用`sql`函数动态生成SQL语句时，若同时指定csort和limit参数，csort中指定的字段会无法被辨别。(**1.00.19**)
 * 修复bug: 修复使用哈希算法进行`group by`分组计算时的一个bug。在使用哈希算法分组计算聚合函数时，对结果列中的空值，系统没有设置空值标志，导致对查询结果进一步使用`isNull`函数过滤时，不能返回正确结果。(**1.00.19**)
 * 修复bug: 在SQL语句中若使用哈希算法进行`wsum`聚合函数的分组计算，当所有输入均为空值时，`wsum`应该返回空值而不是0。(**1.00.19**)
-* 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.00.17引入的bug。(**1.00.19**)
+* 修复bug: 有多个streaming executors时，执行`getStreamingStat`会导致系统crash。这是1.00.18引入的bug。(**1.00.19**)
 * 修复bug: 分配超过2G的连续内存块导致内存泄漏。(**1.00.20**)
 * 修复bug: 多个调用了`mr`或`imr`函数的批处理作业并发运行时，如果运行过程中出现异常（譬如，某个分区被其它事务占有导致不能写入），可能导致系统crash。(**1.00.20**)
 * 修复bug: 时间序列聚合引擎按系统时间(useSystemTime=true)进行分组聚合时，窗口内没有数据也会输出聚合结果的bug。(**1.00.20**)
 * 修复bug: 内置的并发哈希表的一个bug。这个bug可能导致并发创建与访问共享变量时系统crash。(**1.00.20**)
+* 修复bug: 路径深度大于等于2的分布式数据库（例如`dfs://stock/valueDB`）不能正常备份和恢复。(**1.00.21**)
+* 修复bug: 左表的string列和右表的symbol列进行等值关联(ej)时，若右表只有1行，关联的结果有误，总是产生空表。(**1.00.21**)
+* 修复bug: 对分布式表和维度表进行关联时，若无符合条件的记录，select子句使用了wildcard(\*)，分布式表名与关联时引用的别名不一致，左右两表有同名的字段，系统会抛出找不到两表中同名字段的异常。(**1.00.21**)
+
 
 
 ## DolphinDB GUI
