@@ -111,6 +111,18 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
 
+
+版本号： 1.10.10
+
+发行日期： 2020-06-22
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_JIT.zip) |
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -182,6 +194,9 @@
 * 支持在关联中为维度表设置别名。(**1.10.9**)
 * 高阶函数`moving`新增可选参数minPeriods。(**1.10.9**)
 * 共享的内存表允许添加和删除字段。(**1.10.9**)
+* 禁止对共享内存表和mvcc内存表通过`<tableName>.<colName>`的方式直接访问表中的字段。可以使用字段名称作为索引访问表字段，例如 `t["col1"]`。(**1.10.10**)
+* 禁止共享的内存分区表通过update语句新增字段。(**1.10.10**)
+* DolphinDB集群中的节点之间创建TCP连接时启用TCP_KEEPALIVE。(**1.10.10**)
 
 
 > bug 修复
@@ -227,6 +242,10 @@
 * 修复bug: 多个调用了`mr`或`imr`函数的批处理作业并发运行时，如果运行过程中出现异常（譬如，某个分区被其它事务占有导致不能写入），可能导致系统crash。(**1.10.9**)
 * 修复bug: 时间序列聚合引擎按系统时间(useSystemTime=true)进行分组聚合时，窗口内没有数据也会输出聚合结果的bug。(**1.10.9**)
 * 修复bug: 内置的并发哈希表的一个bug。这个bug可能导致并发创建与访问共享变量时系统crash。(**1.10.9**)
+* 修复bug: 路径深度大于等于2的分布式数据库（例如`dfs://stock/valueDB`）不能正常备份和恢复。(**1.10.10**)
+* 修复bug: 左表的string列和右表的symbol列进行等值关联(ej)时，若右表只有1行，关联的结果有误，总是产生空表。(**1.10.10**)
+* 修复bug: 对分布式表和维度表进行关联时，若无符合条件的记录，select子句使用了wildcard(\*)，分布式表名与关联时引用的别名不一致，左右两表有同名的字段，系统会抛出找不到两表中同名字段的异常。(**1.10.10**)
+
 
 ## DolphinDB GUI
 
