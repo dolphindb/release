@@ -104,6 +104,15 @@ Release date: 2020-06-15
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
 
+Version: 1.10.10
+
+Release date: 2020-06-22
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_JIT.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
 
 > New Features
 
@@ -165,6 +174,7 @@ Release date: 2020-06-15
 * Function `convertExcelFormula` added support for Excel functions: countifs, sumifs, averageifs, minifs, maxifs, and rank. (**1.10.8**)
 * Adjusted some parameter names in functions: `nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest` and `fTest` to be consistent with the parameter naming conventions in DolphinDB. (**1.10.8**)
 * Improved function `run` by adding an optional parameter 'newSession'. If set to true (the default value is false), the script is executed in a new session, and the variables of the original session are not deleted. (**1.10.8**) 
+* Improved the stability of DFS tables. In particular, solved an issue that repeated deletion of a partition may result in inconsistency of table versions. 
 * The last joining column of `aj` now support 3 more data types: uuid, ipaddr and int128. (**1.10.9**)
 * Can backup and restore dimension tables. (**1.10.9**)
 * Added checks when `aj` or `wj` uses at least one partitioned table. The joining columns except the last one must include all partitioning columns. (**1.10.9**)
@@ -173,6 +183,9 @@ Release date: 2020-06-15
 * Can use aliases for dimension tables in joins. (**1.10.9**)
 * Added an optional parameter 'minPeriods' to the higher-order function `moving`. (**1.10.9**)
 * Can add or delete columns in shared in-memory tables. (**1.10.9**)
+* It is forbidden to directly access the fields in the table for shared in-memory table and mvcc table through `<tableName>.<colName>`. You can use the field name as an index to access table fields, such as `t["col1"]`. (**1.10.10**)
+* It is forbidden to add new fields through the update statement in shared partitioned in-memory table. (**1.10.10**)
+* Enable TCP_KEEPALIVE when creating TCP connections between nodes in the DolphinDB cluster. (**1.10.10**)
 
 > Bug Fixes
 
@@ -217,7 +230,9 @@ Release date: 2020-06-15
 * Fixed a bug: when multiple batch jobs that call `mr` or `imr` are running concurrently, if an exception occurs (e.g., a partition is locked by another transaction and cannot be written to), it may cause the system to crash. (**1.10.9**)
 * Fixed a bug: when the time-series aggregator performs grouping calculations with useSystemTime=true, if there is no data in the windows, calculation results are erroneously generated. (**1.10.9**)
 * Fixed a bug with built-in concurrent hash table. This bug may cause the system to crash when creating and accessing shared variables concurrently. (**1.10.9**)
-
+* Fixed a bug: a DFS database with multiple levels of directories (e.g., `dfs://stock/valueDB`) cannot be properly backed up and restored. (**1.10.10**)
+* Fixed a bug: in equal join, if the data type of the joining column is STRING in the left table and SYMBOL in the right table, and if the right table has only 1 row, the result is incorrect in that it always return an empty table. (**1.10.10**)
+* Fixed a bug: in joining a DFS table and a dimension table, if all the following conditions are met: (1) no records satisfy the joining conditions; (2) wildcard (\*) is used in the select clause; (3) DFS table name and the table alias used in joining are different; (4) there is a column with the same name in both tables, then the system will throw an exception that it cannot find the column with the same name in both tables. (**1.10.10**)
 
 ## DolphinDB GUI
 
