@@ -141,6 +141,13 @@ Release date: 2020.06.15
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.20.zip) |
 
 
+Version: 1.00.21
+Release date: 2020.06.22
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.21.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.21_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.21.zip) |
+
 
 
 > New feature
@@ -223,13 +230,17 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Improved parameter verification of function `dropPartition`. If paths of partititon contain duplicate values, an error message will be thrown. (**1.00.19**)
 * Adjusted some parameter names in functions: `nunique`, `isDuplicated`, `ewmMean`, `ewmStd`, `ewmVar`, `ewmCovar`, `ewmCorr`, `knn`, `multinomialNB`, `gaussianNB`, `zTest`, `tTest` and `fTest` to be consistent with the parameter naming conventions in DolphinDB. (**1.00.19**)
 * Improved function `run` by adding an optional parameter 'newSession'. If set to true (the default value is false), the script is executed in a new session, and the variables of the original session are not deleted. (**1.00.19**) 
-* SQL update and delete statements now support scalar-based logical expressions such as 1 = 1 or 1 = 0. (**1.00.19**)  
+* SQL update and delete statements now support scalar-based logical expressions such as 1 = 1 or 1 = 0. (**1.00.19**)
+* Improve the stability of partitioned tables. In particular, it solves the problem of inconsistent versions caused by repeatedly deleting tables in a database partition. (**1.00.20**)
 * The last joining column of `aj` now support 3 more data types: uuid, ipaddr and int128. (**1.00.20**)
 * Can backup and restore dimension tables. (**1.00.20**)
 * Added checks when `aj` or `wj` uses at least one partitioned table. The joining columns except the last one must include all partitioning columns. (**1.00.20**)
 * When a time-series streaming aggregator receives new data, check the number of columns in the new data. (**1.00.20**)
 * Can use table aliases in nested joins. (**1.00.20**)
 * Can use aliases for dimension tables in joins. (**1.00.20**)
+* It is forbidden to directly access the fields in the table for shared in-memory table and mvcc table through `<tableName>.<colName>`. You can use the field name as an index to access table fields, such as `t["col1"]`. (**1.00.21**)
+* It is forbidden to add new fields through the update statement in shared partitioned in-memory table. (**1.00.21**)
+* Enable TCP_KEEPALIVE when creating TCP connections between nodes in the DolphinDB cluster. (**1.00.21**)
 
 
 
@@ -289,11 +300,14 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug: When both parameters 'csort' and 'limit' are specified in function `sql`, the generated SQL statement cannot not find the columns specified by 'csort'. (**1.00.19**)
 * Fixed a bug: When the hash algorithm is used to execute aggregate functions in groups in SQL statements, if the result contains Null values, the system does not set a Null value flag. Therefore, if the results are further filtered with function `isNull`, the system can't detect Null values. (**1.00.19**)
 * Fixed a bug: If the hash algorithm is used to execute aggregate function `wsum` in SQL group-by calculations, and if both inputs of function `wsum` are Null, the result should be Null instead of 0. (**1.00.19**)
-* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.00.17. (**1.00.19**)
+* Fixed a bug: When there are multiple streaming executors, executing `getStreamingStat` will cause the system to crash. This is a bug introduced in 1.00.18. (**1.00.19**)
 * Fixed memory leak caused by allocating more than 2GB to a contiguous memory block. (**1.00.20**)
 * Fixed a bug: when multiple batch jobs that call `mr` or `imr` are running concurrently, if an exception occurs (e.g., a partition is locked by another transaction and cannot be written to), it may cause the system to crash.  (**1.00.20**)
 * Fixed a bug: when the time-series aggregator performs grouping calculations with useSystemTime=true, if there is no data in the windows, calculation results are erroneously generated.  (**1.00.20**)
 * Fixed a bug with built-in concurrent hash table. This bug may cause the system to crash when creating and accessing shared variables concurrently.  (**1.00.20**)
+* Fixed a bug: a DFS database with multiple levels of directories (e.g., `dfs://stock/valueDB`) cannot be properly backed up and restored. (**1.00.21**)
+* Fixed a bug: in equal join, if the data type of the joining column is STRING in the left table and SYMBOL in the right table, and if the right table has only 1 row, the result is incorrect in that it always return an empty table. (**1.00.21**)
+* Fixed a bug: in joining a DFS table and a dimension table, if all the following conditions are met: (1) no records satisfy the joining conditions; (2) wildcard (\*) is used in the select clause; (3) DFS table name and the table alias used in joining are different; (4) there is a column with the same name in both tables, then the system will throw an exception that it cannot find the column with the same name in both tables. (**1.00.21**)
 
 
 
