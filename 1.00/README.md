@@ -149,6 +149,14 @@ Release date: 2020.06.22
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.21.zip) |
 
 
+Version: 1.00.22
+Release date: 2020.07.02
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.22.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.22_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.22.zip) |
+
+
 
 > New feature
 
@@ -241,6 +249,11 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * It is forbidden to directly access the fields in the table for shared in-memory table and mvcc table through `<tableName>.<colName>`. You can use the field name as an index to access table fields, such as `t["col1"]`. (**1.00.21**)
 * It is forbidden to add new fields through the update statement in shared partitioned in-memory table. (**1.00.21**)
 * Enable TCP_KEEPALIVE when creating TCP connections between nodes in the DolphinDB cluster. (**1.00.21**)
+* The minimum cache size of a stream table is reduced from 100,000 rows to 1000 rows. (**1.00.22**)
+* The minimum allowed value of the parameter 'throttle' of function `subscribeTable` is reduced from 1 second to 0.001 second. (**1.00.22**)
+* Function `dictUpdate!` can be applied to a dictionary with an ANY vector as the value of the dictionary. (**1.00.22**)
+* Added parameter verification to function `loadTable`. When loading a DFS table, it is not allowed to specify the partitions to load. (**1.00.22**)
+
 
 
 
@@ -308,6 +321,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug: a DFS database with multiple levels of directories (e.g., `dfs://stock/valueDB`) cannot be properly backed up and restored. (**1.00.21**)
 * Fixed a bug: in equal join, if the data type of the joining column is STRING in the left table and SYMBOL in the right table, and if the right table has only 1 row, the result is incorrect in that it always return an empty table. (**1.00.21**)
 * Fixed a bug: in joining a DFS table and a dimension table, if all the following conditions are met: (1) no records satisfy the joining conditions; (2) wildcard (\*) is used in the select clause; (3) DFS table name and the table alias used in joining are different; (4) there is a column with the same name in both tables, then the system will throw an exception that it cannot find the column with the same name in both tables. (**1.00.21**)
+* Fixed a bug: the results are erroneous when a large size dictionary is serialized asynchronously. (**1.00.22**)
 
 
 
@@ -323,9 +337,9 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 
 *  Plugins including AWS S3, ZLIB, MYSQL, ODBC and HDF5 are packaged under the folder "server/plugins" for this release. 
 * [Plugin source code](https://github.com/dolphindb/DolphinDBPlugin)
-* ODBC
+* ODBC Plugin: The odbc::append method provides an optional parameter 'insertIgnore'. For target databases that support the 'insert ignore' syntax, when parameter 'insertIgore' is specified, duplicate data on the primary key will be ignored. 
+* OPC Plugin: Added support for Chinese tags. Chinese tags must use UTF-8 encoding. (**1.00.21**)
 
-   The odbc::append method provides an optional parameter 'insertIgnore'. For target databases that support the 'insert ignore' syntax, when parameter 'insertIgore' is specified, duplicate data on the primary key will be ignored. 
 
 ## DolphinDB APIs
 
@@ -348,4 +362,6 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * C# 
 
     Support new data types UUID and IPADDR.
+
+
 
