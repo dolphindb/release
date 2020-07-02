@@ -123,6 +123,19 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
 
+
+版本号： 1.10.11
+
+发行日期： 2020-07-02
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_JIT.zip) |
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
+
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -197,6 +210,10 @@
 * 禁止对共享内存表和mvcc内存表通过`<tableName>.<colName>`的方式直接访问表中的字段。可以使用字段名称作为索引访问表字段，例如 `t["col1"]`。(**1.10.10**)
 * 禁止共享的内存分区表通过update语句新增字段。(**1.10.10**)
 * DolphinDB集群中的节点之间创建TCP连接时启用TCP_KEEPALIVE。(**1.10.10**)
+* 流数据表的最小缓存数据量从100000行降为1000行。(**1.10.11**)
+* 函数`subscribeTable`的参数throttle的最小值从1秒降到0.001秒。(**1.10.11**)
+* 函数`dictUpdate!`可以应用于值为ANY类型的字典。(**1.10.11**)
+* 对`loadTable`函数增加了参数校验。加载DFS分布式表时，不允许指定加载部分分区。(**1.10.11**)
 
 
 > bug 修复
@@ -245,6 +262,7 @@
 * 修复bug: 路径深度大于等于2的分布式数据库（例如`dfs://stock/valueDB`）不能正常备份和恢复。(**1.10.10**)
 * 修复bug: 左表的string列和右表的symbol列进行等值关联(ej)时，若右表只有1行，关联的结果有误，总是产生空表。(**1.10.10**)
 * 修复bug: 对分布式表和维度表进行关联时，若无符合条件的记录，select子句使用了wildcard(\*)，分布式表名与关联时引用的别名不一致，左右两表有同名的字段，系统会抛出找不到两表中同名字段的异常。(**1.10.10**)
+* 修复bug: 大数据量字典在异步序列化数据时结果有误。(**1.10.11**)
 
 
 ## DolphinDB GUI
@@ -286,10 +304,14 @@
 
 * 开启TCP_KEEPALIVE：用于解决发布端已经断开连接，但是订阅端无感知，导致后续订阅端收不到数据，却又不主动重连的问题。(**1.10.9**)
 
-## JDBC
+## JDBC插件
 
 > 新功能
 
 * 支持用分号(;)分隔多行脚本。(**1.10.9**)
 
+## OPC插件
 
+> 改进
+
+* 新增对中文tag的支持。中文tag必须使用utf-8编码。(**1.10.10**)
