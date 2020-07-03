@@ -159,8 +159,8 @@
 * 新增滑动窗口函数：`mwavg`和`mwsum`。(**1.10.7**)
 * 新增累计窗口函数：`cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`。(**1.10.7**)
 * 新增累计窗口函数: `cumrank`。(**1.10.8**)
-* 新增机器学习函数：`adaBoostClassifier`和`adaBoostRegressor`。(**1.10.9**)
 * 新增函数`getChunkPath`：用于获取data source代表的chunk的路径。(**1.10.9**)
+* 新增机器学习函数：`adaBoostClassifier`和`adaBoostRegressor`。(**1.10.11**)
  
 
 > 改进
