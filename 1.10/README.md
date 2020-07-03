@@ -146,8 +146,8 @@ Release date: 2020-07-02
 * Added sliding window functions: `mwavg` and `mwsum`. (**1.10.7**)
 * Added cumulative window functions: `cumavg`, `cumstd`, `cumvar`, `cummed`, `cumsum2`, `cumsum3`, `cumsum4`, `cumwavg`, `cumwsum`, `cumbeta`, `cumcorrr`, `cumcovar`, `cumpercentile`. (**1.10.7**)
 * Added cumulative window function: `cumrank`. (**1.10.8**)
-* Added machine learning functions: `adaBoostClassifier` and `adaBoostRegressor`. (**1.10.9**)
 * Added function: `getChunkPath` returns the paths of the chunks that the given data sources represent. (**1.10.9**)
+* Added machine learning functions: `adaBoostClassifier` and `adaBoostRegressor`. (**1.10.11**)
 
 
 > Improvements
