@@ -156,6 +156,12 @@ Release date: 2020.07.02
 [Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.22_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.22.zip) |
 
+Version: 1.00.23
+Release date: 2020.07.20
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.23.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.00.23_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.23.zip) |
 
 
 > New feature
@@ -253,7 +259,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * The minimum allowed value of the parameter 'throttle' of function `subscribeTable` is reduced from 1 second to 0.001 second. (**1.00.22**)
 * Function `dictUpdate!` can be applied to a dictionary with an ANY vector as the value of the dictionary. (**1.00.22**)
 * Added parameter verification to function `loadTable`. When loading a DFS table, it is not allowed to specify the partitions to load. (**1.00.22**)
-
+* The SQL UPDATE statement now requires that the object to be updated must be a table. (**1.00.23**)
+* Temporal type conversion functions now support tuple as the input. The functions involved include: `date`, `month`, `year`, `hour`, `minute`, `second`, `time` ,`datetime`,`datehour`,`timestamp`,`nanotime`,`nanotimestamp`,`weekday`,`dayOfWeek`,`dayOfYear`,`dayOfMonth`,`quarterOfYear`,`monthOfYear`,`weekOfYear`,`hourOfDay`,`minuteOfHour`,`secondOfMinute`,`millisecond`,`microsecond`,`nanosecond`. (**1.00.23**)
+* Improved the stability of the distributed database. Specifically, improved the stability of transaction resolution when the chunk versions are inconsistent; reduced the chances that heartbeat transmission is delayed. (**1.00.23**)
+* The parameter 'groupingCol' of function `contextby` is allowed to be an empty array. (**1.00.23**)
 
 
 
@@ -322,7 +331,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * Fixed a bug: in equal join, if the data type of the joining column is STRING in the left table and SYMBOL in the right table, and if the right table has only 1 row, the result is incorrect in that it always return an empty table. (**1.00.21**)
 * Fixed a bug: in joining a DFS table and a dimension table, if all the following conditions are met: (1) no records satisfy the joining conditions; (2) wildcard (\*) is used in the select clause; (3) DFS table name and the table alias used in joining are different; (4) there is a column with the same name in both tables, then the system will throw an exception that it cannot find the column with the same name in both tables. (**1.00.21**)
 * Fixed a bug: the results are erroneous when a large size dictionary is serialized asynchronously. (**1.00.22**)
-
+* Fixed a bug: after enabling high availability for the controller node, if a transaction involves too many partitions so the RAFT message length exceeds 64K, the metadata will be truncated when the RAFT message is replayed after restarting the system. (**1.00.23**)
 
 
 

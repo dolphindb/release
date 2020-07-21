@@ -165,6 +165,14 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.00.22.zip) |
 
 
+版本号： 1.00.23
+发行日期： 2020.07.20
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.00.23.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.00.23_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.00.23.zip) |
+
+版本号
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -259,7 +267,10 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 函数`subscribeTable`的参数throttle的最小值从1秒降到0.001秒。(**1.00.22**)
 * 函数`dictUpdate!`可以应用于值为ANY类型的字典。(**1.00.22**)
 * 对`loadTable`函数增加了参数校验。加载DFS分布式表时，不允许指定加载部分分区。(**1.00.22**)
-
+* SQL UPDATE语句增加了校验，要求更新的对象必须为表(table)类型。(**1.00.23**)
+* 时间类型转换函数支持使用tuple（元组）作为输入参数，涉及的函数包括：`date`,`month`,`year`,`hour`,`minute`,`second`,`time`,`datetime`,`datehour`,`timestamp`,`nanotime`,`nanotimestamp`,`weekday`,`dayOfWeek`,`dayOfYear`,`dayOfMonth`,`quarterOfYear`,`monthOfYear`,`weekOfYear`,`hourOfDay`,`minuteOfHour`,`secondOfMinute`,`millisecond`,`microsecond`,`nanosecond`。(**1.00.23**)
+* 提升分布式数据库的稳定性，包括提升了数据版本不一致时事务决议的稳定性，以及减少了心跳发送延迟的可能性。(**1.00.23**)
+* `contextby`函数允许输入的groupingCol参数为空数组。(**1.00.23**)
 
 
 > Bug修复:
@@ -328,7 +339,7 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug: 左表的string列和右表的symbol列进行等值关联(ej)时，若右表只有1行，关联的结果有误，总是产生空表。(**1.00.21**)
 * 修复bug: 对分布式表和维度表进行关联时，若无符合条件的记录，select子句使用了wildcard(\*)，分布式表名与关联时引用的别名不一致，左右两表有同名的字段，系统会抛出找不到两表中同名字段的异常。(**1.00.21**)
 * 修复bug: 大数据量字典在异步序列化数据时结果有误。(**1.00.22**)
-
+* 开启控制节点高可用后，若单个事务涉及太多分区导致RAFT消息长度超过64K，重启后重放RAFT消息时，元数据会被截断。(**1.00.23**)
 
 
 ## DolphinDB GUI
