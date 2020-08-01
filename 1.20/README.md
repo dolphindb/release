@@ -71,7 +71,14 @@ Releate Date： 2020-07-20
 * Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
 
 
-> API
+
+> Python API
 
 * Fixed the bug that in the Python API exceptions are thrown when the session method loadTable is used to load specified partitions.
+
+> C++ API
+
+* Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API.
+* Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl.
+* Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1.
 
