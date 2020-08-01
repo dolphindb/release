@@ -69,6 +69,13 @@
 
 * 要求MySQL插件函数`load`和`loadEx`中参数startRow必须为非负整数。
 
-> API
 
-* Python API中，修复使用session方法loadTable以加载指定分区时，抛出非正确异常的bug。
+> Python API
+
+* 修复使用session方法loadTable以加载指定分区时，抛出非正确异常的bug。
+
+> C++ API 
+
+* 修复从C++ API订阅流数据，无法正常退出的bug。
+* 去除了C++ API动态库对openssl的依赖。
+* Linux C++ API动态库增加支持 D_GLIBCXX_USE_CXX11_ABI=1的版本。
