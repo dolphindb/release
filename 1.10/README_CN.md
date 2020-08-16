@@ -135,17 +135,6 @@
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
 
-版本号： 1.10.11
-
-发行日期： 2020-07-02
-
-
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
-
 版本号： 1.10.12
 
 发行日期： 2020-07-20
@@ -156,6 +145,17 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.12.zip) |
 [Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.12_JIT.zip)
+
+版本号： 1.10.13
+
+发行日期： 2020-08-15
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13_JIT.zip) |
+[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.13.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.13_JIT.zip)
 
 > 新功能
 
@@ -182,8 +182,8 @@
 * 新增累计窗口函数: `cumrank`。(**1.10.8**)
 * 新增函数`getChunkPath`：用于获取data source代表的chunk的路径。(**1.10.9**)
 * 新增机器学习函数：`adaBoostClassifier`和`adaBoostRegressor`。(**1.10.11**)
- 
-
+* 增加新函数closeSessions，允许管理员关闭指定的一个或多个会话，释放连接和内存。(**1.10.13**)
+* 新增函数getChunksMeta和getTabletsMeta，获取数据节点上chunk和tablet的元数据和统计信息，譬如分区占用的磁盘空间、数据表的行数和版本号等。(**1.10.13**)
 > 改进
 
 * 函数`slice`的参数 rowIndex 和 colIndex 新增了对数组的支持。
@@ -239,6 +239,16 @@
 * 时间类型转换函数支持使用tuple（元组）作为输入参数，涉及的函数包括：`date`,`month`,`year`,`hour`,`minute`,`second`,`time`,`datetime`,`datehour`,`timestamp`,`nanotime`,`nanotimestamp`,`weekday`,`dayOfWeek`,`dayOfYear`,`dayOfMonth`,`quarterOfYear`,`monthOfYear`,`weekOfYear`,`hourOfDay`,`minuteOfHour`,`secondOfMinute`,`millisecond`,`microsecond`,`nanosecond`。(**1.10.12**)
 * 提升分布式数据库的稳定性，包括提升了数据版本不一致时事务决议的稳定性，以及减少了心跳发送延迟的可能性。(**1.10.12**)
 * `contextby`函数允许输入的groupingCol参数为空数组。(**1.10.12**)
+* 使用openblas和lapack改进一下矩阵相关函数的性能：inverse, solve, det和cholesky。在大矩阵下，性能有10~50倍的提升。(**1.10.13**)
+* 函数`lu`可以分解一个不是方阵的矩阵。(**1.10.13**)
+* `schema`函数的输出中增加一个标签partitionTypeName，用以描述分区类型。(**1.10.13**)
+* 函数`in`和`find`支持对keyed table。(**1.10.13**)
+* 函数`syncDict`增加一个可选参数sharedName。如果指定参数sharedName，那么创建的字典将被节点上的所有会话共享。(**1.10.13**)
+* 函数`getSessionMemoryStat`的输出增加了两个字段createTime和lastActiveTime，分别记录会话创建时间和最近一次访问时间。并且更正了字段remotePort的输出值。(**1.10.13**)
+* 函数`getConsoleJobs`的输出增加了两个字段remoteIP和remotePort。(**1.10.13**)
+* 函数`backup`支持并行备份，提升效率。(**1.10.13**)
+* 常量赋值给一个变量时，会复制一个对象，避免在多线程并行计算时因对引用计数进行并发修改导致的系统效率降低。(**1.10.13**)
+* 提升了raft一致性协议实现的稳定性。(**1.10.13**)
 
 > bug 修复
 
@@ -289,6 +299,10 @@
 * 修复bug: 大数据量字典在异步序列化数据时结果有误。(**1.10.11**)
 * 开启控制节点高可用后，若单个事务涉及太多分区导致RAFT消息长度超过64K，重启后重放RAFT消息时，元数据会被截断。(**1.10.12**)
 * 若SQL语句中启用了 WHERE 子句，GROUP BY 子句包含多个字段，并且第二个或其后的分组字段使用了`segment`函数，输出的结果不符合预期。(**1.10.12**)
+* mvar和cumvar出现极小负值以及mstd和cumstd出现空值。(**1.10.13**)
+* 修复了socket连接时出现的内存泄漏。(**1.10.13**)
+* 修复了adaBoostRegressor一个运行时崩溃的问题。(**1.10.13**)
+* 高可用集群在线增加一个数据节点后，创建新的数据库分区到新节点时，可能导致新增节点崩溃。(**1.10.13**)
 
 ## DolphinDB GUI
 
