@@ -172,7 +172,13 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.00.23_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.00.23.zip) |
 
-版本号
+版本号： 1.00.24
+发行日期： 2020.08.15
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.00.24.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.00.24_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.00.24.zip) |
+
 > 新功能
 
 * 增加了基于Raft协议的流数据高可用。 
@@ -271,7 +277,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 时间类型转换函数支持使用tuple（元组）作为输入参数，涉及的函数包括：`date`,`month`,`year`,`hour`,`minute`,`second`,`time`,`datetime`,`datehour`,`timestamp`,`nanotime`,`nanotimestamp`,`weekday`,`dayOfWeek`,`dayOfYear`,`dayOfMonth`,`quarterOfYear`,`monthOfYear`,`weekOfYear`,`hourOfDay`,`minuteOfHour`,`secondOfMinute`,`millisecond`,`microsecond`,`nanosecond`。(**1.00.23**)
 * 提升分布式数据库的稳定性，包括提升了数据版本不一致时事务决议的稳定性，以及减少了心跳发送延迟的可能性。(**1.00.23**)
 * `contextby`函数允许输入的groupingCol参数为空数组。(**1.00.23**)
-
+* 常量赋值给一个变量时，会复制一个对象，避免在多线程并行计算时因对引用计数进行并发修改导致的系统效率降低。(**1.00.24**)
+* 提升了raft一致性协议实现的稳定性。(**1.00.24**)
 
 > Bug修复:
 
@@ -340,8 +347,8 @@ fy5253,fy5253Quarter,isYearStart,isYearEnd,isQuarterStart,isQuarterEnd,isMonthSt
 * 修复bug: 对分布式表和维度表进行关联时，若无符合条件的记录，select子句使用了wildcard(\*)，分布式表名与关联时引用的别名不一致，左右两表有同名的字段，系统会抛出找不到两表中同名字段的异常。(**1.00.21**)
 * 修复bug: 大数据量字典在异步序列化数据时结果有误。(**1.00.22**)
 * 开启控制节点高可用后，若单个事务涉及太多分区导致RAFT消息长度超过64K，重启后重放RAFT消息时，元数据会被截断。(**1.00.23**)
-
-
+* 修复了socket连接时出现的内存泄漏。(**1.00.24**)
+* 高可用集群在线增加一个数据节点后，创建新的数据库分区到新节点时，可能导致新增节点崩溃。(**1.00.24**)
 ## DolphinDB GUI
 
 * 支持远程同步 DolphinDB module的功能(Synchronize module to server)。
