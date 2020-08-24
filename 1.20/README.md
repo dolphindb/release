@@ -22,6 +22,16 @@ Releate Date： 2020-07-20
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.1.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.1_JIT.zip)
 
+Version： 1.20.2
+
+Releate Date： 2020-08-15
+
+
+[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2.zip) |
+[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
+
 > New Features
 
 * In JIT, the parameters of a function are allowed to be another function (user-defined function, lambda function, partial application or dynamic function).
