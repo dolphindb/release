@@ -38,7 +38,13 @@ Releate Date： 2020-07-20
 * Added function `mprod` to calculate the product of numbers over a moving window. (**1.20.1**)
 * Added function `saveModule` to serialize modules into binary format. Added function `loadModule` and added the configuration parameter 'preloadModules', both of which can be used to pre-load modules or plugins. (**1.20.1**)
 * Added regression functions `ridge`, `lasso` and `elasticNet`. (**1.20.1**)
- 
+* Added matrix factorization functions `schur`, `svd` and `qr`. (**1.20.2**)
+* Added function `indexedTable` to create indexed in-memory tables. Queries on indexed in-memory tables are optimized if the filtering conditions include first key column. (**1.20.2**)
+* Added functions `autocorr` and `acf` to calculate autocorrelation. (**1.20.2**)
+* Added function `sliceByKey` to quickly access keyed tables and indexed in-memory tables. Compared with SQL statements, `sliceByKey` is faster by about 100%. (**1.20.2**)
+* Added function `manova` for multivariate analysis of variance. (**1.20.2**)
+* Added command `closeSessions`. It allows an administrator to close one or more specified sessions to release resources. (**1.20.2**)
+* Added functions `getChunksMeta` and `getTabletsMeta` to obtain metadata of the partitions (chunks) and partitioned subtables (tablets) on the data node, such as the occupied disk space, the number of rows and the version number of each partition. (**1.20.2**) 
 
 > Improvements
 
@@ -52,33 +58,61 @@ Releate Date： 2020-07-20
 * Temporal type conversion functions now support tuple as the input. The functions involved include: `date`, `month`, `year`, `hour`, `minute`, `second`, `time` ,`datetime`,`datehour`,`timestamp`,`nanotime`,`nanotimestamp`,`weekday`,`dayOfWeek`,`dayOfYear`,`dayOfMonth`,`quarterOfYear`,`monthOfYear`,`weekOfYear`,`hourOfDay`,`minuteOfHour`,`secondOfMinute`,`millisecond`,`microsecond`,`nanosecond`. (**1.20.1**)
 * Improved the stability of the distributed database. Specifically, improved the stability of transaction resolution when the chunk versions are inconsistent; reduced the chances that heartbeat transmission is delayed. (**1.20.1**)
 * The parameter 'groupingCol' of function `contextby` is allowed to be an empty array. (**1.20.1**)
-
+* Use OpenBLAS and LAPACK to improve the performance of the following matrix related functions: `inverse`, `solve`, `det` and `cholesky`. When used on a large matrix, the performance of these functions is improved by 10 to 50 times. (**1.20.2**)
+* The function `lu` can decompose a matrix that is not a square matrix. (**1.20.2**)
+* Added a label 'partitionTypeName' to the output of function `schema` to describe the partition type. (**1.20.2**)
+* Functions `in` and `find` support searching for key values in keyed tables and indexed in-memory tables. (**1.20.2**)
+* Added an optional parameter 'sharedName' to function `syncDict`. If it is specified, the dictionary will be shared across all sessions on the node. (**1.20.2**)
+* Added 2 columns ('createTime' and 'lastActiveTime') to the output of function `getSessionMemoryStat` to record the session creation time and the last access time respectively. Corrected the value of the column 'remotePort'. (**1.20.2**)
+* Added 2 columns ('remoteIP' and 'remotePort') to the output of function `getConsoleJobs`. (**1.20.2**)
+* Function `backup` now supports parallel backup to improve efficiency. (**1.20.2**)
+* Improved the stability of the implementation of the RAFT consensus protocol. (**1.20.2**)
 
 > Bug fixes:
 
 * When the data types of the inputs of functions `mmax` and `mmin` are BOOL, CHAR or SHORT and the optional parameter 'minPeriods' is specified, if the first element of the result is expected to be empty, the result does not match the expectation. (**1.20.1**)
 * After enabling high availability for the controller node, if a transaction involves too many partitions so the RAFT message length exceeds 64K, the metadata will be truncated when the RAFT message is replayed after restarting the system. (**1.20.1**)
 * If a SQL statement has the WHERE clause, and if the GROUP BY clause contains multiple fields, and if the second or a subsequent field in the GROUP BY clause uses function `segment`, the result does not match the expectation. (**1.20.1**)
-
+* When all elements of a vector are identical, the results of functions `mvar` and `cumvar` may have extremely small negative values; the results of functions `mstd` and `cumstd` may have NULL values. (**1.20.2**)
+* A memory leak may occur during socket connection. (**1.20.2**)
+* Several stability issues of functions `ridge`, `lasso` and `elasticNet` introduced in version 1.20.1. (**1.20.2**)
+* Function `adaBoostRegressor` may crash under certain circumstances. (**1.20.2**)
+* After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash. (**1.20.2**)
 
 > Web-based cluster manager
 
 * After enabling high availability for the controller node, if a re-election of the controller leader occurs, when the user accesses the homepage of the web-based cluster manager, the system checks whether the controller node at the address of the cluster manager is the controller leader. If not, it will display information about the current controller leader. (**1.20.1**)
+* Fixed the problem that data nodes cannot be dynamically loaded after adding data nodes in a high-availability cluster online. (**1.20.2**)
+* When logging onto a follower control node in a high-availability cluster, sometimes the system erroneously return an error message that user name or password is wrong. Now it returns the correct prompt message together with the alias of the current active controller. (**1.20.2**).
 
+> GUI
+
+* Added links to user manual and GUI help.
+* Column width of the histogram is automatically adjusted based on number of data points on the x-axis.
 
 > Plugins
 
 * Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
 
-
-
 > Python API
 
-* Fixed the bug that in the Python API exceptions are thrown when the session method loadTable is used to load specified partitions.
+* Fixed the bug that in the Python API exceptions are thrown when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
+* Added support for ipaddr, uuid and int238 data types. (**0.1.15.23**)
+* Added support for arrays of month type. (**0.1.15.23**)
+* Added `hashBucket` function. (**0.1.15.23**)
+
+> Orca:
+
+* Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
+* Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
 
 > C++ API
 
-* Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API.
-* Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl.
-* Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1.
+* Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API. (**1.20.2**)
+* Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl. (**1.20.2**)
+* Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
+
+> Node.js API
+
+* Added Node.js API for DolphinDB. (**1.20.2**)
 
