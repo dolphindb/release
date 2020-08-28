@@ -89,40 +89,45 @@ Releate Date： 2020-08-15
 * Function `adaBoostRegressor` may crash under certain circumstances. (**1.20.2**)
 * After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash. (**1.20.2**)
 
-> Web-based cluster manager
+#### Plugins
 
-* After enabling high availability for the controller node, if a re-election of the controller leader occurs, when the user accesses the homepage of the web-based cluster manager, the system checks whether the controller node at the address of the cluster manager is the controller leader. If not, it will display information about the current controller leader. (**1.20.1**)
-* Fixed the problem that data nodes cannot be dynamically loaded after adding data nodes in a high-availability cluster online. (**1.20.2**)
-* When logging onto a follower control node in a high-availability cluster, sometimes the system erroneously return an error message that user name or password is wrong. Now it returns the correct prompt message together with the alias of the current active controller. (**1.20.2**).
+* MySQL
 
-> GUI
+    * Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
 
-* Added links to user manual and GUI help.
-* Column width of the histogram is automatically adjusted based on number of data points on the x-axis.
+#### Client softwares
 
-> Plugins
+* Web-based cluster manager
 
-* Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
+    * After enabling high availability for the controller node, if a re-election of the controller leader occurs, when the user accesses the homepage of the web-based cluster manager, the system checks whether the controller node at the address of the cluster manager is the controller leader. If not, it will display information about the current controller leader. (**1.20.1**)
+    * Fixed the problem that data nodes cannot be dynamically loaded after adding data nodes in a high-availability cluster online. (**1.20.2**)
+    * When logging onto a follower control node in a high-availability cluster, sometimes the system erroneously return an error message that user name or password is wrong. Now it returns the correct prompt message together with the alias of the current active controller. (**1.20.2**).
 
-> Python API
+* GUI
 
-* Fixed the bug that in the Python API exceptions are thrown when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
-* Added support for ipaddr, uuid and int238 data types. (**0.1.15.23**)
-* Added support for arrays of month type. (**0.1.15.23**)
-* Added `hashBucket` function. (**0.1.15.23**)
+    * Added links to user manual and GUI help.
+    * Column width of the histogram is automatically adjusted based on number of data points on the x-axis.
 
-> Orca:
+#### APIs
 
-* Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
-* Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
+* Python API
 
-> C++ API
+    * Fixed the bug that in the Python API exceptions are thrown when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
+    * Added support for ipaddr, uuid and int238 data types. (**0.1.15.23**)
+    * Added support for arrays of month type. (**0.1.15.23**)
+    * Added `hashBucket` function. (**0.1.15.23**)
 
-* Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API. (**1.20.2**)
-* Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl. (**1.20.2**)
-* Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
+* Orca:
 
-> Node.js API
+    * Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
+    * Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
 
-* Added Node.js API for DolphinDB. (**1.20.2**)
+* C++ API
 
+    * Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API. (**1.20.2**)
+    * Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl. (**1.20.2**)
+    * Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
+
+* Node.js API
+
+    * Added Node.js API for DolphinDB. (**1.20.2**)
