@@ -88,14 +88,14 @@
 * 函数`backup`支持并行备份，以提升效率。(**1.20.2**)
 * 常量赋值给一个变量时，会复制一个对象，避免在多线程并行计算时因对引用计数进行并发修改导致的系统效率降低。(**1.20.2**)
 * 提升了RAFT一致性协议实现的稳定性。(**1.20.2**)
-* 使用tcmalloc管理内存池。提升了内存分配效率，尤其在多线程并行计算时小内存的分配效率有大幅提升。同时解决了DolphinDB实际占用的内存超过maxMemSize设定值的问题，以及尚有内存剩余时创建字符串出现OOM的问题。(**1.20.3**)
-* 使用函数saveText双精度浮点数到文件时，保留最高15位的精度。(**1.20.3**)
-* 横截面聚合引擎(crossSectionalAggregator)引入了可选参数useSystemTime。当该参数为false时，输出的计算时间为event本身的时间。本功能可以更好的支持回放历史数据进行仿真。(**1.20.3**)
+* 使用TCMalloc管理内存池。提升了内存分配效率，尤其在多线程并行计算时小内存的分配效率有大幅提升。同时解决了DolphinDB实际占用的内存超过配置参数maxMemSize设定值的问题，以及尚有内存剩余时创建字符串出现OOM的问题。(**1.20.3**)
+* 使用函数`saveText`将DOUBLE类型数据保存到文件时，保留小数点后最多15位的精度。(**1.20.3**)
+* 横截面聚合引擎引入了可选参数useSystemTime。当该参数为false时，结果中的时刻为数据中的时刻。本功能可以更好的支持回放历史数据进行仿真。(**1.20.3**)
 * 高斯朴素贝叶斯（gaussianNB）模型进行分类预测时，使用likelihood的对数形式，使得高维度的情况下仍然可以使用该模型进行分类。(**1.20.3**)
-* 主成分分析（pca）改用lapack的svd算法提升性能。(**1.20.3**)
-* `pca`函数增加了 svdSolver, randomState 两个参数。(**1.20.3**)
-* `logisticRegression` 增加了 regularizationCoeff 参数。(**1.20.3**)
-* `backup` 增加parallel参数，支持并行备份。(**1.20.3**)
+* 主成分分析（`pca`函数）改用lapack的svd算法提升性能。(**1.20.3**)
+* `pca`函数新增 svdSolver, randomState 两个参数。(**1.20.3**)
+* `logisticRegression`函数新增 regularizationCoeff 参数。(**1.20.3**)
+* `backup`函数新增parallel参数，以支持并行备份。(**1.20.3**)
 * 配置项 dfsReplicaReliabilityLevel 增加了可配置项 `=2`，在资源允许情况下，副本优先使用多物理机分布策略。(**1.20.3**)
 
 > Bug fixes:
@@ -108,10 +108,10 @@
 * 1.20.1版本中引入的`ridge`, `lasso`和`elasticNet`三个回归函数的若干稳定性问题。(**1.20.2**)
 * `adaBoostRegressor`函数在某些情况下运行时崩溃。(**1.20.2**)
 * 高可用集群在线增加一个数据节点后，创建新的数据库分区到新节点时，可能导致新增节点崩溃。(**1.20.2**)
-* 使用json进行web调用时，如果没有指定tag 'functionName' 会导致节点崩溃。在使用grafana访问DolphinDB时，可能遇到这个问题。(**1.20.3**)
-* 日期和时间类型函数（date, timestamp等）处理一组字符串时，如果字符串不符合日期和时间类型，那么相应的元素返回空值，但返回的vector内部未设置包含空值元素的标志，导 致 isValid和isNull等函数的返回与预期不符。(**1.20.3**)
-* 使用fromJson函数处理json字符串时，若没有包含tag ’value'，可能导致节点崩溃。(**1.20.3**)
-* 修复raft的snapshot checkpoint实现中的一个bug。这个可能导致leader切换时耗时特别长。(**1.20.3**)
+* 使用JSON进行web调用时，如果没有指定tag 'functionName' 会导致节点崩溃。在使用Grafana访问DolphinDB时，可能遇到这个问题。(**1.20.3**)
+* 日期和时间类型函数（`date`, `timestamp`等）处理一组字符串时，如果某些字符串无法被转换为日期和时间类型，那么相应的元素返回空值，但返回的vector内部未设置包含空值元素的标志，导致`isValid`和`isNull`等函数的返回与预期不符。(**1.20.3**)
+* 使用`fromJson`函数处理JSON字符串时，若没有包含tag 'value'，可能导致节点崩溃。(**1.20.3**)
+* 修复RAFT的snapshot checkpoint实现中的一个bug。它可能导致leader切换时耗时特别长。(**1.20.3**)
 
 #### DolphinDB 插件
 
