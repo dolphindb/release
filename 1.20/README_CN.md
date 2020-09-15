@@ -139,7 +139,13 @@
 
 * HDF5插件    
 
-    * LoadHDF5EX 函数增加了transform 参数，支持在导入时自定义数据转换逻辑。(**1.20.4**)
+    * LoadHDF5EX 函数增加了 transform 参数，支持在导入时自定义数据转换逻辑。(**1.20.4**)
+
+* httpClient插件    
+
+    * 增加邮件发送函数 `sendEmail` 。(**1.20.4**)
+    * `httpGet`, `httpPost`函数增加了 headers 参数用于填写http请求的头部信息。(**1.20.4**)
+
 
 #### 客户端工具
 
