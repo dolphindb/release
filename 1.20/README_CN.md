@@ -42,6 +42,16 @@
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
 [Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
 
+版本号： 1.20.4
+
+发行日期： 2020-09-14
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -97,6 +107,11 @@
 * `logisticRegression`函数新增 regularizationCoeff 参数。(**1.20.3**)
 * `backup`函数新增parallel参数，以支持并行备份。(**1.20.3**)
 * 配置项 dfsReplicaReliabilityLevel 增加了可配置项 `=2`，在资源允许情况下，副本优先使用多物理机分布策略。(**1.20.3**)
+* SQL语句中的PIVOT BY子句的行分组从一个字段扩展到多个字段，输出的指标也从一个扩展到多个。(**1.20.4**)
+* unionAll函数增加了可选参数byColName。当这个参数为true时，多个表的列按照字段名称而不是字段的顺序来对齐。这种情况下，也允许多个表有不同的列，缺失的列用空值填充。(**1.20.4**)
+* 允许三个以上参数的自定义聚合函数在dolphindb.dos中声明map reduce和running aggregation的实现。(**1.20.4**)
+* 大幅提升了有问题的数据节点重新接入集群后数据恢复的性能。避免了个别分区由于数据恢复时间过长导致的写入中断。(**1.20.4**)
+* 支持从外网订阅DolphinDB节点上的流数据表。(**1.20.4**)
 
 > Bug fixes:
 
@@ -112,12 +127,19 @@
 * 日期和时间类型函数（`date`, `timestamp`等）处理一组字符串时，如果某些字符串无法被转换为日期和时间类型，那么相应的元素返回空值，但返回的vector内部未设置包含空值元素的标志，导致`isValid`和`isNull`等函数的返回与预期不符。(**1.20.3**)
 * 使用`fromJson`函数处理JSON字符串时，若没有包含tag 'value'，可能导致节点崩溃。(**1.20.3**)
 * 修复RAFT的snapshot checkpoint实现中的一个bug。它可能导致leader切换时耗时特别长。(**1.20.3**)
+* 若配置项newValuePartitionPolicy=add（允许系统自动增加值分区），当有多个并发写入线程在短时间内快速增加大量新分区时（通常是在压力测试或开发环境中），有可能出现分区丢失的现象，即无法查询到写入数据库的数据。(**1.20.4**)
+* replace和replace!函数的新值为浮点数时，小数部分会被忽略，造成错误结果。(**1.20.4**)
+* 使用内存分区表作为mr和imr函数的数据源会导致系统crash。。(**1.20.4**)
 
 #### DolphinDB 插件
 
 * Mysql插件
 
     * 要求MySQL插件函数`load`和`loadEx`中参数startRow必须为非负整数。
+
+* HDF5插件    
+
+    * LoadHDF5EX 函数增加了transform 参数，支持在导入时自定义数据转换逻辑。(**1.20.4**)
 
 #### 客户端工具
 
@@ -131,6 +153,7 @@
 
     * 增加了用户手册和GUI帮助的链接
     * 柱状图的柱形宽度随x轴数值自动调整。
+    * 在状态栏显示当前连接的会话ID
 
 #### API 
 

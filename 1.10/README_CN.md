@@ -165,6 +165,14 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.14.zip) |
 
+版本号： 1.10.15
+
+发行日期： 2020-09-14
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.15.zip) |
 
 > 新功能
 
@@ -265,6 +273,11 @@
 * 主成分分析（pca）改用lapack的svd算法提升性能。(**1.10.14**)
 * `logisticRegression` 增加了 regularizationCoeff 参数。(**1.10.14**)
 * 配置项 dfsReplicaReliabilityLevel 增加了可配置项 `=2`，在资源允许情况下，副本优先使用多物理机分布策略。(**1.10.14**)
+
+* 允许三个以上参数的自定义聚合函数在dolphindb.dos中声明map reduce和running aggregation的实现。(**1.10.15**)
+* 大幅提升了有问题的数据节点重新接入集群后数据恢复的性能。避免了个别分区由于数据恢复时间过长导致的写入中断。(**1.10.15**)
+* 支持从外网订阅DolphinDB节点上的流数据表。(**1.10.15**)
+
 > bug 修复
 
 * 修复`backup`函数长时间运行性能逐步下降的问题。
@@ -322,6 +335,9 @@
 * 日期和时间类型函数（date, timestamp等）处理一组字符串时，如果字符串不符合日期和时间类型，那么相应的元素返回空值，但返回的vector内部未设置包含空值元素的标志，导致`isValid`和`isNull`等函数的返回与预期不符。(**1.10.14**)
 * 使用fromJson函数处理json字符串时，若没有包含tag 'value'，可能导致节点崩溃。(**1.10.14**)
 * 修复raft的snapshot checkpoint实现中的一个bug。这个可能导致leader切换时耗时特别长。(**1.10.14**)
+* 若配置项newValuePartitionPolicy=add（允许系统自动增加值分区），当有多个并发写入线程在短时间内快速增加大量新分区时（通常是在压力测试或开发环境中），有可能出现分区丢失的现象，即无法查询到写入数据库的数据。(**1.10.15**)
+* replace和replace!函数的新值为浮点数时，小数部分会被忽略，造成错误结果。(**1.10.15**)
+* 使用内存分区表作为mr和imr函数的数据源会导致系统crash。。(**1.10.15**)
 
 ## DolphinDB GUI
 
@@ -341,6 +357,10 @@
     * 修复含有LONGTEXT类型字段的数据无法成功导入的bug。(**1.10.7**)
 * 发布Support Vector Machine(SVM)插件 (**1.10.9**)
 * 发布XGBoost插件 (**1.10.9**)
+
+* HDF5插件    
+
+    * LoadHDF5EX 函数增加了transform 参数，支持在导入时自定义数据转换逻辑。(**1.10.15**)
 
 ## Python API
 

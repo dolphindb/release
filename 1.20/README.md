@@ -76,7 +76,17 @@ Releate Date： 2020-08-15
 * Added 2 columns ('createTime' and 'lastActiveTime') to the output of function `getSessionMemoryStat` to record the session creation time and the last access time respectively. Corrected the value of the column 'remotePort'. (**1.20.2**)
 * Added 2 columns ('remoteIP' and 'remotePort') to the output of function `getConsoleJobs`. (**1.20.2**)
 * Function `backup` now supports parallel backup to improve efficiency. (**1.20.2**)
+* When a constant is assigned to a variable, an object will be copied to avoid the reduction in system efficiency caused by concurrent modification of the reference count during multi-threaded parallel computing. (**1.20.2**)
 * Improved the stability of the implementation of the RAFT consensus protocol. (**1.20.2**)
+* Used TCMalloc to manage the in-memory pool, which improved in-memory allocation efficiency, especially the allocation efficiency of small in-memory during multi-threaded parallel computing. Meanwhile, two problems were solved, firstly, the situation where the actual memory occupied by DolphinDB exceeds the set value of the configuration parameter maxMemSize, and secondly, the OOM issue where there is still in-memory remaining when creating a string. (**1.20.3**)
+* When using the function `saveText`, the maximum precision of a double type variable retains 15 digits. (**1.20.3**)
+* Imported an optional parameter 'useSystemTime' in crossSectionalAggregator. When it set to false, the output calculation time is the time of the event itself. This function could better support the playback of historical data for simulation. (**1.20.3**)
+* Use the logarithmic form of likelihood when using gaussianNB moudle for classification prediction, that makes it possible to use the model for classification in high-dimensional situations. (**1.20.3**)
+* Improved performance of `pca` function as changed to use the svd algorithm of lapack. (**1.20.3**)
+* Added parameters 'svdSolver' and 'randomState' to function `pca`. (**1.20.3**)
+* Added parameter 'regularizationCoeff' to function `logisticRegression`. (**1.20.3**)
+* Added parameter 'parallel' to function `backup` to support parallel backup. (**1.20.3**)
+* The configuration parameter 'dfsReplicaReliabilityLevel' now can take the value of 2, which means the replicas are distributed to different machines if resources permit. (**1.20.3**)
 
 > Bug fixes:
 
@@ -88,6 +98,10 @@ Releate Date： 2020-08-15
 * Several stability issues of functions `ridge`, `lasso` and `elasticNet` introduced in version 1.20.1. (**1.20.2**)
 * Function `adaBoostRegressor` may crash under certain circumstances. (**1.20.2**)
 * After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash. (**1.20.2**)
+* When using JSON to make web calls, if the tag'functionName' is not specified, the node will crash. This might occur when using grafana to access DolphinDB. (**1.20.3**)
+* When the date and time type functions (`date`, `timestamp`, etc.) process a set of strings, if the string does not conform to the date and time type, the corresponding element returns a null value, but the returned vector does not set the flag containing the null value element, which causes the return of `isValid` and `isNull` to be inconsistent with expectations. (**1.20.3**)
+* When using `fromJson` function to process JSON strings, if the tag 'value' is not included, the node may crash. (**1.20.3**)
+* Fixed a bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly long time-consuming leader switching. (**1.20.3**)
 
 #### Plugins
 
@@ -116,17 +130,30 @@ Releate Date： 2020-08-15
     * Added support for ipaddr, uuid and int238 data types. (**0.1.15.23**)
     * Added support for arrays of month type. (**0.1.15.23**)
     * Added `hashBucket` function. (**0.1.15.23**)
+    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2.
+    * Released version 1.10.12.0 corresponds to DolphinDB 1.10.12.
+    * Released version 1.0.24.1 corresponds to DolphinDB 1.00.24
 
 * Orca:
 
     * Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
     * Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
+    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2.
+    * Released version 1.10.12.0 corresponds to DolphinDB 1.10.12.
+    * Released version 1.0.24.1 corresponds to DolphinDB 1.00.24
 
 * C++ API
 
     * Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API. (**1.20.2**)
     * Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl. (**1.20.2**)
     * Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
+
+* Java API
+    * Added 'Upload' return value deserialization processing, which does not affect the call of the interface. (**1.20.2**)
+
+* C# API
+
+    * Added 'Upload' return value deserialization processing, which does not affect the call of the interface. (**1.20.2**)
 
 * Node.js API
 
