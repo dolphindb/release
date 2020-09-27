@@ -121,7 +121,7 @@ Releate Date： 2020-08-15
     * Released the parquet plugin,  which imports Parquet files into DolphinDB and supports data type conversions.（**1.20.4**）
 
 * mongodb
-    * Released the mongdb plugin, which can establish a connection with the mongodb server, and then import data into a in-memory table of DolphinDB.（**1.20.4**）
+    * Released the mongdb plugin, which establishs a connection with a mongodb server, and then imports data into a in-memory table of DolphinDB.（**1.20.4**）
 
 #### Client softwares
 
