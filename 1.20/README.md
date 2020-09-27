@@ -124,23 +124,19 @@ Releate Date： 2020-08-15
 
 #### APIs
 
-* Python API
+* Python API and orca
 
     * Fixed the bug that in the Python API exceptions are thrown when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
-    * Added support for ipaddr, uuid and int238 data types. (**0.1.15.23**)
+    * Added support for ipaddr, uuid and int128 data types. (**0.1.15.23**)
     * Added support for arrays of month type. (**0.1.15.23**)
     * Added `hashBucket` function. (**0.1.15.23**)
-    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2.
-    * Released version 1.10.12.0 corresponds to DolphinDB 1.10.12.
-    * Released version 1.0.24.1 corresponds to DolphinDB 1.00.24
+    * Orca: Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
+    * Orca: Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
+    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2; released version 1.10.12.0 corresponds to DolphinDB 1.10.12; 
+      released version 1.0.24.1 corresponds to DolphinDB 1.00.24.
+    * Added support for python3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * Added native methods for creating DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
 
-* Orca:
-
-    * Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
-    * Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
-    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2.
-    * Released version 1.10.12.0 corresponds to DolphinDB 1.10.12.
-    * Released version 1.0.24.1 corresponds to DolphinDB 1.00.24
 
 * C++ API
 
