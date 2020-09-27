@@ -138,14 +138,19 @@
     * 要求MySQL插件函数`load`和`loadEx`中参数startRow必须为非负整数。
 
 * HDF5插件    
-
     * loadHDF5Ex 函数增加了 transform 参数，支持在导入时自定义数据转换逻辑。(**1.20.4**)
     * 修复了loadHDF5Ex可能出现内存溢出的问题。(**1.20.4**)
 
 * httpClient插件    
-
     * 增加邮件发送函数 `sendEmail` 。(**1.20.4**)
     * `httpGet`, `httpPost`函数增加了 headers 参数用于填写http请求的头部信息。(**1.20.4**)
+
+* parquet插件
+    * 发布parquet插件，可將Parquet文件导入DolphinDB，并支持进行数据类型转换。（**1.20.4**）
+
+
+* mongodb插件
+    * 发布mongdb插件，可以建立与mongodb服务器的连接，然后导入数据到DolphinDB的内存表中。（**1.20.4**）
 
 
 #### 客户端工具
