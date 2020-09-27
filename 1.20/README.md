@@ -109,6 +109,20 @@ Releate Date： 2020-08-15
 
     * Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
 
+* HDF5    
+    * added parameter `transform` to function `loadHDF5Ex` to support custom data conversion. (**1.20.4**)
+    * Fixed a bug of function loadHDF5Ex that may cause memory overflow. (**1.20.4**)
+
+* httpClient    
+    * Added mail sending function `sendEmail` 。(**1.20.4**)
+    * Added parameter `headers` to function `httpGet` and `httpPost` to fill in the header information of a http request. (**1.20.4**)
+
+* parquet
+    * Released the parquet plugin,  which imports Parquet files into DolphinDB and supports data type conversions.（**1.20.4**）
+
+* mongodb
+    * Released the mongdb plugin, which can establish a connection with the mongodb server, and then import data into a in-memory table of DolphinDB.（**1.20.4**）
+
 #### Client softwares
 
 * Web-based cluster manager
