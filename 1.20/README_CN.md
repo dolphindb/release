@@ -167,7 +167,7 @@
 * Python API 和 orca
 
     * 修复使用`session.loadTable`加载指定分区抛出异常。(**0.1.15.23**)
-    * 增加支持 ipaddr, uuid, int238类型。(**0.1.15.23**)
+    * 增加支持 ipaddr, uuid, int128类型。(**0.1.15.23**)
     * 增加支持 month 数组。(**0.1.15.23**)
     * 增加`hashBucket`函数。(**0.1.15.23**)
     * Orca:修复了`rolling`函数当输入类型为float32并存在nan时，计算出错的问题。(**0.1.15.23**)
