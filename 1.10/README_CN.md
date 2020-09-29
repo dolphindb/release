@@ -174,6 +174,15 @@
 [Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15_ABI.zip) | 
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.15.zip) |
 
+版本号： 1.10.16
+
+发行日期： 2020-09-27
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16.zip) | 
+[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16_ABI.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.16.zip) |
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -201,6 +210,8 @@
 * 新增机器学习函数：`adaBoostClassifier`和`adaBoostRegressor`。(**1.10.11**)
 * 增加新函数closeSessions，允许管理员关闭指定的一个或多个会话，释放连接和内存。(**1.10.13**)
 * 新增函数getChunksMeta和getTabletsMeta，获取数据节点上chunk和tablet的元数据和统计信息，譬如分区占用的磁盘空间、数据表的行数和版本号等。(**1.10.13**)
+* 新增系统参数warningMemSize （以GB为单位）。默认值为maxMemSize的75%。当使用的内存超过指定值时，系统会自动清理部分数据库的缓存，以降低内存使用量，避免出现OOM异常。(**1.10.16**)
+
 > 改进
 
 * 函数`slice`的参数 rowIndex 和 colIndex 新增了对数组的支持。
@@ -277,6 +288,8 @@
 * 允许三个以上参数的自定义聚合函数在dolphindb.dos中声明map reduce和running aggregation的实现。(**1.10.15**)
 * 大幅提升了有问题的数据节点重新接入集群后数据恢复的性能。避免了个别分区由于数据恢复时间过长导致的写入中断。(**1.10.15**)
 * 支持从外网订阅DolphinDB节点上的流数据表。(**1.10.15**)
+* 在api和server之间以及server的data node之间的套接字（socket）连接启用了参数TCP_USER_TIMEOUT。在Linux版本的高可用场景下，启用该参数后，客户端和peer server能更快的感知数据节点因为掉电引起的故障。(**1.10.16**)
+* server端的套接字（socket）连接启用了TCP保活机制（SO_KEEPALIVE），当客户端意外断开时，能更快速的感知，并且释放连接，收回资源。 (**1.10.16**)
 
 > bug 修复
 
@@ -338,7 +351,8 @@
 * 若配置项newValuePartitionPolicy=add（允许系统自动增加值分区），当有多个并发写入线程在短时间内快速增加大量新分区时（通常是在压力测试或开发环境中），有可能出现分区丢失的现象，即无法查询到写入数据库的数据。(**1.10.15**)
 * replace和replace!函数的新值为浮点数时，小数部分会被忽略，造成错误结果。(**1.10.15**)
 * 使用内存分区表作为mr和imr函数的数据源会导致系统crash。。(**1.10.15**)
-
+* SQL分组计算（group by）的排序后增量计算算法不支持在时间/日期类型数据上计算min和max。修复后的版本已经支持时间/日期类型。当分组个数较多时，系统会选择采用排序后增量计算算法。(**1.10.16**)
+* 修复了从集群管理器 dfs explorer 中浏览数据时，不受数据读取权限控制的问题。(**1.10.16**)
 ## DolphinDB GUI
 
 > 改进
@@ -362,6 +376,12 @@
 
     * LoadHDF5EX 函数增加了transform 参数，支持在导入时自定义数据转换逻辑。(**1.10.15**)
 
+## Java API
+
+> 改进
+
+ * 对于大的查询结果，支持客户端API使用fetchSize参数分块传输。(**1.10.16**)
+ 
 ## Python API
 
 > 改进
