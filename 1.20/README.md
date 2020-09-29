@@ -24,13 +24,44 @@ Releate Date： 2020-07-20
 
 Version： 1.20.2
 
-Releate Date： 2020-08-15
+Releate Date：2020-08-15
 
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
+
+
+Version： 1.20.3
+
+Releate Date：2020-08-31
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
+
+Version： 1.20.4
+
+Releate Date：2020-09-14
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
+
+Version： 1.20.5
+
+Releate Date：2020-09-27
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
+
 
 > New Features
 
@@ -99,9 +130,8 @@ Releate Date： 2020-08-15
 * Function `adaBoostRegressor` may crash under certain circumstances. (**1.20.2**)
 * After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash. (**1.20.2**)
 * When using JSON to make web calls, if the tag'functionName' is not specified, the node will crash. This might occur when using grafana to access DolphinDB. (**1.20.3**)
-* When the date and time type functions (`date`, `timestamp`, etc.) process a set of strings, if the string does not conform to the date and time type, the corresponding element returns a null value, but the returned vector does not set the flag containing the null value element, which causes the return of `isValid` and `isNull` to be inconsistent with expectations. (**1.20.3**)
 * When using `fromJson` function to process JSON strings, if the tag 'value' is not included, the node may crash. (**1.20.3**)
-* Fixed a bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly long time-consuming leader switching. (**1.20.3**)
+* Fixed a bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly time-consuming leader switching. (**1.20.3**)
 
 #### Plugins
 
@@ -146,10 +176,9 @@ Releate Date： 2020-08-15
     * Added `hashBucket` function. (**0.1.15.23**)
     * Orca: Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
     * Orca: Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
-    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2; released version 1.10.12.0 corresponds to DolphinDB 1.10.12; 
-      released version 1.0.24.1 corresponds to DolphinDB 1.00.24.
-    * Added support for python3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
-    * Added native methods for creating DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * Released version 1.20.2.0 for DolphinDB 1.20.2; version 1.10.12.0 for DolphinDB 1.10.12; version 1.0.24.1 for DolphinDB 1.00.24. Please make sure to get the appropriate Python API and orca version based on the version of the DolphinDB server. 
+    * Added support for Python 3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * Added native methods to create DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
 
 
 * C++ API
@@ -159,11 +188,11 @@ Releate Date： 2020-08-15
     * Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
 
 * Java API
-    * Added 'Upload' return value deserialization processing, which does not affect the call of the interface. (**1.20.2**)
+    * Added the deserialization of the return value of 'Upload', which does not affect the call of the interface. (**1.20.2**)
 
 * C# API
 
-    * Added 'Upload' return value deserialization processing, which does not affect the call of the interface. (**1.20.2**)
+    * Added the deserialization of the return value of 'Upload', which does not affect the call of the interface. (**1.20.2**)
 
 * Node.js API
 
