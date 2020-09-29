@@ -53,14 +53,7 @@ Releate Date：2020-09-14
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
 [Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
 
-Version： 1.20.5
 
-Releate Date：2020-09-27
-
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
 
 
 > New Features
