@@ -53,7 +53,14 @@ Releate Date：2020-09-14
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
 [Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
 
+Version： 1.20.5
 
+Releate Date：2020-09-27
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
 
 
 > New Features
@@ -111,6 +118,9 @@ Releate Date：2020-09-14
 * Added parameter 'regularizationCoeff' to function `logisticRegression`. (**1.20.3**)
 * Added parameter 'parallel' to function `backup` to support parallel backup. (**1.20.3**)
 * The configuration parameter 'dfsReplicaReliabilityLevel' now can take the value of 2, which means the replicas are distributed to different machines if resources permit. (**1.20.3**)
+* Can use more than 2 grouping columns in the "pivot by" clause of a SQL statement. Can also use multiple metrics in the "select" clause when a SQL statement has the "pivot by" clause. (**1.20.4**)
+* Can subscribe to a DolphinDB stream table from external network. (**1.20.4**)
+* Aggregate functions such as `avg`, moving window functions such as `mavg`, and cumulative window functions such as `cumavg` all support matrix input. The calculations are conducted within each column of the matrix. (**1.20.5**)
 
 > Bug fixes:
 
@@ -181,6 +191,7 @@ Releate Date：2020-09-14
     * Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
 
 * Java API
+    * Added parameter fetchSize to support transfer in blocks  for large query results (**1.20.5**)
     * Added the deserialization of the return value of 'Upload', which does not affect the call of the interface. (**1.20.2**)
 
 * C# API
