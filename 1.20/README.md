@@ -182,6 +182,7 @@ Releate Date：2020-09-27
     * Released version 1.20.2.0 for DolphinDB 1.20.2; version 1.10.12.0 for DolphinDB 1.10.12; version 1.0.24.1 for DolphinDB 1.00.24. Please make sure to get the appropriate Python API and orca version based on the version of the DolphinDB server. 
     * Added support for Python 3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
     * Added native methods to create DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * Improved the conversion efficiency of DolphinDB table objects to Pandas dataframes. (**1.30.0.0, 1.20.5.0, 1.10.16.0**)
 
 
 * C++ API
