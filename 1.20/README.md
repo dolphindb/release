@@ -24,13 +24,44 @@ Releate Date： 2020-07-20
 
 Version： 1.20.2
 
-Releate Date： 2020-08-15
+Releate Date：2020-08-15
 
 
 [Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
 [Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
 [Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2.zip) |
 [Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
+
+
+Version： 1.20.3
+
+Releate Date：2020-08-31
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
+
+Version： 1.20.4
+
+Releate Date：2020-09-14
+
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
+
+Version： 1.20.5
+
+Releate Date：2020-09-27
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
+
 
 > New Features
 
@@ -87,6 +118,9 @@ Releate Date： 2020-08-15
 * Added parameter 'regularizationCoeff' to function `logisticRegression`. (**1.20.3**)
 * Added parameter 'parallel' to function `backup` to support parallel backup. (**1.20.3**)
 * The configuration parameter 'dfsReplicaReliabilityLevel' now can take the value of 2, which means the replicas are distributed to different machines if resources permit. (**1.20.3**)
+* Can use more than 2 grouping columns in the "pivot by" clause of a SQL statement. Can also use multiple metrics in the "select" clause when a SQL statement has the "pivot by" clause. (**1.20.4**)
+* Can subscribe to a DolphinDB stream table from external network. (**1.20.4**)
+* Aggregate functions such as `avg`, moving window functions such as `mavg`, and cumulative window functions such as `cumavg` all support matrix input. The calculations are conducted within each column of the matrix. (**1.20.5**)
 
 > Bug fixes:
 
@@ -99,15 +133,28 @@ Releate Date： 2020-08-15
 * Function `adaBoostRegressor` may crash under certain circumstances. (**1.20.2**)
 * After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash. (**1.20.2**)
 * When using JSON to make web calls, if the tag'functionName' is not specified, the node will crash. This might occur when using grafana to access DolphinDB. (**1.20.3**)
-* When the date and time type functions (`date`, `timestamp`, etc.) process a set of strings, if the string does not conform to the date and time type, the corresponding element returns a null value, but the returned vector does not set the flag containing the null value element, which causes the return of `isValid` and `isNull` to be inconsistent with expectations. (**1.20.3**)
 * When using `fromJson` function to process JSON strings, if the tag 'value' is not included, the node may crash. (**1.20.3**)
-* Fixed a bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly long time-consuming leader switching. (**1.20.3**)
+* Fixed a bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly time-consuming leader switching. (**1.20.3**)
 
 #### Plugins
 
 * MySQL
 
     * Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
+
+* HDF5    
+    * added parameter `transform` to function `loadHDF5Ex` to support custom data conversion. (**1.20.4**)
+    * Fixed a bug of function loadHDF5Ex that may cause memory overflow. (**1.20.4**)
+
+* httpClient    
+    * Added mail sending function `sendEmail` 。(**1.20.4**)
+    * Added parameter `headers` to function `httpGet` and `httpPost` to fill in the header information of a http request. (**1.20.4**)
+
+* parquet
+    * Released the parquet plugin,  which imports Parquet files into DolphinDB and supports data type conversions.（**1.20.4**）
+
+* mongodb
+    * Released the mongdb plugin, which establishs a connection with a mongodb server, and then imports data into a in-memory table of DolphinDB.（**1.20.4**）
 
 #### Client softwares
 
@@ -124,23 +171,19 @@ Releate Date： 2020-08-15
 
 #### APIs
 
-* Python API
+* Python API and orca
 
     * Fixed the bug that in the Python API exceptions are thrown when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
-    * Added support for ipaddr, uuid and int238 data types. (**0.1.15.23**)
+    * Added support for ipaddr, uuid and int128 data types. (**0.1.15.23**)
     * Added support for arrays of month type. (**0.1.15.23**)
     * Added `hashBucket` function. (**0.1.15.23**)
-    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2.
-    * Released version 1.10.12.0 corresponds to DolphinDB 1.10.12.
-    * Released version 1.0.24.1 corresponds to DolphinDB 1.00.24
+    * Orca: Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
+    * Orca: Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
+    * Released version 1.20.2.0 for DolphinDB 1.20.2; version 1.10.12.0 for DolphinDB 1.10.12; version 1.0.24.1 for DolphinDB 1.00.24. Please make sure to get the appropriate Python API and orca version based on the version of the DolphinDB server. 
+    * Added support for Python 3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * Added native methods to create DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * Improved the conversion efficiency of DolphinDB table objects to Pandas dataframes. (**1.30.0.0, 1.20.5.0, 1.10.16.0**)
 
-* Orca:
-
-    * Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
-    * Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
-    * Released version 1.20.2.0 corresponds to DolphinDB 1.20.2.
-    * Released version 1.10.12.0 corresponds to DolphinDB 1.10.12.
-    * Released version 1.0.24.1 corresponds to DolphinDB 1.00.24
 
 * C++ API
 
@@ -149,11 +192,12 @@ Releate Date： 2020-08-15
     * Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
 
 * Java API
-    * Added 'Upload' return value deserialization processing, which does not affect the call of the interface. (**1.20.2**)
+    * Added parameter fetchSize to support transfer in blocks  for large query results (**1.20.5**)
+    * Added the deserialization of the return value of 'Upload', which does not affect the call of the interface. (**1.20.2**)
 
 * C# API
 
-    * Added 'Upload' return value deserialization processing, which does not affect the call of the interface. (**1.20.2**)
+    * Added the deserialization of the return value of 'Upload', which does not affect the call of the interface. (**1.20.2**)
 
 * Node.js API
 

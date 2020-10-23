@@ -52,6 +52,25 @@
 [Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
 [Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
 
+版本号： 1.20.5
+
+发行日期： 2020-09-27
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
+
+
+版本号： 1.20.6
+
+发行日期： 2020-10-23
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6_JIT.zip)
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -75,7 +94,16 @@
 * 新增函数`manova`，用于多元方差分析。(**1.20.2**)
 * 增加新函数`closeSessions`，允许管理员关闭指定的一个或多个会话，以释放连接和内存。(**1.20.2**)
 * 新增函数`getChunksMeta`和`getTabletsMeta`，以获取数据节点上分区(chunk)和分区子表(tablet)的元数据和统计信息，譬如分区占用的磁盘空间、数据表的行数和版本号等。(**1.20.2**)
- 
+* 新增函数`panel`，用于将原始数据转换成一个或多个指定label的矩阵。(**1.20.5**)
+* 新增函数`rowRank`，用于对截面数据进行排序。(**1.20.5**)
+* 对于大的查询结果，支持客户端API使用fetchSize参数分块传输。(**1.20.5**)
+* 新增系统参数warningMemSize （以GB为单位）。默认值为maxMemSize的75%。当使用的内存超过指定值时，系统会自动清理部分数据库的缓存，以降低内存使用量，避免出现OOM异常。(**1.20.5**)
+* 支持客户端异步连接数据库（windows版本尚不支持）。(**1.20.6**)
+* 增加了delta压缩算法，并允许用户在创建分布式表（`createPartitionedTable`）和创建维度表（`createTable`）的时候为每个字段分别选定压缩算法。delta压缩算法通常在时间/日期类型字段上比lz4算法有更高的压缩比。(**1.20.6**)
+* `compress`函数增加了可选参数[method]指定压缩算法。新增解压函数`decompress`。(**1.20.6**)
+* 新增函数`repmat`，用于复制和平铺矩阵。(**1.20.6**)
+* 支持一个矩阵和一个向量进行二元操作，如加减乘除等。(**1.20.6**)
+
 > 改进
 
 * 以下滑动窗口函数增加可选参数minPeriods：`mmed`,`mavg`,`mmin`,`mmax`,`mimin`,`mimax`,`msum`,`mstd`,`mvar`,`mmad`,`mmse`,`mpercentile`,`mcorr`,`mcovar`,`mwsum`,`mwavg`,`mbeta`。
@@ -107,11 +135,17 @@
 * `logisticRegression`函数新增 regularizationCoeff 参数。(**1.20.3**)
 * `backup`函数新增parallel参数，以支持并行备份。(**1.20.3**)
 * 配置项 dfsReplicaReliabilityLevel 增加了可配置项 `=2`，在资源允许情况下，副本优先使用多物理机分布策略。(**1.20.3**)
-* SQL语句中的PIVOT BY子句的行分组从一个字段扩展到多个字段，输出的指标也从一个扩展到多个。(**1.20.4**)
-* unionAll函数增加了可选参数byColName。当这个参数为true时，多个表的列按照字段名称而不是字段的顺序来对齐。这种情况下，也允许多个表有不同的列，缺失的列用空值填充。(**1.20.4**)
+* SQL语句中的pivot by子句的行分组字段从一个扩展到多个，输出的指标也从一个扩展到多个。(**1.20.4**)
+* `unionAll`函数增加了可选参数byColName。当其为true时，多个表的列按照列名来合并，而不是按照各列在原始数据表中的顺序来合并。这种情况下，也允许各个表有不同数量或不同名称的列，缺失的列用空值填充。(**1.20.4**)
 * 允许三个以上参数的自定义聚合函数在dolphindb.dos中声明map reduce和running aggregation的实现。(**1.20.4**)
 * 大幅提升了有问题的数据节点重新接入集群后数据恢复的性能。避免了个别分区由于数据恢复时间过长导致的写入中断。(**1.20.4**)
 * 支持从外网订阅DolphinDB节点上的流数据表。(**1.20.4**)
+* `avg`等聚合函数，`mavg`等滑动窗口函数，以及`cumavg`等累积窗口函数均支持矩阵输入。对矩阵中的每一列分别进行计算。(**1.20.5**)
+* 在API和server之间以及server的data node之间的套接字（socket）连接启用了参数TCP_USER_TIMEOUT。在Linux版本的高可用场景下，启用该参数后，客户端和peer server能更快的感知数据节点因为掉电引起的故障。(**1.20.5**)
+* server端的套接字连接启用了TCP保活机制（SO_KEEPALIVE），当客户端意外断开时，能更快速的感知，并且释放连接，收回资源。(**1.20.5**)
+* 复制矩阵时也复制矩阵的行列标签。(**1.20.6**)
+* 单节点模式的web管理界面也支持https。(**1.20.6**)
+* `rank`函数接受矩阵作为输入，即分别计算矩阵每一个列的rank。(**1.20.6**)
 
 > Bug fixes:
 
@@ -128,23 +162,37 @@
 * 使用`fromJson`函数处理JSON字符串时，若没有包含tag 'value'，可能导致节点崩溃。(**1.20.3**)
 * 修复RAFT的snapshot checkpoint实现中的一个bug。它可能导致leader切换时耗时特别长。(**1.20.3**)
 * 若配置项newValuePartitionPolicy=add（允许系统自动增加值分区），当有多个并发写入线程在短时间内快速增加大量新分区时（通常是在压力测试或开发环境中），有可能出现分区丢失的现象，即无法查询到写入数据库的数据。(**1.20.4**)
-* replace和replace!函数的新值为浮点数时，小数部分会被忽略，造成错误结果。(**1.20.4**)
-* 使用内存分区表作为mr和imr函数的数据源会导致系统crash。。(**1.20.4**)
+* `replace`和`replace!`函数的新值为浮点数时，小数部分会被忽略，造成错误结果。(**1.20.4**)
+* 使用内存分区表作为`mr`和`imr`函数的数据源会导致系统crash。(**1.20.4**)
+* SQL分组计算（group by）的排序后增量计算算法不支持在时间/日期类型数据上计算min和max。修复后的版本已经支持时间/日期类型。当分组个数较多时，系统会选择采用排序后增量计算算法。(**1.20.5**)
+* 修复了从集群管理器 DFS Explorer 中浏览数据时，不受数据读取权限控制的问题。(**1.20.5**)
+* 修复了在window join中使用`median`函数，如果输入数据有空值，可能导致系统崩溃的bug。(**1.20.6**)
+* 修复了在window join中使用多个指标函数时，当优化过的指标函数（包括`avg`, `sum`, `min`, `max`, `last`, `first`, `med`, `beta`等）排在未优化的函数之后，会引起系统崩溃的问题。(**1.20.6**)
+* 使用`cumrank`函数可能导致系统崩溃。(**1.20.6**)
+* 修复了`split`函数最后一个字符为分隔符时，没有包括最后一个空字符串的问题。(**1.20.6**)
+* 修复了使用SQL查询只有单分区的分布式表并且指定map子句，会错误的返回一个空表的问题。(**1.20.6**)
+* 修复了利用`sqlDS`函数对一个刚创建尚未写入数据的维度表产生数据源（Data Source），并用于mr函数，会导致系统崩溃。(**1.20.6**)
+* 修复系统初始化时偶发的一个并发问题，这个问题会抛出类似 "No corresponding BinaryBooleanOperator defined for gt"的异常。(**1.20.6**)
 
 #### DolphinDB 插件
 
-* Mysql插件
+* MySql插件
 
     * 要求MySQL插件函数`load`和`loadEx`中参数startRow必须为非负整数。
 
-* HDF5插件    
-
-    * LoadHDF5EX 函数增加了 transform 参数，支持在导入时自定义数据转换逻辑。(**1.20.4**)
+* HDF5插件   
+    * loadHDF5Ex 函数增加了 transform 参数，支持在导入时自定义数据转换逻辑。(**1.20.4**)
+    * 修复了loadHDF5Ex可能出现内存溢出的问题。(**1.20.4**)
 
 * httpClient插件    
-
     * 增加邮件发送函数 `sendEmail` 。(**1.20.4**)
     * `httpGet`, `httpPost`函数增加了 headers 参数用于填写http请求的头部信息。(**1.20.4**)
+
+* parquet插件
+    * 发布parquet插件，可將Parquet文件导入DolphinDB，并支持进行数据类型转换。（**1.20.4**）
+
+* MongoDB插件
+    * 发布MongoDB插件，可以建立与MongoDB服务器的连接，然后导入数据到DolphinDB的内存表中。（**1.20.4**）
 
 
 #### 客户端工具
@@ -153,34 +201,29 @@
 
     * 开启控制节点高可用后，若重新选举了控制节点leader，访问集群管理器首页时，校验集群管理器地址对应的控制节点是否为控制节点leader，若不是则提示控制节点leader信息。(**1.20.1**)
     * 修复了高可用集群中在线增加数据节点后，无法动态加载的问题。(**1.20.2**)
-    * 在高可用集群中的follower控制节点中登录时，返回的用户名密码错误的信息，修改为返回正确的提示信息，并给出当前activeMaster的别名信息。(**1.20.2**)。
+    * 在高可用集群中的follower控制节点中登录时，返回的用户名密码错误的信息，修改为返回正确的提示信息，并给出当前active controller的别名信息。(**1.20.2**)。
 
 * GUI
 
-    * 增加了用户手册和GUI帮助的链接
+    * 增加了用户手册和GUI帮助的链接。
     * 柱状图的柱形宽度随x轴数值自动调整。
-    * 在状态栏显示当前连接的会话ID
+    * 在状态栏显示当前连接的会话ID。
 
 #### API 
 
-* Python API
+    
+* Python API 和 orca
 
     * 修复使用`session.loadTable`加载指定分区抛出异常。(**0.1.15.23**)
-    * 增加支持 ipaddr, uuid, int238类型。(**0.1.15.23**)
+    * 增加支持 ipaddr, uuid, int128类型。(**0.1.15.23**)
     * 增加支持 month 数组。(**0.1.15.23**)
     * 增加`hashBucket`函数。(**0.1.15.23**)
-    * 发布1.20.2.0对应DolphinDB 1.20.2
-    * 发布1.10.12.0对应DolphinDB 1.10.12
-    * 发布1.0.24.1对应DolphinDB 1.00.24
-    
-
-* Orca:
-
-    * 修复了`rolling`函数当输入类型为float32并存在nan时，计算出错的问题。(**0.1.15.23**)
-    * 修复了`read_table`加载分布式表报参数异常的问题。(**0.1.15.23**)
-    * 发布1.20.2.0对应DolphinDB Server 1.20.2
-    * 发布1.10.12.0对应DolphinDB Server 1.10.12
-    * 发布1.0.24.1对应DolphinDB Server 1.00.24
+    * Orca:修复了`rolling`函数当输入类型为float32并存在nan时，计算出错的问题。(**0.1.15.23**)
+    * Orca: 修复了`read_table`加载分布式表报参数异常的问题。(**0.1.15.23**)
+    * 发布1.20.2.0对应DolphinDB 1.20.2，1.10.12.0对应DolphinDB 1.10.12，1.0.24.1对应DolphinDB 1.00.24。
+    * 增加对Python3.8的支持。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * 增加创建数据库以及分区表的Python原生方法。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+    * 提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
 
 * C++ API 
 
@@ -190,6 +233,7 @@
 
 * Java API
 
+    * 对于大的查询结果，支持客户端使用fetchSize参数分块传输。(**1.20.5**)
     * 增加了Upload返回值反序列化处理，不影响用户调用接口。(**1.20.2**)
 
 * C# API
