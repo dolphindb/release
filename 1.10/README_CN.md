@@ -432,9 +432,10 @@
 > 新功能
 
 * 发布Visual Studio 2017版本的C++ API。(**1.10.9**)
- * DBConnection 初始化变量时，增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为false。例如DBConnection conn(enableSSL=true,enableASYN=false)将启动加密通讯。
+* DBConnection 初始化变量时，增加可选参数：enableSSL(加密)taskAsyn(异步)，默认值为false。例如DBConnection conn(enableSSL=true,taskAsyn=false)将启动加密通讯。
      enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6),才能成功建立连接。异步通讯为true时，只支持`conn.run`方法，并且无返回值。
      适用于异步写入数据。(**1.10.17**)
+* `conn.run`添加可选参数fetchSize支持分块读取（server版本>=1.10.16）。(**1.10.17**)
 
 > bug 修复
 
