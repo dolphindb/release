@@ -63,6 +63,15 @@ Releate Date：2020-09-27
 [Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
 
 
+Version： 1.20.6
+
+Releate Date：2020-10-23
+
+[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6.zip) | 
+[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6_JIT.zip) | 
+[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6.zip) |
+[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6_JIT.zip)
+
 > New Features
 
 * In JIT, the parameters of a function are allowed to be another function (user-defined function, lambda function, partial application or dynamic function).
@@ -86,6 +95,15 @@ Releate Date：2020-09-27
 * Added function `manova` for multivariate analysis of variance. (**1.20.2**)
 * Added command `closeSessions`. It allows an administrator to close one or more specified sessions to release resources. (**1.20.2**)
 * Added functions `getChunksMeta` and `getTabletsMeta` to obtain metadata of the partitions (chunks) and partitioned subtables (tablets) on the data node, such as the occupied disk space, the number of rows and the version number of each partition. (**1.20.2**) 
+* Added function `panel` to convert data into one or more matrices. (**1.20.5**)
+* Added function `rowRank` to conduct ranking within each row of a matrix. (**1.20.5**)
+* Added support for client APIs to use the fetchSize parameter to transfer data in blocks when the query result contains a large amount of data. (**1.20.5**)
+* Added configuration parameter warningMemSize (in GB). The default value is 75% of maxMemSize. When memory usage exceeds warningMemSize, the system will automatically clean up the cache of some databases to avoid OOM exceptions. (**1.20.5**)
+* Added support for client APIs to connect to the database asynchronously (the Windows version does not support it yet). (1.20.6)
+* Added delta compression algorithm that allows users to select the compression algorithm for each column when creating a distributed table (`createPartitionedTable`) or a dimension table (`createTable`). The delta compression algorithm usually has a higher compression ratio than the lz4 algorithm on the time/date type field. (**1.20.6**)
+* Added an optional parameter "method" to function `compress` to specify the compression algorithm. Added function `decompress` for decompressing the compressed data. (**1.20.6**)
+* Added function `repmat` to create tiling of copies of a matrix. (**1.20.6**)
+* Added support for binary operations between a matrix and a vector. (**1.20.6**)
 
 > Improvements
 
@@ -121,6 +139,11 @@ Releate Date：2020-09-27
 * Can use more than 2 grouping columns in the "pivot by" clause of a SQL statement. Can also use multiple metrics in the "select" clause when a SQL statement has the "pivot by" clause. (**1.20.4**)
 * Can subscribe to a DolphinDB stream table from external network. (**1.20.4**)
 * Aggregate functions such as `avg`, moving window functions such as `mavg`, and cumulative window functions such as `cumavg` all support matrix input. The calculations are conducted within each column of the matrix. (**1.20.5**)
+* The TCP_USER_TIMEOUT parameter can be enabled for the socket connection between the API and DolphinDB server. If high-availability is enabled in Linux version, after enabling TCP_USER_TIMEOUT, the client and peer server can more quickly detect the failure of the data node due to power outage. (**1.20.5**)
+* The socket connection on the server side enables the TCP keep-alive mechanism (SO_KEEPALIVE). When the client is accidentally disconnected, it can be detected more promptly to release the connection and recover resources. (**1.20.5**)
+* When copying a matrix, the row and column labels of the matrix are also copied. (**1.20.6**)
+* The web management interface of single node mode now supports HTTPS. (**1.20.6**)
+* Function `rank` accepts a matrix as input, i.e., rank the elements within each column of the matrix. (**1.20.6**)
 
 > Bug fixes:
 
@@ -134,29 +157,39 @@ Releate Date：2020-09-27
 * After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash. (**1.20.2**)
 * When using JSON to make web calls, if the tag'functionName' is not specified, the node will crash. This might occur when using grafana to access DolphinDB. (**1.20.3**)
 * When using `fromJson` function to process JSON strings, if the tag 'value' is not included, the node may crash. (**1.20.3**)
-* Fixed a bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly time-consuming leader switching. (**1.20.3**)
+* Fixed the bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly time-consuming leader switching. (**1.20.3**)
+* If the configuration parameter newValuePartitionPolicy=add (allowing the system to automatically add value partitions), when multiple concurrent writing threads add a large number of new partitions in a short period of time (usually in a stress test or development environment), partition loss may occur, i.e., the data written to the database cannot be queried. (**1.20.4**)
+* When the new values of function `replace` or `replace!` are floating-point numbers, the fractional part will be ignored, generating incorrect results. (**1.20.4**)
+* Fixed the bug that using in-memory partitioned tables as the data source of function `mr` or `imr` will cause the system to crash. (**1.20.4**)
+* Fixed the bug that using function `median` in window join may cause the system to crash if the input data contains Null values. (**1.20.6**)
+* Fixed the bug that when multiple aggregate functions are used in window join, if optimized aggregate functions (such as `avg`, `sum`, `min`, `max`, `last`, `first`, `med`, `beta`, etc.) are located after unoptimized aggregate functions, the system will crash. (**1.20.6**)
+* Fixed the bug that using function `cumrank` may cause the system to crash. (**1.20.6**)
+* Fixed the bug that if the last character of the input of function `split` is a separator, the last empty string is not included in the result. (**1.20.6**)
+* Fixed the bug that when a SQL query with the map clause is applied on a distributed table with a single partition, an empty table is erroneously returned. (1.20.6)
+* Fixed the bug that using function `sqlDS` to make a newly created dimension table that has not yet been written data as the data source for function `mr` will cause the system to crash. (**1.20.6**)
+* Fixed an occasional concurrency problem during system initialization. This problem will throw an exception similar to "No corresponding BinaryBooleanOperator defined for gt". (**1.20.6**)
 
-#### Plugins
+### Plugins
 
 * MySQL
 
     * Added the requirement that the parameter 'startRow' for MySQL plug-in functions `load` and `loadEx` must be a nonnegative integer. 
 
 * HDF5    
-    * added parameter `transform` to function `loadHDF5Ex` to support custom data conversion. (**1.20.4**)
-    * Fixed a bug of function loadHDF5Ex that may cause memory overflow. (**1.20.4**)
+    * added parameter 'transform' to function `loadHDF5Ex` to support custom data conversion. (**1.20.4**)
+    * Fixed a bug of function `loadHDF5Ex` that may cause memory overflow. (**1.20.4**)
 
 * httpClient    
-    * Added mail sending function `sendEmail` 。(**1.20.4**)
-    * Added parameter `headers` to function `httpGet` and `httpPost` to fill in the header information of a http request. (**1.20.4**)
+    * Added email sending function `sendEmail` 。(**1.20.4**)
+    * Added parameter 'headers' to function `httpGet` and `httpPost` to fill in the header information of a http request. (**1.20.4**)
 
 * parquet
-    * Released the parquet plugin,  which imports Parquet files into DolphinDB and supports data type conversions.（**1.20.4**）
+    * Released the parquet plugin, which imports Parquet files into DolphinDB and supports data type conversions.（**1.20.4**）
 
 * mongodb
-    * Released the mongdb plugin, which establishs a connection with a mongodb server, and then imports data into a in-memory table of DolphinDB.（**1.20.4**）
+    * Released the mongdb plugin, which establishs a connection with a mongodb server and then imports data into a in-memory table of DolphinDB.（**1.20.4**）
 
-#### Client softwares
+### Client softwares
 
 * Web-based cluster manager
 
@@ -168,12 +201,13 @@ Releate Date：2020-09-27
 
     * Added links to user manual and GUI help.
     * Column width of the histogram is automatically adjusted based on number of data points on the x-axis.
+    * Display the current session ID in the status bar. 
 
-#### APIs
+### APIs
 
 * Python API and orca
 
-    * Fixed the bug that in the Python API exceptions are thrown when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
+    * Fixed the bug that exceptions are thrown in the Python API when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
     * Added support for ipaddr, uuid and int128 data types. (**0.1.15.23**)
     * Added support for arrays of month type. (**0.1.15.23**)
     * Added `hashBucket` function. (**0.1.15.23**)
@@ -182,7 +216,9 @@ Releate Date：2020-09-27
     * Released version 1.20.2.0 for DolphinDB 1.20.2; version 1.10.12.0 for DolphinDB 1.10.12; version 1.0.24.1 for DolphinDB 1.00.24. Please make sure to get the appropriate Python API and orca version based on the version of the DolphinDB server. 
     * Added support for Python 3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
     * Added native methods to create DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
-    * Improved the conversion efficiency of DolphinDB table objects to Pandas dataframes. (**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+    * Improved the efficiency of converting pandas dataframes to DolphinDB table objects. (**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+    * Further improved the efficiency of converting pandas dataframes to DolphinDB table objects. (**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+    * The Session class constructor adds optional parameters: enableSSL (encryption) and enableASYN (asynchronous), the default value is False. For example: s=ddb.Session(enableSSL=True, enableASYN=True). When enableSSL is True, the server side needs to add the enableHTTPS=true parameter (Linux64 stable version>=1.10.17, the latest version>=1.20.6) to successfully establish a connection. When asynchronous communication is enabled, only the session.run method is supported, and there is no return value, which is suitable for asynchronous writing of data. (**1.30.0.1, 1.20.6.0, 1.10.17.0**)
 
 
 * C++ API
@@ -190,9 +226,11 @@ Releate Date：2020-09-27
     * Fixed the bug that a process cannot exit normally when subscribing to a stream table from C++ API. (**1.20.2**)
     * Removed the dependency of C++ API dynamic library (libDolphinDBAPI.so) on openssl. (**1.20.2**)
     * Linux C++ API dynamic library added support for D_GLIBCXX_USE_CXX11_ABI=1. (**1.20.2**)
+    * When DBConnection initializes variables, optional parameters including enableSSL (encryption) and enableASYN (asynchronous) are supported, the default value is false. For example, DBConnection conn(enableSSL=true,enableASYN=false) will start encrypted communication.
+When enableSSL is true, the server side needs to add the enableHTTPS=true parameter (Linux64 stable version>=1.10.17, the latest version>=1.20.6) to successfully establish a connection. When asynchronous communication is true, only the conn.run method is supported, and there is no return value, suitable for asynchronous writing of data. (**1.20.6**)
 
 * Java API
-    * Added parameter fetchSize to support transfer in blocks  for large query results (**1.20.5**)
+    * Added parameter fetchSize to support transfer in blocks for query results with a large amount of data. (**1.20.5**)
     * Added the deserialization of the return value of 'Upload', which does not affect the call of the interface. (**1.20.2**)
 
 * C# API
