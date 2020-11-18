@@ -247,8 +247,8 @@
     * 发布1.20.2.0对应DolphinDB 1.20.2，1.10.12.0对应DolphinDB 1.10.12，1.0.24.1对应DolphinDB 1.00.24。
     * 增加对Python3.8的支持。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
     * 增加创建数据库以及分区表的Python原生方法。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
-    * 提高从pandas的dataframe对象转换到DolphinDB的table对象的效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
-    * 进一步提高从pandas的dataframe对象转换到DolphinDB的table对象的效率。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+    * 提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+    * 进一步提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
     * Session类构造函数增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为False。例如： s=ddb.Session(enableSSL=True, enableASYN=True)。 
         enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6)，才能成功建立连接。 异步通讯为true时，只支持`session.run`方法，并且无返回值。
         适用于异步写入数据。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
@@ -258,9 +258,10 @@
     * 修复从C++ API订阅流数据，无法正常退出的bug。(**1.20.2**)
     * 去除了C++ API动态库对openssl的依赖。(**1.20.2**)
     * Linux C++ API动态库增加支持 D_GLIBCXX_USE_CXX11_ABI=1的版本。(**1.20.2**)
-    * DBConnection 初始化变量时，增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为false。例如DBConnection conn(enableSSL=true,enableASYN=false)将启动加密通讯。
+    * DBConnection 初始化变量时，增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为false。例如DBConnection conn(enableSSL=true,taskAsyn=false)将启动加密通讯。
         enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6),才能成功建立连接。异步通讯为true时，只支持`conn.run`方法，并且无返回值。
         适用于异步写入数据。(**1.20.6**)
+    * `conn.run`添加可选参数fetchSize支持分块读取（server版本>=1.20.5）。(**1.20.6**)
     
 
 * Java API
