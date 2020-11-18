@@ -7,69 +7,78 @@
 发行日期： 2020-07-08
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.0.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.0_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.0.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.0_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.0.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.0_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.0.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.0_JIT.zip)
 
 版本号： 1.20.1
 
 发行日期： 2020-07-20
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.1.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.1_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.1.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.1_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.1_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.1_JIT.zip)
 
 版本号： 1.20.2
 
 发行日期： 2020-08-15
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.2.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
 
 版本号： 1.20.3
 
 发行日期： 2020-08-31
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
 
 版本号： 1.20.4
 
 发行日期： 2020-09-14
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
 
 版本号： 1.20.5
 
 发行日期： 2020-09-27
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
 
 
 版本号： 1.20.6
 
 发行日期： 2020-10-23
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6_JIT.zip)
+
+版本号： 1.20.7
+
+发行日期： 2020-11-17
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.7_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.7_JIT.zip)
 
 > 新功能
 
@@ -94,15 +103,16 @@
 * 新增函数`manova`，用于多元方差分析。(**1.20.2**)
 * 增加新函数`closeSessions`，允许管理员关闭指定的一个或多个会话，以释放连接和内存。(**1.20.2**)
 * 新增函数`getChunksMeta`和`getTabletsMeta`，以获取数据节点上分区(chunk)和分区子表(tablet)的元数据和统计信息，譬如分区占用的磁盘空间、数据表的行数和版本号等。(**1.20.2**)
-* 新增函数`panel`，用于将原始数据转换成一个或多个指定label的矩阵。(**1.20.5**)
-* 新增函数`rowRank`，用于对截面数据进行排序。(**1.20.5**)
-* 对于大的查询结果，支持客户端API使用fetchSize参数分块传输。(**1.20.5**)
-* 新增系统参数warningMemSize （以GB为单位）。默认值为maxMemSize的75%。当使用的内存超过指定值时，系统会自动清理部分数据库的缓存，以降低内存使用量，避免出现OOM异常。(**1.20.5**)
+* 新增函数`panel`，用于将数据转换成一个或多个矩阵。(**1.20.5**)
+* 新增函数`rowRank`，用于对矩阵中的每一行的元素进行排序或排序分组。(**1.20.5**)
+* 对于数据量大的查询结果，支持客户端API使用fetchSize参数分块传输。(**1.20.5**)
+* 新增配置参数warningMemSize （以GB为单位）。默认值为maxMemSize的75%。当内存使用量超过warningMemSize时，系统会自动清理部分数据库的缓存，以避免出现OOM异常。(**1.20.5**)
 * 支持客户端异步连接数据库（windows版本尚不支持）。(**1.20.6**)
 * 增加了delta压缩算法，并允许用户在创建分布式表（`createPartitionedTable`）和创建维度表（`createTable`）的时候为每个字段分别选定压缩算法。delta压缩算法通常在时间/日期类型字段上比lz4算法有更高的压缩比。(**1.20.6**)
-* `compress`函数增加了可选参数[method]指定压缩算法。新增解压函数`decompress`。(**1.20.6**)
-* 新增函数`repmat`，用于复制和平铺矩阵。(**1.20.6**)
+* `compress`函数增加了可选参数method以指定压缩算法。新增解压函数`decompress`。(**1.20.6**)
+* 新增函数`repmat`，用于竖向与横向重复矩阵。(**1.20.6**)
 * 支持一个矩阵和一个向量进行二元操作，如加减乘除等。(**1.20.6**)
+* 新增函数`rollingDataSet` 。(**1.20.7**)
 
 > 改进
 
@@ -144,8 +154,12 @@
 * 在API和server之间以及server的data node之间的套接字（socket）连接启用了参数TCP_USER_TIMEOUT。在Linux版本的高可用场景下，启用该参数后，客户端和peer server能更快的感知数据节点因为掉电引起的故障。(**1.20.5**)
 * server端的套接字连接启用了TCP保活机制（SO_KEEPALIVE），当客户端意外断开时，能更快速的感知，并且释放连接，收回资源。(**1.20.5**)
 * 复制矩阵时也复制矩阵的行列标签。(**1.20.6**)
-* 单节点模式的web管理界面也支持https。(**1.20.6**)
+* 单节点模式的web管理界面也支持HTTPS。(**1.20.6**)
 * `rank`函数接受矩阵作为输入，即分别计算矩阵每一个列的rank。(**1.20.6**)
+* 函数`conditionalFilter`在支持等值和in过滤的基础上，新增对范围过滤的支持。(**1.20.7**)
+* 函数`temporalAdd`支持按时间单位月（M）或年（y）进行操作。(**1.20.7**)
+* 函数`share`增加可选参数readonly，允许将普通/键值/索引内存表共享为一个只读的内存表，以提升读取和查询时的性能。(**1.20.7**)
+* 左表或右表为键值/索引内存表示，优化equal join （ej）的性能。(**1.20.7**)
 
 > Bug fixes:
 
@@ -167,14 +181,24 @@
 * SQL分组计算（group by）的排序后增量计算算法不支持在时间/日期类型数据上计算min和max。修复后的版本已经支持时间/日期类型。当分组个数较多时，系统会选择采用排序后增量计算算法。(**1.20.5**)
 * 修复了从集群管理器 DFS Explorer 中浏览数据时，不受数据读取权限控制的问题。(**1.20.5**)
 * 修复了在window join中使用`median`函数，如果输入数据有空值，可能导致系统崩溃的bug。(**1.20.6**)
-* 修复了在window join中使用多个指标函数时，当优化过的指标函数（包括`avg`, `sum`, `min`, `max`, `last`, `first`, `med`, `beta`等）排在未优化的函数之后，会引起系统崩溃的问题。(**1.20.6**)
-* 使用`cumrank`函数可能导致系统崩溃。(**1.20.6**)
-* 修复了`split`函数最后一个字符为分隔符时，没有包括最后一个空字符串的问题。(**1.20.6**)
-* 修复了使用SQL查询只有单分区的分布式表并且指定map子句，会错误的返回一个空表的问题。(**1.20.6**)
-* 修复了利用`sqlDS`函数对一个刚创建尚未写入数据的维度表产生数据源（Data Source），并用于mr函数，会导致系统崩溃。(**1.20.6**)
+* 修复了在window join中使用多个聚合函数时，若优化过的聚合函数（包括`avg`, `sum`, `min`, `max`, `last`, `first`, `med`, `beta`等）位于未优化的函数之后，会引起系统崩溃的问题。(**1.20.6**)
+* 修复了使用`cumrank`函数可能导致系统崩溃的问题。(**1.20.6**)
+* 修复了`split`函数的输入的最后一个字符为分隔符时，结果中没有包括最后一个空字符串的问题。(**1.20.6**)
+* 修复了使用SQL查询只有一个分区的分布式表并且指定map子句，会错误的返回一个空表的问题。(**1.20.6**)
+* 修复了使用`sqlDS`函数将一个刚创建尚未写入数据的维度表作为`mr`函数的数据源（Data Source），会导致系统崩溃的问题。(**1.20.6**)
 * 修复系统初始化时偶发的一个并发问题，这个问题会抛出类似 "No corresponding BinaryBooleanOperator defined for gt"的异常。(**1.20.6**)
-
-#### DolphinDB 插件
+* 修复了loadText和loadTextEx等函数不能正确解析带微秒的时间戳的问题，例如 2012.12.10T10:00:00.123456。(**1.20.7**)
+* 修复了在极端的内存不足情况下可能导致系统崩溃的问题。(**1.20.7**)
+* 修复了loop函数第二个开始的参数如果为标量（scalar）导致系统崩溃的问题。(**1.20.7**)
+* 修复了SQL语句中无法识别模块中的自定义函数的问题。(**1.20.7**)
+* 修复了windows中文版不能正确显示操作系统报告的异常。(**1.20.7**)
+* 修复了windows版本重启后日志重放时某些数据文件无法修改，导致重启失败的问题。(**1.20.7**)
+* 修复了使用createTimeSeriesAggregator创建时间序列聚合引擎时，如果输入数据的key的类型与输出表第二个字段的数据类型不一致，可能会导致系统崩溃的问题。(**1.20.7**)
+* 修复了创建symbol类型的vector或matrix时，没有设置空值标志的问题。(**1.20.7**)
+* 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.20.7**)
+* 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
+* `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.20.7**)
+### DolphinDB 插件
 
 * MySql插件
 
@@ -186,7 +210,7 @@
 
 * httpClient插件    
     * 增加邮件发送函数 `sendEmail` 。(**1.20.4**)
-    * `httpGet`, `httpPost`函数增加了 headers 参数用于填写http请求的头部信息。(**1.20.4**)
+    * `httpGet`与`httpPost`函数增加了 headers 参数用于填写http请求的头部信息。(**1.20.4**)
 
 * parquet插件
     * 发布parquet插件，可將Parquet文件导入DolphinDB，并支持进行数据类型转换。（**1.20.4**）
@@ -195,7 +219,7 @@
     * 发布MongoDB插件，可以建立与MongoDB服务器的连接，然后导入数据到DolphinDB的内存表中。（**1.20.4**）
 
 
-#### 客户端工具
+### 客户端工具
 
 * Web集群管理器
 
@@ -209,7 +233,7 @@
     * 柱状图的柱形宽度随x轴数值自动调整。
     * 在状态栏显示当前连接的会话ID。
 
-#### API 
+### API 
 
     
 * Python API 和 orca
@@ -223,17 +247,25 @@
     * 发布1.20.2.0对应DolphinDB 1.20.2，1.10.12.0对应DolphinDB 1.10.12，1.0.24.1对应DolphinDB 1.00.24。
     * 增加对Python3.8的支持。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
     * 增加创建数据库以及分区表的Python原生方法。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
-    * 提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+    * 提高从pandas的dataframe对象转换到DolphinDB的table对象的效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+    * 进一步提高从pandas的dataframe对象转换到DolphinDB的table对象的效率。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+    * Session类构造函数增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为False。例如： s=ddb.Session(enableSSL=True, enableASYN=True)。 
+        enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6)，才能成功建立连接。 异步通讯为true时，只支持`session.run`方法，并且无返回值。
+        适用于异步写入数据。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
 
 * C++ API 
 
     * 修复从C++ API订阅流数据，无法正常退出的bug。(**1.20.2**)
     * 去除了C++ API动态库对openssl的依赖。(**1.20.2**)
     * Linux C++ API动态库增加支持 D_GLIBCXX_USE_CXX11_ABI=1的版本。(**1.20.2**)
+    * DBConnection 初始化变量时，增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为false。例如DBConnection conn(enableSSL=true,enableASYN=false)将启动加密通讯。
+        enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6),才能成功建立连接。异步通讯为true时，只支持`conn.run`方法，并且无返回值。
+        适用于异步写入数据。(**1.20.6**)
+    
 
 * Java API
 
-    * 对于大的查询结果，支持客户端使用fetchSize参数分块传输。(**1.20.5**)
+    * 对于数据量较大的查询结果，支持客户端使用fetchSize参数分块传输。(**1.20.5**)
     * 增加了Upload返回值反序列化处理，不影响用户调用接口。(**1.20.2**)
 
 * C# API

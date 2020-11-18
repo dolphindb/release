@@ -7,10 +7,10 @@
 发行日期： 2020-03-16
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0_JIT.zip)
 
 
 版本号： 1.10.1
@@ -18,30 +18,30 @@
 发行日期： 2020-03-24
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1_JIT.zip)
 
 版本号： 1.10.2
 
 发行日期： 2020-03-27
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2_JIT.zip)
 
 版本号： 1.10.3
 
 发行日期： 2020-03-30
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
 
 
 版本号： 1.10.4
@@ -49,20 +49,20 @@
 发行日期： 2020-04-08
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4_JIT.zip)
 
 版本号： 1.10.5
 
 发行日期： 2020-04-14
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5_JIT.zip)
 
 
 版本号： 1.10.6
@@ -70,10 +70,10 @@
 发行日期： 2020-04-22
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
 
 
 版本号： 1.10.7
@@ -81,11 +81,11 @@
 发行日期： 2020-05-23
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_JIT.zip) |
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
 
 
 版本号： 1.10.8
@@ -93,11 +93,11 @@
 发行日期： 2020-06-05
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) |
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
 
 
 版本号： 1.10.9
@@ -105,11 +105,11 @@
 发行日期： 2020-06-15
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_JIT.zip) |
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
 
 
 版本号： 1.10.10
@@ -117,11 +117,11 @@
 发行日期： 2020-06-22
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_JIT.zip) |
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
 
 
 版本号： 1.10.11
@@ -129,31 +129,31 @@
 发行日期： 2020-07-02
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_JIT.zip) |
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
 
 版本号： 1.10.12
 
 发行日期： 2020-07-20
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12_JIT.zip) |
-[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.12.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.12_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12_JIT.zip) |
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.12_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.12.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.12_JIT.zip)
 
 版本号： 1.10.13
 
 发行日期： 2020-08-15
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.13.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.13.zip) |
 
 
 版本号： 1.10.14
@@ -161,27 +161,27 @@
 发行日期： 2020-08-31
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.14.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.14.zip) |
 
 版本号： 1.10.15
 
 发行日期： 2020-09-14
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.15.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.15.zip) |
 
 版本号： 1.10.16
 
 发行日期： 2020-09-27
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.16.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.16.zip) |
 
 
 版本号： 1.10.17
@@ -189,9 +189,19 @@
 发行日期： 2020-10-23
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.17.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.17_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.17.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.17.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.17_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.17.zip) |
+
+版本号： 1.10.18
+
+发行日期： 2020-11-17
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.18.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.18_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.18.zip) |
+
 
 
 > 新功能
@@ -226,6 +236,7 @@
 * 增加了delta压缩算法，并允许用户在创建分布式表（`createPartitionedTable`）和创建维度表（`createTable`）的时候为每个字段分别选定压缩算法。delta压缩算法通常在时间/日期类型字段上比lz4算法有更高的压缩比。(**1.10.17**)
 * `compress`函数增加了可选参数[method]指定压缩算法。新增解压函数`decompress`。(**1.10.17**)
 * 新增函数`repmat`，用于复制和平铺矩阵。(**1.10.17**)
+* 新增函数rollingDataSet。(**1.10.18**)
 
 > 改进
 
@@ -306,6 +317,10 @@
 * 在api和server之间以及server的data node之间的套接字（socket）连接启用了参数TCP_USER_TIMEOUT。在Linux版本的高可用场景下，启用该参数后，客户端和peer server能更快的感知数据节点因为掉电引起的故障。(**1.10.16**)
 * server端的套接字（socket）连接启用了TCP保活机制（SO_KEEPALIVE），当客户端意外断开时，能更快速的感知，并且释放连接，收回资源。 (**1.10.16**)
 * 复制矩阵时也复制矩阵的行列标签。(**1.10.17**)
+* 函数`conditionalFilter`在支持等值和in过滤的基础上，新增对范围过滤的支持。(**1.10.18**)
+* 函数`temporalAdd`支持按时间单位月（M）或年（y）进行操作。(**1.10.18**)
+* 函数`share`增加可选参数readonly，允许将普通/键值/索引内存表共享为一个只读的内存表，以提升读取和查询时的性能。(**1.10.18**)
+* 左表或右表为键值/索引内存表示，优化equal join （ej）的性能。(**1.10.18**)
 
 > bug 修复
 
@@ -376,8 +391,17 @@
 * 修复了使用SQL查询只有单分区的分布式表并且指定map子句，会错误的返回一个空表的问题。(**1.10.17**)
 * 修复了利用`sqlDS`函数对一个刚创建尚未写入数据的维度表产生数据源（Data Source），并用于mr函数，会导致系统崩溃的问题。(**1.10.17**)
 * 修复了系统初始化时偶发的一个并发问题，这个问题会抛出类似 "No corresponding BinaryBooleanOperator defined for gt"的异常。(**1.10.17**)
-
-
+* 修复了loadText和loadTextEx等函数不能正确解析带微秒的时间戳，例如 2012.12.10T10:00:00.123456。(**1.10.18**)
+* 修复了在极端的内存不足情况下可能导致系统崩溃。(**1.10.18**)
+* 修复了loop函数第二个开始的参数如果为标量（scalar）导致系统崩溃。(**1.10.18**)
+* 修复了SQL语句中无法识别模块中的自定义函数。(**1.10.18**)
+* 修复了windows中文版不能正确显示操作系统报告的异常。(**1.10.18**)
+* 修复了windows版本重启后日志重放时某些数据文件无法修改，导致重启失败。(**1.10.18**)
+* 修复了使用createTimeSeriesAggregator创建时间序列聚合引擎时，如果输入数据的key的类型与输出表第二个字段的数据类型不一致，肯能会导致系统崩溃。(**1.10.18**)
+* 修复了创建symbol类型的vector或matrix时，没有设置空值标志问题。(**1.10.18**)
+* 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.10.18**)
+* 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
+* `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.10.18**)
 ## DolphinDB GUI
 
 > 改进
@@ -407,21 +431,36 @@
 
  * 对于大的查询结果，支持客户端API使用fetchSize参数分块传输。(**1.10.16**)
  
-## Python API
-
-> 改进
+## Python API 和 orca
 
 * 增加检查DataFrame的column label是否合法。（**0.1.15.20**)
-
-> bug 修复
-
 * 修复了上传numpy.matrix导致crash的bug。（**0.1.15.20**)
+* 修复使用`session.loadTable`加载指定分区抛出异常。(**0.1.15.23**)
+* 增加支持 ipaddr, uuid, int128类型。(**0.1.15.23**)
+* 增加支持 month 数组。(**0.1.15.23**)
+* 增加`hashBucket`函数。(**0.1.15.23**)
+* Orca:修复了`rolling`函数当输入类型为float32并存在nan时，计算出错的问题。(**0.1.15.23**)
+* Orca: 修复了`read_table`加载分布式表报参数异常的问题。(**0.1.15.23**)
+* 发布1.20.2.0对应DolphinDB 1.20.2，1.10.12.0对应DolphinDB 1.10.12，1.0.24.1对应DolphinDB 1.00.24。
+* 增加对Python3.8的支持。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+* 增加创建数据库以及分区表的Python原生方法。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+* 提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+* 进一步提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+* Session类的构造函数增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为False。例如： s=ddb.Session(enableSSL=True, enableASYN=True)。 
+    enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6)，才能成功建立连接。 异步通讯为true时，只支持`session.run`方法，并且无返回值。
+    适用于异步写入数据。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+
+
 
 ## C++ API
 
 > 新功能
 
 * 发布Visual Studio 2017版本的C++ API。(**1.10.9**)
+* DBConnection 初始化变量时，增加可选参数：enableSSL(加密)taskAsyn(异步)，默认值为false。例如DBConnection conn(enableSSL=true,taskAsyn=false)将启动加密通讯。
+     enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6),才能成功建立连接。异步通讯为true时，只支持`conn.run`方法，并且无返回值。
+     适用于异步写入数据。(**1.10.17**)
+* `conn.run`添加可选参数fetchSize支持分块读取（server版本>=1.10.16）。(**1.10.17**)
 
 > bug 修复
 
