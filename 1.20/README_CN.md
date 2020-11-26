@@ -212,8 +212,9 @@
 * 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.20.7**)
 * 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
 * `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.20.7**)
-* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）历史数据回放设置的时间段比较多时。
-* `power`函数的计算结果出现浮点数的NaN值时作为DolphinDB的null值处理。
+* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）历史数据回放设置的时间段比较多时。(**1.20.8**)
+* `power`函数的计算结果出现浮点数的NaN值时作为DolphinDB的null值处理。(**1.20.8**)
+* SQL语句的pivot by子句如果有多个标签字段，而且前若干个标签字段的值在所有行中完全雷同，会出现结果不正确。(**1.20.8**)
 ### DolphinDB 插件
 
 * MySql插件
