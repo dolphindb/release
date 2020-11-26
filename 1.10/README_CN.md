@@ -202,7 +202,14 @@
 [Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.18_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.18.zip) |
 
+版本号： 1.10.19
 
+发行日期： 2020-11-26
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.19.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.19_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.19.zip) |
 
 > 新功能
 
@@ -321,6 +328,10 @@
 * 函数`temporalAdd`支持按时间单位月（M）或年（y）进行操作。(**1.10.18**)
 * 函数`share`增加可选参数readonly，允许将普通/键值/索引内存表共享为一个只读的内存表，以提升读取和查询时的性能。(**1.10.18**)
 * 左表或右表为键值/索引内存表示，优化equal join （ej）的性能。(**1.10.18**)
+* 对矩阵赋值更新时行列下标允许使用数组。(**1.10.19**)
+* 提升了windows版本的稳定性。解决了windows版本中容易出现的日志文件访问、改名、sync等被系统拒绝的问题。(**1.10.19**)
+* `pivot`函数禁止输入空数据。(**1.10.19**)
+* 自定义函数禁止输入重复的参数。(**1.10.19**)
 
 > bug 修复
 
@@ -402,6 +413,9 @@
 * 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.10.18**)
 * 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
 * `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.10.18**)
+* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）`time`，`minute`，`second`，`datetime`，`timestamp`，`nanotimestamp`等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）历史数据回放设置的时间段比较多时。
+* `power`函数的计算结果出现浮点数的NaN值，作为DolphinDB的null值处理。
+
 ## DolphinDB GUI
 
 > 改进
@@ -449,6 +463,7 @@
 * Session类的构造函数增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为False。例如： s=ddb.Session(enableSSL=True, enableASYN=True)。 
     enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6)，才能成功建立连接。 异步通讯为true时，只支持`session.run`方法，并且无返回值。
     适用于异步写入数据。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+
 
 
 ## C++ API

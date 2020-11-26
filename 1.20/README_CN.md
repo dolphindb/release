@@ -80,6 +80,15 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.7.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.7_JIT.zip)
 
+版本号： 1.20.8
+
+发行日期： 2020-11-26
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.8_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.8_JIT.zip)
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -160,6 +169,11 @@
 * 函数`temporalAdd`支持按时间单位月（M）或年（y）进行操作。(**1.20.7**)
 * 函数`share`增加可选参数readonly，允许将普通/键值/索引内存表共享为一个只读的内存表，以提升读取和查询时的性能。(**1.20.7**)
 * 左表或右表为键值/索引内存表示，优化equal join （ej）的性能。(**1.20.7**)
+* 对矩阵赋值更新时行列下标允许使用数组。(**1.20.8**)
+* 提升了windows版本的稳定性。解决了windows版本中容易出现的日志文件访问、改名、sync等被系统拒绝的问题。(**1.20.8**)
+* 函数`rollingDataSet`改名为`rollingPanel`。(**1.20.8**)
+* pivot函数禁止输入空数据。(**1.20.8**)
+* 自定义函数禁止输入重复的参数。(**1.20.8**)
 
 > Bug fixes:
 
@@ -198,6 +212,8 @@
 * 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.20.7**)
 * 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
 * `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.20.7**)
+* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）历史数据回放设置的时间段比较多时。
+* `power`函数的计算结果出现浮点数的NaN值时作为DolphinDB的null值处理。
 ### DolphinDB 插件
 
 * MySql插件
@@ -247,8 +263,8 @@
     * 发布1.20.2.0对应DolphinDB 1.20.2，1.10.12.0对应DolphinDB 1.10.12，1.0.24.1对应DolphinDB 1.00.24。
     * 增加对Python3.8的支持。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
     * 增加创建数据库以及分区表的Python原生方法。(**1.20.4.0, 1.10.15.0, 1.0.24.2**)
-    * 提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
-    * 进一步提高DolphinDB的table对象到Pandas的dataframe对象的转换效率。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+    * 提高从pandas的dataframe对象转换到DolphinDB的table对象的效率。(**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+    * 进一步提高从pandas的dataframe对象转换到DolphinDB的table对象的效率。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
     * Session类构造函数增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为False。例如： s=ddb.Session(enableSSL=True, enableASYN=True)。 
         enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6)，才能成功建立连接。 异步通讯为true时，只支持`session.run`方法，并且无返回值。
         适用于异步写入数据。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
@@ -258,10 +274,9 @@
     * 修复从C++ API订阅流数据，无法正常退出的bug。(**1.20.2**)
     * 去除了C++ API动态库对openssl的依赖。(**1.20.2**)
     * Linux C++ API动态库增加支持 D_GLIBCXX_USE_CXX11_ABI=1的版本。(**1.20.2**)
-    * DBConnection 初始化变量时，增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为false。例如DBConnection conn(enableSSL=true,taskAsyn=false)将启动加密通讯。
+    * DBConnection 初始化变量时，增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为false。例如DBConnection conn(enableSSL=true,enableASYN=false)将启动加密通讯。
         enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6),才能成功建立连接。异步通讯为true时，只支持`conn.run`方法，并且无返回值。
         适用于异步写入数据。(**1.20.6**)
-    * `conn.run`添加可选参数fetchSize支持分块读取（server版本>=1.20.5）。(**1.20.6**)
     
 
 * Java API

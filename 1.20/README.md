@@ -7,30 +7,30 @@ Version： 1.20.0
 Releate Date： 2020-07-08
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.0.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.0_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.0.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.0_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.0.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.0_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.0.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.0_JIT.zip)
 
 Version： 1.20.1
 
 Releate Date： 2020-07-20
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.1.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.1_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.1.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.1_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.1_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.1_JIT.zip)
 
 Version： 1.20.2
 
 Releate Date：2020-08-15
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.20.2_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.20.2_JIT.zip)
 
 
 Version： 1.20.3
@@ -38,39 +38,39 @@ Version： 1.20.3
 Releate Date：2020-08-31
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.3_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.3_JIT.zip)
 
 Version： 1.20.4
 
 Releate Date：2020-09-14
 
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.4_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.4_JIT.zip)
 
 Version： 1.20.5
 
 Releate Date：2020-09-27
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.5_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.5_JIT.zip)
 
 
 Version： 1.20.6
 
 Releate Date：2020-10-23
 
-[Linux64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6.zip) |
-[Windows64 JIT binary](http://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.6_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.6_JIT.zip)
 
 > New Features
 

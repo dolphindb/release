@@ -8,10 +8,10 @@ Version: 1.10.0
 Release date: 2020-03-16
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.0_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.0_JIT.zip)
 
 
 Version: 1.10.1
@@ -19,10 +19,10 @@ Version: 1.10.1
 Release date: 2020-03-24
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.1_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.1_JIT.zip)
 
 
 Version: 1.10.2
@@ -30,111 +30,158 @@ Version: 1.10.2
 Release date: 2020-03-27
 
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.2_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.2_JIT.zip)
 
 Version: 1.10.3
 
 Release date: 2020-03-30
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.3_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.3_JIT.zip)
 
 
 Version: 1.10.4
 
 Release date: 2020-04-08
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.4_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.4_JIT.zip)
 
 Version: 1.10.5
 
 Release date: 2020-04-14
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.5_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.5_JIT.zip)
 
 Version: 1.10.6
 
 Release date: 2020-04-22
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6_JIT.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.6_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.6_JIT.zip)
 
 
 Version: 1.10.7
 
 Release date: 2020-05-23
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_JIT.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_JIT.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.7_JIT.zip)
 
 Version: 1.10.8
 
 Release date: 2020-06-05
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_JIT.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.8_JIT.zip)
 
 
 Version: 1.10.9
 
 Release date: 2020-06-15
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_JIT.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_JIT.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.9_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.9_JIT.zip)
 
 Version: 1.10.10
 
 Release date: 2020-06-22
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_JIT.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_JIT.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.10_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.10_JIT.zip)
 
 
 Version: 1.10.11
 
 Release date: 2020-07-02
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_JIT.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_JIT.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.11_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.11_JIT.zip)
 
 Version: 1.10.12
 
 Release date: 2020-07-20
 
-[Linux64 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.12.zip) | 
-[Linux64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.12_JIT.zip) | 
-[Linux64 ABI=1 binary](http://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.12_ABI.zip) | 
-[Windows64 binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.12.zip) |
-[Windows64 JIT binary](http://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.12_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.12.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.12_JIT.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.10.12_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.12.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.10.12_JIT.zip)
 
+
+Version: 1.10.13
+
+Release date: 2020-08-15
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.13_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.13.zip) |
+
+
+Version: 1.10.14
+
+Release date: 2020-08-31
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.14_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.14.zip) |
+
+Version: 1.10.15
+
+Release date: 2020-09-14
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.15_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.15.zip) |
+
+Version: 1.10.16
+
+Release date: 2020-09-27
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.16_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.16.zip) |
+
+
+Version: 1.10.17
+
+Release date: 2020-10-23
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.17.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.17_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.17.zip) |
 
 > New Features
 
@@ -159,7 +206,13 @@ Release date: 2020-07-20
 * Added cumulative window function: `cumrank`. (**1.10.8**)
 * Added function: `getChunkPath` returns the paths of the chunks that the given data sources represent. (**1.10.9**)
 * Added machine learning functions: `adaBoostClassifier` and `adaBoostRegressor`. (**1.10.11**)
-
+* Added command closeSessions. It allows an administrator to close one or more specified sessions to release resources.(**1.10.13**)
+* Added functions getChunksMeta and getTabletsMeta to obtain metadata of the partitions (chunks) and partitioned subtables (tablets) on the data node, such as the occupied disk space, the number of rows and the version number of each partition.(**1.10.13**)
+* Added configuration parameter warningMemSize (in GB). The default value is 75% of maxMemSize. When memory usage exceeds warningMemSize, the system will automatically clean up the cache of some databases to avoid OOM exceptions. (**1.10.16**)
+* Added support for client APIs to connect to the database asynchronously (the Windows version does not support it yet). (**1.10.17**)
+* Added `delta` compression algorithm that allows users to select the compression algorithm for each column when creating a distributed table (createPartitionedTable) or a dimension table (createTable). The delta compression algorithm usually has a higher compression ratio than the lz4 algorithm on the time/date type field. (**1.10.17**)
+* Added an optional parameter "method" to function compress to specify the compression algorithm. Added function decompress for decompressing the compressed data.(**1.10.17**)
+* Added function `repmat` to create tiling of copies of a matrix. (**1.10.17**)
 
 > Improvements
 
@@ -216,7 +269,31 @@ Release date: 2020-07-20
 * Temporal type conversion functions now support tuple as the input. The functions involved include: `date`, `month`, `year`, `hour`, `minute`, `second`, `time` ,`datetime`,`datehour`,`timestamp`,`nanotime`,`nanotimestamp`,`weekday`,`dayOfWeek`,`dayOfYear`,`dayOfMonth`,`quarterOfYear`,`monthOfYear`,`weekOfYear`,`hourOfDay`,`minuteOfHour`,`secondOfMinute`,`millisecond`,`microsecond`,`nanosecond`. (**1.10.12**)
 * Improved the stability of the distributed database. Specifically, improved the stability of transaction resolution when the chunk versions are inconsistent; reduced the chances that heartbeat transmission is delayed. (**1.10.12**)
 * The parameter 'groupingCol' of function `contextby` is allowed to be an empty array. (**1.10.12**)
+* Use `OpenBLAS` and LAPACK to improve the performance of the following matrix related functions: inverse, solve, det and cholesky. When used on a large matrix, the performance of these functions is improved by 10 to 50 times. (**1.10.13**)
+* The function `lu` can decompose a matrix that is not a square matrix. (**1.10.13**)
+* Added a label 'partitionTypeName' to the output of function `schema` to describe the partition type.(**1.10.13**)
+* Functions `in` and `find` support searching for key values in keyed tables and indexed in-memory tables.(**1.10.13**)
+* Added an optional parameter 'sharedName' to function `syncDict`. If it is specified, the dictionary will be shared across all sessions on the node. (**1.10.13**)
+* Added 2 columns ('createTime' and 'lastActiveTime') to the output of function `getSessionMemoryStat` to record the session creation time and the last access time respectively. Corrected the value of the column 'remotePort'.(**1.10.13**)
+* Added 2 columns ('remoteIP' and 'remotePort') to the output of function `getConsoleJobs`. (**1.10.13**)
+* Function `backup` now supports parallel backup to improve efficiency.(**1.10.13**)
+* When a constant is assigned to a variable, an object will be copied to avoid the reduction in system efficiency caused by concurrent modification of the reference count during multi-threaded parallel computing. (**1.10.13**)
+* Improved the stability of the implementation of the RAFT consensus protocol.(**1.10.13**)
+* Used TCMalloc to manage the in-memory pool, which improved in-memory allocation efficiency, especially the allocation efficiency of small in-memory during multi-threaded parallel computing. Meanwhile, two problems were solved, firstly, the situation where the actual memory occupied by DolphinDB exceeds the set value of the configuration parameter maxMemSize, and secondly, the OOM issue where there is still in-memory remaining when creating a string. (**1.10.14**)
+* When using the function `saveText`, the maximum precision of a double type variable retains 15 digits. (**1.10.14**)
+* Imported an optional parameter 'useSystemTime' in crossSectionalAggregator. When it set to false, the output calculation time is the time of the event itself. This function could better support the playback of historical data for simulation. (**1.10.14**)
+* Use the logarithmic form of likelihood when using gaussianNB moudle for classification prediction, that makes it possible to use the model for classification in high-dimensional situations. (**1.10.14**)
+* Improved performance of `pca` function as changed to use the svd algorithm of lapack. (**1.10.14**)
+* Added parameter 'regularizationCoeff' to function `logisticRegression`.(**1.10.14**)
+* The configuration parameter 'dfsReplicaReliabilityLevel' now can take the value of 2, which means the replicas are distributed to different machines if resources permit. (**1.10.14**)
 
+* 允许三个以上参数的自定义聚合函数在dolphindb.dos中声明map reduce和running aggregation的实现。(**1.10.15**)
+* 大幅提升了有问题的数据节点重新接入集群后数据恢复的性能。避免了个别分区由于数据恢复时间过长导致的写入中断。(**1.10.15**)
+* Can subscribe to a DolphinDB stream table from external network. (**1.10.15**)
+* The TCP_USER_TIMEOUT parameter can be enabled for the socket connection between the API and DolphinDB server. If high-availability is enabled in Linux version, after enabling TCP_USER_TIMEOUT, the client and peer server can more quickly detect the failure of the data node due to power outage. (**1.10.16**)
+* The socket connection on the server side enables the TCP keep-alive mechanism (SO_KEEPALIVE). When the client is accidentally disconnected, it can be detected more promptly to release the connection and recover resources.  (**1.10.16**)
+* When copying a matrix, the row and column labels of the matrix are also copied. (**1.10.17**)
+* 
 > Bug Fixes
 
 * Fixed the problem that the performance of function `backup` deteriorates after running for a period of time.
@@ -266,7 +343,27 @@ Release date: 2020-07-20
 * Fixed a bug: the results are erroneous when a large size dictionary is serialized asynchronously. (**1.10.11**)
 * Fixed a bug: after enabling high availability for the controller node, if a transaction involves too many partitions so the RAFT message length exceeds 64K, the metadata will be truncated when the RAFT message is replayed after restarting the system. (**1.10.12**)
 * Fixed a bug: if a SQL statement has the WHERE clause, and if the GROUP BY clause contains multiple fields, and if the second or a subsequent field in the GROUP BY clause uses function `segment`, the result does not match the expectation. (**1.10.12**)
-
+* When all elements of a vector are identical, the results of functions `mvar` and `cumvar` may have extremely small negative values; the results of functions `mstd` and `cumstd` may have NULL values.(**1.10.13**)
+* A memory leak may occur during socket connection. (**1.10.13**)
+* Function `adaBoostRegressor` may crash under certain circumstances. (**1.10.13**)
+* After a high-availability cluster adds a data node online, creating a new database partition on a new node may cause the new node to crash.(**1.10.13**)
+* When using JSON to make web calls, if the tag'functionName' is not specified, the node will crash. This might occur when using grafana to access DolphinDB.(**1.10.14**)
+* 日期和时间类型函数（date, timestamp等）处理一组字符串时，如果字符串不符合日期和时间类型，那么相应的元素返回空值，但返回的vector内部未设置包含空值元素的标志，导致`isValid`和`isNull`等函数的返回与预期不符。(**1.10.14**)
+* When using `fromJson` function to process JSON strings, if the tag 'value' is not included, the node may crash.(**1.10.14**)
+* Fixed the bug in the implementation of snapshot checkpoint of RAFT. This may lead to a particularly time-consuming leader switching.(**1.10.14**)
+* If the configuration parameter newValuePartitionPolicy=add (allowing the system to automatically add value partitions), when multiple concurrent writing threads add a large number of new partitions in a short period of time (usually in a stress test or development environment), partition loss may occur, i.e., the data written to the database cannot be queried.(**1.10.15**)
+* When the new values of function `replace` or `replace!` are floating-point numbers, the fractional part will be ignored, generating incorrect results. (**1.10.15**)
+* Fixed the bug that using in-memory partitioned tables as the data source of function `mr` or `imr` will cause the system to crash. (**1.10.15**)
+* SQL分组计算（group by）的排序后增量计算算法不支持在时间/日期类型数据上计算min和max。修复后的版本已经支持时间/日期类型。当分组个数较多时，系统会选择采用排序后增量计算算法。(**1.10.16**)
+* 修复了从集群管理器 dfs explorer 中浏览数据时，不受数据读取权限控制的问题。(**1.10.16**)
+* Fixed the bug that using function `median` in window join may cause the system to crash if the input data contains Null values.(**1.10.17**)
+* Fixed the bug that when multiple aggregate functions are used in window join, if optimized aggregate functions (such as `avg`, `sum`, `min`, `max`, `last`, `first`, `med`, `beta`, etc.) are located after unoptimized aggregate functions, the system will crash. (**1.10.17**)
+* Fixed the bug that using function `cumrank` may cause the system to crash. (**1.10.17**)
+* Fixed the bug that if the last character of the input of function `split` is a separator, the last empty string is not included in the result.(**1.10.17**)
+* Fixed the bug that when a SQL query with the map clause is applied on a distributed table with a single partition, an empty table is erroneously returned.(**1.10.17**)
+* Fixed the bug that using function `sqlDS` to make a newly created dimension table that has not yet been written data as the data source for function `mr` will cause the system to crash. (**1.10.17**)
+* Fixed an occasional concurrency problem during system initialization. This problem will throw an exception similar to "No corresponding BinaryBooleanOperator defined for gt". (**1.10.17**)
+ 
 ## DolphinDB GUI
 
 > Improvements
@@ -286,7 +383,16 @@ Release date: 2020-07-20
 * Released Support Vector Machine(SVM) plugin. (**1.10.9**)
 * Released XGBoost plugin. (**1.10.9**)
     
+* HDF5插件    
 
+   * added parameter 'transform' to function `loadHDF5Ex` to support custom data conversion. (**1.10.15**)
+    
+## Java API
+
+> 改进
+
+ * Added parameter fetchSize to support transfer in blocks for query results with a large amount of data. (**1.10.16**)
+     
 ## Python API
 
 > Improvements
@@ -296,6 +402,19 @@ Release date: 2020-07-20
 > Bug Fixes
 
 * Fixed a bug that uploading numpy.matrix to DolphinDB server causes a crash. (**0.1.15.20**)
+* 增加检查DataFrame的column label是否合法。（**0.1.15.20**)
+* Fixed the bug that exceptions are thrown in the Python API when the session method `loadTable` is used to load specified partitions. (**0.1.15.23**)
+* Added support for ipaddr, uuid and int128 data types.(**0.1.15.23**)
+* Added support for arrays of month type. (**0.1.15.23**)
+* Added `hashBucket` function. (**0.1.15.23**)
+* Orca: Fixed the problem of calculation errors in `rolling` function when the input type is float32 with nan values. (**0.1.15.23**)
+* Orca: Fixed the problem of erroneous error message when `read_table` is used to load a distributed table. (**0.1.15.23**)
+* Released version 1.20.2.0 for DolphinDB 1.20.2; version 1.10.12.0 for DolphinDB 1.10.12; version 1.0.24.1 for DolphinDB 1.00.24. Please make sure to get the appropriate Python API and orca version based on the version of the DolphinDB server. 
+* Added support for Python 3.8. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+* Added native methods to create DolphinDB databases and partitioned tables. (**1.20.4.0, 1.10.15.0, 1.0.24.2**)
+* Improved the efficiency of converting pandas dataframes to DolphinDB table objects. (**1.30.0.0, 1.20.5.0, 1.10.16.0**)
+* Further improved the efficiency of converting pandas dataframes to DolphinDB table objects. (**1.30.0.1, 1.20.6.0, 1.10.17.0**)
+* The Session class constructor adds optional parameters: enableSSL (encryption) and enableASYN (asynchronous), the default value is False. For example: s=ddb.Session(enableSSL=True, enableASYN=True). When enableSSL is True, the server side needs to add the enableHTTPS=true parameter (Linux64 stable version>=1.10.17, the latest version>=1.20.6) to successfully establish a connection. When asynchronous communication is enabled, only the session.run method is supported, and there is no return value, which is suitable for asynchronous writing of data.(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
 
 
 ## C++ API
