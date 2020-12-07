@@ -211,6 +211,15 @@
 [Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.19_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.19.zip) |
 
+版本号： 1.10.20
+
+发行日期： 2020-12-04
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.20.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.10.20_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.10.20.zip) |
+
+
 > 新功能
 
 * DolphinDB脚本抛出异常时，显示调用的stack。
@@ -332,6 +341,15 @@
 * 提升了windows版本的稳定性。解决了windows版本中容易出现的日志文件访问、改名、sync等被系统拒绝的问题。(**1.10.19**)
 * `pivot`函数禁止输入空数据。(**1.10.19**)
 * 自定义函数禁止输入重复的参数。(**1.10.19**)
+* 函数dailyAlignedBar增加两个可选参数timeEnd和mergeSessionEnd。如果设置了timeEnd，每个session之外的数据返回空值。mergeSessionEnd为true值，session结束点的数据将合并到最后一个bar中。(**1.10.20**)
+* 函数contextby的参数groupingCol允许为一个tuple，即可以使用多个列来分组。(**1.10.20**)
+* 加强对sql update语句的校验，用于更新的值必须是一个标量或向量。(**1.10.20**)
+* SQL查询支持HINT_NOMERGE。使用该HINT时，从分区表获取的数据不再合并成一个内存表，而是直接返回内存分区表，从而提升查询性能。(**1.10.20**)
+* replayDS函数允许选择一部分列进行回放。(**1.10.20**)
+* replayDS函数执行前不再通过实际加载分区来校验SQL语句的正确性。(**1.10.20**)
+* 时间序列聚合引擎和和异常检测引擎增加了可选参数roundTime。当该参数为true时，窗口长度超过60s仍然按时间整点对齐。(**1.10.20**)
+* 函数getAggregatorStat，支持显示timeSeriesAggregator的内存使用情况。(**1.10.20**)
+* 通过submitJob和submitJobEx提交的批处理作业，真正执行时才打开消息文件和对象文件。避免未运行的任务占用打开文件数。(**1.10.20**)
 
 > bug 修复
 
@@ -415,7 +433,9 @@
 * `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.10.19**)
 * 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）`time`，`minute`，`second`，`datetime`，`timestamp`，`nanotimestamp`等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）历史数据回放设置的时间段比较多时。(**1.10.19**)
 * `power`函数的计算结果出现浮点数的NaN值，作为DolphinDB的null值处理。(**1.10.19**)
-* SQL语句的pivot by子句如果有多个标签字段，而且前若干个标签字段的值在所有行中完全雷同，会出现结果不正确。(**1.10.19**)
+* 关联函数（lj等）左右表出现重名字段无法解决时抛出异常。新的解决方案是，如果加上表名修饰后仍然重名，不显示右表字段。(**1.10.20**)
+* SQL语句的pivot by子句如果有多个标签字段，而且前若干个标签字段的值在所有行中完全相同，会出现结果不正确。(**1.10.20**)
+
 ## DolphinDB GUI
 
 > 改进

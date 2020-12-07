@@ -89,6 +89,17 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.8.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.8_JIT.zip)
 
+
+版本号： 1.20.9
+
+发行日期： 2020-12-04
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.9.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.9_JIT.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.9.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.9_JIT.zip)
+
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -117,11 +128,12 @@
 * 对于数据量大的查询结果，支持客户端API使用fetchSize参数分块传输。(**1.20.5**)
 * 新增配置参数warningMemSize （以GB为单位）。默认值为maxMemSize的75%。当内存使用量超过warningMemSize时，系统会自动清理部分数据库的缓存，以避免出现OOM异常。(**1.20.5**)
 * 支持客户端异步连接数据库（windows版本尚不支持）。(**1.20.6**)
-* 增加了delta压缩算法，并允许用户在创建分布式表（`createPartitionedTable`）和创建维度表（`createTable`）的时候为每个字段分别选定压缩算法。delta压缩算法通常在时间/日期类型字段上比lz4算法有更高的压缩比。(**1.20.6**)
+* 增加了delta压缩算法，并允许用户在创建分布式表（`createPartitionedTable`）和创建维度表（`createTable`）时为每个字段分别选定压缩算法。delta压缩算法通常在时间/日期类型字段上比LZ4算法有更高的压缩比。(**1.20.6**)
 * `compress`函数增加了可选参数method以指定压缩算法。新增解压函数`decompress`。(**1.20.6**)
 * 新增函数`repmat`，用于竖向与横向重复矩阵。(**1.20.6**)
 * 支持一个矩阵和一个向量进行二元操作，如加减乘除等。(**1.20.6**)
 * 新增函数`rollingDataSet` 。(**1.20.7**)
+* 支持以pickle格式序列化数据。大幅提升python api的读取性能。(**1.20.9**)
 
 > 改进
 
@@ -153,7 +165,7 @@
 * `pca`函数新增 svdSolver, randomState 两个参数。(**1.20.3**)
 * `logisticRegression`函数新增 regularizationCoeff 参数。(**1.20.3**)
 * `backup`函数新增parallel参数，以支持并行备份。(**1.20.3**)
-* 配置项 dfsReplicaReliabilityLevel 增加了可配置项 `=2`，在资源允许情况下，副本优先使用多物理机分布策略。(**1.20.3**)
+* 配置项 dfsReplicaReliabilityLevel 增加了允许取值 2，表示在资源允许情况下，副本优先使用多物理机分布策略。(**1.20.3**)
 * SQL语句中的pivot by子句的行分组字段从一个扩展到多个，输出的指标也从一个扩展到多个。(**1.20.4**)
 * `unionAll`函数增加了可选参数byColName。当其为true时，多个表的列按照列名来合并，而不是按照各列在原始数据表中的顺序来合并。这种情况下，也允许各个表有不同数量或不同名称的列，缺失的列用空值填充。(**1.20.4**)
 * 允许三个以上参数的自定义聚合函数在dolphindb.dos中声明map reduce和running aggregation的实现。(**1.20.4**)
@@ -166,14 +178,23 @@
 * 单节点模式的web管理界面也支持HTTPS。(**1.20.6**)
 * `rank`函数接受矩阵作为输入，即分别计算矩阵每一个列的rank。(**1.20.6**)
 * 函数`conditionalFilter`在支持等值和in过滤的基础上，新增对范围过滤的支持。(**1.20.7**)
-* 函数`temporalAdd`支持按时间单位月（M）或年（y）进行操作。(**1.20.7**)
+* 函数`temporalAdd`对任何时间类型数据均支持参数unit使用月（"M"）或年（"y"）。(**1.20.7**)
 * 函数`share`增加可选参数readonly，允许将普通/键值/索引内存表共享为一个只读的内存表，以提升读取和查询时的性能。(**1.20.7**)
-* 左表或右表为键值/索引内存表示，优化equal join （ej）的性能。(**1.20.7**)
+* 左表或右表为键值/索引内存表时，优化equal join (ej) 的性能。(**1.20.7**)
 * 对矩阵赋值更新时行列下标允许使用数组。(**1.20.8**)
-* 提升了windows版本的稳定性。解决了windows版本中容易出现的日志文件访问、改名、sync等被系统拒绝的问题。(**1.20.8**)
+* 提升了Windows版本的稳定性。解决了Windows版本中容易出现的日志文件访问、改名、sync等操作被系统拒绝的问题。(**1.20.8**)
 * 函数`rollingDataSet`改名为`rollingPanel`。(**1.20.8**)
-* pivot函数禁止输入空数据。(**1.20.8**)
-* 自定义函数禁止输入重复的参数。(**1.20.8**)
+* `pivot`函数禁止输入空数据。(**1.20.8**)
+* 定义自定义函数时，禁止输入重复的参数。(**1.20.8**)
+* 函数dailyAlignedBar增加两个可选参数timeEnd和mergeSessionEnd。如果设置了timeEnd，每个session之外的数据返回空值。mergeSessionEnd为true值，session结束点的数据将合并到最后一个bar中。(**1.20.9**)
+* 函数contextby的参数groupingCol允许为一个tuple，即可以使用多个列来分组。(**1.20.9**)
+* 加强对sql update语句的校验，用于更新的值必须是一个标量或向量。(**1.20.9**)
+* SQL查询支持HINT_NOMERGE。使用该HINT时，从分区表获取的数据不再合并成一个内存表，而是直接返回内存分区表，从而提升查询性能。(**1.20.9**)
+* replayDS函数允许选择一部分列进行回放。(**1.20.9**)
+* replayDS函数执行前不再通过实际加载分区数据来校验SQL语句的正确性。(**1.20.9**)
+* 时间序列聚合引擎和和异常检测引擎增加了可选参数roundTime。当该参数为true时，窗口长度超过60s仍然按时间整点对齐。(**1.20.9**)
+* 函数getAggregatorStat，支持显示timeSeriesAggregator的内存使用情况。(**1.20.9**)
+* 通过submitJob和submitJobEx提交的批处理作业，真正执行时才打开消息文件和对象文件。避免未运行的任务占用打开文件数。(**1.20.9**)
 
 > Bug fixes:
 
@@ -203,7 +224,7 @@
 * 修复系统初始化时偶发的一个并发问题，这个问题会抛出类似 "No corresponding BinaryBooleanOperator defined for gt"的异常。(**1.20.6**)
 * 修复了loadText和loadTextEx等函数不能正确解析带微秒的时间戳的问题，例如 2012.12.10T10:00:00.123456。(**1.20.7**)
 * 修复了在极端的内存不足情况下可能导致系统崩溃的问题。(**1.20.7**)
-* 修复了loop函数第二个开始的参数如果为标量（scalar）导致系统崩溃的问题。(**1.20.7**)
+* 修复了loop函数第一个参数以外的参数如果为标量（scalar）导致系统崩溃的问题。(**1.20.7**)
 * 修复了SQL语句中无法识别模块中的自定义函数的问题。(**1.20.7**)
 * 修复了windows中文版不能正确显示操作系统报告的异常。(**1.20.7**)
 * 修复了windows版本重启后日志重放时某些数据文件无法修改，导致重启失败的问题。(**1.20.7**)
@@ -211,10 +232,12 @@
 * 修复了创建symbol类型的vector或matrix时，没有设置空值标志的问题。(**1.20.7**)
 * 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.20.7**)
 * 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
-* `files`函数对包含超多文件数(几十万)的目录读取文件列表时导致系统崩溃。(**1.20.7**)
-* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）历史数据回放设置的时间段比较多时。(**1.20.8**)
+* 修复了使用`files`函数从包含超多数量(几十万)文件的目录中读取文件时导致系统崩溃的问题。(**1.20.7**)
+* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）数据回放设置的时间段比较多时。(**1.20.8**)
 * `power`函数的计算结果出现浮点数的NaN值时作为DolphinDB的null值处理。(**1.20.8**)
-* SQL语句的pivot by子句如果有多个标签字段，而且前若干个标签字段的值在所有行中完全雷同，会出现结果不正确。(**1.20.8**)
+* 关联函数（lj等）左右表出现重名字段无法解决时抛出异常。新的解决方案是，如果加上表名修饰后仍然重名，不显示右表字段。(**1.20.9**)
+* SQL语句的pivot by子句如果有多个标签字段，而且前若干个标签字段的值在所有行中完全相同，会出现结果不正确。(**1.20.9**)
+
 ### DolphinDB 插件
 
 * MySql插件
