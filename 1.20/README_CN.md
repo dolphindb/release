@@ -99,6 +99,12 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.9.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.9_JIT.zip)
 
+版本号： 1.20.10
+
+发行日期： 2020-12-29
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.10.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.10.zip) |
 
 > 新功能
 
@@ -133,8 +139,10 @@
 * 新增函数`repmat`，用于竖向与横向重复矩阵。(**1.20.6**)
 * 支持一个矩阵和一个向量进行二元操作，如加减乘除等。(**1.20.6**)
 * 新增函数`rollingDataSet` 。(**1.20.7**)
-* 支持以pickle格式序列化数据。大幅提升python api的读取性能。(**1.20.9**)
-
+* 支持以pickle格式序列化数据。大幅提升Python API的读取性能。(**1.20.9**)
+* 增加了哑函数partition用于在SQL的where子句中指定使用某些分区。(**1.20.10**)
+* 增加了新函数eqFloat，用于比较浮点数在保留指定位数时，是否相等。(**1.20.10**)
+* 新增配置参数remoteExecutors。该参数指定用于rpc调用的线程个数。当线程个数大于1时，可以提升系统整体的并发性能。(**1.20.10**)
 > 改进
 
 * 以下滑动窗口函数增加可选参数minPeriods：`mmed`,`mavg`,`mmin`,`mmax`,`mimin`,`mimax`,`msum`,`mstd`,`mvar`,`mmad`,`mmse`,`mpercentile`,`mcorr`,`mcovar`,`mwsum`,`mwavg`,`mbeta`。
@@ -188,13 +196,20 @@
 * 定义自定义函数时，禁止输入重复的参数。(**1.20.8**)
 * 函数dailyAlignedBar增加两个可选参数timeEnd和mergeSessionEnd。如果设置了timeEnd，每个session之外的数据返回空值。mergeSessionEnd为true值，session结束点的数据将合并到最后一个bar中。(**1.20.9**)
 * 函数contextby的参数groupingCol允许为一个tuple，即可以使用多个列来分组。(**1.20.9**)
-* 加强对sql update语句的校验，用于更新的值必须是一个标量或向量。(**1.20.9**)
+* 加强对SQL update语句的校验，用于更新的值必须是一个标量或向量。(**1.20.9**)
 * SQL查询支持HINT_NOMERGE。使用该HINT时，从分区表获取的数据不再合并成一个内存表，而是直接返回内存分区表，从而提升查询性能。(**1.20.9**)
 * replayDS函数允许选择一部分列进行回放。(**1.20.9**)
 * replayDS函数执行前不再通过实际加载分区数据来校验SQL语句的正确性。(**1.20.9**)
-* 时间序列聚合引擎和和异常检测引擎增加了可选参数roundTime。当该参数为true时，窗口长度超过60s仍然按时间整点对齐。(**1.20.9**)
-* 函数getAggregatorStat，支持显示timeSeriesAggregator的内存使用情况。(**1.20.9**)
-* 通过submitJob和submitJobEx提交的批处理作业，真正执行时才打开消息文件和对象文件。避免未运行的任务占用打开文件数。(**1.20.9**)
+* 时间序列聚合引擎和和异常检测引擎增加了可选参数roundTime。当该参数为true时，窗口长度超过60秒仍然按时间整点对齐。(**1.20.9**)
+* 函数getAggregatorStat支持显示时间序列聚合引擎的内存使用情况。(**1.20.9**)
+* 通过submitJob和submitJobEx提交的批处理作业，执行时才打开消息文件和对象文件，避免未运行的任务占用打开文件数量。(**1.20.9**)
+* 函数sqlCol增加了可选参数alias。(**1.20.10**)
+* 函数subscribeTable增加了可选参数timeTrigger。当参数为true时，即便没有* 新的消息进入，到达设定的时间间隔后，也会触发消息处理函数。(**1.20.10**)
+* 函数schema的输出字典中增加了partitionColumnType，即分区字段的数据类型。(**1.20.10**)
+* 优化函数isDuplicated的性能。(**1.20.10**)
+* gram函数允许矩阵作为输入参数。(**1.20.10**)
+* ridge支持输入分布式数据源，此时solver的取值只能是cholesky。(**1.20.10**)
+* 进一步优化pickle协议，提升python api的性能。(**1.20.10**)
 
 > Bug fixes:
 
@@ -233,11 +248,15 @@
 * 修复了系统启用dataSync时，数据还在cache中未进入分布式文件系统时，读取symbol类型数据与预期不符的问题。(**1.20.7**)
 * 修复了函数`weekend`内存越界导致的系统崩溃问题。(**1.20.7**)
 * 修复了使用`files`函数从包含超多数量(几十万)文件的目录中读取文件时导致系统崩溃的问题。(**1.20.7**)
-* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输出结果为长度为1的vector，输入条件为长度超过1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）数据回放设置的时间段比较多时。(**1.20.8**)
+* 修复下列场景潜在的内存越界访问：（1）0行或0列的矩阵数据读取。（2）time，minute，second，datetime，timestamp，nanotimestamp等函数解析非法的时间/日期类型字符串。（3）iif函数中输入条件为长度超过1的vector，输出结果为长度为1的vector。（4）update语句中使用了full join。（5）时间序列聚合引擎采用系统时间。（6）数据回放设置的时间段比较多时。(**1.20.8**)
 * `power`函数的计算结果出现浮点数的NaN值时作为DolphinDB的null值处理。(**1.20.8**)
-* 关联函数（lj等）左右表出现重名字段无法解决时抛出异常。新的解决方案是，如果加上表名修饰后仍然重名，不显示右表字段。(**1.20.9**)
-* SQL语句的pivot by子句如果有多个标签字段，而且前若干个标签字段的值在所有行中完全相同，会出现结果不正确。(**1.20.9**)
-
+* 关联函数（lj等）左右表出现重名字段无法解决时抛出异常。解决方案为，如果加上表名修饰后仍然重名，不显示右表字段。(**1.20.9**)
+* SQL语句的pivot by子句的行维度若有多个字段，而且前若干个行维度字段的值在所有行中完全相同，会出现结果不正确。(**1.20.9**)
+* SQL关联中一个表是子查询且子查询中使用了维度表，SQL引擎报异常。(**1.20.10**)
+* 增加了对函数writeLines的参数校验，避免crash。(**1.20.10**)
+* 函数weekOfYear在跨年的日期上结果不正确。(**1.20.10**)
+* 多个线程同时使用openblas计算gram矩阵时结果可能不正确。(**1.20.10**)
+* 时间序列聚合引擎在两种情况下出现crash：metric的表达式中包含本地变量或自定义的metric函数出现异常。(**1.20.10**)
 ### DolphinDB 插件
 
 * MySql插件
@@ -251,13 +270,15 @@
 * httpClient插件    
     * 增加邮件发送函数 `sendEmail` 。(**1.20.4**)
     * `httpGet`与`httpPost`函数增加了 headers 参数用于填写http请求的头部信息。(**1.20.4**)
+    * 增加`httpCreateSubJob`，提供持续订阅请求web服务功能。
+    * 增加`httpCancelSubJob`，取消订阅。
+    * 增加`httpGetJobStat`, 获取订阅信息。
 
-* parquet插件
-    * 发布parquet插件，可將Parquet文件导入DolphinDB，并支持进行数据类型转换。（**1.20.4**）
+* Parquet插件
+    * 发布Parquet插件，可將Parquet文件导入DolphinDB，并支持进行数据类型转换。（**1.20.4**）
 
 * MongoDB插件
     * 发布MongoDB插件，可以建立与MongoDB服务器的连接，然后导入数据到DolphinDB的内存表中。（**1.20.4**）
-
 
 ### 客户端工具
 
@@ -275,7 +296,6 @@
 
 ### API 
 
-    
 * Python API 和 orca
 
     * 修复使用`session.loadTable`加载指定分区抛出异常。(**0.1.15.23**)
@@ -292,7 +312,6 @@
     * Session类构造函数增加可选参数：enableSSL(加密)和enableASYN(异步)，默认值为False。例如： s=ddb.Session(enableSSL=True, enableASYN=True)。 
         enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6)，才能成功建立连接。 异步通讯为true时，只支持`session.run`方法，并且无返回值。
         适用于异步写入数据。(**1.30.0.1, 1.20.6.0, 1.10.17.0**)
-
 * C++ API 
 
     * 修复从C++ API订阅流数据，无法正常退出的bug。(**1.20.2**)
@@ -302,7 +321,6 @@
         enableSSL为True时，server端需要添加enableHTTPS=true参数(Linux64稳定版>=1.10.17, 最新版>=1.20.6),才能成功建立连接。异步通讯为true时，只支持`conn.run`方法，并且无返回值。
         适用于异步写入数据。(**1.20.6**)
     
-
 * Java API
 
     * 对于数据量较大的查询结果，支持客户端使用fetchSize参数分块传输。(**1.20.5**)
