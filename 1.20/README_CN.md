@@ -106,6 +106,20 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.10.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.10.zip) |
 
+版本号： 1.20.11
+
+发行日期： 2020-01-12
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.11.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.11.zip) |
+
+版本号： 1.20.12
+
+发行日期： 2020-01-25
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.12.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.12.zip) |
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -143,6 +157,7 @@
 * 增加了哑函数partition用于在SQL的where子句中指定使用某些分区。(**1.20.10**)
 * 增加了新函数eqFloat，用于比较浮点数在保留指定位数时，是否相等。(**1.20.10**)
 * 新增配置参数remoteExecutors。该参数指定用于rpc调用的线程个数。当线程个数大于1时，可以提升系统整体的并发性能。(**1.20.10**)
+
 > 改进
 
 * 以下滑动窗口函数增加可选参数minPeriods：`mmed`,`mavg`,`mmin`,`mmax`,`mimin`,`mimax`,`msum`,`mstd`,`mvar`,`mmad`,`mmse`,`mpercentile`,`mcorr`,`mcovar`,`mwsum`,`mwavg`,`mbeta`。
@@ -210,6 +225,8 @@
 * gram函数允许矩阵作为输入参数。(**1.20.10**)
 * ridge支持输入分布式数据源，此时solver的取值只能是cholesky。(**1.20.10**)
 * 进一步优化pickle协议，提升python api的性能。(**1.20.10**)
+* window join的自定义指标函数支持多个返回值。(**1.20.12**)
+* 时间序列聚合引擎的自定义函数指标支持多个返回值。同时也支持接受带有别名的指标，例如 avg(price) as price。(**1.20.12**)
 
 > Bug fixes:
 
@@ -259,6 +276,10 @@
 * 时间序列聚合引擎在两种情况下出现crash：metric的表达式中包含本地变量或自定义的metric函数出现异常。(**1.20.10**)
 * 修复无法序列化一个带有symbol类型字段的空表到python api的问题。(**1.20.11**)
 * 处理流数据时，如果订阅端处理太慢，发布端在磁盘保留消息的时间又太短，需要发布的消息在磁盘和内存中都已经不存在了，会导致系统崩溃。(**1.20.11**)
+* Delta压缩算法连续两次增加的记录数小于3时，解压函数无法解压，报异常。(**1.20.12**)
+* 个别函数最后一个参数的名称解析有误，导致使用键值参数时报找不到参数的异常。(**1.20.12**)
+* 系统启动时删除不必要的异常警告：<WARNING> :failed to remove public key  file(**1.20.12**)
+
 ### DolphinDB 插件
 
 * MySql插件
