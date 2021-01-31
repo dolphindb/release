@@ -40,9 +40,9 @@
 * 新增高阶函数`withNullFill`。
 * 新增权限DB_OWNER。拥有该权限的用户可以创建数据库并进行管理。
 * 新增函数`upsert!`向键值表或索引表中添加或更新记录。
-* `schema`函数增加了分区列类型(partitionColumnType)信息输出。
-* 新增响应式状态引擎（reactive state engine）用于流计算。相关的函数包括createReactiveStateEngine和warmupStreamEngine。(**1.30.2**)
-* 新增函数ema，mskew，mkurtosis和mslr。(**1.30.2**)
+* `schema`函数增加了分区列类型(partitionColumnType)的输出。
+* 新增响应式状态引擎（reactive state engine）用于流计算。相关的函数包括`createReactiveStateEngine`和`warmupStreamEngine`。(**1.30.2**)
+* 新增函数`ema`，`mskew`，`mkurtosis`和`mslr`。(**1.30.2**)
 
 
 bug fixes：
@@ -54,8 +54,8 @@ bug fixes：
 * 允许矩阵的行数或列数为0。
 * 当需要序列化的字符串标量长度超过65535个字节时，自动转化为BLOB类型进行序列化。(**1.30.1**)
 * window join的自定义指标函数支持多个返回值。(**1.30.2**)
-* concat函数拼接的字符串长度超过65535或这包含ascii值0，自动将返回值改为BLOB类型。避免输出到客户端时出现问题。(**1.30.2**)
-* 时间序列聚合引擎的自定义函数指标支持多个返回值。同时也支持接受带有别名的指标，例如 avg(price) as price。(**1.30.2**)
+* 若`concat`函数拼接的字符串长度超过65535或包含ASCII值0，自动将返回值改为BLOB类型，以避免输出到客户端时出现问题。(**1.30.2**)
+* 时间序列聚合引擎的自定义函数指标支持多个返回值，同时也支持接受带有别名的指标，例如：avg(price) as price。(**1.30.2**)
 
 > Bug fixes:
 
@@ -65,7 +65,7 @@ bug fixes：
 * Delta压缩算法连续两次增加的记录数小于3时，解压函数无法解压，报异常。(**1.30.2**)
 * 个别函数最后一个参数的名称解析有误，导致使用键值参数时报找不到参数的异常。(**1.30.2**)
 * 极端内存不足的情况下可能导致redo log写入失败。(**1.30.2**)
-* 系统启动时删除不必要的异常警告：<WARNING> :failed to remove public key  file。(**1.30.2**)
+* 系统启动时删除不必要的异常警告 \<WARNING\> : failed to remove public key file。(**1.30.2**)
 
 ### DolphinDB 插件
 
@@ -76,7 +76,7 @@ bug fixes：
 ### 客户端工具
 
 * GUI
-    * **注意**，1.30及以上版本的Server不兼容低于1.30.0版本的GUI，请从官网下载最新版本GUI客户端。
+    * **注意**：1.30及以上版本的Server不兼容低于1.30.0版本的GUI，请从官网下载最新版本GUI客户端。
 
 ### API 
 
