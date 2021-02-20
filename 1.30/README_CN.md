@@ -44,14 +44,12 @@
 * 新增响应式状态引擎（reactive state engine）用于流计算。相关的函数包括`createReactiveStateEngine`和`warmupStreamEngine`。(**1.30.2**)
 * 新增函数`ema`，`mskew`，`mkurtosis`和`mslr`。(**1.30.2**)
 
-
-bug fixes：
-
 > 改进
 
 * 优化SYMBOL类型的数据序列化/反序列化。这个优化使DolphinDB数据节点之间以及数据节点和API之间传输SYMBOL类型数据时性能有5~10倍的提升。
 * 提升了并行作业和分布式作业的稳定性。
 * 允许矩阵的行数或列数为0。
+* 函数subscribeTable增加了可选参数timeTrigger。当参数为true时，即便没有新的消息进入，到达设定的时间间隔后，也会触发消息处理函数。
 * 当需要序列化的字符串标量长度超过65535个字节时，自动转化为BLOB类型进行序列化。(**1.30.1**)
 * window join的自定义指标函数支持多个返回值。(**1.30.2**)
 * 若`concat`函数拼接的字符串长度超过65535或包含ASCII值0，自动将返回值改为BLOB类型，以避免输出到客户端时出现问题。(**1.30.2**)
