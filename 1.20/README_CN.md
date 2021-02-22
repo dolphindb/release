@@ -108,17 +108,25 @@
 
 版本号： 1.20.11
 
-发行日期： 2020-01-12
+发行日期： 2021-01-12
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.11.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.11.zip) |
 
 版本号： 1.20.12
 
-发行日期： 2020-01-25
+发行日期： 2021-01-25
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.12.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.12.zip) |
+
+版本号： 1.20.13
+
+发行日期： 2021-02-20
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.13.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.13.zip) |
+
 
 > 新功能
 
