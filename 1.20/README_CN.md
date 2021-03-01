@@ -127,6 +127,13 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.13.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.13.zip) |
 
+版本号： 1.20.14
+
+发行日期： 2021-02-28
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.14.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.14.zip) |
+
 
 > 新功能
 
@@ -241,6 +248,7 @@
 * 函数`subscribeTable`的可选参数offset取值为-2时，如果找不到持久化的offset，不再抛出异常，而是用-1取代。(**1.20.13**)
 * windows版本的cpu绑定，从最多支持32核增加到64核。(**1.20.13**)
 * 调用函数`addMetrics`为时间序列聚合引擎动态增加指标时，如果windowSize和原先的定义不同，系统报异常。(**1.20.13**)
+* `subscribeTable`函数的filter参数，在值过滤的基础上增加了哈希和范围过滤。(**1.20.14**)
 
 > Bug fixes:
 
@@ -300,8 +308,10 @@
 * 修复mr函数和imr函数在下面的情况下导致系统崩溃：启用了reduce函数，但没有启用final函数，map函数没有返回值。(**1.20.13**)
 * 修复了事务管理器、任务调度器和缓存管理器在内存严重不足时可能出现内部状态不一致，死锁或者系统崩溃。(**1.20.13**)
 * 修复当磁盘空间占用100%时，redolog写入不完整，导致重启后数据库无法启动。(**1.20.13**)
-* 修复ewm系列函数包括ewmMean, ewmVar, ewmStd, ewmCov, ewmCorr在sql语句中和context by子句配合使用时结果不正确。(**1.20.13**)
-
+* ewm系列函数包括`ewmMean`, `ewmVar`, `ewmStd`, `ewmCov`, `ewmCorr`没有注册成为顺序敏感（order sensitive）的函数，导致在sql语句中和context by子句配合使用时结果不正确。(**1.20.14**)
+* sql中分组计算时，如果聚合函数sum，max，min，avg，count，std等的参数用到了顺序敏感的函数如next，prev等，系统错误的使用了哈希分组优化算法，导致结果不正确。(**1.20.14**)
+* 使用顺序敏感的函数（如mstd，mavg）构造部分应用（partial application）时，没有正确设置顺序敏感标志，导致启用context by子句的sql语句应用此类函数的部分应用时，结果不正确。(**1.20.14**)
+* 
 ### DolphinDB 插件
 
 * MySql插件
