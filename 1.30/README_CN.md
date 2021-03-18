@@ -119,8 +119,7 @@
 
 * Python API
 
-    * 优化数据传输性能
-
-
-
-
+    * 优化数据传输性能, 最新Server版本请升级python api到1.30.0.5
+    ```
+    pip3 install dolphindb==1.30.0.5
+    ```
