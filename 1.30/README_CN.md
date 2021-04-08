@@ -45,21 +45,19 @@
 版本号： 1.30.4
 发行日期： 2021-03-19
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.4.zip) | 
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.4.zip) 
 
 版本号： 1.30.5
 发行日期： 2021-03-30
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.5.zip) | 
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.5.zip) 
 
 版本号： 1.30.6
 发行日期： 2021-04-08
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.6.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.6_JIT.zip)
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_ABI.zip) 
 
 > 新功能
 
