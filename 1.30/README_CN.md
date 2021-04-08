@@ -42,6 +42,25 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.3.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.3_JIT.zip)
 
+版本号： 1.30.4
+发行日期： 2021-03-19
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.4.zip) | 
+
+版本号： 1.30.5
+发行日期： 2021-03-30
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.5.zip) | 
+
+版本号： 1.30.6
+发行日期： 2021-04-08
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.6_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -59,6 +78,11 @@
 * 新增函数`winsorize`。(**1.30.3**)
 * 新增高阶函数`byRow`，使得一个列式函数，可用于矩阵按行计算。(**1.30.3**)
 * 内置的流数据计算引擎包括时间序列聚合引擎、横截面引擎、异常检测引擎和响应式状态引擎，支持多个引擎串联。(**1.30.3**)
+* 修改upsert！函数，支持对dfs表（包括维度表和分区表）进行修改。(**1.30.6**)
+* 支持通过sql update和sql delete语句修改分布式表和维度表。(**1.30.6**)
+* 新增函数sqlUpdate和sqlDelete，动态创建sql update和sql delete语句。(**1.30.6**)
+* 新增函数createSessionWindowEngine用于创建流数据的会话窗口。(**1.30.6**)
+* 支持客户端数据压缩上传到服务端，也支持数据压缩后输出到客户端。(**1.30.6**)
 
 > 改进
 
@@ -79,32 +103,54 @@
 * `subscribeTable`函数的filter参数，在值过滤的基础上增加了哈希和范围过滤。(**1.30.3**)
 * 横截面引擎在支持聚合函数的基础上，增加对向量化函数的支持。(**1.30.3**)
 * 时序聚合引擎允许在一个引擎中使用多个窗口。(**1.30.3**)
- 
+* 改进了部分应用（partial application）的显示，除了显示函数名称，也会显示已经固定的参数。(**1.30.6**)
+* 对时间类型的分区字段进行剪枝时，允许在分区字段上使用相应的时间函数（目前支持date, month和datahour函数），方便用户操作。例如，数据库在时间维度上按日期（DATE类型）进行分区，数据表的分区字段是TIMESTAMP类型，允许在时间列上先使用date函数再进行过滤， date(time) = 2021.03.02。(**1.30.6**)
+* 数据表按照时间类型字段进行值分区或者范围分区时，通过对where子句中的过滤条件剪枝（如果所涉及分区的时间范围必然满足过滤条件，则可以在该分区的子查询上删除该过滤条件），改进查询性能。(**1.30.6**)
+* 改了cache engine的回收算法，提升了事务回收的效率，避免了不必要的OOM。(**1.30.6**)
+* 时间序列聚合引擎增加可选参数fill，可选的fill方法包括none，null和ffill。默认值是none，也即某一个key在某个时间窗口中没有数据时，不输出任何结果。(**1.30.6**)
+* 函数compress和decompress支持table作为输入。(**1.30.6**)
+* 单个事务涉及的元数据大小从最大16MB增加到128MB，避免出现一些大表不能删除的情况。(**1.30.6**)
+* 异常检测引擎（函数createAnomalyDetectionEngine） 支持快照（snapshot）(**1.30.6**)
+* 函数createCrossSectionalAggregator 改名为createCrossSectionalEngine，原名作为别名。(**1.30.6**)
+
 > Bug fixes:
 
-* 修复无法序列化一个带有symbol类型字段的空表到python api的问题。(**1.30.1**)
+* 修复无法将一个带有SYMBOL类型字段的空表序列化到Python API的问题。(**1.30.1**)
 * 处理流数据时，如果订阅端处理太慢，发布端在磁盘保留消息的时间又太短，需要发布的消息在磁盘和内存中都已经不存在了，会导致系统崩溃。(**1.30.1**)
 * 修复redo log和cache engine在内存不足时导致系统死锁的问题。(**1.30.1**)
 * Delta压缩算法连续两次增加的记录数小于3时，解压函数无法解压，报异常。(**1.30.2**)
 * 个别函数最后一个参数的名称解析有误，导致使用键值参数时报找不到参数的异常。(**1.30.2**)
 * 极端内存不足的情况下可能导致redo log写入失败。(**1.30.2**)
 * 系统启动时删除不必要的异常警告 \<WARNING\> : failed to remove public key file。(**1.30.2**)
-* 键值表和索引表在下面的情况下导致系统崩溃：包含多个键值列，查询时一个键值列是包含单个元素的向量，其他键值列的值是标量。(**1.30.3**)
+* 键值表和索引表在以下场景导致系统崩溃：包含多个键值列，查询时一个键值列是包含单个元素的向量，其他键值列的值是标量。(**1.30.3**)
 * 内置的哈希表使用的内存超过2G时可能导致系统崩溃，影响的函数包括`isDuplicated`。(**1.30.3**)
 * 函数`searchK`在应用到big array（非连续的数组）时可能出现结果不正确。(**1.30.3**)
 * 订阅时启用filter，并且同一个流表被同一个节点的多个应用订阅时，只有按照订阅的顺序，依次反订阅（unsubcribeTable）才可以取消订阅。修复后的版本没有顺序要求。(**1.30.3**)
-* mr函数和imr函数在下面的情况下导致系统崩溃：启用了`reduce`函数，但没有启用`final`函数，`map`函数没有返回值。(**1.30.3**)
-* 事务管理器、任务调度器和缓存管理器在内存严重不足时出现内部状态不一致，死锁或者系统崩溃。(**1.30.3**)
-* 当磁盘满时，redo log内部状态出现不一致，导致重启后数据库无法启动。(**1.30.3**)
+* `mr`函数和`imr`函数在以下场景导致系统崩溃：启用了`reduce`函数，但没有启用`final`函数，`map`函数没有返回值。(**1.30.3**)
+* 事务管理器、任务调度器和缓存管理器在内存严重不足时出现内部状态不一致，导致死锁或者系统崩溃。(**1.30.3**)
+* 当磁盘被占满后，redo log内部状态出现不一致，导致重启后数据库无法启动。(**1.30.3**)
 * ewm系列函数包括`ewmMean`, `ewmVar`, `ewmStd`, `ewmCov`, `ewmCorr`没有注册成为顺序敏感（order sensitive）的函数，导致在sql语句中和context by子句配合使用时结果不正确。(**1.30.3**)
 * sql中分组计算时，如果聚合函数sum，max，min，avg，count，std等的参数用到了顺序敏感的函数如next，prev等，系统错误的使用了哈希分组优化算法，导致结果不正确。(**1.30.3**)
 * 使用顺序敏感的函数（如mstd，mavg）构造部分应用（partial application）时，没有正确设置顺序敏感标志，导致启用context by子句的sql语句应用此类函数的部分应用时，结果不正确。(**1.30.3**)
-
+* 当输入的数据包含多个key，每个key的数据按时间升序排列，但是全部数据并非按时间顺序排列时，时间序列聚合引擎输出的结果缺失部分数据。(**1.30.4**)
+* 同一客户端对同一流表有多个订阅且流数据的队列满时，可能出现订阅不能删除的情况。(**1.30.4**)
+* 当输入的数据小于一个窗口，指定的指标包含聚合和非聚合两种，异常检测引擎会崩溃。(**1.30.4**)
+* 修复创建数据库和表时潜在的丢失元数据的风险。(**1.30.5**)
+* 数据表按照日期（DATE）进行分区，分区字段ts的数据类型是TIMESTAMP，过滤条件 ts > 2021.03.02没有包含（应该包含）2021.03.02这个分区。(**1.30.6**)
+* 一个数据库被删除后，如果在被回收之前，系统重启了，查询时该数据库又会展现给用户。(**1.30.6**)
+* 自定义函数用于pcross，ploop和peach等并行计算的高阶函数时，可能出现自定义函数返回值为空的情况。(**1.30.6**)
+* rank函数指定tiesMethod为max时，可能导致系统崩溃。(**1.30.6**)
+* 当输入为单个元素的tuple时，flatten函数的结果不正确，直接返回了tuple，而不是tuple中的元素。(**1.30.6**)
+* 客户端为python时，month/datetime/date/minute/time/second等时间类型数据在高压力情况下可能出现输出结果不正确。(**1.30.6**)
+* 时间序列聚合引擎的一个批次的输入数据包含多个时间窗口时，输出的结果没有按时间排序。(**1.30.6**)
+* 横截面引擎一个批次的输入数据包含多个时间点，且均满足keyCount的触发条件，则输出结果有重复。(**1.30.6**)
+* 系统若开启了cache engine，短时间内反复多次删除和创建同一个数据库表，可能导致旧表的数据写入到新创建的同名表中。(**1.30.6**)
+* replay无法指定select中定义的列名作为dateColumn和timeColumn。(**1.30.6**)
 ### DolphinDB 插件
 
 * Python 插件
 
-    * 支持在DolphinDB中直接调用python库。
+    * 支持在DolphinDB中直接调用Python库。
 
 ### 客户端工具
 
@@ -119,7 +165,7 @@
 
 * Python API
 
-    * 优化数据传输性能, 最新Server版本请升级python api到1.30.0.5
+    * 优化数据传输性能, 最新Server版本请升级Python API到1.30.0.5
     ```
     pip3 install dolphindb==1.30.0.5
     ```
