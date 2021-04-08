@@ -43,17 +43,20 @@
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.3_JIT.zip)
 
 版本号： 1.30.4
-发行日期： 2021-03-19
+
+发行日期： 2021-03-29
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.4.zip) 
 
 版本号： 1.30.5
+
 发行日期： 2021-03-30
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.5.zip) 
 
 版本号： 1.30.6
-发行日期： 2021-04-08
+
+发行日期： 2021-04-07
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_JIT.zip) | 
