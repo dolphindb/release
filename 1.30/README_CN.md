@@ -98,7 +98,7 @@
 * 支持节点间通过压缩方式传输数据。(**1.30.7**)
 * temporalAdd,dailyAlignedBar,bar,wj,pwj 函数支持DURATION类型参数。(**1.30.7**)
 * keyedStreamTable支持多个key列。(**1.30.7**)
-* SQL提供inverval关键字支持插值查询。(**1.30.7**)
+* SQL提供interval关键字支持插值查询。(**1.30.7**)
 
 > 改进
 
