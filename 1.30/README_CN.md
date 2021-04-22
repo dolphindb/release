@@ -62,6 +62,16 @@
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.6_ABI.zip) 
 
+版本号： 1.30.7
+
+发行日期： 2021-04-21
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.7_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.7_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -79,11 +89,16 @@
 * 新增函数`winsorize`。(**1.30.3**)
 * 新增高阶函数`byRow`，使得一个列式函数，可用于矩阵按行计算。(**1.30.3**)
 * 内置的流数据计算引擎包括时间序列聚合引擎、横截面引擎、异常检测引擎和响应式状态引擎，支持多个引擎串联。(**1.30.3**)
-* 修改upsert！函数，支持对dfs表（包括维度表和分区表）进行修改。(**1.30.6**)
-* 支持通过sql update和sql delete语句修改分布式表和维度表。(**1.30.6**)
-* 新增函数sqlUpdate和sqlDelete，动态创建sql update和sql delete语句。(**1.30.6**)
-* 新增函数createSessionWindowEngine用于创建流数据的会话窗口。(**1.30.6**)
+* 修改upsert！函数，支持对DFS表（包括维度表和分区表）进行修改。(**1.30.6**)
+* 支持使用SQL update和delete语句修改DFS表（包括维度表和分区表）。(**1.30.6**)
+* 新增函数`sqlUpdate`和`sqlDelete`，动态创建SQL update和delete语句。(**1.30.6**)
+* 新增函数`createSessionWindowEngine`用于创建流数据会话窗口引擎。(**1.30.6**)
 * 支持客户端数据压缩上传到服务端，也支持数据压缩后输出到客户端。(**1.30.6**)
+* 支持新数据类型DURATION， 表达时间范围更加简练。(**1.30.7**)
+* 支持节点间通过压缩方式传输数据。(**1.30.7**)
+* temporalAdd,dailyAlignedBar,bar,wj,pwj 函数支持DURATION类型参数。(**1.30.7**)
+* keyedStreamTable支持多个key列。(**1.30.7**)
+* SQL提供inverval关键字支持插值查询。(**1.30.7**)
 
 > 改进
 
@@ -103,16 +118,18 @@
 * 调用函数`addMetrics`为时间序列聚合引擎动态增加指标时，如果windowSize和原先的定义不同，系统报异常。(**1.30.3**)
 * `subscribeTable`函数的filter参数，在值过滤的基础上增加了哈希和范围过滤。(**1.30.3**)
 * 横截面引擎在支持聚合函数的基础上，增加对向量化函数的支持。(**1.30.3**)
-* 时序聚合引擎允许在一个引擎中使用多个窗口。(**1.30.3**)
+* 时序聚合引擎允许在一个引擎中使用多个不同长度窗口。(**1.30.3**)
 * 改进了部分应用（partial application）的显示，除了显示函数名称，也会显示已经固定的参数。(**1.30.6**)
 * 对时间类型的分区字段进行剪枝时，允许在分区字段上使用相应的时间函数（目前支持date, month和datahour函数），方便用户操作。例如，数据库在时间维度上按日期（DATE类型）进行分区，数据表的分区字段是TIMESTAMP类型，允许在时间列上先使用date函数再进行过滤， date(time) = 2021.03.02。(**1.30.6**)
 * 数据表按照时间类型字段进行值分区或者范围分区时，通过对where子句中的过滤条件剪枝（如果所涉及分区的时间范围必然满足过滤条件，则可以在该分区的子查询上删除该过滤条件），改进查询性能。(**1.30.6**)
-* 改了cache engine的回收算法，提升了事务回收的效率，避免了不必要的OOM。(**1.30.6**)
-* 时间序列聚合引擎增加可选参数fill，可选的fill方法包括none，null和ffill。默认值是none，也即某一个key在某个时间窗口中没有数据时，不输出任何结果。(**1.30.6**)
-* 函数compress和decompress支持table作为输入。(**1.30.6**)
+* 修改了cache engine的回收算法，提升了事务回收的效率，避免了不必要的OOM。(**1.30.6**)
+* 流数据时间序列聚合引擎增加可选参数fill，可选的fill方法包括none，null和ffill。默认值是none，也即某一个key在某个时间窗口中没有数据时，不输出任何结果。(**1.30.6**)
+* 函数`compress`和`decompress`支持table作为输入。(**1.30.6**)
 * 单个事务涉及的元数据大小从最大16MB增加到128MB，避免出现一些大表不能删除的情况。(**1.30.6**)
 * 异常检测引擎（函数createAnomalyDetectionEngine） 支持快照（snapshot）(**1.30.6**)
 * 函数createCrossSectionalAggregator 改名为createCrossSectionalEngine，原名作为别名。(**1.30.6**)
+* maxConnections默认值改成512。(**1.30.7**)
+* createTimeSeriesAggregator 改名为createTimeSeriesEngine，原函数名作为alias。(**1.30.7**)
 
 > Bug fixes:
 
@@ -147,6 +164,11 @@
 * 横截面引擎一个批次的输入数据包含多个时间点，且均满足keyCount的触发条件，则输出结果有重复。(**1.30.6**)
 * 系统若开启了cache engine，短时间内反复多次删除和创建同一个数据库表，可能导致旧表的数据写入到新创建的同名表中。(**1.30.6**)
 * replay无法指定select中定义的列名作为dateColumn和timeColumn。(**1.30.6**)
+* 修复异常检查引擎全局不按时间排序时，输出表缺少第一组和最后一组时间数据。(**1.30.7**)
+* 修复并发调用`dropTable`，`getTables`会导致crash的问题。(**1.30.7**)
+* 修复当发布节点host定义为localhost时，远程订阅无法取消问题。(**1.30.7**)
+* 修复使用`nunique`查询时报错：Immutable sub vector doesn't support method getDataSegment。(**1.30.7**)
+
 ### DolphinDB 插件
 
 * Python 插件
@@ -157,6 +179,8 @@
 
 * GUI
     * **注意**：1.30及以上版本的Server不兼容低于1.30.0版本的GUI，请从官网下载最新版本GUI客户端。
+    * 1.30.7 及以上版本的Server, 需要配合GUI1.30.7版本使用DURATION类型。
+    * 增加用sql将服务端数据下载到本地csv功能。
 
 ### API 
 
