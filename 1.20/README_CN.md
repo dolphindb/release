@@ -134,6 +134,13 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.14.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.14.zip) |
 
+版本号： 1.20.15
+
+发行日期： 2021-04-07
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.15.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.15.zip) |
+
 
 > 新功能
 
@@ -249,6 +256,11 @@
 * windows版本的cpu绑定，从最多支持32核增加到64核。(**1.20.13**)
 * 调用函数`addMetrics`为时间序列聚合引擎动态增加指标时，如果windowSize和原先的定义不同，系统报异常。(**1.20.13**)
 * `subscribeTable`函数的filter参数，在值过滤的基础上增加了哈希和范围过滤。(**1.20.14**)
+* 改进了部分应用（partial application）的显示，除了显示函数名称，也会显示已经固定的参数。(**1.20.15**)
+* 对时间类型的分区字段进行剪枝时，允许在分区字段上使用相应的时间函数（目前支持date, month和datahour函数），方便用户操作。例如，数据库在时间维度上按日期（DATE类型）进行分区，数据表的分区字段是TIMESTAMP类型，允许在时间列上先使用date函数再进行过滤， date(time) = 2021.03.02。。(**1.20.15**)
+* 数据表按照时间类型字段进行值分区或者范围分区时，通过对where子句中的过滤条件剪枝（如果所涉及分区的时间范围必然满足过滤条件，则可以在该分区的子查询上删除该过滤条件），改进查询性能。。(**1.20.15**)
+* 改进了cache engine的回收算法，提升了事务回收的效率，避免了不必要的OOM。。(**1.20.15**)
+* 单个事务涉及的元数据大小从最大16MB增加到128MB，避免出现一些大表不能删除的情况。。(**1.20.15**)
 
 > Bug fixes:
 
@@ -311,6 +323,16 @@
 * ewm系列函数包括`ewmMean`, `ewmVar`, `ewmStd`, `ewmCov`, `ewmCorr`没有注册成为顺序敏感（order sensitive）的函数，导致在sql语句中和context by子句配合使用时结果不正确。(**1.20.14**)
 * sql中分组计算时，如果聚合函数sum，max，min，avg，count，std等的参数用到了顺序敏感的函数如next，prev等，系统错误的使用了哈希分组优化算法，导致结果不正确。(**1.20.14**)
 * 使用顺序敏感的函数（如mstd，mavg）构造部分应用（partial application）时，没有正确设置顺序敏感标志，导致启用context by子句的sql语句应用此类函数的部分应用时，结果不正确。(**1.20.14**)
+* 数据表按照日期（DATE）进行分区，分区字段ts的数据类型是TIMESTAMP，过滤条件判断如 ts > 2021.03.02时没有包含（应该包含）2021.03.02这个分区。(**1.20.15**)
+* 一个数据库被删除后，如果在被回收之前，系统重启了，查询时该数据库又会展现给用户。(**1.20.15**)
+* 自定义函数用于`pcross`，`ploop`和`peach`等并行计算的高阶函数时，可能出现自定义函数返回值为空的情况。(**1.20.15**)
+* `rank`函数指定tiesMethod为max时，可能导致系统崩溃。(**1.20.15**)
+* 当输入为单个元素的tuple时，`flatten`函数的结果不正确，直接返回了tuple，而不是tuple中的元素。(**1.20.15**)
+* 客户端为python时，month/datetime/date/minute/time/second等时间类型数据在高压力情况下可能出现输出结果不正确。(**1.20.15**)
+* 系统若开启了cache engine，短时间内反复多次删除和创建同一个数据库表，可能导致旧表的数据写入到新创建的同名表中。(**1.20.15**)
+* `replay`无法指定select中定义的列名作为dateColumn和timeColumn。(**1.20.15**)
+* 修复创建分布式数据库和表时潜在的丢失元数据的风险。(**1.20.15**)
+
 * 
 ### DolphinDB 插件
 
