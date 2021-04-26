@@ -141,6 +141,12 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.15.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.15.zip) |
 
+版本号： 1.20.16
+
+发行日期： 2021-04-21
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.16.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.16.zip) |
 
 > 新功能
 
@@ -261,6 +267,8 @@
 * 数据表按照时间类型字段进行值分区或者范围分区时，通过对where子句中的过滤条件剪枝（如果所涉及分区的时间范围必然满足过滤条件，则可以在该分区的子查询上删除该过滤条件），改进查询性能。。(**1.20.15**)
 * 改进了cache engine的回收算法，提升了事务回收的效率，避免了不必要的OOM。。(**1.20.15**)
 * 单个事务涉及的元数据大小从最大16MB增加到128MB，避免出现一些大表不能删除的情况。。(**1.20.15**)
+* maxConnections默认值改成512。(**1.20.16**) 
+* createTimeSeriesAggregator 改名为createTimeSeriesEngine，原函数名作为alias。(**1.20.16**) 
 
 > Bug fixes:
 
@@ -332,8 +340,13 @@
 * 系统若开启了cache engine，短时间内反复多次删除和创建同一个数据库表，可能导致旧表的数据写入到新创建的同名表中。(**1.20.15**)
 * `replay`无法指定select中定义的列名作为dateColumn和timeColumn。(**1.20.15**)
 * 修复创建分布式数据库和表时潜在的丢失元数据的风险。(**1.20.15**)
+* 修复异常检查引擎全局不按时间排序时，输出表缺少第一组和最后一组时间数据。(**1.20.16**)
+* 修复并发调用dropTable，getTables会导致crash的问题。(**1.20.16**)
+* 修复当发布节点host定义为localhost时，远程订阅无法取消问题。(**1.20.16**)
+* 修复使用nunique查询时报错：Immutable sub vector doesn't support method getDataSegment。(**1.20.16**)
+* `cutPoints` 在sql语句中使用结果有误(**1.20.16**)
+* 修复节点掉线后执行dropTable失败导致节点恢复后该表也无法被删除。(**1.20.16**)
 
-* 
 ### DolphinDB 插件
 
 * MySql插件
