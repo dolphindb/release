@@ -148,6 +148,13 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.16.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.16.zip) |
 
+版本号： 1.20.17
+
+发行日期： 2021-04-28
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.17.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.17.zip) |
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -346,7 +353,8 @@
 * 修复使用nunique查询时报错：Immutable sub vector doesn't support method getDataSegment。(**1.20.16**)
 * `cutPoints` 在sql语句中使用结果有误(**1.20.16**)
 * 修复节点掉线后执行dropTable失败导致节点恢复后该表也无法被删除。(**1.20.16**)
-
+* 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.20.17**)
+* 修复多层循环时，在内层循环使用break，会退出最外层循环。(**1.20.17**)
 ### DolphinDB 插件
 
 * MySql插件
