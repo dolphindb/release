@@ -99,6 +99,8 @@
 * temporalAdd,dailyAlignedBar,bar,wj,pwj 函数支持DURATION类型参数。(**1.30.7**)
 * keyedStreamTable支持多个key列。(**1.30.7**)
 * SQL提供interval关键字支持插值查询。(**1.30.7**)
+* `CrossSectionalEngine` 新增参数 lastBatchOnly。(**1.30.8**)
+* `createReactiveStateEngine` 增加了可选参数 keepOrder。(**1.30.8**)
 
 > 改进
 
@@ -130,7 +132,9 @@
 * 函数createCrossSectionalAggregator 改名为createCrossSectionalEngine，原名作为别名。(**1.30.6**)
 * maxConnections默认值改成512。(**1.30.7**)
 * createTimeSeriesAggregator 改名为createTimeSeriesEngine，原函数名作为alias。(**1.30.7**)
-
+* 针对多列宽表优化sql性能。(**1.30.8**)
+* Reactive state engine 支持指定多个keyColumn。(**1.30.8**)
+* CrossSectionalEngine 支持聚合和非聚合混用。(**1.30.8**)
 > Bug fixes:
 
 * 修复无法将一个带有SYMBOL类型字段的空表序列化到Python API的问题。(**1.30.1**)
@@ -168,7 +172,11 @@
 * 修复并发调用`dropTable`，`getTables`会导致crash的问题。(**1.30.7**)
 * 修复当发布节点host定义为localhost时，远程订阅无法取消问题。(**1.30.7**)
 * 修复使用`nunique`查询时报错：Immutable sub vector doesn't support method getDataSegment。(**1.30.7**)
-
+* 修复节点掉线后执行dropTable失败导致节点恢复后该表也无法被删除。(**1.30.8**)
+* cutPoints 在sql语句中使用结果有误。(**1.30.8**)
+* 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.30.8**)
+* 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.30.6 版本的修复代码引入。(**1.30.8**)
+* update分布式表失败时有几率导致在append数据时候server报告异常"appendCommittedVersion",此问题由1.30.6的分布式表支持update功能引入。(**1.30.8**)
 ### DolphinDB 插件
 
 * Python 插件
