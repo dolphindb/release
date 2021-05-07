@@ -72,6 +72,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.7.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.7_JIT.zip)
 
+版本号： 1.30.8
+
+发行日期： 2021-04-28
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.8_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.8_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -175,7 +185,7 @@
 * 修复节点掉线后执行dropTable失败导致节点恢复后该表也无法被删除。(**1.30.8**)
 * cutPoints 在sql语句中使用结果有误。(**1.30.8**)
 * 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.30.8**)
-* 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.30.6 版本的修复代码引入。(**1.30.8**)
+* 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.30.6 版本引入。(**1.30.8**)
 * update分布式表失败时有几率导致在append数据时候server报告异常"appendCommittedVersion",此问题由1.30.6的分布式表支持update功能引入。(**1.30.8**)
 ### DolphinDB 插件
 
