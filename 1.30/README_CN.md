@@ -82,6 +82,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.8.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.8_JIT.zip)
 
+版本号： 1.30.9
+
+发行日期： 2021-05-17
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.9.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.9_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.9_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.9.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.9_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -111,6 +121,10 @@
 * SQL提供interval关键字支持插值查询。(**1.30.7**)
 * `CrossSectionalEngine` 新增参数 lastBatchOnly。(**1.30.8**)
 * `createReactiveStateEngine` 增加了可选参数 keepOrder。(**1.30.8**)
+* 新增 `spearmanr`和`mutualInfo` 两个相关性的计算函数。	**(1.30.9)**
+* 新增函数createDailyTimeSeriesEngine，用于创建支持会话的时间序列聚合引擎。每个会话的结束点和开始点可以做一些特殊处理。 **(1.30.9)**
+* 增加函数getStreamTableFilterColumn用于取得流数据Filter列信息。**(1.30.9)**
+* 新增函数`varp` 和 `stdp`。**(1.30.9)**
 
 > 改进
 
@@ -145,6 +159,14 @@
 * 针对多列宽表优化sql性能。(**1.30.8**)
 * Reactive state engine 支持指定多个keyColumn。(**1.30.8**)
 * CrossSectionalEngine 支持聚合和非聚合混用。(**1.30.8**)
+* `skew`和`kurtosis`分布式的聚合函数支持校正偏差。	**(1.30.9)**
+* 检测同一个update语句对同一列重复更新，并给出异常提示。**(1.30.9)**
+* createTimeSeriesEngine支持timeColumn指定2列，比如 date 和 time 列。**(1.30.9)**
+* `sqlUpdate` 函数 where 条件中允许使用函数。**(1.30.9)**
+* `firstNot`和`lastNot`分布式聚合时支持指定第2个参数。**(1.30.9)**
+* `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	**(1.30.9)**
+* 写入数据若在分区之外没有成功写入，会在日志中记录warning。**(1.30.9)**
+* 高可用流表的引用变量被 undef后，仍然可以通过 `dropStreamTable` 删除该表。 **(1.30.9)**
 > Bug fixes:
 
 * 修复无法将一个带有SYMBOL类型字段的空表序列化到Python API的问题。(**1.30.1**)
@@ -187,6 +209,21 @@
 * 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.30.8**)
 * 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.30.6 版本引入。(**1.30.8**)
 * update分布式表失败时有几率导致在append数据时候server报告异常"appendCommittedVersion",此问题由1.30.6的分布式表支持update功能引入。(**1.30.8**)
+* createTimeSeriesEngine启用fill选项，当实时数据存在多个连续的空窗口时，计算结果有误。**(1.30.9)**
+* 设置系统定期回收策略的数据库，被删除后未及时清理回收策略。**(1.30.9)**
+* 一库多表，并发写入和删除不同分区，重启后查询报错symbol base is corrupted	**(1.30.9)**
+* 持续的重复下列操作：删除一个分布式表的分区，写入数据到这个分区，重启数据库进程，有几率出现元数据和数据不一致的情况。**(1.30.9)**
+* 多线程并发执行share语句共享一个表和查询一个共享表两个操作时，有几率导致系统奔溃。**(1.30.9)**
+* mcorr计算相关性时，如果某一列的数完全相同，应该返回空值。但由于判断浮点数是否为0的阈值设置不合理，导致结果变成0或非常接近于0的数。**(1.30.9)**
+* 在启用dataSync的情况下，使用loadTextEx导入大文件后，会导致redolog不释放。**(1.30.9)**
+* 异常检测引擎在指定多个keyColumn，计算复合表达式指标时，计算结果有误。**(1.30.9)**
+* 执行continue之后无法进入下一次循环。此问题从1.30.6版本引入。	**(1.30.9)**
+* 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 **(1.30.9)**
+* 高可用流表不指定keyColumn会crash。	**(1.30.9)**
+* 矩阵按布尔条件取列数据时结果不符合预期。**(1.30.9)**
+* dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。**(1.30.9)**
+* 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 **(1.30.9)**
+
 ### DolphinDB 插件
 
 * Python 插件

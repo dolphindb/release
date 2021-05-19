@@ -155,6 +155,14 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.17.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.17.zip) |
 
+版本号： 1.20.18
+
+发行日期： 2021-05-17
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.18.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.18.zip) |
+
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -193,7 +201,7 @@
 * 增加了新函数eqFloat，用于比较浮点数在保留指定位数时，是否相等。(**1.20.10**)
 * 新增配置参数remoteExecutors。该参数指定用于rpc调用的线程个数。当线程个数大于1时，可以提升系统整体的并发性能。(**1.20.10**)
 * 新增函数`getRequiredAPIVersion`，以配合API检查是否需要更新版本来兼容DolphinDB server。(**1.20.13**)
-
+* 增加函数`getStreamTableFilterColumn`用于取得流数据Filter列信息。**(1.20.18)**
 > 改进
 
 * 以下滑动窗口函数增加可选参数minPeriods：`mmed`,`mavg`,`mmin`,`mmax`,`mimin`,`mimax`,`msum`,`mstd`,`mvar`,`mmad`,`mmse`,`mpercentile`,`mcorr`,`mcovar`,`mwsum`,`mwavg`,`mbeta`。
@@ -276,7 +284,9 @@
 * 单个事务涉及的元数据大小从最大16MB增加到128MB，避免出现一些大表不能删除的情况。。(**1.20.15**)
 * maxConnections默认值改成512。(**1.20.16**) 
 * createTimeSeriesAggregator 改名为createTimeSeriesEngine，原函数名作为alias。(**1.20.16**) 
-
+* `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	**(1.20.18)**
+* 写入数据若在分区之外没有成功写入，会在日志中记录warning。**(1.20.18)**
+* 高可用流表的引用变量被 undef 后，仍然可以通过 `dropStreamTable` 删除该表。 **(1.20.18)**
 > Bug fixes:
 
 * 函数`mmax`和`mmin`的输入数据类型为bool，char或short，并且设置了可选参数minPeriods时，输出结果的第一个值若预期为空，实际结果与预期不符。(**1.20.1**)
@@ -351,10 +361,20 @@
 * 修复并发调用dropTable，getTables会导致crash的问题。(**1.20.16**)
 * 修复当发布节点host定义为localhost时，远程订阅无法取消问题。(**1.20.16**)
 * 修复使用nunique查询时报错：Immutable sub vector doesn't support method getDataSegment。(**1.20.16**)
-* `cutPoints` 在sql语句中使用结果有误(**1.20.16**)
+* `cutPoints` 在sql语句中使用结果有误。(**1.20.16**)
 * 修复节点掉线后执行dropTable失败导致节点恢复后该表也无法被删除。(**1.20.16**)
 * 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.20.17**)
-* 修复多层循环时，在内层循环使用break，会退出最外层循环。(**1.20.17**)
+* 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.20.15版本的修复代码引入。(**1.20.17**)
+* 设置系统定期回收策略的数据库，被删除后未及时清理回收策略。**(1.20.18)**
+* 持续的重复下列操作：删除一个分布式表的分区，写入数据到这个分区，重启数据库进程，有几率出现元数据和数据不一致的情况。**(1.20.18)**
+* 多线程并发执行share语句共享一个表和查询一个共享表两个操作时，有几率导致系统奔溃。**(1.20.18)**
+* mcorr计算相关性时，如果某一列的数完全相同，应该返回空值。但由于判断浮点数是否为0的阈值设置不合理，导致结果变成0或非常接近于0的数。**(1.20.18)**
+* 在启用dataSync的情况下，使用loadTextEx导入大文件后，会导致redolog不释放。**(1.20.18)**
+* 异常检测引擎在指定多个keyColumn，计算复合表达式指标时，计算结果有误。**(1.20.18)**
+* 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 **(1.20.18)**
+* dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。**(1.20.18)**
+* 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 **(1.20.18)**
+
 ### DolphinDB 插件
 
 * MySql插件
