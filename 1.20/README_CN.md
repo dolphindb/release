@@ -162,6 +162,12 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.18.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.18.zip) |
 
+版本号： 1.20.19
+
+发行日期： 2021-05-31
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.19.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.19.zip) |
 
 > 新功能
 
@@ -287,6 +293,8 @@
 * `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	**(1.20.18)**
 * 写入数据若在分区之外没有成功写入，会在日志中记录warning。**(1.20.18)**
 * 高可用流表的引用变量被 undef 后，仍然可以通过 `dropStreamTable` 删除该表。 **(1.20.18)**
+* 异常检测引擎 outputTable 的时间列与dummyTable不一致时抛出异常提示。**(1.20.19)**
+  
 > Bug fixes:
 
 * 函数`mmax`和`mmin`的输入数据类型为bool，char或short，并且设置了可选参数minPeriods时，输出结果的第一个值若预期为空，实际结果与预期不符。(**1.20.1**)
@@ -374,7 +382,10 @@
 * 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 **(1.20.18)**
 * dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。**(1.20.18)**
 * 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 **(1.20.18)**
-
+* 修复当表达式结果为NULL时，逻辑判断默认为true的问题。**(1.20.19)**
+* 修复流数据高可用切换leader后接受不到数据。**(1.20.19)**
+* 修复当rand(uplimit, n)的uplimit超过INT_MAX时，产生的随机数分布不是均匀的。**(1.20.19)**
+* 修复`createTimeSeriesEngine`指定updateTime，不指定keyColumn时，最后一批数据时间窗口长度未超过updateTime，经过2*updateTime其仍未强制触发计算。**(1.20.19)**
 ### DolphinDB 插件
 
 * MySql插件
