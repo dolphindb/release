@@ -92,6 +92,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.9.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.9_JIT.zip)
 
+版本号： 1.30.10
+
+发行日期： 2021-05-31
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.10.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.10_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.10_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.10.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.10_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -125,6 +135,10 @@
 * 新增函数createDailyTimeSeriesEngine，用于创建支持会话的时间序列聚合引擎。每个会话的结束点和开始点可以做一些特殊处理。 **(1.30.9)**
 * 增加函数getStreamTableFilterColumn用于取得流数据Filter列信息。**(1.30.9)**
 * 新增函数`varp` 和 `stdp`。**(1.30.9)**
+* 支持实时流数据join,新增函数`createAsofJoinEngine` 和 `appendForJoin`。**(1.30.10)**
+* 增加`getConnections`函数，获取节点当前所有连接信息。**(1.30.10)**
+* 增加`interval`函数支持在指定的范围内进行插值。**(1.30.10)**
+* 增加高阶函数`unifiedCall`，将函数的参数集以tuple方式传入。**(1.30.10)**
 
 > 改进
 
@@ -167,6 +181,13 @@
 * `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	**(1.30.9)**
 * 写入数据若在分区之外没有成功写入，会在日志中记录warning。**(1.30.9)**
 * 高可用流表的引用变量被 undef后，仍然可以通过 `dropStreamTable` 删除该表。 **(1.30.9)**
+* `haStreamTable`支持多个keyColumn。**(1.30.10)**
+* `createTimeSeriesEngine`、`createDailyTimeSeriesEngine`、`createCrossSectionalEngine`、`createAnomalyDetectionEngine`、`createSessionWindowEngine`的metrics参数支持tuple。**(1.30.10)**
+* 增加一个选项，在`sqlUpdate`时，可以不使用hardlink，新增选项名称为 useHardLink。**(1.30.10)**
+* 优化ContextBy limit的性能。**(1.30.10)**
+* `TimeSeriesEngine` 和 `dailyTimeSeriesEngine` 支持指标指定各自的fill方法。**(1.30.10)**
+* 异常检测引擎 outputTable 的时间列与dummyTable不一致时抛出异常提示。**(1.30.10)**
+
 > Bug fixes:
 
 * 修复无法将一个带有SYMBOL类型字段的空表序列化到Python API的问题。(**1.30.1**)
@@ -223,6 +244,12 @@
 * 矩阵按布尔条件取列数据时结果不符合预期。**(1.30.9)**
 * dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。**(1.30.9)**
 * 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 **(1.30.9)**
+* 修复当表达式结果为NULL时，逻辑判断默认为true的问题。**(1.30.10)**
+* 修复时序聚合引擎，聚合函数嵌套序列相关函数导致数据错误，比如min(next(voltage))。**(1.30.10)**
+* 修复流数据计算引擎写入乱序数据导致计算错误，现对乱序数据做忽略处理。**(1.30.10)**
+* 修复流数据高可用切换leader后接受不到数据。**(1.30.10)**
+* 修复当rand(uplimit, n)的uplimit超过INT_MAX时，产生的随机数分布不是均匀的。**(1.30.10)**
+* 修复`createTimeSeriesEngine`指定updateTime，不指定keyColumn时，最后一批数据时间窗口长度未超过updateTime，经过2*updateTime其仍未强制触发计算。**(1.30.10)**
 
 ### DolphinDB 插件
 
