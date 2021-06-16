@@ -102,6 +102,17 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.10.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.10_JIT.zip)
 
+版本号： 1.30.11
+
+发行日期： 2021-06-15
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.11.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.11_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.11_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.11.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.11_JIT.zip)
+
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -131,14 +142,18 @@
 * SQL提供interval关键字支持插值查询。(**1.30.7**)
 * `CrossSectionalEngine` 新增参数 lastBatchOnly。(**1.30.8**)
 * `createReactiveStateEngine` 增加了可选参数 keepOrder。(**1.30.8**)
-* 新增 `spearmanr`和`mutualInfo` 两个相关性的计算函数。	**(1.30.9)**
-* 新增函数createDailyTimeSeriesEngine，用于创建支持会话的时间序列聚合引擎。每个会话的结束点和开始点可以做一些特殊处理。 **(1.30.9)**
-* 增加函数getStreamTableFilterColumn用于取得流数据Filter列信息。**(1.30.9)**
-* 新增函数`varp` 和 `stdp`。**(1.30.9)**
+* 新增 `spearmanr`和`mutualInfo` 两个相关性的计算函数。	(**1.30.9**)
+* 新增函数createDailyTimeSeriesEngine，用于创建支持会话的时间序列聚合引擎。每个会话的结束点和开始点可以做一些特殊处理。 (**1.30.9**)
+* 增加函数getStreamTableFilterColumn用于取得流数据Filter列信息。(**1.30.9**)
+* 新增函数`varp` 和 `stdp`。(**1.30.9**)
 * 支持实时流数据join,新增函数`createAsofJoinEngine` 和 `appendForJoin`。**(1.30.10)**
 * 增加`getConnections`函数，获取节点当前所有连接信息。**(1.30.10)**
 * 增加`interval`函数支持在指定的范围内进行插值。**(1.30.10)**
 * 增加高阶函数`unifiedCall`，将函数的参数集以tuple方式传入。**(1.30.10)**
+* 新增函数`denseRank`,`rowDenseRank`。(**1.30.11**)
+* 替换license支持不停机在线更新。(**1.30.11**)
+* Agent可自动启动数据节点，可在数据节点意外关闭时把它重启，controller.cfg中新增配置项`datanodeRestartInterval`。(**1.30.11**)
+* 内存表字段中有支持超长字符串\(blob\)。(**1.30.11**)
 
 > 改进
 
@@ -173,20 +188,25 @@
 * 针对多列宽表优化sql性能。(**1.30.8**)
 * Reactive state engine 支持指定多个keyColumn。(**1.30.8**)
 * CrossSectionalEngine 支持聚合和非聚合混用。(**1.30.8**)
-* `skew`和`kurtosis`分布式的聚合函数支持校正偏差。	**(1.30.9)**
-* 检测同一个update语句对同一列重复更新，并给出异常提示。**(1.30.9)**
-* createTimeSeriesEngine支持timeColumn指定2列，比如 date 和 time 列。**(1.30.9)**
-* `sqlUpdate` 函数 where 条件中允许使用函数。**(1.30.9)**
-* `firstNot`和`lastNot`分布式聚合时支持指定第2个参数。**(1.30.9)**
-* `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	**(1.30.9)**
-* 写入数据若在分区之外没有成功写入，会在日志中记录warning。**(1.30.9)**
-* 高可用流表的引用变量被 undef后，仍然可以通过 `dropStreamTable` 删除该表。 **(1.30.9)**
+* `skew`和`kurtosis`分布式的聚合函数支持校正偏差。	(**1.30.9**)
+* 检测同一个update语句对同一列重复更新，并给出异常提示。(**1.30.9**)
+* createTimeSeriesEngine支持timeColumn指定2列，比如 date 和 time 列。(**1.30.9**)
+* `sqlUpdate` 函数 where 条件中允许使用函数。(**1.30.9**)
+* `firstNot`和`lastNot`分布式聚合时支持指定第2个参数。(**1.30.9**)
+* `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	(**1.30.9**)
+* 写入数据若在分区之外没有成功写入，会在日志中记录warning。(**1.30.9**)
+* 高可用流表的引用变量被 undef后，仍然可以通过 `dropStreamTable` 删除该表。 (**1.30.9**)
 * `haStreamTable`支持多个keyColumn。**(1.30.10)**
 * `createTimeSeriesEngine`、`createDailyTimeSeriesEngine`、`createCrossSectionalEngine`、`createAnomalyDetectionEngine`、`createSessionWindowEngine`的metrics参数支持tuple。**(1.30.10)**
 * 增加一个选项，在`sqlUpdate`时，可以不使用hardlink，新增选项名称为 useHardLink。**(1.30.10)**
 * 优化ContextBy limit的性能。**(1.30.10)**
 * `TimeSeriesEngine` 和 `dailyTimeSeriesEngine` 支持指标指定各自的fill方法。**(1.30.10)**
 * 异常检测引擎 outputTable 的时间列与dummyTable不一致时抛出异常提示。**(1.30.10)**
+* 优化 `skew` , `kurtosis`函数在timeSeriesEngine使用时性能。(**1.30.11**)
+* 优化timeSeriesEngine在useSystemTime=true时的性能。(**1.30.11**)
+* `createTimeSeriesEngine`, `createCrossSectional`,`createDailyTimeSeriesEngine`, `AnomalyDetectionEngine`, `SessionWindowEngine` 流数据引擎支持输出结果表为分布式表。(**1.30.11**)
+* CrossSectionalEngine 中加一个可选参数`contextbycolumn`分组字段，如果设置了，按照分组字段来做计算。(**1.30.11**)
+* server log 中重新规划输出日志，将一部分事务处理细节信息归入DEBUG类型。避免日志增长过快。(**1.30.11**)
 
 > Bug fixes:
 
@@ -230,26 +250,37 @@
 * 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.30.8**)
 * 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.30.6 版本引入。(**1.30.8**)
 * update分布式表失败时有几率导致在append数据时候server报告异常"appendCommittedVersion",此问题由1.30.6的分布式表支持update功能引入。(**1.30.8**)
-* createTimeSeriesEngine启用fill选项，当实时数据存在多个连续的空窗口时，计算结果有误。**(1.30.9)**
-* 设置系统定期回收策略的数据库，被删除后未及时清理回收策略。**(1.30.9)**
-* 一库多表，并发写入和删除不同分区，重启后查询报错symbol base is corrupted	**(1.30.9)**
-* 持续的重复下列操作：删除一个分布式表的分区，写入数据到这个分区，重启数据库进程，有几率出现元数据和数据不一致的情况。**(1.30.9)**
-* 多线程并发执行share语句共享一个表和查询一个共享表两个操作时，有几率导致系统奔溃。**(1.30.9)**
-* mcorr计算相关性时，如果某一列的数完全相同，应该返回空值。但由于判断浮点数是否为0的阈值设置不合理，导致结果变成0或非常接近于0的数。**(1.30.9)**
-* 在启用dataSync的情况下，使用loadTextEx导入大文件后，会导致redolog不释放。**(1.30.9)**
-* 异常检测引擎在指定多个keyColumn，计算复合表达式指标时，计算结果有误。**(1.30.9)**
-* 执行continue之后无法进入下一次循环。此问题从1.30.6版本引入。	**(1.30.9)**
-* 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 **(1.30.9)**
-* 高可用流表不指定keyColumn会crash。	**(1.30.9)**
-* 矩阵按布尔条件取列数据时结果不符合预期。**(1.30.9)**
-* dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。**(1.30.9)**
-* 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 **(1.30.9)**
+* createTimeSeriesEngine启用fill选项，当实时数据存在多个连续的空窗口时，计算结果有误。(**1.30.9**)
+* 设置系统定期回收策略的数据库，被删除后未及时清理回收策略。(**1.30.9**)
+* 一库多表，并发写入和删除不同分区，重启后查询报错symbol base is corrupted	(**1.30.9**)
+* 持续的重复下列操作：删除一个分布式表的分区，写入数据到这个分区，重启数据库进程，有几率出现元数据和数据不一致的情况。(**1.30.9**)
+* 多线程并发执行share语句共享一个表和查询一个共享表两个操作时，有几率导致系统奔溃。(**1.30.9**)
+* mcorr计算相关性时，如果某一列的数完全相同，应该返回空值。但由于判断浮点数是否为0的阈值设置不合理，导致结果变成0或非常接近于0的数。(**1.30.9**)
+* 在启用dataSync的情况下，使用loadTextEx导入大文件后，会导致redolog不释放。(**1.30.9**)
+* 异常检测引擎在指定多个keyColumn，计算复合表达式指标时，计算结果有误。(**1.30.9**)
+* 执行continue之后无法进入下一次循环。此问题从1.30.6版本引入。	(**1.30.9**)
+* 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 (**1.30.9**)
+* 高可用流表不指定keyColumn会crash。	(**1.30.9**)
+* 矩阵按布尔条件取列数据时结果不符合预期。(**1.30.9**)
+* dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。(**1.30.9**)
+* 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 (**1.30.9**)
 * 修复当表达式结果为NULL时，逻辑判断默认为true的问题。**(1.30.10)**
 * 修复时序聚合引擎，聚合函数嵌套序列相关函数导致数据错误，比如min(next(voltage))。**(1.30.10)**
 * 修复流数据计算引擎写入乱序数据导致计算错误，现对乱序数据做忽略处理。**(1.30.10)**
 * 修复流数据高可用切换leader后接受不到数据。**(1.30.10)**
 * 修复当rand(uplimit, n)的uplimit超过INT_MAX时，产生的随机数分布不是均匀的。**(1.30.10)**
 * 修复`createTimeSeriesEngine`指定updateTime，不指定keyColumn时，最后一批数据时间窗口长度未超过updateTime，经过2*updateTime其仍未强制触发计算。**(1.30.10)**
+* dropStreamTable 删除不存在的表crash，此问题由1.30.9的修复代码引入。(**1.30.11**)
+
+* 通过 insert into 方式向 CrossSectionalEngine 写入长度不一致的向量会引发crash。(**1.30.11**)
+* addColumn后多次插入数据，查询会报错 "The source vector has been shortened and the sub vector is not valid any more" 。(**1.30.11**)
+* 更新空的维度表报错: "Failed to retrieve the size and path for tablet chunk dfs://dbName/\_\_tbName/tbName"。(**1.30.11**)
+* 集群中的维度表和分布式表做关联报错 : "getFileBlocksMeta on path '/dbpath/tbName.tbl' failed, reason: path does not exist"。(**1.30.11**)
+* C++标准库string的实现存在缺陷，当节点内存满负荷运转时，使用字符串(String)会导致数据节点crash，通过重新实现string修复。(**1.30.11**)
+* 分区被完全删除后，first和last取值到长度为1的NULL向量，预期为空。(**1.30.11**)
+* 节点重启后重新定义流数据持久化时报告"contain invalid data"异常。(**1.30.11**)
+* dropPartition 时报错："Failed to find physical table from Table\_Name when delete tablet chunk"。(**1.30.11**) 
+* 对新建的维度表做upsert!时报错。(**1.30.11**)
 
 ### DolphinDB 插件
 
@@ -283,3 +314,7 @@
     * 连接时进行Server版本的兼容性检查(**1.30.0.6**)
     * `tableAppender`函数提供写入数据时自动转换时间类型功能(**1.30.0.6**)
     * 取消Python API安装时pandas版本必须低于1.0的限制(**1.30.0.7**)
+    * `DBConnectionPool`新增了`runTaskAsyn`函数，实现并行异步任务调用接口简化(**1.30.0.8**)
+    * 修复update函数where条件不生效的问题(**1.30.0.8**)
+    * 修复使用Python API异步追加数据时，客户端会crash的问题(**1.30.0.8**)
+    * 修复使用Python API两次upload同一个名字的named object, 报错该named object无法找到的问题(**1.30.0.8**)
