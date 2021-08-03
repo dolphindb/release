@@ -177,6 +177,17 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.20.zip) |
 
 
+版本号： 1.20.21
+
+发行日期： 2021-07-31
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.21.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.21_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.21.zip) |
+
+
+
 > 新功能
 
 * JIT中，允许一个函数的参数是另一个函数（用户自定义函数，lambda函数，部分应用或动态函数）。
@@ -305,6 +316,11 @@
 * 替换license支持不停机在线更新。(**1.20.20**)
 * Agent可自动启动数据节点，可在数据节点意外关闭时把它重启，controller.cfg中新增配置项`datanodeRestartInterval`。(**1.20.20**)
 * server log 中重新规划输出日志，将一部分事务处理细节信息归入DEBUG类型。避免日志增长过快。(**1.20.20**)
+* 与标准SQL兼容，当select子句中包含的列与分组字段（group by）重名时，不再抛出异常。(**1.20.21**)
+* 取消API和GUI提交脚本长度不能超过64K的限制。(**1.20.21**)
+* `window join`的聚合指标支持以元组的方式输入，也即元组的每一个元素表示一个聚合指标。(**1.20.21**)
+* `setStreamTableFilterColumn`支持高可用流表。(**1.20.21**)
+* `addVolumes`函数增加了校验，不允许在控制节点上执行。(**1.20.21**)
 
 > Bug fixes:
 
@@ -407,6 +423,23 @@
 * 对ej关联的表做update操作时报错：In a SQL update statement, the left table of a join must be the base table
 * 节点重启后重新定义流数据持久化时报告"contain invalid data"异常。(**1.20.20**)
 * dropPartition 时报错："Failed to find physical table from Table\_Name when delete tablet chunk"。(**1.20.20**) 
+* 系统参数`localExecutors`设置为0时，在执行cancelJob等功能时，导致系统崩溃. (**1.20.21**)
+* 修复分布式表在反复执行删除、更新、新增和节点重启操作时，可能出现的下列状况：（1）The symbol column xxx  or the associated symbol base [] is corrupted. （2）Failed to load column. Expected xxx rows, but actually loaded xxx rows. （3）sym.col contains \(xxx rows\) than requested \(xxx rows\).\] （4）Invalid symbol file. （5）某些分区只有部分副本汇报成功。（6）节点重启时日志中出现错误 Invalid log entry type，导致无法重启。(**1.20.21**)
+* 修复了几个导致部分chunk一直处于recovering（恢复中）状态的场景。(**1.20.21**)
+* SQL语句 exec count\(\*\) from t（t为分布式表）被多个线程同时执行时，某些线程产生的结果可能是一个向量（分别记录每个分区的记录数）。正确的结果应该是一个标量（总的记录数量）。(**1.20.21**)
+* SQL语句分组计算（group by）时，如果系统采用了哈希算法，对symbol类型的字段使用count函数，计算结果可能不正确，空值会当作非空值计数。(**1.20.21**)
+* 使用SQL Delete语句对一个包含字符串列（Symbol类型的列没有影响）的大内存表（通常几千万行以上）执行删除操作时（通过where语句指定过滤条件)，有概率出现系统崩溃. (**1.20.21**)
+* 分布式表（左表）与未分区内存表（右表）关联（join），连接的列为分区列，where子句中包含了非分区列，而且该列同时出现在两个表中，计算结果不正确。(**1.20.21**)
+* 未分区内存表（左表）和分布式表（右表）关联（join），且分组子句（group by）中包含了分区列，计算结果不正确。(**1.20.21**)
+* 在集群模式下，分布式表和维度表关联（join），计算结果不正确。(**1.20.21**)
+* 用api往高可用流表写入数据，反复切换流表raft组中的leader，有概率出现数据丢失。(**1.20.21**)
+* `dropStreamTable`不能删除内存中的流数据表。(**1.20.21**)
+* 持久化元代码（Meta Code）时没有持久化包含的自定义函数。导致加载持久化的元代码时，可能出现系统崩溃（找不到自定义函数导致）. (**1.20.21**)
+* for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.20.21**)
+* `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.20.21**)
+* `gram`函数多次执行，出现计算结果有误的情况。(**1.20.21**)
+
+
 ### DolphinDB 插件
 
 * MySql插件
