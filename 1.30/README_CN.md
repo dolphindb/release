@@ -112,6 +112,15 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.11.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.11_JIT.zip)
 
+版本号： 1.30.12
+
+发行日期： 2021-07-31
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.12.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.12_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.12_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.12.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.12_JIT.zip)
 
 > 新功能
 
@@ -154,6 +163,10 @@
 * 替换license支持不停机在线更新。(**1.30.11**)
 * Agent可自动启动数据节点，可在数据节点意外关闭时把它重启，controller.cfg中新增配置项`datanodeRestartInterval`。(**1.30.11**)
 * 内存表字段中支持超长字符串\(blob\)。(**1.30.11**)
+* 提供`isDataNodeInitialized`函数用于查看数据节点是否已经完成初始化。(**1.30.12**)
+* 函数`replay`回放历史数据时，支持一种新的模式：即多个schema相同的数据源按照事件的时间顺序回放到同一个流表. (**1.30.12**)
+* 新增函数`distance`计算两个用经纬度表示的点之间的距离。(**1.30.12**)
+* 流数据订阅端的计算引擎支持高可用。(**1.30.12**)
 
 > 改进
 
@@ -207,6 +220,12 @@
 * `createTimeSeriesEngine`, `createCrossSectional`,`createDailyTimeSeriesEngine`, `AnomalyDetectionEngine`, `SessionWindowEngine` 流数据引擎支持输出结果表为分布式表。(**1.30.11**)
 * CrossSectionalEngine 中加一个可选参数`contextbycolumn`分组字段，如果设置了，按照分组字段来做计算。(**1.30.11**)
 * server log 中重新规划输出日志，将一部分事务处理细节信息归入DEBUG类型。避免日志增长过快。(**1.30.11**)
+* 与标准SQL兼容，当select子句中包含的列与分组字段（group by）重名时，不再抛出异常。(**1.30.12**)
+* 取消API和GUI提交脚本长度不能超过64K的限制。(**1.30.12**)
+* `window join`的聚合指标支持以元组的方式输入，也即元组的每一个元素表示一个聚合指标。(**1.30.12**)
+* `createCrossSectionalEngine`（横截面引擎），收到的数据中出现乱序时则丢弃乱序数据。(**1.30.12**)
+* `setStreamTableFilterColumn`支持高可用流表。(**1.30.12**)
+* `addVolumes`函数增加了校验，不允许在控制节点上执行。
 
 > Bug fixes:
 
@@ -271,7 +290,6 @@
 * 修复当rand(uplimit, n)的uplimit超过INT_MAX时，产生的随机数分布不是均匀的。**(1.30.10)**
 * 修复`createTimeSeriesEngine`指定updateTime，不指定keyColumn时，最后一批数据时间窗口长度未超过updateTime，经过2*updateTime其仍未强制触发计算。**(1.30.10)**
 * dropStreamTable 删除不存在的表crash，此问题由1.30.9的修复代码引入。(**1.30.11**)
-
 * 通过 insert into 方式向 CrossSectionalEngine 写入长度不一致的向量会引发crash。(**1.30.11**)
 * addColumn后多次插入数据，查询会报错 "The source vector has been shortened and the sub vector is not valid any more" 。(**1.30.11**)
 * 更新空的维度表报错: "Failed to retrieve the size and path for tablet chunk dfs://dbName/\_\_tbName/tbName"。(**1.30.11**)
@@ -281,12 +299,39 @@
 * 节点重启后重新定义流数据持久化时报告"contain invalid data"异常。(**1.30.11**)
 * dropPartition 时报错："Failed to find physical table from Table\_Name when delete tablet chunk"。(**1.30.11**) 
 * 对新建的维度表做upsert!时报错。(**1.30.11**)
+* 系统参数`localExecutors`设置为0时，在执行cancelJob等功能时，导致系统崩溃. (**1.30.12**)
+* 修复分布式表在反复执行删除、更新、新增和节点重启操作时，可能出现的下列状况：（1）The symbol column xxx  or the associated symbol base [] is corrupted. （2）Failed to load column. Expected xxx rows, but actually loaded xxx rows. （3）sym.col contains \(xxx rows\) than requested \(xxx rows\).\] （4）Invalid symbol file. （5）某些分区只有部分副本汇报成功。（6）节点重启时日志中出现错误 Invalid log entry type，导致无法重启。
+* SQL语句 exec count\(\*\) from t（t为分布式表）被多个线程同时执行时，某些线程产生的结果可能是一个向量（记录每个分区的记录数）。正确的结果应该是一个标量（总的记录数量）。(**1.30.12**)
+* SQL语句分组计算（group by）时，如果系统采用了哈希算法，对symbol类型的字段使用count函数，计算结果可能不正确，空值会当作非空值计数。(**1.30.12**)
+* 使用SQL Delete语句对一个包含字符串列（Symbol类型的列没有影响）的大内存表（通常几千万行以上）执行删除操作时（通过where语句指定过滤条件)，有概率出现系统崩溃. (**1.30.12**)
+* 集群正常情况下，数据节点相继offline再online后导致chunk一直处于recovery状态。(**1.30.12**)
+* 当datanode上版本一致，且比master高时，由于写入数据，事务决议和chunk recovery操作上的冲突导致的master上的chunk一直处于recovering状态。(**1.30.12**)
+* 内存表与分区表join, 连接列为非分区列，分区表为左表，且查询where子句包含连接列时，输出结果不正确。(**1.30.12**)
+* 分布式表join时，当值分区列作为第一个连接列时，会修改外部的matchingCol. (**1.30.12**)
+* ej时连接列是分区列，查询的where条件包含非分区列，输出结果不正确。(**1.30.12**)
+* 左表内存表和右表分布式表join时，查询分组子句group by包含分区列，输出结果不正确。(**1.30.12**)
+* 版本1.30.6中引入的会话窗口引擎（`createSessionWindowEngine`）计算有误，输出结果不正确。(**1.30.12**)
+* replay函数回放历史数据到共享的输出表时，应该在append数据时对数据表加锁，但实际没有加锁。如果有多个任务都在往共享表append数据，可能导致节点崩溃. (**1.30.12**)
+* 往异常检测引擎输入乱序数据时可能发生计算的死循环，导致执行getStreamEngineStat等其它功能时卡住。(**1.30.12**)
+* 用api往高可用流表写入数据，反复切换流表raft组中的leader，有概率出现数据丢失。(**1.30.12**)
+* `dropStreamTable`不能删除内存中的流数据表。(**1.30.12**)
+* 先append数据到右表，再append数据到左表，且时间类型的rawType为int时，`AsofJoinEngine`重复执行，输出错误结果。(**1.30.12**)
+* 持久化元代码（Meta Code）时没有持久化包含的自定义函数。导致加载持久化的元代码时，可能出现系统崩溃（找不到自定义函数导致）. (**1.30.12**)
+* for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.30.12**)
+* `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.30.12**)
+* `gram`函数多次执行，出现计算结果有误的情况。(**1.30.12**)
+
 
 ### DolphinDB 插件
 
 * Python 插件
 
-    * 支持在DolphinDB中直接调用Python库。
+    * 支持在DolphinDB中直接调用Python库。    
+
+* ODBC 插件
+
+    * `mysql::load`中添了allowEmptyTable参数，可以设置是否返回一个空表。
+    * odbc插件导出数据到mysql时，对\ 和 '进行转义。
 
 ### 客户端工具
 
@@ -307,14 +352,26 @@
     ```
     pip3 install dolphindb==1.30.0.5
     ```
-    * 提供partitionTableAppender支持向分布式表并发写入数据 (**1.30.0.6**)
-    * run函数提供fetchSize参数，支持每次读取fetchSize行记录 (**1.30.0.6**)
-    * 流数据订阅时支持批量处理 (**1.30.0.6**)
-    * run执行完毕后自动清除本会话内生成的变量 (**1.30.0.6**)
-    * 连接时进行Server版本的兼容性检查(**1.30.0.6**)
-    * `tableAppender`函数提供写入数据时自动转换时间类型功能(**1.30.0.6**)
-    * 取消Python API安装时pandas版本必须低于1.0的限制(**1.30.0.7**)
-    * `DBConnectionPool`新增了`runTaskAsyn`函数，实现并行异步任务调用接口简化(**1.30.0.8**)
-    * 修复update函数where条件不生效的问题(**1.30.0.8**)
-    * 修复使用Python API异步追加数据时，客户端会crash的问题(**1.30.0.8**)
-    * 修复使用Python API两次upload同一个名字的named object, 报错该named object无法找到的问题(**1.30.0.8**)
+    * 提供partitionTableAppender支持向分布式表并发写入数据。(**1.30.0.6**)
+    * run函数提供fetchSize参数，支持每次读取fetchSize行记录。(**1.30.0.6**)
+    * 流数据订阅时支持批量处理。(**1.30.0.6**)
+    * run执行完毕后自动清除本会话内生成的变量。(**1.30.0.6**)
+    * 连接时进行Server版本的兼容性检查。(**1.30.0.6**)
+    * `tableAppender`函数提供写入数据时自动转换时间类型功能。(**1.30.0.6**)
+    * 取消Python API安装时pandas版本必须低于1.0的限制。(**1.30.0.7**)
+    * `DBConnectionPool`新增了`runTaskAsyn`函数，实现并行异步任务调用接口简化。(**1.30.0.8**)
+    * 修复update函数where条件不生效的问题。(**1.30.0.8**)
+    * 修复使用Python API异步追加数据时，客户端会crash的问题。(**1.30.0.8**)
+    * 修复使用Python API两次upload同一个名字的named object, 报错该named object无法找到的问题。(**1.30.0.8**)
+    * orca: 添加`rolling rank`函数。(**1.30.0.9**)
+    * orca: `rolling mean`增加支持加权平均值功能。(**1.30.0.9**)
+    * orca: 新增函数orca.read_in_memory_table: 支持读取DolphinDB内存表。(**1.30.0.9**)
+    * orca: 新增orca.panel函数。(**1.30.0.9**)
+    * orca: 修复window join中where失效的问题。(**1.30.0.9**)
+    * orca: 移除groupby中lazy参数，groupby只支持以lazy方式进行计算。(**1.30.0.9**)
+    * orca: 修复orca.panel函数。(**1.30.0.10**)
+    
+* C++ API
+    * 新增batchTableWriter (**1.30.12** )
+    
+    
