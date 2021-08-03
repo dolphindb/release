@@ -225,7 +225,7 @@
 * `window join`的聚合指标支持以元组的方式输入，也即元组的每一个元素表示一个聚合指标。(**1.30.12**)
 * `createCrossSectionalEngine`（横截面引擎），收到的数据中出现乱序时则丢弃乱序数据。(**1.30.12**)
 * `setStreamTableFilterColumn`支持高可用流表。(**1.30.12**)
-* `addVolumes`函数增加了校验，不允许在控制节点上执行。
+* `addVolumes`函数增加了校验，不允许在控制节点上执行。(**1.30.12**)
 
 > Bug fixes:
 
@@ -300,22 +300,19 @@
 * dropPartition 时报错："Failed to find physical table from Table\_Name when delete tablet chunk"。(**1.30.11**) 
 * 对新建的维度表做upsert!时报错。(**1.30.11**)
 * 系统参数`localExecutors`设置为0时，在执行cancelJob等功能时，导致系统崩溃. (**1.30.12**)
-* 修复分布式表在反复执行删除、更新、新增和节点重启操作时，可能出现的下列状况：（1）The symbol column xxx  or the associated symbol base [] is corrupted. （2）Failed to load column. Expected xxx rows, but actually loaded xxx rows. （3）sym.col contains \(xxx rows\) than requested \(xxx rows\).\] （4）Invalid symbol file. （5）某些分区只有部分副本汇报成功。（6）节点重启时日志中出现错误 Invalid log entry type，导致无法重启。
-* SQL语句 exec count\(\*\) from t（t为分布式表）被多个线程同时执行时，某些线程产生的结果可能是一个向量（记录每个分区的记录数）。正确的结果应该是一个标量（总的记录数量）。(**1.30.12**)
+* 修复分布式表在反复执行删除、更新、新增和节点重启操作时，可能出现的下列状况：（1）The symbol column xxx  or the associated symbol base [] is corrupted. （2）Failed to load column. Expected xxx rows, but actually loaded xxx rows. （3）sym.col contains \(xxx rows\) than requested \(xxx rows\).\] （4）Invalid symbol file. （5）某些分区只有部分副本汇报成功。（6）节点重启时日志中出现错误 Invalid log entry type，导致无法重启。(**1.30.12**)
+* 修复了几个导致部分chunk一直处于recovering（恢复中）状态的场景。(**1.30.12**)
+* SQL语句 exec count\(\*\) from t（t为分布式表）被多个线程同时执行时，某些线程产生的结果可能是一个向量（分别记录每个分区的记录数）。正确的结果应该是一个标量（总的记录数量）。(**1.30.12**)
 * SQL语句分组计算（group by）时，如果系统采用了哈希算法，对symbol类型的字段使用count函数，计算结果可能不正确，空值会当作非空值计数。(**1.30.12**)
 * 使用SQL Delete语句对一个包含字符串列（Symbol类型的列没有影响）的大内存表（通常几千万行以上）执行删除操作时（通过where语句指定过滤条件)，有概率出现系统崩溃. (**1.30.12**)
-* 集群正常情况下，数据节点相继offline再online后导致chunk一直处于recovery状态。(**1.30.12**)
-* 当datanode上版本一致，且比master高时，由于写入数据，事务决议和chunk recovery操作上的冲突导致的master上的chunk一直处于recovering状态。(**1.30.12**)
-* 内存表与分区表join, 连接列为非分区列，分区表为左表，且查询where子句包含连接列时，输出结果不正确。(**1.30.12**)
-* 分布式表join时，当值分区列作为第一个连接列时，会修改外部的matchingCol. (**1.30.12**)
-* ej时连接列是分区列，查询的where条件包含非分区列，输出结果不正确。(**1.30.12**)
-* 左表内存表和右表分布式表join时，查询分组子句group by包含分区列，输出结果不正确。(**1.30.12**)
+* 分布式表（左表）与未分区内存表（右表）关联（join），连接的列为分区列，where子句中包含了非分区列，而且该列同时出现在两个表中，计算结果不正确。(**1.30.12**)
+* 未分区内存表（左表）和分布式表（右表）关联（join），且分组子句（group by）中包含了分区列，计算结果不正确。(**1.30.12**)
 * 版本1.30.6中引入的会话窗口引擎（`createSessionWindowEngine`）计算有误，输出结果不正确。(**1.30.12**)
 * replay函数回放历史数据到共享的输出表时，应该在append数据时对数据表加锁，但实际没有加锁。如果有多个任务都在往共享表append数据，可能导致节点崩溃. (**1.30.12**)
 * 往异常检测引擎输入乱序数据时可能发生计算的死循环，导致执行getStreamEngineStat等其它功能时卡住。(**1.30.12**)
 * 用api往高可用流表写入数据，反复切换流表raft组中的leader，有概率出现数据丢失。(**1.30.12**)
 * `dropStreamTable`不能删除内存中的流数据表。(**1.30.12**)
-* 先append数据到右表，再append数据到左表，且时间类型的rawType为int时，`AsofJoinEngine`重复执行，输出错误结果。(**1.30.12**)
+* 先append数据到右表，再append数据到左表，且时间类型为4字节类型时（例如datetime和time类型），`AsofJoinEngine`可能输出错误结果。(**1.30.12**)
 * 持久化元代码（Meta Code）时没有持久化包含的自定义函数。导致加载持久化的元代码时，可能出现系统崩溃（找不到自定义函数导致）. (**1.30.12**)
 * for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.30.12**)
 * `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.30.12**)
@@ -330,8 +327,11 @@
 
 * ODBC 插件
 
-    * `mysql::load`中添了allowEmptyTable参数，可以设置是否返回一个空表。
-    * odbc插件导出数据到mysql时，对\ 和 '进行转义。
+    * odbc插件导出数据到mysql时，对\ 和 '进行转义。(**1.30.12**)
+
+* MySQL 插件
+    * `mysql::load`中添了allowEmptyTable参数，可以设置是否返回一个空表。(**1.30.12**)
+
 
 ### 客户端工具
 
@@ -373,5 +373,3 @@
     
 * C++ API
     * 新增batchTableWriter (**1.30.12** )
-    
-    
