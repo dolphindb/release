@@ -16,5 +16,5 @@
 
 > 新功能
 
-* 发布 tsdb engine
-* 新增BLOB数据类型
+* 发布TSDB存储引擎。`database`函数提供了一个可选参数engineType，默认值为OLAP，即旧的存储引擎。如果创建基于TSDB存储引擎的数据库，engineType设置为TSDB即可。(**2.00.0**)
+* 基于TSDB存储引擎的数据支持新的数据类型BLOB。(**2.00.0**)
