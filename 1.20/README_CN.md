@@ -227,6 +227,8 @@
 * 新增配置参数remoteExecutors。该参数指定用于rpc调用的线程个数。当线程个数大于1时，可以提升系统整体的并发性能。(**1.20.10**)
 * 新增函数`getRequiredAPIVersion`，以配合API检查是否需要更新版本来兼容DolphinDB server。(**1.20.13**)
 * 增加函数`getStreamTableFilterColumn`用于取得流数据Filter列信息。(**1.20.18**)
+* 流数据订阅端的计算引擎支持高可用。(**1.20.21**)
+
 > 改进
 
 * 以下滑动窗口函数增加可选参数minPeriods：`mmed`,`mavg`,`mmin`,`mmax`,`mimin`,`mimax`,`msum`,`mstd`,`mvar`,`mmad`,`mmse`,`mpercentile`,`mcorr`,`mcovar`,`mwsum`,`mwavg`,`mbeta`。
@@ -321,6 +323,7 @@
 * `window join`的聚合指标支持以元组的方式输入，也即元组的每一个元素表示一个聚合指标。(**1.20.21**)
 * `setStreamTableFilterColumn`支持高可用流表。(**1.20.21**)
 * `addVolumes`函数增加了校验，不允许在控制节点上执行。(**1.20.21**)
+
 
 > Bug fixes:
 
@@ -438,6 +441,7 @@
 * for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.20.21**)
 * `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.20.21**)
 * `gram`函数多次执行，出现计算结果有误的情况。(**1.20.21**)
+
 
 
 ### DolphinDB 插件
