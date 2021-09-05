@@ -122,6 +122,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.12.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.12_JIT.zip)
 
+版本号： 1.30.13
+
+发行日期： 2021-08-25
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.13.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.13_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.13_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.13.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.13_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -167,6 +177,14 @@
 * 函数`replay`回放历史数据时，支持一种新的模式：即多个schema相同的数据源按照事件的时间顺序回放到同一个流表. (**1.30.12**)
 * 新增函数`distance`计算两个用经纬度表示的点之间的距离。(**1.30.12**)
 * 流数据订阅端的计算引擎支持高可用。(**1.30.12**)
+* 新增`percentileRank`函数，计算一个值在一个向量中的百分位。(**1.30.13**)
+* 新增``zigzag`函数，计算数据中的极值点。(**1.30.13**)
+* 新增`lowDouble`和`highDouble`函数，用于将point和complex等16字节的数据类型分解成高位8字节的double类型和低位8字节的double类型。(**1.30.13**)
+* 新增`rdp`压缩算法函数。(**1.30.13**)
+* 新增计算加权最小二乘回归函数`wls`。(**1.30.13**)
+* 流数据引擎支持equal join。(**1.30.13**)
+* 新增`ifNull`和`ifValid`函数。(**1.30.13**)
+* 新增配置enableConcurrentDimensionalTableWrite，维度表支持并行写入。(**1.30.13**)
 
 > 改进
 
@@ -226,6 +244,22 @@
 * `createCrossSectionalEngine`（横截面引擎），收到的数据中出现乱序时则丢弃乱序数据。(**1.30.12**)
 * `setStreamTableFilterColumn`支持高可用流表。(**1.30.12**)
 * `addVolumes`函数增加了校验，不允许在控制节点上执行。(**1.30.12**)
+* createTimeSeriesEngine和createDailyTimeSeriesEngine函数新增参数forceTriggerTime。(**1.30.13**)
+* 缩短了scheduleJob的间隔时间到5分钟。(**1.30.13**)
+* Time series engine 和 daily time series engine支持多个keyColumn。(**1.30.13**)
+* upsert!函数ignoreNull字段支持DFS表。(**1.30.13**)
+* parseExpr新增可选参数modules和overloadedOperators，可加载模块，且支持使用字典来给表达式中的变量赋值。(**1.30.13**)
+* sql 函数新增可选参数exec，支持生成exec语句。(**1.30.13**)
+* `temporalAdd`支持增加与减去工作日（BusinessDay），支持时间类型DATEHOUR。(**1.30.13**)
+* SQL GROUPBY子句中的interval函数支持step参数，以滑动窗口的方式计算聚合结果。(**1.30.13**)
+* createReactiveStateEngine新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持自动清理key。(**1.30.13**)
+* delete语句支持map子句，将delete语句下沉到各分区执行。(**1.30.13**)
+* 用户自定义函数的输入参数支持默认值。(**1.30.13**)
+* 时序引擎TimeSeriesEngine支持高可用。(**1.30.13**)
+* * `sql`函数中当参数groupFlag为PIVOTBY是，参数groupBy持选择多列。(**2.00.1**)
+* createReactiveStateEngine新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持响应式状态引擎（reactive state engine）自动清理key。(**1.30.13**)
+* 响应式状态引擎（reactive state engine）支持输出结果到分布式表和流数据表，支持接受来自replay的输入。(**1.30.13**)
+* Windows安装包的dolphindb.cfg、controller.cfg、cluster.cfg默认配置项中移除redolog配置参数。(**1.30.13**)
 
 > Bug fixes:
 
@@ -317,7 +351,19 @@
 * for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.30.12**)
 * `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.30.12**)
 * `gram`函数多次执行，出现计算结果有误的情况。(**1.30.12**)
-
+* 删除分布式表（使用dropTable或dropPartition）在提交时失败，导致事务回滚后，再次查询该表时结果不符合预期。删除该表缓存后，查询恢复正常。(**1.30.13**)
+* 配置参数datanodeRestartInterval后,在高可用环境下会一直重启数据节点, 数据节点无法关闭。(**1.30.13**)
+* 键值表（keyed table）或索引表（indexed table）和内存表等值关联时，抛出OOM异常或导致系统崩溃。(**1.30.13**)
+* Reactive state engine、cross sectional engine、equal join engine、asof join engine输出到异步持久化流表时crash。(**1.30.13**)
+* 当最近一个事务操作是删除表的分区，且事务处于决议状态，数据节点有可能给出错误的决议结果。(**1.30.13**)
+* 当使用remoteRun函数远程取消流表订阅时，远程连接可能卡死。(**1.30.13**)
+* 当多个数据节点向控制节点汇报元数据，如果时间相差很大，会出现元数据一直处于recovering状态。(**1.30.13**)
+* 恢复某个分区后立刻进行checkpoint， 并且后续该分区没有再写入，会导致元数据和数据不一致。(**1.30.13**)
+* 对空矩阵进行行操作如rowSum会导致系统崩溃。(**1.30.13**)
+* 高可用流表使用函数`setStreamTableFilterColumn`设置filter后, 重启节点后filter字段消失。(**1.30.13**)
+* python api序列化时间类型时，由于发生内存踩踏而导致api收到错误消息。(**1.30.13**)
+* 多副本集群，设置dataSync=1时可能出现读取数据失败或者读取到全部空值。(**1.30.13**)
+* `mr`函数中数据源的脚本长度超过1024字节时，远程执行的数据源错误的将脚本字符串作为执行结果。(**1.30.13**)
 
 ### DolphinDB 插件
 
@@ -339,6 +385,7 @@
     * **注意**：1.30及以上版本的Server不兼容低于1.30.0版本的GUI，请从官网下载最新版本GUI客户端。
     * 1.30.7 及以上版本的Server, 需要配合GUI1.30.7版本使用DURATION类型。
     * 增加下载查询结果到GUI本地csv功能。
+    * GUI画图函数plot多曲线可共享y轴。(**1.30.13**)
 
 ### API 
 
