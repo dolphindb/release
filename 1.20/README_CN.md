@@ -187,6 +187,15 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.21.zip) |
 
 
+版本号： 1.20.22
+
+发行日期： 2021-08-25
+
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.22.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.22_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.22.zip) |
+
 
 > 新功能
 
@@ -323,7 +332,8 @@
 * `window join`的聚合指标支持以元组的方式输入，也即元组的每一个元素表示一个聚合指标。(**1.20.21**)
 * `setStreamTableFilterColumn`支持高可用流表。(**1.20.21**)
 * `addVolumes`函数增加了校验，不允许在控制节点上执行。(**1.20.21**)
-
+* 缩短了scheduleJob的间隔时间到5分钟。(**1.20.22**)
+* 
 
 > Bug fixes:
 
@@ -441,8 +451,18 @@
 * for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.20.21**)
 * `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.20.21**)
 * `gram`函数多次执行，出现计算结果有误的情况。(**1.20.21**)
-
-
+* 修复了集群中提交mr函数任务有时会crash的问题。(**1.20.22**)
+* 配置datanode RestartInterval,在高可用环境下会一直重启datanode,数据节点无法关闭。(**1.20.22**)
+* keyedTable和内存表join时即使数据量很少，仍然抛异常out of memory。(**1.20.22**)
+* Windows安装包的dolphindb.cfg、controller.cfg、cluster.cfg默认配置项中移除redolog配置参数。(**1.20.22**)
+* 修复了流表取消订阅时，使用xdb远程连接卡死的问题。(**1.20.22**)
+* 修复了对空矩阵进行行操作导致crash的问题。(**1.20.22**)
+* 修复了创建高可用流表crash的问题。(**1.20.22**)
+* 修复了集群中分布式表和维度表join 结果不正确。(**1.20.22**)
+* 修复高可用流表setStreamTableFilterColumn设置filter后,重启节点filter信息消失的问题。(**1.20.22**)
+* python api序列化时间类型时，由于发生内存踩踏而导致api收到错误消息的问题。(**1.20.22**)
+* 修复多副本集群，设置dataSync=1时可能出现读取数据失败或者读取到全部空值的问题。(**1.20.22**)
+* 修复mr函数中datasource语句长度超过1024引发异常。。(**1.20.22**)
 
 ### DolphinDB 插件
 
@@ -480,6 +500,7 @@
     * 增加了用户手册和GUI帮助的链接。
     * 柱状图的柱形宽度随x轴数值自动调整。
     * 在状态栏显示当前连接的会话ID。
+    * GUI画图函数plot多曲线可共享y轴。(**1.20.22**)
 
 ### API 
 
