@@ -47,7 +47,7 @@
 * `temporalAdd`支持增加与减去工作日（BusinessDay），支持时间类型DATEHOUR。(**2.00.1**)
 * 控制节点的元数据信息新增修改时间戳。(**2.00.1**)
 * SQL GROUPBY子句中的interval函数支持step参数，以滑动窗口的方式计算聚合结果。(**2.00.1**)
-* `sql`函数中当参数groupFlag为PIVOTBY是，参数groupBy持选择多列。(**2.00.1**)
+* `sql`函数中当参数groupFlag为PIVOTBY时，参数groupBy支持选择多列。(**2.00.1**)
 * createReactiveStateEngine新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持响应式状态引擎（reactive state engine）自动清理key。(**2.00.1**)
 * 响应式状态引擎（reactive state engine）支持输出结果到分布式表和流数据表，支持接受来自replay的输入。(**2.00.1**)
 * delete语句支持map子句，将delete语句下沉到各分区执行。(**2.00.1**)
