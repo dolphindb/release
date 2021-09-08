@@ -53,6 +53,7 @@
 * delete语句支持map子句，将delete语句下沉到各分区执行。(**2.00.1**)
 * 用户自定义函数的输入参数支持默认值。(**2.00.1**)
 * Windows安装包的dolphindb.cfg、controller.cfg、cluster.cfg默认配置项中移除redolog配置参数。(**2.00.1**)
+* 改进redo log的回放性能。在有大量小事务的情况下，性能有10倍以上的提升。(**2.00.1**)
 
 Bug fixes:
 
