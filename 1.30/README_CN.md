@@ -259,6 +259,7 @@
 * createReactiveStateEngine新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持响应式状态引擎（reactive state engine）自动清理key。(**1.30.13**)
 * 响应式状态引擎（reactive state engine）支持输出结果到分布式表和流数据表，支持接受来自replay的输入。(**1.30.13**)
 * Windows安装包的dolphindb.cfg、controller.cfg、cluster.cfg默认配置项中移除redolog配置参数。(**1.30.13**)
+* 改进redo log的回放性能。在有大量小事务的情况下，性能有10倍以上的提升。(**.1.30.13**)
 
 > Bug fixes:
 
