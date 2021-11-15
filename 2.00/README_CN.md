@@ -52,7 +52,7 @@
 * 新增函数`runScript`，用于执行一段脚本。(**2.00.2**)
 * 新增函数`makeUnifiedCall`, `binaryExpr`和`unifiedExpr`用于元编程。(**2.00.2**)
 * 新增23个按时间滑动的窗口系列函数，包括`tmove`，`tmfirst`，`tmlast`, `tmsum`, `tmavg`, `tmcount`, `tmvar`, `tmvarp`, `tmstd`, `tmstdp`, `tmprod`, `tmskew`, `tmkurtosis`, `tmmin`, `tmmax`, `tmmed`, `tmpercentile`, `tmrank`, `tmcovar`, `tmbeta`, `tmcorr`, `tmwavg`, `tmwsum`。并在响应式状态引擎中实现对应的状态函数。(**2.00.2**)
-* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `t3`, `ma`, `talib`, `untilValid`，`talibNull`和`linearTimeTrend`。并在响应式状态引擎中实现对应的状态函数(**2.00.2**)
+* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。并在响应式状态引擎中实现对应的状态函数(**2.00.2**)
 * 新增函数`countNanInf`和`isNanInf`，统计scalar, vector或matrix中包含多少个NaN和Inf值。(**2.00.2**)
 * 增加流数据window join引擎。(**2.00.2**)
 * 时间序列聚合引擎新增函数实现：`count`, `firstNot`, `ifirstNot`, `ilastNot`, `imax`, `imin`, `lastNot`, `nunique`, `prod`, `quantile`, `sem`, `sum3`, `sum4`, `mode`和`searchK`。(**2.00.2**)
