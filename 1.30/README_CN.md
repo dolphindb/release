@@ -132,6 +132,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.13.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.13_JIT.zip)
 
+版本号： 1.30.14
+
+发行日期： 2021-11-05
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.14.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.14_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.14_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.14.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.14_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -185,6 +195,21 @@
 * 流数据引擎支持equal join。(**1.30.13**)
 * 新增`ifNull`和`ifValid`函数。(**1.30.13**)
 * 新增配置enableConcurrentDimensionalTableWrite，维度表支持并行写入。(**1.30.13**)
+* 流计算引擎ReactiveStateEngine, AnomalyDetectionEngine, SessionWindowEngine, DailyTimeSeriesEngine和TimeSeriesEnginereactive支持高可用。(**1.30.14**)
+* 新增功能，跨集群数据异步复制。(**1.30.14**)
+* 新增函数`covarMatrix`和`corrMatrix`，来计算pairwise covariance和correlation，性能比直接使用高阶函数cross和covar/corr的组合快1~2个数量级。(**1.30.14**)
+* 新增配置项stdoutLog，当取值为true或1时，不再输出系统的日志到文件，而是输出到stdout。(**1.30.14**)
+* 新增高阶函数`tmoving`，可以实现时间窗口的滑动。同时响应式状态引擎中实现高阶函数`moving`和`tmoving`对应的状态函数(state function)。(**1.30.14**)
+* 新增函数`runScript`，用于执行一段脚本。(**1.30.14**)
+* 新增函数`makeUnifiedCall`, `binaryExpr`和`unifiedExpr`用于元编程。(**1.30.14**)
+* 新增23个按时间滑动的窗口系列函数，包括`tmove`，`tmfirst`，`tmlast`, `tmsum`, `tmavg`, `tmcount`, `tmvar`, `tmvarp`, `tmstd`, `tmstdp`, `tmprod`, `tmskew`, `tmkurtosis`, `tmmin`, `tmmax`, `tmmed`, `tmpercentile`, `tmrank`, `tmcovar`, `tmbeta`, `tmcorr`, `tmwavg`, `tmwsum`。并在响应式状态引擎中实现对应的状态函数。(**1.30.14**)
+* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `t3`, `ma`, `talib`, `untilValid`，`talibNull`和`linearTimeTrend`。并在响应式状态引擎中实现对应的状态函数(**1.30.14**)
+* 新增函数`countNanInf`和`isNanInf`，统计scalar, vector或matrix中包含多少个NaN和Inf值。(**1.30.14**)
+* 增加流数据window join引擎。(**1.30.14**)
+* 时间序列聚合引擎新增函数实现：`count`, `firstNot`, `ifirstNot`, `ilastNot`, `imax`, `imin`, `lastNot`, `nunique`, `prod`, `quantile`, `sem`, `sum3`, `sum4`, `mode`和`searchK`。(**1.30.14**)
+* 增加函数`getConfigure`，传入一个key，返回该配置项信息。如果参数为0，返回所有配置项目信息。(**1.30.14**)
+* 新增命令`clearCachedModules`，可以强制清除缓存的module。当缓存清除后，执行use语句时，会重新从文件加载module。这个方法可以在不重启节点的情况下，重新加载已经更新的module。只有admin才有权限执行这个命令。(**1.30.14**)
+* 新增按行聚合函数`rowSize`, `rowStdp`, `rowVarp`, `rowSkew`和`rowKurtosis`。(**1.30.14**)
 
 > 改进
 
@@ -259,6 +284,22 @@
 * createReactiveStateEngine新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持响应式状态引擎（reactive state engine）自动清理key。(**1.30.13**)
 * 响应式状态引擎（reactive state engine）支持输出结果到分布式表和流数据表，支持接受来自replay的输入。(**1.30.13**)
 * Windows安装包的dolphindb.cfg、controller.cfg、cluster.cfg默认配置项中移除redolog配置参数。(**1.30.13**)
+* 改进redo log的回放性能。在有大量小事务的情况下，性能有10倍以上的提升。(**1.30.13**)
+* 修改`iif`函数在condition包含空值时的行为。旧版本中condition的元素包含空值被当作false处理。新版本中如果为空值，对应的结果也为空值。(**1.30.14**)
+* in(X, Y)函数的参数Y支持为NULL，当Y为无类型的NULL时，函数的返回值为false或每一个值为false的vector。(**1.30.14**)
+* 矩阵进行`accumulate`等计算时放开8192行的限制。(**1.30.14**)
+* 对维度表的并发执行写入、更新和删除等操作时，不再抛出事务冲突异常。(**1.30.14**)
+* 数据节点重启时，redolog的回放会在日志中输出详细的进度。(**1.30.14**)
+* SQL语句中的`interval`功能（按时间聚合）移除range参数，同时增加可选参数explicitOffset，默认值为false。当该参数为true时，可以将第一个窗口的起始位置指定为where指定的窗口的起始位置。(**1.30.14**)
+* `ols`和`wls`在mode为2的时候，新增一个输出Residual。对分布式表中的列，同时新增一个函数`residual`用于计算回归的残差。(**1.30.14**)
+* 计算节点(computing node)支持客户端的所有操作。(**1.30.14**)
+* SQL pivot产生的表列名不再特殊处理，即直接使用pivot的值作为列名。(**1.30.14**)
+* 函数`rank`, `denseRank`, `cumrank`, `rowRank`和`rowDenseRank`支持percent形式。(**1.30.14**)
+* kmeans支持自定义质心。(**1.30.14**)
+* window join增加对`varp`, `stdp`, `prod`，`skew`和`kurtosis` 5个聚合函数的优化。(**1.30.14**)
+* 支持对非数值类型进行`unpivot`。(**1.30.14**)
+* 部分滑动窗口函数系列如`msum`，当输入数据为indexed matrix或indexed series时，窗口支持时间偏移窗口类型。(**1.30.14**)
+* `database`函数新增可选参数atomic。当atomic取值为'CHUNK'时，写入操作只保准分区的原子性，此时也允许多个并发线程同时写入该数据库的同一个分区。(**1.30.14**)
 
 > Bug fixes:
 
@@ -363,6 +404,40 @@
 * python api序列化时间类型时，由于发生内存踩踏而导致api收到错误消息。(**1.30.13**)
 * 多副本集群，设置dataSync=1时可能出现读取数据失败或者读取到全部空值。(**1.30.13**)
 * `mr`函数中数据源的脚本长度超过1024字节时，远程执行的数据源错误的将脚本字符串作为执行结果。(**1.30.13**)
+* 大压力写入数据时，偶发写任务卡住的情况。(**1.30.14**)
+* Cache Engine处理不当，导致symbose base一直无法被回收。如果随着时间推移，包含SYMBOL类型的分区一直增加，导致内存使用量一直缓慢上升。(**1.30.14**)
+* 如果事务有rollback，则redo log不会被回收。(**1.30.14**)
+* 写入更新删除并发时，读取文件时会出现有时读到的数据比预期少，或者某些表会有空行，或者有些chunk状态不正确。(**1.30.14**)
+* 多次写入时重启会报“returned from name node didn't contain any site”。(**1.30.14**)
+* 控制节点高可用，重启leader，偶尔会导致数据节点 crash。(**1.30.14**)
+* 由于raft模块在leader切换时处理不当，导致控制节点在高可用的情况下，同一个chunk在数据节点上有时候会对应多个chunkId。(**1.30.14**)
+* 控制节点在高可用的情况下，频繁切换leader，导致写入或查询过程中任务卡住。(**1.30.14**)
+* 在大量并发线程同时增加不存在的值分区时，由于线程的冲突和重试时间太短，导致某些新增值分区添加失败，抛出异常。(**1.30.14**)
+* 使用非字符串非SYMBOL类型的值去更新分布式表的SYMBOL类型列，会导致symbol base被破坏。(**1.30.14**)
+* 集群的数据节点在重启时收到大量的客户端请求，有可能在后续的鉴权中，出现登录了却当作guest处理的情况。(**1.30.14**)
+* `tableInsert`将一个包含多行数据但某些列缺失的字典插入内存表时报异常。(**1.30.14**)
+* replay回放三个数据表表时，会出现两个表的回放速度明显快于第三个表。(**1.30.14**)
+* replay回放到持久化流表log会报错“Error in Replayer::output: Immutable sub vector doesn't support method serialize”。(**1.30.14**)
+* `kurtosis`和`skew`在流计算引擎中结果精度较低。(**1.30.14**)
+* `createDailyTimeSeriesEngine`使用force Trigger导致计算结果有session区间之外的时间。(**1.30.14**)
+* TimeSeriesEngine指定fill 并且两个分组之间时间相差较大，计算结果可能出错。(**1.30.14**)
+* `createAsofJoinEngine`数据乱序时结果不对。(**1.30.14**)
+* 没有输出表时，横截面引擎作为返回表会报字段缺失错误。(**1.30.14**)
+* 一个引用的数据表调用函数`colNames`无法返回列名。(**1.30.14**)
+* `saveText`保存空表时候会抛异常。(**1.30.14**)
+* `cumvarp`和`cumstdp`应用在矩阵上时错误地调用了`cumvar`和`cumstd`，导致结果不正确。(**1.30.14**)
+* `try catch`语句的catch部分包含多行代码时，实际上只有第一行代码会被执行。(**1.30.14**)
+* 模块中有系统同名函数时，`parseExpr`指定模块，没有优先取模块中的函数。(**1.30.14**)
+* `interval`函数在时间列为分区列且duration可以整除分区列的单位时，会多生成数据，这个bug是在1.30.13中引入的。(**1.30.14**)
+* 当`interval`函数指定step参数且处理的列存在缺失的区间时，结果不正确。(**1.30.14**)
+* order by在第二列为负数时，且第二列或之后的数据为浮点数(double或float)，且一个小组的数据的个数小于等于7个，且包含两个以上的负数，会导致负数之间的相对排序错误。(**1.30.14**)
+* 诸如exec col1 from t  group by col1的sql语句返回结果不是向量。(**1.30.14**)
+* 对huge temporal vector使用min和max函数，应该返回对应的时间类型，但实际上返回一个长整型。(**1.30.14**)
+* `mskew`输入的值过大会出现非法值INF。(**1.30.14**)
+* 使用`funcByName`且参数为聚合函数时，和context by同时使用结果只会返回一行。(**1.30.14**)
+* window join在右表时间列有重复值时计算结果不正确。(**1.30.14**)
+* 自定义函数中的常量均被标记为static，使用时必须先复制。函数序列化时丢失了static标记。(**1.30.14**)
+* JIT版本的数据节点在`loadColumn`的时候，若发生OOM，则会crash。(**1.30.14**)
 
 ### DolphinDB 插件
 
