@@ -32,6 +32,17 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.2.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.2_JIT.zip)
 
+版本号： 2.00.3
+
+发行日期： 2021-11-22
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.3_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.3_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.3_JIT.zip)
+
+
 > 新功能
 
 * 发布TSDB存储引擎。`database`函数提供了一个可选参数engineType，默认值为OLAP，即旧的存储引擎。如果创建基于TSDB存储引擎的数据库，engineType设置为TSDB即可。(**2.00.0**)
@@ -52,7 +63,7 @@
 * 新增函数`runScript`，用于执行一段脚本。(**2.00.2**)
 * 新增函数`makeUnifiedCall`, `binaryExpr`和`unifiedExpr`用于元编程。(**2.00.2**)
 * 新增23个按时间滑动的窗口系列函数，包括`tmove`，`tmfirst`，`tmlast`, `tmsum`, `tmavg`, `tmcount`, `tmvar`, `tmvarp`, `tmstd`, `tmstdp`, `tmprod`, `tmskew`, `tmkurtosis`, `tmmin`, `tmmax`, `tmmed`, `tmpercentile`, `tmrank`, `tmcovar`, `tmbeta`, `tmcorr`, `tmwavg`, `tmwsum`。并在响应式状态引擎中实现对应的状态函数。(**2.00.2**)
-* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。并在响应式状态引擎中实现对应的状态函数(**2.00.2**)
+* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。(**2.00.2**)
 * 新增函数`countNanInf`和`isNanInf`，统计scalar, vector或matrix中包含多少个NaN和Inf值。(**2.00.2**)
 * 增加流数据window join引擎。(**2.00.2**)
 * 时间序列聚合引擎新增函数实现：`count`, `firstNot`, `ifirstNot`, `ilastNot`, `imax`, `imin`, `lastNot`, `nunique`, `prod`, `quantile`, `sem`, `sum3`, `sum4`, `mode`和`searchK`。(**2.00.2**)
@@ -60,6 +71,12 @@
 * 新增命令`clearCachedModules`，可以强制清除缓存的module。当缓存清除后，执行use语句时，会重新从文件加载module。这个方法可以在不重启节点的情况下，重新加载已经更新的module。只有admin才有权限执行这个命令。(**2.00.2**)
 * 支持新的数据类型array vector，array vector的每一行是具有相同数据类型的不定长的数组。目前分布式表中仅TSDB引擎支持。(**2.00.2**)
 * 新增按行聚合函数`rowSize`, `rowStdp`, `rowVarp`, `rowSkew`和`rowKurtosis`。(**2.00.2**)
+* 支持匿名的聚合函数定义。(**2.00.3**)
+* 支持postStart.dos文件，可用于启动DolphinDB时挂载定时任务。(**2.00.3**)
+* 新增tcmalloc控制预留内存配置选项，当内存占用接近maxMemSize的时候，控制能够分配的内存块的最大尺寸，避免因OOM导致crash。(**2.00.3**)
+* 增加`cumfirstNot`,`cumlastNot`, `mfirst`，`mlast`等函数，以及在响应式引擎中实现它们的状态函数。(**2.00.3**)
+* 新增函数`oneHot`，用于做one hot（独热）编码。(**2.00.3**)
+* 新增`setAtomicLevel`函数，用于修改历史数据库的配置以支持并发写入。(**2.00.3**)
 
 改进
 
@@ -97,6 +114,24 @@
 * 优化了TSDB引擎中`dropPartition`的性能。(**2.00.2**)
 * TSDB新增配置选项TSDBBlockSize，可以指定TSDB存储时一个block的大小。(**2.00.2**)
 * `database`函数新增可选参数atomic。当atomic取值为'CHUNK'时，写入操作只保准分区的原子性，此时也允许多个并发线程同时写入该数据库的同一个分区。(**2.00.2**)
+* 时序聚合引擎的forceTriggerTime参数计算规则修改，设置updateTime时，不再限制输出表为keyedTable。(**2.00.3**)
+* 横截面引擎添加是否触发有效计算的开关。(**2.00.3**)
+* 响应式引擎中增加支持`mmad`状态函数。(**2.00.3**)
+* 时序聚合引擎新增对nanotimestamp的规整。(**2.00.3**)
+* 共享流表新增权限控制。(**2.00.3**)
+* getStreamingStat().subWorkers的结果表中增加以下参数：msgAsTable, batchSize, throttle, hash, filter, persistOffset, timeTrigger, handlerNeedMsgId, raftGroup, 用于对流数据的监控。(**2.00.3**)
+* `sma, wma, dema, tema, trima, t3, ma, talib, talibNull, linearTimeTrend`增加流数据中对应的state function。(**2.00.3**)
+* 分布式join改进，支持更多的场景，支持的函数包括 `lj`, `lsj`, `ej`, `aj`和`wj`，可以对不同分区方案的表，分区列不是连接列的表，或者不在同一库中的分布式表做join。(**2.00.3**)
+* 维度表的delete支持并发操作。(**2.00.3**)
+* array vector的index支持slice。(**2.00.3**)
+* string类型支持直接与NULL进行比较。(**2.00.3**)
+* 提升`stdp`, `std`, `varp`, `var`, `skew`, `kurtosis`, `mskew`, `mkurtosis`, `tmskew`, `tmkurtosis`，以及window join中`skew`和`kurtosis`等函数的精度。(**2.00.3**)
+* 支持更多与array vector相关计算，包括`groups`, `distinct`, `nunique` 和 `at`。(**2.00.3**)
+* 高阶函数的第一个参数会被强制解析成函数。(**2.00.3**)
+* `distinct`函数可与group by配合使用，其结果为一个array vector。(**2.00.3**)
+* `nunique`函数支持分布式计算。(**2.00.3**)
+* UDF函数支持keyword arguments。(**2.00.3**)
+* 新增对`qr`, `ols`, `dot`函数输入的校验，不允许行数或列数为0的矩阵作为输入。(**2.00.3**)
 
 Bug fixes:
 
@@ -152,6 +187,24 @@ Bug fixes:
 * window join在右表时间列有重复值时计算结果不正确。(**2.00.2**)
 * 自定义函数中的常量均被标记为static，使用时必须先复制。函数序列化时丢失了static标记。(**2.00.2**)
 * JIT版本的数据节点在`loadColumn`的时候，若发生OOM，则会crash。(**2.00.2**)
+* TSDB存储引擎下，compact和dropPartition并发会导致元数据错误。(**2.00.3**)
+* TSDB存储引擎下，有时重启后数据节点无法启动，报iotCheckPointFile.meta无法初始化。(**2.00.3**)
+* 修复了写入、删除、checkpoint、恢复并发的场景下数据库不稳定的问题。(**2.00.3**)
+* 高可用集群有时候控制节点无法启动，报错"Failed to read rsa public key file"。(**2.00.3**)
+* 集群Python API多并发有时候会出现数据节点死锁。(**2.00.3**)
+* 控制节点上关于chunk的信息落后于数据节点。(**2.00.3**)
+* 系统恢复之后发生了事务决议导致数据错乱。(**2.00.3**)
+* OLAP存储引擎下，redolog在系统恢复之后再重放，可能导致数据丢失。(**2.00.3**)
+* 时序聚合引擎中append的table的列数小于dummyTable的列数时会crash。(**2.00.3**)
+* 流数据高可用，将发布端的leader多次kill之后，再往发布端写入数据，订阅端有时收不到新数据。(**2.00.3**)
+* `interval`在指定线性填充方式，同时where指定的开始时间没有数据，且group by多个字段的时候，会出现错误的结果。(**2.00.3**)
+* 当特殊字符作为列名时，`sqlCol`会错误地把字段名称当作共享表的引用来处理。(**2.00.3**)
+* 当y中的数据为连续的相等数据时，`mslr`计算会产生正无穷。(**2.00.3**)
+* `eachPre`函数在计算矩阵时，如果矩阵行数过多，则会导致crash。(**2.00.3**)
+* `mpercentile`计算偶尔会卡住。(**2.00.3**)
+* `temporalParse`对时间向量转换失败的情况下，返回的结果不正确，应该为NULL。(**2.00.3**)
+* 对空表进行update时，使用context by语句，不能产生新的列。(**2.00.3**)
+* where 条件中"!="前面没有空格时解析失败。(**2.00.3**)
 
 > GUI
 

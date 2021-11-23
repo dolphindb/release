@@ -142,6 +142,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.14.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.14_JIT.zip)
 
+版本号： 1.30.15
+
+发行日期： 2021-11-22
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.15.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.15_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.15_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.15.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.15_JIT.zip)
+
 > 新功能
 
 * 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
@@ -203,13 +213,19 @@
 * 新增函数`runScript`，用于执行一段脚本。(**1.30.14**)
 * 新增函数`makeUnifiedCall`, `binaryExpr`和`unifiedExpr`用于元编程。(**1.30.14**)
 * 新增23个按时间滑动的窗口系列函数，包括`tmove`，`tmfirst`，`tmlast`, `tmsum`, `tmavg`, `tmcount`, `tmvar`, `tmvarp`, `tmstd`, `tmstdp`, `tmprod`, `tmskew`, `tmkurtosis`, `tmmin`, `tmmax`, `tmmed`, `tmpercentile`, `tmrank`, `tmcovar`, `tmbeta`, `tmcorr`, `tmwavg`, `tmwsum`。并在响应式状态引擎中实现对应的状态函数。(**1.30.14**)
-* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。并在响应式状态引擎中实现对应的状态函数(**1.30.14**)
+* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。(**1.30.14**)
 * 新增函数`countNanInf`和`isNanInf`，统计scalar, vector或matrix中包含多少个NaN和Inf值。(**1.30.14**)
 * 增加流数据window join引擎。(**1.30.14**)
 * 时间序列聚合引擎新增函数实现：`count`, `firstNot`, `ifirstNot`, `ilastNot`, `imax`, `imin`, `lastNot`, `nunique`, `prod`, `quantile`, `sem`, `sum3`, `sum4`, `mode`和`searchK`。(**1.30.14**)
 * 增加函数`getConfigure`，传入一个key，返回该配置项信息。如果参数为0，返回所有配置项目信息。(**1.30.14**)
 * 新增命令`clearCachedModules`，可以强制清除缓存的module。当缓存清除后，执行use语句时，会重新从文件加载module。这个方法可以在不重启节点的情况下，重新加载已经更新的module。只有admin才有权限执行这个命令。(**1.30.14**)
 * 新增按行聚合函数`rowSize`, `rowStdp`, `rowVarp`, `rowSkew`和`rowKurtosis`。(**1.30.14**)
+* 支持匿名的聚合函数定义。(**1.30.15**)
+* 支持postStart.dos文件，可用于启动DolphinDB时挂载定时任务。(**1.30.15**)
+* 新增tcmalloc控制预留内存配置选项，当内存占用接近maxMemSize的时候，控制能够分配的内存块的最大尺寸，避免因OOM导致crash。(**1.30.15**)
+* 增加`cumfirstNot`,`cumlastNot`, `mfirst`，`mlast`等函数，以及在响应式引擎中实现它们的状态函数。(**1.30.15**)
+* 新增函数`oneHot`，用于做one hot（独热）编码。(**1.30.15**)
+* 新增`setAtomicLevel`函数，用于修改历史数据库的配置以支持并发写入。(**1.30.15**)
 
 > 改进
 
@@ -300,6 +316,19 @@
 * 支持对非数值类型进行`unpivot`。(**1.30.14**)
 * 部分滑动窗口函数系列如`msum`，当输入数据为indexed matrix或indexed series时，窗口支持时间偏移窗口类型。(**1.30.14**)
 * `database`函数新增可选参数atomic。当atomic取值为'CHUNK'时，写入操作只保准分区的原子性，此时也允许多个并发线程同时写入该数据库的同一个分区。(**1.30.14**)
+* 时序聚合引擎的forceTriggerTime参数计算规则修改，设置updateTime时，不再限制输出表为keyedTable。(**1.30.15**)
+* 横截面引擎添加是否触发有效计算的开关。(**1.30.15**)
+* 响应式引擎中增加支持`mmad`状态函数。(**1.30.15**)
+* 时序聚合引擎新增对nanotimestamp的规整。(**1.30.15**)
+* 共享流表新增权限控制。(**1.30.15**)
+* getStreamingStat().subWorkers的结果表中增加以下参数：msgAsTable, batchSize, throttle, hash, filter, persistOffset, timeTrigger, handlerNeedMsgId, raftGroup, 用于对流数据的监控。(**1.30.15**)
+* `sma, wma, dema, tema, trima, t3, ma, talib, talibNull, linearTimeTrend`增加流数据中对应的state function。(**1.30.15**)
+* 维度表的delete支持并发操作。(**1.30.15**)
+* string类型支持直接与NULL进行比较。(**1.30.15**)
+* 提升`stdp`, `std`, `varp`, `var`, `skew`, `kurtosis`, `mskew`, `mkurtosis`, `tmskew`, `tmkurtosis`，以及window join中`skew`和`kurtosis`等函数的精度。(**1.30.15**)
+* 高阶函数的第一个参数会被强制解析成函数。(**1.30.15**)
+* UDF函数支持keyword arguments。(**1.30.15**)
+* 新增对`qr`, `ols`, `dot`函数输入的校验，不允许行数或列数为0的矩阵作为输入。(**1.30.15**)
 
 > Bug fixes:
 
@@ -438,6 +467,22 @@
 * window join在右表时间列有重复值时计算结果不正确。(**1.30.14**)
 * 自定义函数中的常量均被标记为static，使用时必须先复制。函数序列化时丢失了static标记。(**1.30.14**)
 * JIT版本的数据节点在`loadColumn`的时候，若发生OOM，则会crash。(**1.30.14**)
+* 修复了写入、删除、checkpoint、恢复并发的场景下数据库不稳定的问题。(**1.30.15**)
+* 高可用集群有时候控制节点无法启动，报错"Failed to read rsa public key file"。(**1.30.15**)
+* 集群Python API多并发有时候会出现数据节点死锁。(**1.30.15**)
+* 控制节点上关于chunk的信息落后于数据节点。(**1.30.15**)
+* 系统恢复之后发生了事务决议导致数据错乱。(**1.30.15**)
+* redolog在系统恢复之后再重放，可能导致数据丢失。(**1.30.15**)
+* 时序聚合引擎中append的table的列数小于dummyTable的列数时会crash。(**1.30.15**)
+* 流数据高可用，将发布端的leader多次kill之后，再往发布端写入数据，订阅端有时收不到新数据。(**1.30.15**)
+* `interval`在指定线性填充方式，同时where指定的开始时间没有数据，且group by多个字段的时候，会出现错误的结果。(**1.30.15**)
+* 当特殊字符作为列名时，`sqlCol`会错误地把字段名称当作共享表的引用来处理。(**1.30.15**)
+* 当y中的数据为连续的相等数据时，`mslr`计算会产生正无穷。(**1.30.15**)
+* `eachPre`函数在计算矩阵时，如果矩阵行数过多，则会导致crash。(**1.30.15**)
+* `mpercentile`计算偶尔会卡住。(**1.30.15**)
+* `temporalParse`对时间向量转换失败的情况下，返回的结果不正确，应该为NULL。(**1.30.15**)
+* 对空表进行update时，使用context by语句，不能产生新的列。(**1.30.15**)
+* where 条件中"!="前面没有空格时解析失败。(**1.30.15**)
 
 ### DolphinDB 插件
 
