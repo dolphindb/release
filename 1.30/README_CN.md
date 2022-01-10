@@ -152,183 +152,465 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.15.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.15_JIT.zip)
 
+版本号： 1.30.16
+
+发行日期： 2022-01-10
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.16.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.16_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.16_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.16.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.16_JIT.zip)
+
+
+
 > 新功能
 
-* 新增数据结构索引矩阵（indexed matrix）和索引序列（indexed series）用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。
-* 新增函数`panel`，`indexedSeries`, `setIndexedMatrix!`, `setIndexedSeries!`, `isIndexedMatrix`, `isIndexedSeries`，`dropna`，`resample`，`asFreq`，`merge`等用于处理索引矩阵和索引序列。
-* 新增函数`renameTable`，允许分布式的维度表和分区表改名。
-* 新增高阶函数`withNullFill`。
-* 新增权限DB_OWNER。拥有该权限的用户可以创建数据库并进行管理。
-* 新增函数`upsert!`向键值表或索引表中添加或更新记录。
-* `schema`函数增加了分区列类型(partitionColumnType)的输出。
+* 新增数据结构：索引矩阵（indexed matrix）和索引序列（indexed series），用于面板数据的处理。索引矩阵之间、索引序列之间、以及索引矩阵和索引序列之间的二元操作，支持按行列标签自动对齐。(**1.30.1**)
+
+* 新增函数`panel`，`indexedSeries`, `setIndexedMatrix!`, `setIndexedSeries!`, `isIndexedMatrix`, `isIndexedSeries`，`dropna`，`resample`，`asFreq`，`merge`等用于处理索引矩阵和索引序列。(**1.30.1**)
+
+* 新增函数`renameTable`，允许分布式的维度表和分区表改名。(**1.30.1**)
+
+* 新增高阶函数`withNullFill`。(**1.30.1**)
+
+* 新增权限DB_OWNER。拥有该权限的用户可以创建数据库并进行管理。(**1.30.1**)
+
+* 新增函数`upsert!`向键值表或索引表中添加或更新记录。(**1.30.1**)
+
+* `schema`函数增加了分区列类型（partitionColumnType）的输出。(**1.30.1**)
+
 * 新增响应式状态引擎（reactive state engine）用于流计算。相关的函数包括`createReactiveStateEngine`和`warmupStreamEngine`。(**1.30.2**)
+
 * 新增函数`ema`，`mskew`，`mkurtosis`和`mslr`。(**1.30.2**)
-* 支持新的数据类型复数(COMPLEX)和点(POINT)。使用函数complex和point分别构造上述两种数据类型。(**1.30.3**)
+
+* 支持新的数据类型：复数（COMPLEX）和点（POINT）。使用函数complex和point分别构造上述两种数据类型。(**1.30.3**)
+
+* 新增函数`getRequiredAPIVersion`，以配合API检查是否需要更新版本来兼容DolphinDB server。(**1.30.3**)
+
 * 响应式状态引擎和时间序列聚合引擎支持快照，用于保存这些引擎的状态，以便在流计算出现异常时，快速从上一个快照处恢复。(**1.30.3**)
+
 * 新增函数`mskew`，`mkurtosis`，`mvarp`, `mstdp`, `cumvarp`, `cumstdp`，并且在响应式状态引擎中支持上述函数。(**1.30.3**)
+
 * 新增函数`winsorize`。(**1.30.3**)
+
 * 新增高阶函数`byRow`，使得一个列式函数，可用于矩阵按行计算。(**1.30.3**)
+
 * 内置的流数据计算引擎包括时间序列聚合引擎、横截面引擎、异常检测引擎和响应式状态引擎，支持多个引擎串联。(**1.30.3**)
+
 * 修改upsert！函数，支持对DFS表（包括维度表和分区表）进行修改。(**1.30.6**)
+
 * 支持使用SQL update和delete语句修改DFS表（包括维度表和分区表）。(**1.30.6**)
+
 * 新增函数`sqlUpdate`和`sqlDelete`，动态创建SQL update和delete语句。(**1.30.6**)
+
 * 新增函数`createSessionWindowEngine`用于创建流数据会话窗口引擎。(**1.30.6**)
+
 * 支持客户端数据压缩上传到服务端，也支持数据压缩后输出到客户端。(**1.30.6**)
+
 * 支持新数据类型DURATION， 表达时间范围更加简练。(**1.30.7**)
+
 * 支持节点间通过压缩方式传输数据。(**1.30.7**)
-* temporalAdd,dailyAlignedBar,bar,wj,pwj 函数支持DURATION类型参数。(**1.30.7**)
+
+* temporalAdd, dailyAlignedBar, bar, wj, pwj函数支持DURATION类型参数。(**1.30.7**)
+
 * keyedStreamTable支持多个key列。(**1.30.7**)
-* SQL提供interval关键字支持插值查询。(**1.30.7**)
-* `CrossSectionalEngine` 新增参数 lastBatchOnly。(**1.30.8**)
-* `createReactiveStateEngine` 增加了可选参数 keepOrder。(**1.30.8**)
-* 新增 `spearmanr`和`mutualInfo` 两个相关性的计算函数。	(**1.30.9**)
+
+* SQL提供interval关键字，支持插值查询。(**1.30.7**)
+
+* `CrossSectionalEngine`新增参数lastBatchOnly。(**1.30.8**)
+
+* `createReactiveStateEngine`增加了可选参数 keepOrder。(**1.30.8**)
+
+* 新增 `spearmanr`和`mutualInfo`两个相关性的计算函数。	(**1.30.9**)
+
 * 新增函数createDailyTimeSeriesEngine，用于创建支持会话的时间序列聚合引擎。每个会话的结束点和开始点可以做一些特殊处理。 (**1.30.9**)
+
 * 增加函数getStreamTableFilterColumn用于取得流数据Filter列信息。(**1.30.9**)
-* 新增函数`varp` 和 `stdp`。(**1.30.9**)
-* 支持实时流数据join,新增函数`createAsofJoinEngine` 和 `appendForJoin`。**(1.30.10)**
+
+* 新增函数`varp`和`stdp`。(**1.30.9**)
+
+* 支持实时流数据join，新增函数`createAsofJoinEngine`和`appendForJoin`。**(1.30.10)**
+
 * 增加`getConnections`函数，获取节点当前所有连接信息。**(1.30.10)**
-* 增加`interval`函数支持在指定的范围内进行插值。**(1.30.10)**
+
+* `interval`函数新增支持在指定的范围内进行插值。**(1.30.10)**
+
 * 增加高阶函数`unifiedCall`，将函数的参数集以tuple方式传入。**(1.30.10)**
-* 新增函数`denseRank`,`rowDenseRank`。(**1.30.11**)
-* 替换license支持不停机在线更新。(**1.30.11**)
+
+* 新增函数`denseRank`, `rowDenseRank`。(**1.30.11**)
+
+* 替换license后，支持不停机在线更新。(**1.30.11**)
+
 * Agent可自动启动数据节点，可在数据节点意外关闭时把它重启，controller.cfg中新增配置项`datanodeRestartInterval`。(**1.30.11**)
-* 内存表字段中支持超长字符串\(blob\)。(**1.30.11**)
+
+* 内存表字段中支持超长字符串（blob）。(**1.30.11**)
+
 * 提供`isDataNodeInitialized`函数用于查看数据节点是否已经完成初始化。(**1.30.12**)
+
 * 函数`replay`回放历史数据时，支持一种新的模式：即多个schema相同的数据源按照事件的时间顺序回放到同一个流表. (**1.30.12**)
+
 * 新增函数`distance`计算两个用经纬度表示的点之间的距离。(**1.30.12**)
+
 * 流数据订阅端的计算引擎支持高可用。(**1.30.12**)
+
 * 新增`percentileRank`函数，计算一个值在一个向量中的百分位。(**1.30.13**)
-* 新增``zigzag`函数，计算数据中的极值点。(**1.30.13**)
+
+* 新增`zigzag`函数，计算数据中的极值点。(**1.30.13**)
+
 * 新增`lowDouble`和`highDouble`函数，用于将point和complex等16字节的数据类型分解成高位8字节的double类型和低位8字节的double类型。(**1.30.13**)
+
 * 新增`rdp`压缩算法函数。(**1.30.13**)
+
 * 新增计算加权最小二乘回归函数`wls`。(**1.30.13**)
-* 流数据引擎支持equal join。(**1.30.13**)
+
+* 新增支持流数据equal join引擎。(**1.30.13**)
+
 * 新增`ifNull`和`ifValid`函数。(**1.30.13**)
-* 新增配置enableConcurrentDimensionalTableWrite，维度表支持并行写入。(**1.30.13**)
+
+* 新增配置enableConcurrentDimensionalTableWrite，用于开启维度表并行写入。(**1.30.13**)
+
 * 流计算引擎ReactiveStateEngine, AnomalyDetectionEngine, SessionWindowEngine, DailyTimeSeriesEngine和TimeSeriesEnginereactive支持高可用。(**1.30.14**)
-* 新增功能，跨集群数据异步复制。(**1.30.14**)
+
+* 新增功能：跨集群数据异步复制。(**1.30.14**)
+
 * 新增函数`covarMatrix`和`corrMatrix`，来计算pairwise covariance和correlation，性能比直接使用高阶函数cross和covar/corr的组合快1~2个数量级。(**1.30.14**)
+
 * 新增配置项stdoutLog，当取值为true或1时，不再输出系统的日志到文件，而是输出到stdout。(**1.30.14**)
-* 新增高阶函数`tmoving`，可以实现时间窗口的滑动。同时响应式状态引擎中实现高阶函数`moving`和`tmoving`对应的状态函数(state function)。(**1.30.14**)
+
+* 新增高阶函数`tmoving`，将一个对象按照时间窗口进行滑动计算。同时响应式状态引擎中实现高阶函数`moving`和`tmoving`对应的状态函数（state function）。(**1.30.14**)
+
 * 新增函数`runScript`，用于执行一段脚本。(**1.30.14**)
+
 * 新增函数`makeUnifiedCall`, `binaryExpr`和`unifiedExpr`用于元编程。(**1.30.14**)
-* 新增23个按时间滑动的窗口系列函数，包括`tmove`，`tmfirst`，`tmlast`, `tmsum`, `tmavg`, `tmcount`, `tmvar`, `tmvarp`, `tmstd`, `tmstdp`, `tmprod`, `tmskew`, `tmkurtosis`, `tmmin`, `tmmax`, `tmmed`, `tmpercentile`, `tmrank`, `tmcovar`, `tmbeta`, `tmcorr`, `tmwavg`, `tmwsum`。并在响应式状态引擎中实现对应的状态函数。(**1.30.14**)
-* 新增函数`sma`,`wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。(**1.30.14**)
-* 新增函数`countNanInf`和`isNanInf`，统计scalar, vector或matrix中包含多少个NaN和Inf值。(**1.30.14**)
+
+* 新增23个按时间滑动的窗口系列函数，包括`tmove`，`tmfirst`，`tmlast`, `tmsum`, `tmavg`, `tmcount`, `tmvar`, `tmvarp`, `tmstd`, `tmstdp`, `tmprod`, `tmskew`, `tmkurtosis`, `tmmin`, `tmmax`, `tmmed`, `tmpercentile`, `tmrank`, `tmcovar`, `tmbeta`, `tmcorr`, `tmwavg`, `tmwsum`。并在响应式状态引擎中实现它们对应的状态函数。(**1.30.14**)
+
+* 新增函数`sma`, `wma`, `dema`, `tema`, `trima`, `talib`, `talibNull`和`linearTimeTrend`。(**1.30.14**)
+
+* 新增函数`countNanInf`和`isNanInf`，统计scalar, vector或matrix中包含的NaN和Inf值的数量。(**1.30.14**)
+
 * 增加流数据window join引擎。(**1.30.14**)
-* 时间序列聚合引擎新增函数实现：`count`, `firstNot`, `ifirstNot`, `ilastNot`, `imax`, `imin`, `lastNot`, `nunique`, `prod`, `quantile`, `sem`, `sum3`, `sum4`, `mode`和`searchK`。(**1.30.14**)
-* 增加函数`getConfigure`，传入一个key，返回该配置项信息。如果参数为0，返回所有配置项目信息。(**1.30.14**)
+
+* 时间序列聚合引擎新增优化以下函数：`count`, `firstNot`, `ifirstNot`, `ilastNot`, `imax`, `imin`, `lastNot`, `nunique`, `prod`, `quantile`, `sem`, `sum3`, `sum4`, `mode`和`searchK`。(**1.30.14**)
+
+* 增加函数`getConfigure`，当传入一个key时，返回该配置项的配置信息。如果参数为空，则返回所有配置项目信息。(**1.30.14**)
+
 * 新增命令`clearCachedModules`，可以强制清除缓存的module。当缓存清除后，执行use语句时，会重新从文件加载module。这个方法可以在不重启节点的情况下，重新加载已经更新的module。只有admin才有权限执行这个命令。(**1.30.14**)
+
 * 新增按行聚合函数`rowSize`, `rowStdp`, `rowVarp`, `rowSkew`和`rowKurtosis`。(**1.30.14**)
+
 * 支持匿名的聚合函数定义。(**1.30.15**)
-* 支持postStart.dos文件，可用于启动DolphinDB时挂载定时任务。(**1.30.15**)
-* 新增tcmalloc控制预留内存配置选项，当内存占用接近maxMemSize的时候，控制能够分配的内存块的最大尺寸，避免因OOM导致crash。(**1.30.15**)
-* 增加`cumfirstNot`,`cumlastNot`, `mfirst`，`mlast`等函数，以及在响应式引擎中实现它们的状态函数。(**1.30.15**)
+
+* 新增配置参数postStart，可以支持postStart.dos文件，用于启动DolphinDB时挂载定时任务。(**1.30.15**)
+
+* 新增配置参数reservedMemSize和maxBlockSizeForReservedMemory，当内存占用接近maxMemSize的时候，控制能够分配的内存块的最大尺寸，避免因OOM导致crash。(**1.30.15**)
+
+* 增加`cumfirstNot`, `cumlastNot`, `mfirst`，`mlast`等函数，以及在响应式引擎中实现它们的状态函数。(**1.30.15**)
+
 * 新增函数`oneHot`，用于做one hot（独热）编码。(**1.30.15**)
-* 新增`setAtomicLevel`函数，用于修改历史数据库的配置以支持并发写入。(**1.30.15**)
+
+* 新增`setAtomicLevel`命令，用于修改历史数据库的atomic参数，实现是否支持并发写入分布式表的分区。(**1.30.15**)
+
+* 往内存表的时间列写入数据时，自动进行时间类型转换。（**1.30.16**）
+
+* 支持表级别分区粒度，支持同一库中不同的表可以并发写入。（**1.30.16**）
+
+* 支持在线增量恢复，可以异步地进行节点数据恢复。 （**1.30.16**）
+
+* 支持真正的快照隔离。（**1.30.16**）
+
+* SQL语句增加标识 [HINT_EXPLAIN]，可以显示 SQL 的执行过程。（**1.30.16**）
+
+* 支持管理和查询集群中的所有计算任务。（**1.30.16**）
+
+* 新增函数streamEngineParser，支持自动分解截面因子成多个内置流计算引擎的流水线。（**1.30.16**）
+
+* 新增函数existSubscriptionTopic，用于判断某一个订阅是否已经创建。（**1.30.16**）
+
+* 新增函数createLookupJoinEngine，支持将流数据表和一个相对稳定的表做左连接。（**1.30.16**）
+
+* 新增函数moveChunksAcrossVolume，在增加新的 volume 后，用于转移旧 volume 的部分 chunk 到新 volume。（**1.30.16**）
+
+* 增加新的 volume 后，可以使用resetDBDirMeta函数转移老的 volume 上的 meta log 目录到新的volume。（**1.30.16**）
+
+* 新增 10 个TopN函数 msumTopN, mavgTopN, mstdpTopN, mstdTopN, mvarTopN, mvarpTopN, mcorrTopN, mbetaTopN, mcovarTopN, mwsumTopN，且 createReactiveStateEngine 引擎支持它们相应的状态函数。（**1.30.16**）
+
+* 新增函数makeKey和makeOrderedKey，可以将多个列合并成一个 BLOB 列，用作字典或集合的键值，其中makeOrderedKey的结果保留了多个字段的排序顺序。（**1.30.16**）
+
+* 新增高阶函数aggrTopN，用以计算根据排序列获取的前N行数据的聚合结果。（**1.30.16**）
+
+* 新增高阶函数window和twindow，支持窗口函数的计算。（**1.30.16**）
+
+* 新增配置项raftElectionTick，用以配置raft切换leader的心跳时间。同时新增函数setCacheEngineMemSize, setTimeoutTick，setTSDBCacheEngineSize, setMaxMemSize，setReservedMemSize和 setMaxBlockSizeForReservedMemory支持在线修改对应的配置项。（**1.30.16**）
+
+* 新增函数fixedLengthArrayVector，支持将多个向量合成一个 array vector。（**1.30.16**）
+
+* 新增函数loadNpz支持导入 numpy 的 npz 文件。（**1.30.16**）
+
+* 新增函数suspendRecovery用于暂停 recovery 任务，新增函数resumeRecovery用于重启recovery任务。（**1.30.16**）
+
+* 新增函数 rowCorr, rowCovar, rowBeta, rowWsum, rowWavg，可以对每行数据进行计算。（**1.30.16**）
+
+* 新增fflush函数，帮助将缓存中的数据写入文件系统。（**1.30.16**）
+
+  
 
 > 改进
 
-* 优化SYMBOL类型的数据序列化/反序列化。这个优化使DolphinDB数据节点之间以及数据节点和API之间传输SYMBOL类型数据时性能有5~10倍的提升。
-* 提升了并行作业和分布式作业的稳定性。
-* 允许矩阵的行数或列数为0。
-* 函数subscribeTable增加了可选参数timeTrigger。当参数为true时，即便没有新的消息进入，到达设定的时间间隔后，也会触发消息处理函数。
-* 当需要序列化的字符串标量长度超过65535个字节时，自动转化为BLOB类型进行序列化。(**1.30.1**)
+* 优化SYMBOL类型的数据序列化/反序列化过程。该优化提升了DolphinDB数据节点之间以及数据节点和API之间传输SYMBOL类型数据的性能，提升约有5~10倍。
+
+* 增强了并行作业和分布式作业的稳定性。
+
+* 数据结构支持行数或列数为0的矩阵类型。
+
+* 函数`subscribeTable`新增可选参数timeTrigger，支持定时触发消息处理函数。
+
+* 长度超过65535个字节的字符串标量在序列化时将自动转化为BLOB类型。(**1.30.1**)
+
 * window join的自定义指标函数支持多个返回值。(**1.30.2**)
-* 若`concat`函数拼接的字符串长度超过65535或包含ASCII值0，自动将返回值改为BLOB类型，以避免输出到客户端时出现问题。(**1.30.2**)
-* 时间序列聚合引擎的自定义函数指标支持多个返回值，同时也支持接受带有别名的指标，例如：avg(price) as price。(**1.30.2**)
-* 调整了检查日志文件大小的频率，避免日志大小超过设定值。(**1.30.3**)
-* 画图函数plot增加了可选参数stacking。线状图（line chart，柱状图（bar chart）和面积图（area chart）支持该参数。(**1.30.3**)
-* 新增函数`getRequiredAPIVersion`，以配合API检查是否需要更新版本来兼容DolphinDB server。(**1.30.3**)
-* 函数`subscribeTable`的可选参数offset取值为-2时，如果找不到持久化的offset，不再抛出异常，而是用-1取代。(**1.30.3**)
-* windows版本的cpu绑定，从最多支持32核增加到64核。(**1.30.3**)
+
+* `concat`函数拼接的字符串长度超过65535或字符串内包含ASCII值0，返回值将自动转化为BLOB类型。(**1.30.2**)
+
+* 时间序列聚合引擎的自定义指标函数支持多个返回值，同时也支持接受带有别名的指标，例如：avg(price) as price。(**1.30.2**)
+
+* 调整了系统自动检查日志文件大小的频率，避免日志大小超过设定值。(**1.30.3**)
+
+* 画图函数`plot`新增可选参数stacking。目前线状图（line chart，柱状图（bar chart）和面积图（area chart）支持该参数。(**1.30.3**)
+
+* 函数`subscribeTable`的可选参数offset指定为-2时，若找不到持久化的offset，不再抛出异常，而是用-1取代，即从最新的数据开始订阅。(**1.30.3**)
+
+* windows版本的cpu绑定，上限从32核增加到64核。(**1.30.3**)
+
 * 调用函数`addMetrics`为时间序列聚合引擎动态增加指标时，如果windowSize和原先的定义不同，系统报异常。(**1.30.3**)
-* `subscribeTable`函数的filter参数，在值过滤的基础上增加了哈希和范围过滤。(**1.30.3**)
-* 横截面引擎在支持聚合函数的基础上，增加对向量化函数的支持。(**1.30.3**)
-* 时序聚合引擎允许在一个引擎中使用多个不同长度窗口。(**1.30.3**)
+
+* `subscribeTable`函数的filter参数，在值过滤的基础上增加了哈希过滤和范围过滤。(**1.30.3**)
+
+* 横截面引擎（`createCrossSectionalEngine`）在支持聚合函数的基础上，增加对向量化函数的支持。(**1.30.3**)
+
+* 时序聚合引擎支持在一个引擎中使用多个不同长度的窗口。(**1.30.3**)
+
 * 改进了部分应用（partial application）的显示，除了显示函数名称，也会显示已经固定的参数。(**1.30.6**)
-* 对时间类型的分区字段进行剪枝时，允许在分区字段上使用相应的时间函数（目前支持date, month和datahour函数），方便用户操作。例如，数据库在时间维度上按日期（DATE类型）进行分区，数据表的分区字段是TIMESTAMP类型，允许在时间列上先使用date函数再进行过滤， date(time) = 2021.03.02。(**1.30.6**)
-* 数据表按照时间类型字段进行值分区或者范围分区时，通过对where子句中的过滤条件剪枝（如果所涉及分区的时间范围必然满足过滤条件，则可以在该分区的子查询上删除该过滤条件），改进查询性能。(**1.30.6**)
+
+* 对时间类型的分区字段进行剪枝时，支持在分区字段上使用相应的时间函数（目前支持date, month和datahour函数），方便用户操作。例如，数据库在时间维度上按日期（DATE类型）进行分区，数据表的分区字段是TIMESTAMP类型，允许在时间列上先使用date函数再进行过滤，比如：date(time) = 2021.03.02。(**1.30.6**)
+
+* 数据表按照时间类型字段进行值分区或者范围分区时，根据where子句中的过滤条件剪枝（如果所涉及分区的时间范围必然满足过滤条件，则可以在该分区的子查询上删除该过滤条件），改进查询性能。(**1.30.6**)
+
 * 修改了cache engine的回收算法，提升了事务回收的效率，避免了不必要的OOM。(**1.30.6**)
-* 流数据时间序列聚合引擎增加可选参数fill，可选的fill方法包括none，null和ffill。默认值是none，也即某一个key在某个时间窗口中没有数据时，不输出任何结果。(**1.30.6**)
-* 函数`compress`和`decompress`支持table作为输入。(**1.30.6**)
+
+* 流数据时间序列聚合引擎增加可选参数fill，可选的fill方法包括none，null和ffill。默认值是none，即某一个key在某个时间窗口中没有数据时，不输出任何结果。(**1.30.6**)
+
+* 函数`compress`和`decompress`支持table类型。(**1.30.6**)
+
 * 单个事务涉及的元数据大小从最大16MB增加到128MB，避免出现一些大表不能删除的情况。(**1.30.6**)
-* 异常检测引擎（函数createAnomalyDetectionEngine） 支持快照（snapshot）(**1.30.6**)
-* 函数createCrossSectionalAggregator 改名为createCrossSectionalEngine，原名作为别名。(**1.30.6**)
+
+* 异常检测引擎（`createAnomalyDetectionEngine`）支持快照（snapshot）(**1.30.6**)
+
+* 函数`createCrossSectionalAggregator`改名为`createCrossSectionalEngine`，原名作为别名。(**1.30.6**)
+
 * maxConnections默认值改成512。(**1.30.7**)
-* createTimeSeriesAggregator 改名为createTimeSeriesEngine，原函数名作为alias。(**1.30.7**)
-* 针对多列宽表优化sql性能。(**1.30.8**)
-* Reactive state engine 支持指定多个keyColumn。(**1.30.8**)
-* CrossSectionalEngine 支持聚合和非聚合混用。(**1.30.8**)
-* `skew`和`kurtosis`分布式的聚合函数支持校正偏差。	(**1.30.9**)
-* 检测同一个update语句对同一列重复更新，并给出异常提示。(**1.30.9**)
-* createTimeSeriesEngine支持timeColumn指定2列，比如 date 和 time 列。(**1.30.9**)
-* `sqlUpdate` 函数 where 条件中允许使用函数。(**1.30.9**)
-* `firstNot`和`lastNot`分布式聚合时支持指定第2个参数。(**1.30.9**)
+
+* 函数`createTimeSeriesAggregator`改名为`createTimeSeriesEngine`，原名作为别名。(**1.30.7**)
+
+* 针对多列宽表进行sql性能的优化。(**1.30.8**)
+
+* 响应式状态引擎（`createReactiveStateEngine`）支持指定多个keyColumn。(**1.30.8**)
+
+* 横截面引擎（`createCrossSectionalEngine`）的指标支持聚合和非聚合混用。(**1.30.8**)
+
+* 分布式表中使用`skew`和`kurtosis`时支持偏差校正。(**1.30.9**)
+
+* 同一个update语句对同一列进行了重复更新时，会抛出异常提示。(**1.30.9**)
+
+* 时间聚合引擎支持timeColumn指定2列，比如同时指定date和time列。(**1.30.9**)
+
+* `sqlUpdate` 函数where条件中允许调用函数。(**1.30.9**)
+
+* `firstNot`和`lastNot`用于分布式表时，支持指定第2个参数。(**1.30.9**)
+
 * `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	(**1.30.9**)
-* 写入数据若在分区之外没有成功写入，会在日志中记录warning。(**1.30.9**)
-* 高可用流表的引用变量被 undef后，仍然可以通过 `dropStreamTable` 删除该表。 (**1.30.9**)
-* `haStreamTable`支持多个keyColumn。**(1.30.10)**
-* `createTimeSeriesEngine`、`createDailyTimeSeriesEngine`、`createCrossSectionalEngine`、`createAnomalyDetectionEngine`、`createSessionWindowEngine`的metrics参数支持tuple。**(1.30.10)**
-* 增加一个选项，在`sqlUpdate`时，可以不使用hardlink，新增选项名称为 useHardLink。**(1.30.10)**
-* 优化ContextBy limit的性能。**(1.30.10)**
-* `TimeSeriesEngine` 和 `dailyTimeSeriesEngine` 支持指标指定各自的fill方法。**(1.30.10)**
-* 异常检测引擎 outputTable 的时间列与dummyTable不一致时抛出异常提示。**(1.30.10)**
-* 优化 `skew` , `kurtosis`函数在timeSeriesEngine使用时性能。(**1.30.11**)
-* 优化timeSeriesEngine在useSystemTime=true时的性能。(**1.30.11**)
-* `createTimeSeriesEngine`, `createCrossSectional`,`createDailyTimeSeriesEngine`, `AnomalyDetectionEngine`, `SessionWindowEngine` 流数据引擎支持输出结果表为分布式表。(**1.30.11**)
-* CrossSectionalEngine 中加一个可选参数`contextbycolumn`分组字段，如果设置了，按照分组字段来做计算。(**1.30.11**)
+
+* 若由于数据在分区之外而没有成功写入，会在日志中记录warning。(**1.30.9**)
+
+* 高可用流表的引用变量使用`undef`取消定义后，仍然可以通过`dropStreamTable`删除该表。 (**1.30.9**)
+
+* `haStreamTable`支持多个keyColumn。(**1.30.10**)
+
+* `createTimeSeriesEngine`, `createDailyTimeSeriesEngine`, `createCrossSectionalEngine` , `createAnomalyDetectionEngine`, `createSessionWindowEngine`的metrics参数支持tuple。**(1.30.10)**
+
+* 新增配置参数useHardLink，在`sqlUpdate`时，可以不使用hardlink。**(1.30.10)**
+
+* 优化ContextBy搭配`limit`使用的性能。**(1.30.10)**
+
+* `createTimeSeriesEngine`和`createDailyTimeSeriesEngine`支持指标中指定各自的fill方法。**(1.30.10)**
+
+* 异常检测引擎（`createAnomalyDetectionEngine`）的outputTable的时间列与dummyTable不一致时抛出异常提示。**(1.30.10)**
+
+* 优化`skew`, `kurtosis`函数在时间序列聚合引擎中使用时的性能。(**1.30.11**)
+
+* 优化时间序列聚合引擎在useSystemTime=true时的性能。(**1.30.11**)
+
+* `createTimeSeriesEngine`, `createCrossSectional`,`createDailyTimeSeriesEngine`, `createAnomalyDetectionEngine`, `createSessionWindowEngine`支持输出结果表为分布式表。(**1.30.11**)
+
+* 横截面引擎（`createCrossSectionalEngine`）新增可选参数contextbycolumn作为分组字段，如果设置了该参数，按照分组字段来做计算。(**1.30.11**)
+
 * server log 中重新规划输出日志，将一部分事务处理细节信息归入DEBUG类型。避免日志增长过快。(**1.30.11**)
+
 * 与标准SQL兼容，当select子句中包含的列与分组字段（group by）重名时，不再抛出异常。(**1.30.12**)
-* 取消API和GUI提交脚本长度不能超过64K的限制。(**1.30.12**)
+
+* 放开API和GUI提交脚本长度不能超过64K的限制。(**1.30.12**)
+
 * `window join`的聚合指标支持以元组的方式输入，也即元组的每一个元素表示一个聚合指标。(**1.30.12**)
-* `createCrossSectionalEngine`（横截面引擎），收到的数据中出现乱序时则丢弃乱序数据。(**1.30.12**)
+
+* 横截面引擎（`createCrossSectionalEngine`）收到的数据中出现乱序时则丢弃乱序数据。(**1.30.12**)
+
 * `setStreamTableFilterColumn`支持高可用流表。(**1.30.12**)
+
 * `addVolumes`函数增加了校验，不允许在控制节点上执行。(**1.30.12**)
-* createTimeSeriesEngine和createDailyTimeSeriesEngine函数新增参数forceTriggerTime。(**1.30.13**)
-* 缩短了scheduleJob的间隔时间到5分钟。(**1.30.13**)
-* Time series engine 和 daily time series engine支持多个keyColumn。(**1.30.13**)
-* upsert!函数ignoreNull字段支持DFS表。(**1.30.13**)
-* parseExpr新增可选参数modules和overloadedOperators，可加载模块，且支持使用字典来给表达式中的变量赋值。(**1.30.13**)
-* sql 函数新增可选参数exec，支持生成exec语句。(**1.30.13**)
+
+* 函数`createTimeSeriesEngine`和`createDailyTimeSeriesEngine`新增参数forceTriggerTime。(**1.30.13**)
+
+* `scheduleJob`的scheduleTime指定的任务之间的最小时间间隔缩短为5分钟。(**1.30.13**)
+
+* `createTimeSeriesEngine`和`createDailyTimeSeriesEngine`支持多个keyColumn。(**1.30.13**)
+
+* 函数`upsert!`的ignoreNull字段支持分布式表。(**1.30.13**)
+
+* 函数`parseExpr`新增可选参数modules和overloadedOperators，用于加载模块，且支持使用字典来给表达式中的变量赋值。(**1.30.13**)
+
+* sql函数新增可选参数exec，支持生成exec语句。(**1.30.13**)
+
 * `temporalAdd`支持增加与减去工作日（BusinessDay），支持时间类型DATEHOUR。(**1.30.13**)
-* SQL GROUPBY子句中的interval函数支持step参数，以滑动窗口的方式计算聚合结果。(**1.30.13**)
-* delete语句支持map子句，将delete语句下沉到各分区执行。(**1.30.13**)
+
+* SQL group by子句中的interval函数支持step参数，以滑动窗口的方式计算聚合结果。(**1.30.13**)
+
+* delete语句支持map子句，将delete语句下发到各分区执行。(**1.30.13**)
+
 * 用户自定义函数的输入参数支持默认值。(**1.30.13**)
-* 时序引擎TimeSeriesEngine支持高可用。(**1.30.13**)
+
+* 时序聚合引擎支持高可用。(**1.30.13**)
+
 * `sql`函数中当参数groupFlag为PIVOTBY时，参数groupBy支持选择多列。(**1.30.13**)
-* createReactiveStateEngine新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持响应式状态引擎（reactive state engine）自动清理key。(**1.30.13**)
-* 响应式状态引擎（reactive state engine）支持输出结果到分布式表和流数据表，支持接受来自replay的输入。(**1.30.13**)
-* Windows安装包的dolphindb.cfg、controller.cfg、cluster.cfg默认配置项中移除redolog配置参数。(**1.30.13**)
+
+* 响应式状态引擎（`createReactiveStateEngine`）新增字段keyPurgeFilter和keyPurgeFreqInSecond，以支持响应式状态引擎自动清理key。(**1.30.13**)
+
+* 响应式状态引擎（`createReactiveStateEngine`）支持输出结果到分布式表和流数据表，支持接受来自replay的输入。(**1.30.13**)
+
+* Windows安装包的dolphindb.cfg, controller.cfg, cluster.cfg默认配置项中移除redolog配置参数。(**1.30.13**)
+
 * 改进redo log的回放性能。在有大量小事务的情况下，性能有10倍以上的提升。(**1.30.13**)
+
 * 修改`iif`函数在condition包含空值时的行为。旧版本中condition的元素包含空值被当作false处理。新版本中如果为空值，对应的结果也为空值。(**1.30.14**)
-* in(X, Y)函数的参数Y支持为NULL，当Y为无类型的NULL时，函数的返回值为false或每一个值为false的vector。(**1.30.14**)
+
+* `in`函数的参数Y可以输入一个标量，支持为NULL。当Y为无类型的NULL时，函数的返回值为false或每一个值都为false的vector。(**1.30.14**)
+
 * 矩阵进行`accumulate`等计算时放开8192行的限制。(**1.30.14**)
+
 * 对维度表的并发执行写入、更新和删除等操作时，不再抛出事务冲突异常。(**1.30.14**)
-* 数据节点重启时，redolog的回放会在日志中输出详细的进度。(**1.30.14**)
+
+* 数据节点重启时，会在日志中输出redo log回放的详细的进度。(**1.30.14**)
+
 * SQL语句中的`interval`功能（按时间聚合）移除range参数，同时增加可选参数explicitOffset，默认值为false。当该参数为true时，可以将第一个窗口的起始位置指定为where指定的窗口的起始位置。(**1.30.14**)
-* `ols`和`wls`在mode为2的时候，新增一个输出Residual。对分布式表中的列，同时新增一个函数`residual`用于计算回归的残差。(**1.30.14**)
+
+* `ols`和`wls`在mode为2的时候，新增一个输出Residual。对分布式表中的列，新增一个函数`residual`用于计算回归的残差。(**1.30.14**)
+
 * 计算节点(computing node)支持客户端的所有操作。(**1.30.14**)
+
 * SQL pivot产生的表列名不再特殊处理，即直接使用pivot的值作为列名。(**1.30.14**)
-* 函数`rank`, `denseRank`, `cumrank`, `rowRank`和`rowDenseRank`支持percent形式。(**1.30.14**)
-* kmeans支持自定义质心。(**1.30.14**)
+
+* 函数`rank`, `denseRank`, `cumrank`, `rowRank`和`rowDenseRank`支持percent形式显示排名。(**1.30.14**)
+
+* `kmeans`支持自定义质心。(**1.30.14**)
+
 * window join增加对`varp`, `stdp`, `prod`，`skew`和`kurtosis` 5个聚合函数的优化。(**1.30.14**)
+
 * 支持对非数值类型进行`unpivot`。(**1.30.14**)
+
 * 部分滑动窗口函数系列如`msum`，当输入数据为indexed matrix或indexed series时，窗口支持时间偏移窗口类型。(**1.30.14**)
+
 * `database`函数新增可选参数atomic。当atomic取值为'CHUNK'时，写入操作只保准分区的原子性，此时也允许多个并发线程同时写入该数据库的同一个分区。(**1.30.14**)
+
 * 时序聚合引擎的forceTriggerTime参数计算规则修改，设置updateTime时，不再限制输出表为keyedTable。(**1.30.15**)
-* 横截面引擎添加是否触发有效计算的开关。(**1.30.15**)
-* 响应式引擎中增加支持`mmad`状态函数。(**1.30.15**)
+
+* 横截面引擎（`createCrossSectionalEngine`）添加是否触发有效计算的开关。(**1.30.15**)
+
+* 响应式状态引擎（`createReactiveStateEngine`）中增加支持`mmad`状态函数。(**1.30.15**)
+
 * 时序聚合引擎新增对nanotimestamp的规整。(**1.30.15**)
+
 * 共享流表新增权限控制。(**1.30.15**)
+
 * getStreamingStat().subWorkers的结果表中增加以下参数：msgAsTable, batchSize, throttle, hash, filter, persistOffset, timeTrigger, handlerNeedMsgId, raftGroup, 用于对流数据的监控。(**1.30.15**)
+
 * `sma, wma, dema, tema, trima, t3, ma, talib, talibNull, linearTimeTrend`增加流数据中对应的state function。(**1.30.15**)
-* 维度表的delete支持并发操作。(**1.30.15**)
+
+* 维度表支持并发delete操作。(**1.30.15**)
+
 * string类型支持直接与NULL进行比较。(**1.30.15**)
+
 * 提升`stdp`, `std`, `varp`, `var`, `skew`, `kurtosis`, `mskew`, `mkurtosis`, `tmskew`, `tmkurtosis`，以及window join中`skew`和`kurtosis`等函数的精度。(**1.30.15**)
+
 * 高阶函数的第一个参数会被强制解析成函数。(**1.30.15**)
+
 * UDF函数支持keyword arguments。(**1.30.15**)
+
 * 新增对`qr`, `ols`, `dot`函数输入的校验，不允许行数或列数为0的矩阵作为输入。(**1.30.15**)
+
+* 使用赋值语句对内存表进行更新时，支持在行过滤条件中输入 BOOL 类型数组，形如：t[`y, t[`y]>0] = 0，其中 t 是表变量，y 是 t 的列名。（**1.30.16**）
+
+* upsert!函数新增可选参数 *sortColumns*，更新后的表可根据该指定列进行排序。（**1.30.16**）
+
+* cancelJob, cancelConsoleJob支持同时取消多个任务，且优化了集群阻塞时取消任务的性能。（**1.30.16**）
+
+* set支持 BLOB 类型的值。（**1.30.16**）
+
+* keyedStreamTable 一次性批量插入多条键值相同的新记录，出现插入会失败。（**1.30.16**）
+
+* 优化了atImin和atImax在window join中的使用性能。（**1.30.16**）
+
+* run函数新增可选参数 *clean*，控制是否清理当前session中的变量。（**1.30.16**）
+
+* wj函数，duration 支持设置为 y（年），M（月），B（工作日）。（**1.30.16**）
+
+* loadText支持字符串包含 ASCII 码为 0 的字符。（**1.30.16**）
+
+* 支持对矩阵的条件赋值。（**1.30.16**）
+
+* loadTextEx新增可选参数 *atomic*，默认值是false。加载大文件的情景下，设置该参数为false以将文件加载事务拆分为多个事务，避免一个事务加载大文件时出现卡住的情况。（**1.30.16**）
+
+* getCompletedQueries函数和 getRunningQueries函数返回值中添加remoteIP字段。（**1.30.16**）
+
+* 配置项参数 *stdoutLog* 支持设置为 2，表示同时打印日志到标准输出和日志文件。（**1.30.16**）
+
+* 异常检测引擎（anomaly detection engine）*metrics* 参数支持序列相关函数。（**1.30.16**）
+
+* 时序引擎（time-series engine）*windowSize* 为向量时，各元素取值可相同。（**1.30.16**）
+
+* 横截面引擎（cross-sectional engine）支持 *keyColumn* 输入一个向量。（**1.30.16**）
+
+* 支持向流数据引擎插入 tuple 类型的记录。（**1.30.16**）
+
+* 函数getStreamEngineStat返回的横截面引擎的统计信息添加了memoryUsed 字段，可以查看横截面引擎所占内存。（**1.30.16**）
+
+* createAsofJoinEngine 在 *metrics* 中支持输出右表的时间列。（**1.30.16**）
+
+* 共享内存表（共享流表）新增可读不可写的权限管理。（**1.30.16**）
+
+* 提升了控制节点高可用的稳定性。（**1.30.16**）
+
+* 日志中新增打印delete和update操作信息。（**1.30.16**）
+
+* 输出日志中流订阅任务的报错信息增加订阅主题。（**1.30.16**）
+
+* Web任务管理界面优化。重新设计、整合了 Web 管理界面，增加了作业管理功能，支持查看、停止、取消 DolphinDB 运行中、已提交和定时触发的作业。
+
+  新版本 server 端对于 http://ip:port/ 默认渲染 index.html (原来会根据结点类型默认渲染 default.html 或者 nodedetail.html), 因此需要用户在升级的同时更新替换 web 文件夹，不能只替换 server 可执行文件，否则访问网页会报错 cannot find file index.html
+
+  如果用户在收藏夹中保存了旧的带有路径的链接 (default.html 和 nodedetail.html)，可能出现打开后缺少导航栏，无法登陆的问题，需要用户去掉地址栏后面的路径，直接访问 http://ip:port/
+
+  新版本使用了 WebSocket 协议，增加了对 DolphinDB 二进制协议的支持，对浏览器的要求也随之提高，可能需要用户更新浏览器到最新的版本，推荐使用 Chrome 最新版或 Edge 最新版。（**1.30.16**）
+
+  
 
 > Bug fixes:
 
@@ -483,6 +765,33 @@
 * `temporalParse`对时间向量转换失败的情况下，返回的结果不正确，应该为NULL。(**1.30.15**)
 * 对空表进行update时，使用context by语句，不能产生新的列。(**1.30.15**)
 * where 条件中"!="前面没有空格时解析失败。(**1.30.15**)
+* 当事务刷盘过慢，可能会出现 redo log 回收不及时，导致重启后数据丢失。（**1.30.16**）
+* 通过一个dolphindb server同时启动多个dolphindb 集群，出现数据节点无法启动的报错”Failed to open public key file. No such file or directory.”。（**1.30.16**）
+* 高可用集群设置了定时任务（scheduled job），有时会出现因为各个控制节点初始用户的uuid不同，导致切换leader后，原有的定时任务在新leader上认证失败而无法执行的问题。（**1.30.16**）
+* 数据节点崩溃之后，代理节点每隔一秒而不是按照参数 datanodeRestartInterval配置的时间来重启数据节点。（**1.30.16**）
+* 定时任务（scheduled job）如果包含了SQL update语句，且 where 条件中使用了函数，则在系统重启时反序列化会失败。（**1.30.16**）
+* 对分布式表更新后，若提交事务（commit）失败，则旧的物理目录不会被回收。（**1.30.16**）
+* 高并发写入时，当 redo log 所在磁盘占满时，会概率性导致 redo log 回收线程死锁。（**1.30.16**）
+* 数据节点写入数据时内存不足时，未报错 Out of Memory，而是卡住一段时间后崩溃。（**1.30.16**）
+* OLAP 存储引擎在各种并发操作时出现节点随机下线的情况。等待一段时间后节点上线， getTabletsMeta返回结果显示丢失一个副本的数据，但实际上并没有丢失。（**1.30.16**）
+* 事务回滚出现超时场景下，chunk 的状态设置错误，导致流表持久化报错。（**1.30.16**）
+* 流数据引擎写入持久化流表时，若压缩失败，server 可能会 crash。（**1.30.16**）
+* 横截面引擎（cross-sectional engine）参数校验出错，指定 *timeColumn* 的情况下，没有指定 *useSystemTime* 或者指定 *useSystemTime* 为true，未抛出异常。（**1.30.16**）
+* 时间序列引擎（time-series engine）中当指定 *useSystemTime* 为true且 *outputTable* 是分布式表时，有时会抛出类型不匹配的异常。（**1.30.16**）
+* 用于流数据处理的Asof Join Engine指定 *delayedTime* 的情况下，有时写入数据会出现crash。（**1.30.16**）
+* 流数据高可用，两次append的数据都超过65536，如果此时发生rollback，index.log会重复写入两条一样的index导致报错”index.log contains invalid data.“。（**1.30.16**）
+* Windows系统使用time-series engine, daily time-series engine, asof join engine写入数据有时会发生 crash。（**1.30.16**）
+* unsubscribeTable 取消订阅，当消费队列有数据堆积时，会导致 subworker 里面残留过期的信息。（**1.30.16**）
+* 节点重启之后，高可用流表有时会加载失败；流表和订阅的 raft 组都切换 leader 之后，高可用订阅自动重连失败。（**1.30.16**）
+* 横截面引擎 *triggeringPattern* 为 keyCount 且 *triggeringInterval* 为 tuple 时，会输出重复数据。（**1.30.16**）
+* 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，再次查询该内存表时出现节点crash。（**1.30.16**）
+* 使用readRecord!导入二进制文件，会报错“Read only object or object without ownership can‘t be applied to mutable function readRecord!”。（**1.30.16**）
+* 函数调用时，若右括号不在同一行，有时解析会报错。（**1.30.16**）
+* 查询一个值分区的分布式表，按分区列分组获取每个组最后的K条记录（context by partitionCol limit -k），且在某个分区里不存在满足 where 条件的数据时，会查到不满足条件的数据。（**1.30.16**）
+* SQL中调用rolling/moving函数时，若不指定生成列的列名，则会报错”More than one column has the duplicated name”。（1.30.16）
+* interval在某个 *step* 区间内没有数据时，会生成空值。（**1.30.16**）
+* sliceByKey的 *rowKeys* 的参数设置错误时，server 会 crash。 （**1.30.16**）
+* 函数replace!修改一个向量，引入空值后，没有正确设置空值标志。（**1.30.16**）
 
 ### DolphinDB 插件
 

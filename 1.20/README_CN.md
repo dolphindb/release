@@ -201,10 +201,18 @@
 
 发行日期： 2021-11-12
 
-
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.23.zip) | 
 [Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.23_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.23.zip) |
+
+版本号： 1.20.24
+
+发行日期： 2022-01-10
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.24.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.24_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.24.zip) |
+
 
 
 > 新功能
@@ -349,6 +357,9 @@
 * ols和wls在mode为2的时候，新增一个输出Residual。对分布式表中的列，同时新增一个函数residual用于计算回归的残差。(**1.20.23**)
 * kmeans支持自定义质心。(**1.20.23**)
 * toStdJson函数不再截断结果。(**1.20.23**)
+* 使用赋值语句对内存表进行更新时，支持在行过滤条件中输入 BOOL 类型数组，形如：t[`y, t[`y]>0] = 0，其中 t 是表变量，y 是 t 的列名。（**1.20.24**）
+* 使用改进的tcmalloc，可以有效避免Out Of Memory错误。（**1.20.24**）
+
 
 > Bug fixes:
 
@@ -475,7 +486,7 @@
 * 高可用流表使用函数`setStreamTableFilterColumn`设置filter后, 重启节点后filter字段消失。(**1.20.22**)
 * python api序列化时间类型时，由于发生内存踩踏而导致api收到错误消息。(**1.20.22**)
 * 多副本集群，设置dataSync=1时可能出现读取数据失败或者读取到全部空值。(**1.20.22**)
-* `mr`函数中数据源的脚本长度超过1024字节时，远程执行的数据源错误的将脚本字符串作为执行结果。(**1.20.22**) 
+* `mr`函数中数据源的脚本长度超过1024字节时，远程执行的数据源错误的将脚本字符串作为执行结果。(**1.20.22**)
 * 控制节点在高可用的情况下，重启leader，偶尔会导致数据节点crash。(**1.20.23**)
 * 控制节点在高可用的情况下，频繁切换leader，导致写入或查询过程中任务卡住。(**1.20.23**)
 * checkPoint文件有时会堆积而没有删除。(**1.20.23**)
@@ -497,6 +508,12 @@
 * keyedTable append!数据量多时写入失败。(**1.20.23**)
 * where条件中"!="前面没有空格时解析失败。(**1.20.23**)
 * 自定义函数中的常量均被标记为static，使用时必须先复制。函数序列化时丢失了static标记。(**1.20.23**)
+* 使用`readRecord!`导入二进制文件，会报错“Read only object or object without ownership can‘t be applied to mutable function readRecord!”。（**1.20.24**）
+* 集群中使用`logout`退出登陆失败。（**1.20.24**）
+* `mpercentile`计算偶尔会卡住。（**1.20.24**）
+* OPC插件存在内存泄漏。（**1.20.24**）
+* `sliceByKey`的 *rowKeys* 的参数设置错误时，server 会 crash。（**1.20.24**）
+
 
 ### DolphinDB 插件
 
@@ -575,5 +592,4 @@
 * Node.js API
 
     * 新增了API支持Node.js运行环境下连接DolphinDB。(**1.20.2**)
-
 
