@@ -49,8 +49,6 @@
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.4.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.4_JIT.zip)
 
 
 

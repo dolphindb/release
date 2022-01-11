@@ -784,6 +784,8 @@
 * unsubscribeTable 取消订阅，当消费队列有数据堆积时，会导致 subworker 里面残留过期的信息。（**1.30.16**）
 * 节点重启之后，高可用流表有时会加载失败；流表和订阅的 raft 组都切换 leader 之后，高可用订阅自动重连失败。（**1.30.16**）
 * 横截面引擎 *triggeringPattern* 为 keyCount 且 *triggeringInterval* 为 tuple 时，会输出重复数据。（**1.30.16**）
+* 流表包含 BLOB 类型，从磁盘中加载报错“Failed to decompress the vector. Invalid message format”。（**1.30.16**）
+* 流表在写入 BLOB 数据且单行数据大于 64KB 时会 crash。（**1.30.16**）
 * 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，再次查询该内存表时出现节点crash。（**1.30.16**）
 * 使用readRecord!导入二进制文件，会报错“Read only object or object without ownership can‘t be applied to mutable function readRecord!”。（**1.30.16**）
 * 函数调用时，若右括号不在同一行，有时解析会报错。（**1.30.16**）
