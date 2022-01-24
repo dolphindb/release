@@ -87,22 +87,21 @@
 * 增加`cumfirstNot`,`cumlastNot`, `mfirst`，`mlast`等函数，以及在响应式引擎中实现它们的状态函数。(**2.00.3**)
 * 新增函数`oneHot`，用于做one hot（独热）编码。(**2.00.3**)
 * 新增`setAtomicLevel`函数，用于修改历史数据库的配置以支持并发写入。(**2.00.3**)
-* 支持表级别分区粒度，支持同一库中不同的表可以并发写入。（**2.00.4**）
+* 支持表级别分区粒度，支持同一库中不同的表并发进行增删改操作。（**2.00.4**）
 * 往内存表的时间列写入数据时，自动进行时间类型转换。（**2.00.4**）
 * 支持在线增量恢复，可以异步地进行节点数据恢复。 （**2.00.4**）
 * 支持管理和查询集群中的所有计算任务。（**2.00.4**）
 * 内存表和流数据表支持 BLOB 类型。（**2.00.4**）
-* 支持真正的快照隔离。（**2.00.4**）
 * SQL语句增加标识 [HINT_EXPLAIN]，可以显示 SQL 的执行过程。（**2.00.4**）
 * 新增函数streamEngineParser，支持自动分解截面因子成多个内置流计算引擎的流水线。（**2.00.4**）
 * 新增函数existSubscriptionTopic，用于判断某一个订阅是否已经创建。（**2.00.4**）
-* 新增函数createLookupJoinEngine，支持将流数据表和一个相对稳定的表做左连接。（**2.00.4**）
+* 新增函数createLookupJoinEngine，支持将流数据表和流数据表、内存表或者分布式表（目前只支持维度表）做左连接。（**2.00.4**）
 * 新增函数moveChunksAcrossVolume，在增加新的 volume 后，用于转移旧 volume 的部分 chunk 到新 volume。（**2.00.4**）
 * 增加新的 volume 后，可以使用resetDBDirMeta函数转移老的 volume 上的 meta log 目录到新的volume。（**2.00.4**）
 * 新增 10 个TopN函数 msumTopN, mavgTopN, mstdpTopN, mstdTopN, mvarTopN, mvarpTopN, mcorrTopN, mbetaTopN, mcovarTopN, mwsumTopN，且 createReactiveStateEngine 引擎支持它们相应的状态函数。（**2.00.4**）
 * 新增函数makeKey和makeOrderedKey，可以将多个列合并成一个 BLOB 列，用作字典或集合的键值，其中makeOrderedKey的结果保留了多个字段的排序顺序。（**2.00.4**）
 * 新增高阶函数aggrTopN，用以计算根据排序列获取的前N行数据的聚合结果。（**2.00.4**）
-* 新增高阶函数window和twindow，支持窗口函数的计算。（**2.00.4**）
+* 新增高阶函数window和twindow。与move与tmove类似，但适用于更通用的场景，对于窗口边界的处理稍有不同。。（**2.00.4**）
 * 新增配置项raftElectionTick，用以配置raft切换leader的心跳时间。同时新增函数setCacheEngineMemSize, setTimeoutTick，setTSDBCacheEngineSizesetMaxMemSize，setReservedMemSize和 setMaxBlockSizeForReservedMemory支持在线修改对应的配置项。（**2.00.4**）
 * 新增函数fixedLengthArrayVector，支持将多个向量合成一个 array vector。（**2.00.4**）
 * 新增函数loadNpz支持导入 numpy 的 npz 文件。（**2.00.4**）
@@ -237,7 +236,7 @@
 
 * 优化了atImin和atImax在window join中的使用性能。（**2.00.4**）
 
-* run函数新增可选参数 *clean*，控制是否清理当前session中的变量。（**2.00.4**）
+* run命令新增可选参数 *clean*，控制是否清理当前session中的变量。（**2.00.4**）
 
 * wj函数，duration 支持设置为 y（年），M（月），B（工作日）。（**2.00.4**）
 
@@ -271,11 +270,7 @@
 
 * 输出日志中流订阅任务的报错信息增加订阅主题。（**2.00.4**）
 
-* Web任务管理界面优化。重新设计、整合了 Web 管理界面，增加了作业管理功能，支持查看、停止、取消 DolphinDB 运行中、已提交和定时触发的作业。
-
-  新版本 server 端对于 http://ip:port/ 默认渲染 index.html (原来会根据结点类型默认渲染 default.html 或者 nodedetail.html), 因此需要用户在升级的同时更新替换 web 文件夹，不能只替换 server 可执行文件，否则访问网页会报错 cannot find file index.html
-
-  如果用户在收藏夹中保存了旧的带有路径的链接 (default.html 和 nodedetail.html)，可能出现打开后缺少导航栏，无法登陆的问题，需要用户去掉地址栏后面的路径，直接访问 http://ip:port/
+* Web任务管理界面优化。重新设计、整合了 Web 管理界面，增加了作业管理功能，支持查看、停止、取消 DolphinDB 运行中、已提交和定时触发的作业。升级 server 版本后，需要同步更新 web 文件夹。
 
   新版本使用了 WebSocket 协议，增加了对 DolphinDB 二进制协议的支持，对浏览器的要求也随之提高，可能需要用户更新浏览器到最新的版本，推荐使用 Chrome 最新版或 Edge 最新版。（**2.00.4**）
 
@@ -351,30 +346,29 @@ Bug fixes:
 * `temporalParse`对时间向量转换失败的情况下，返回的结果不正确，应该为NULL。(**2.00.3**)
 * 对空表进行update时，使用context by语句，不能产生新的列。(**2.00.3**)
 * where 条件中"!="前面没有空格时解析失败。(**2.00.3**)
-* 当事务刷盘过慢，可能会出现 redo log 回收不及时，导致重启后数据丢失。（**2.00.4**）
+* 当事务刷盘过慢，可能会出现 redo log 回收超时，导致重启后数据丢失。（**2.00.4**）
 * 通过一个dolphindb server同时启动多个dolphindb 集群，出现数据节点无法启动的报错”Failed to open public key file. No such file or directory.”。（**2.00.4**）
 * 高可用集群设置了定时任务（ scheduled job），有时会出现因为各个控制节点初始用户的uuid不同，导致切换leader后，原有的定时任务在新leader上认证失败而无法执行的问题。（**2.00.4**）
 * 数据节点崩溃之后，代理节点每隔一秒而不是按照参数 datanodeRestartInterval配置的时间来重启数据节点。（**2.00.4**）
 * 定时任务（ scheduled job）如果包含了SQL update语句，且 where 条件中使用了函数，则在系统重启时反序列化会失败。（**2.00.4**）
 * 对分布式表更新后，若提交事务（commit）失败，则旧的物理目录不会被回收。（**2.00.4**）
-* 高并发写入时，当 redo log 所在磁盘占满时，会概率性导致 redo log 回收线程死锁。（**2.00.4**）
+* 高并发写入场景下，当 redo log 所在磁盘占满时，会概率性导致 redo log 回收线程死锁。（**2.00.4**）
 * 数据节点写入数据时内存不足时，未报错 Out of Memory，而是卡住一段时间后崩溃。（**2.00.4**）
 * OLAP 存储引擎在各种并发操作时出现节点随机下线的情况。等待一段时间后节点上线， getTabletsMeta返回结果显示丢失一个副本的数据，但实际上并没有丢失。（**2.00.4**）
-* TSDB存储引擎，若数据按照时间列（*timeCol*）分区，排序列（ *sortColumns* ）有两列以上，且最后一列为 timeCol，此时若查询语句为 context by sortColumns csort timeCol limit k(k为整数)，有时会 crash。（**2.00.4**）
+* TSDB存储引擎，若数据按照时间列（*timeCol*）分区，排序列（*sortColumns*）有两列以上，且最后一列为 *timeCol*，此时若按照排序列（*sortColumns*）分组，取每个分组内按照分区列（*timeCol*）排序后的前k条记录（`context by sortColumns csort timeCol limit k`），有时会 crash。（**2.00.4**）
 * TSDB 存储引擎并发修改 edit log，导致数据节点无法重启。（**2.00.4**）
 * 事务回滚出现超时场景下，chunk 的状态设置错误，导致流表持久化报错。（**2.00.4**）
-* 流数据引擎写入持久化流表时，若压缩失败，系统可能会 crash。（**2.00.4**）
 * 横截面引擎（ cross-sectional engine ) 参数校验出错，指定 *timeColumn* 的情况下，没有指定 *useSystemTime* 或者指定 *useSystemTime* 为true，未抛出异常。（**2.00.4**）
 * 时间序列引擎（ time-series engine )中当指定 *useSystemTime* 为true且 *outputTable* 是分布式表时，有时会抛出类型不匹配的异常。（**2.00.4**）
 * 用于流数据处理的Asof Join Engine指定 *delayedTime* 的情况下，有时写入数据会出现 crash。（**2.00.4**）
 * 流数据高可用，两次append的数据都超过65536，如果此时发生rollback，index.log会重复写入两条一样的index导致报错”index.log contains invalid data.“。（**2.00.4**）
-* Windows系统使用time-series engine, daily time-series engine, asof join engine写入数据有时会发生 crash。（**2.00.4**）
-* unsubscribeTable 取消订阅，当消费队列有数据堆积时，会导致 subworker 里面残留过期的信息。（**2.00.4**）
+* windows系统下，向time-series engine, daily time-series engine和asof join engine写入数据，有时会发生 crash。（**2.00.4**）
+*  subExecutor还有任务在执行，此时，使用 unsubscribeTable 成功取消订阅，但getStreamingStat().subWorkers 仍能查询到被取消订阅的topic。（**2.00.4**）
 * 节点重启之后，高可用流表有时会加载失败；流表和订阅的 raft 组都切换 leader 之后，高可用订阅自动重连失败。（**2.00.4**）
-* 横截面引擎 *triggeringPattern* 为 keyCount 且 *triggeringInterval* 为 tuple 时，会输出重复数据。（**2.00.4**）
+* 横截面引擎 *triggeringPattern* 为 'keyCount' 且 *triggeringInterval* 为 tuple 时，会输出重复数据。（**2.00.4**）
 * 流表包含 BLOB 类型，从磁盘中加载报错“Failed to decompress the vector. Invalid message format”。（**2.00.4**）
 * 流表在写入 BLOB 数据且单行数据大于 64KB 时会 crash。（**2.00.4**）
-* 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，再次查询该内存表时出现节点crash。（**2.00.4**）
+* 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，加载该内存表时出现节点crash。（**2.00.4**）
 * GUI 上访问包含 array vector 的内存表 session 会断开。（**2.00.4**）
 * 使用readRecord!导入二进制文件，会报错“Read only object or object without ownership can‘t be applied to mutable function readRecord!”。（**2.00.4**）
 * 函数调用时，若右括号不在同一行，有时解析会报错。（**2.00.4**）
