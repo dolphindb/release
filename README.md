@@ -1,6 +1,8 @@
 This document lists the release notes from DolphinDB version 0.60 and all subsequent versions. Each notes includes updates and download links of DolphinDB server, GUI, APIs and plugins.
 
 ---
+[DolphinDB Compatibility Levels](./DolphinDB_compatibility_levels.md)
+
 [DolphinDB V2.00 Release Notes](2.00/README.md) (release date : 2021-07-31)
 
 [DolphinDB V1.30 Release Notes](1.30/README_CN.md) (release date : 2020-12-29)
