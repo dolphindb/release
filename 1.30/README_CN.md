@@ -1,5 +1,8 @@
 # DolphinDB发行说明
 
+## DolphinDB兼容性标准
+[DolphinDB兼容性标准](./../DolphinDB_compatibility_levels.md)
+
 ## DolphinDB服务器
 
 版本号： 1.30.0
@@ -162,6 +165,21 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.16.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.16_JIT.zip)
 
+版本号： 1.30.17
+
+发行日期： 2022-03-29
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.17.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.17_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.17_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.17.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.17_JIT.zip)
+
+兼容性标准：
+
+| 版本             | 兼容性等级                                                                                        |
+| ------------------- | --------------------------------------------------------------------------- |
+| 1.30.16 - 1.30.17 <br> 1.30.XX - 2.00.5    | 二级：升级后插件和API需要重新编译。 |
 
 
 > 新功能
@@ -342,7 +360,7 @@
 
 * 新增配置项raftElectionTick，用以配置raft切换leader的心跳时间。同时新增函数setCacheEngineMemSize, setTimeoutTick，setTSDBCacheEngineSize, setMaxMemSize，setReservedMemSize和 setMaxBlockSizeForReservedMemory支持在线修改对应的配置项。（**1.30.16**）
 
-* 新增函数fixedLengthArrayVector，支持将多个向量合成一个 array vector。（**1.30.16**）
+* 新增函数 `fixedLengthArrayVector`，支持将多个向量合成一个 array vector。（**1.30.16**）
 
 * 新增函数loadNpz支持导入 numpy 的 npz 文件。（**1.30.16**）
 
@@ -352,6 +370,25 @@
 
 * 新增fflush函数，帮助将缓存中的数据写入文件系统。（**1.30.16**）
 
+* 新增命令 `resetRecoveryWorkerNum` 动态修改用于 chunk 恢复的工作线程数。（**1.30.17**）
+
+* 支持使用命令 `kill -15 $PID`  或集群 web 管理界面安全关机。（**1.30.17**）
+
+* 新增运维函数 `imtUpdateChunkVersionOnDataNode`，修改数据节点上对应 chunkId 的版本号。维护集群中多副本数据之间，或数据节点与控制节点之间的版本一致性。（**1.30.17**）
+
+* 函数 `replay` 支持多表回放到异构流数据表，并按照时间顺序输出。（**1.30.17**）
+
+* 新增函数 `concatMatrix`，支持水平或垂直拼接多个矩阵。（**1.30.17**）
+
+* 新增高阶函数 `firstHit` 和 `ifirstHit`，用于返回 *X* 中第一个满足条件的元素。（**1.30.17**）
+
+* 新增函数 `getCurrentSessionAndUser`，获取当前session对应的sessionID和userID。（**1.30.17**）
+
+* 支持 SQL Join 的标准写法。（**1.30.17**）
+
+* 新增 SQL 语句 `alter`，用于在已有的表中添加列。（**1.30.17**）
+
+* 新增 SQL 语句 `create`，用于创建数据库或表。（**1.30.17**）
   
 
 > 改进
@@ -604,189 +641,473 @@
 
   新版本使用了 WebSocket 协议，增加了对 DolphinDB 二进制协议的支持，对浏览器的要求也随之提高，可能需要用户更新浏览器到最新的版本，推荐使用 Chrome 最新版或 Edge 最新版。（**1.30.16**）
 
-* 
+* OLAP 引擎支持在 Windows 环境中开启 dataSync（即设置配置项 *dataSync* = 1）。（**1.30.17**）
+函数 `subscribeTable` 新增可选参数 *userId* 和 *password*，系统在用户退出后自动尝试重新登录，保证订阅数据成功写入分布式表。（**1.30.17**）
+
+* `getStreamingStat().subWorkers` 函数返回结果 throttle 统一为以毫秒为单位。（**1.30.17**）
+
+* asof join 引擎支持指定多个连接列。（**1.30.17**）
+
+* 横截面引擎（cross-sectional engine）新增参数 *snapshotDir* 和 *snapshotIntervalInMsgCount* 支持快照机制，新增参数 *raftGroup* 支持计算引擎高可用。（**1.30.17**）
+
+* 新增函数 `getLeftStream` 和 `getRightStream` 支持 join 引擎的级联。（**1.30.17**）
+
+* 若横截面引擎（cross-sectional streaming engine）和时间序列引擎（time-series streaming engine）参数 *metrics* 指定的函数有多个返回值，创建引擎时无需指定列名。（**1.30.17**）
+
+* 新增命令 `addAccessControl` 对共享内存表（包括共享流表）或流数据引擎对象增加权限控制。（**1.30.17**）
+
+* SQL `pivot by` 语句支持转换UUID类型的列。（**1.30.17**）
+
+* 函数 `ceil` 和 `floor` 结果的范围上限提升为2^53。（**1.30.17**）
+
+* 若 SQL `pivot by` 语句最后一列为分区列，且 `select` 字段不包含聚合函数或序列函数，`pivot by` 语句性能提升近五倍。（**1.30.17**）
+
+* 函数 `med` 参数支持BOOL类型。（**1.30.17**）
+
+* 函数 `ema`、`kama` 和 `wma` 支持计算BOOL类型向量。（**1.30.17**）
+
+* 命令 `addColumn` 新增列名支持以数字开头。（**1.30.17**）
+
+* 函数 `loadText` 和 `loadTextEx` 导入csv文件时，第一行数据的读取上限为 256 KB。（**1.30.17**）
+
+* 聚合函数、窗口函数和向量函数支持表作为输入参数。（**1.30.17**）
+
+* 函数 `rand` 和 `normal` 的参数 *count* 支持输入数据对，用于指定生成矩阵的维度。（**1.30.17**）
+
+* row 系列逻辑函数（`rowAnd`, `rowOr`, `rowXor`）支持输入整数。（**1.30.17**）
+`bar` 函数新增参数 *closed*，用于指定分组包含左边界或右边界。（**1.30.17**）
+
+* 滑动窗口函数的参数 *X* 是索引序列或索引矩阵，且window是正整数时，窗口按照索引滑动。（**1.30.17**）
+
+* 自定义函数定义时参数可写为多行，每行以逗号结束。（**1.30.17**）
+
+* SQL `order by` 语句支持使用as改名前和改名后的字段。（**1.30.17**）
+
+* 函数 `dailyAlignedBar` 参数 *X* 新增支持 SECOND，TIME，NANOTIME 类型向量。（**1.30.17**）
+
+* 日级时间序列聚合引擎（daily time-series streaming engine）新增参数 *forceTriggerSessionEndTime*，用于指定强制触发 *sessionEnd* 的窗口。（**1.30.17**）
+
+* 日级时间序列聚合引擎（daily time-series streaming engine）和时间序列聚合引擎（time-series streaming engine）修改参数 *forceTriggerTime*，未计算的窗口由计算结束后的最新数据触发。若设置了参数 *fill*，则同时填充无数据的窗口。（**1.30.17**）
+
 
 > Bug fixes:
 
 * 修复无法将一个带有SYMBOL类型字段的空表序列化到Python API的问题。(**1.30.1**)
+
 * 处理流数据时，如果订阅端处理太慢，发布端在磁盘保留消息的时间又太短，需要发布的消息在磁盘和内存中都已经不存在了，会导致系统崩溃。(**1.30.1**)
+
 * 修复redo log和cache engine在内存不足时导致系统死锁的问题。(**1.30.1**)
+
 * Delta压缩算法连续两次增加的记录数小于3时，解压函数无法解压，报异常。(**1.30.2**)
+
 * 个别函数最后一个参数的名称解析有误，导致使用键值参数时报找不到参数的异常。(**1.30.2**)
+
 * 极端内存不足的情况下可能导致redo log写入失败。(**1.30.2**)
+
 * 系统启动时删除不必要的异常警告 \<WARNING\> : failed to remove public key file。(**1.30.2**)
+
 * 键值表和索引表在以下场景导致系统崩溃：包含多个键值列，查询时一个键值列是包含单个元素的向量，其他键值列的值是标量。(**1.30.3**)
+
 * 内置的哈希表使用的内存超过2G时可能导致系统崩溃，影响的函数包括`isDuplicated`。(**1.30.3**)
+
 * 函数`searchK`在应用到big array（非连续的数组）时可能出现结果不正确。(**1.30.3**)
+
 * 订阅时启用filter，并且同一个流表被同一个节点的多个应用订阅时，只有按照订阅的顺序，依次反订阅（unsubcribeTable）才可以取消订阅。修复后的版本没有顺序要求。(**1.30.3**)
+
 * `mr`函数和`imr`函数在以下场景导致系统崩溃：启用了`reduce`函数，但没有启用`final`函数，`map`函数没有返回值。(**1.30.3**)
+
 * 事务管理器、任务调度器和缓存管理器在内存严重不足时出现内部状态不一致，导致死锁或者系统崩溃。(**1.30.3**)
+
 * 当磁盘被占满后，redo log内部状态出现不一致，导致重启后数据库无法启动。(**1.30.3**)
+
 * ewm系列函数包括`ewmMean`, `ewmVar`, `ewmStd`, `ewmCov`, `ewmCorr`没有注册成为顺序敏感（order sensitive）的函数，导致在sql语句中和context by子句配合使用时结果不正确。(**1.30.3**)
+
 * sql中分组计算时，如果聚合函数sum，max，min，avg，count，std等的参数用到了顺序敏感的函数如next，prev等，系统错误的使用了哈希分组优化算法，导致结果不正确。(**1.30.3**)
+
 * 使用顺序敏感的函数（如mstd，mavg）构造部分应用（partial application）时，没有正确设置顺序敏感标志，导致启用context by子句的sql语句应用此类函数的部分应用时，结果不正确。(**1.30.3**)
+
 * 当输入的数据包含多个key，每个key的数据按时间升序排列，但是全部数据并非按时间顺序排列时，时间序列聚合引擎输出的结果缺失部分数据。(**1.30.4**)
+
 * 同一客户端对同一流表有多个订阅且流数据的队列满时，可能出现订阅不能删除的情况。(**1.30.4**)
+
 * 当输入的数据小于一个窗口，指定的指标包含聚合和非聚合两种，异常检测引擎会崩溃。(**1.30.4**)
+
 * 修复创建数据库和表时潜在的丢失元数据的风险。(**1.30.5**)
+
 * 数据表按照日期（DATE）进行分区，分区字段ts的数据类型是TIMESTAMP，过滤条件 ts > 2021.03.02没有包含（应该包含）2021.03.02这个分区。(**1.30.6**)
+
 * 一个数据库被删除后，如果在被回收之前，系统重启了，查询时该数据库又会展现给用户。(**1.30.6**)
+
 * 自定义函数用于pcross，ploop和peach等并行计算的高阶函数时，可能出现自定义函数返回值为空的情况。(**1.30.6**)
+
 * rank函数指定tiesMethod为max时，可能导致系统崩溃。(**1.30.6**)
+
 * 当输入为单个元素的tuple时，flatten函数的结果不正确，直接返回了tuple，而不是tuple中的元素。(**1.30.6**)
+
 * 客户端为python时，month/datetime/date/minute/time/second等时间类型数据在高压力情况下可能出现输出结果不正确。(**1.30.6**)
+
 * 时间序列聚合引擎的一个批次的输入数据包含多个时间窗口时，输出的结果没有按时间排序。(**1.30.6**)
+
 * 横截面引擎一个批次的输入数据包含多个时间点，且均满足keyCount的触发条件，则输出结果有重复。(**1.30.6**)
+
 * 系统若开启了cache engine，短时间内反复多次删除和创建同一个数据库表，可能导致旧表的数据写入到新创建的同名表中。(**1.30.6**)
+
 * replay无法指定select中定义的列名作为dateColumn和timeColumn。(**1.30.6**)
+
 * 修复异常检查引擎全局不按时间排序时，输出表缺少第一组和最后一组时间数据。(**1.30.7**)
+
 * 修复并发调用`dropTable`，`getTables`会导致crash的问题。(**1.30.7**)
+
 * 修复当发布节点host定义为localhost时，远程订阅无法取消问题。(**1.30.7**)
+
 * 修复使用`nunique`查询时报错：Immutable sub vector doesn't support method getDataSegment。(**1.30.7**)
+
 * 修复节点掉线后执行dropTable失败导致节点恢复后该表也无法被删除。(**1.30.8**)
+
 * cutPoints 在sql语句中使用结果有误。(**1.30.8**)
+
 * 修复当写入keyed table的tuple中包含subarray时，返回的表结果不正确。(**1.30.8**)
+
 * 修复多层循环时，在内层循环使用break，会退出最外层循环, 此问题是由于1.30.6 版本引入。(**1.30.8**)
+
 * update分布式表失败时有几率导致在append数据时候server报告异常"appendCommittedVersion",此问题由1.30.6的分布式表支持update功能引入。(**1.30.8**)
+
 * createTimeSeriesEngine启用fill选项，当实时数据存在多个连续的空窗口时，计算结果有误。(**1.30.9**)
+
 * 设置系统定期回收策略的数据库，被删除后未及时清理回收策略。(**1.30.9**)
+
 * 一库多表，并发写入和删除不同分区，重启后查询报错symbol base is corrupted	(**1.30.9**)
+
 * 持续的重复下列操作：删除一个分布式表的分区，写入数据到这个分区，重启数据库进程，有几率出现元数据和数据不一致的情况。(**1.30.9**)
+
 * 多线程并发执行share语句共享一个表和查询一个共享表两个操作时，有几率导致系统奔溃。(**1.30.9**)
+
 * mcorr计算相关性时，如果某一列的数完全相同，应该返回空值。但由于判断浮点数是否为0的阈值设置不合理，导致结果变成0或非常接近于0的数。(**1.30.9**)
+
 * 在启用dataSync的情况下，使用loadTextEx导入大文件后，会导致redolog不释放。(**1.30.9**)
+
 * 异常检测引擎在指定多个keyColumn，计算复合表达式指标时，计算结果有误。(**1.30.9**)
+
 * 执行continue之后无法进入下一次循环。此问题从1.30.6版本引入。	(**1.30.9**)
+
 * 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 (**1.30.9**)
+
 * 高可用流表不指定keyColumn会crash。	(**1.30.9**)
+
 * 矩阵按布尔条件取列数据时结果不符合预期。(**1.30.9**)
+
 * dictUpdate函数针对值为任意类型（ANY）的字典，如果initFunc抛出异常，继续操作字典会导致crash。(**1.30.9**)
+
 * 键值表（keyedTable）更新已有的数据行时，如果输入数据是长度为1的字符串（STRING）列或符号（SYMBOL）列，系统报错incompatible between index and value。 (**1.30.9**)
+
 * 修复当表达式结果为NULL时，逻辑判断默认为true的问题。**(1.30.10)**
+
 * 修复时序聚合引擎，聚合函数嵌套序列相关函数导致数据错误，比如min(next(voltage))。**(1.30.10)**
+
 * 修复流数据计算引擎写入乱序数据导致计算错误，现对乱序数据做忽略处理。**(1.30.10)**
+
 * 修复流数据高可用切换leader后接受不到数据。**(1.30.10)**
+
 * 修复当rand(uplimit, n)的uplimit超过INT_MAX时，产生的随机数分布不是均匀的。**(1.30.10)**
+
 * 修复`createTimeSeriesEngine`指定updateTime，不指定keyColumn时，最后一批数据时间窗口长度未超过updateTime，经过2*updateTime其仍未强制触发计算。**(1.30.10)**
+
 * dropStreamTable 删除不存在的表crash，此问题由1.30.9的修复代码引入。(**1.30.11**)
+
 * 通过 insert into 方式向 CrossSectionalEngine 写入长度不一致的向量会引发crash。(**1.30.11**)
+
 * addColumn后多次插入数据，查询会报错 "The source vector has been shortened and the sub vector is not valid any more" 。(**1.30.11**)
+
 * 更新空的维度表报错: "Failed to retrieve the size and path for tablet chunk dfs://dbName/\_\_tbName/tbName"。(**1.30.11**)
+
 * 集群中的维度表和分布式表做关联报错 : "getFileBlocksMeta on path '/dbpath/tbName.tbl' failed, reason: path does not exist"。(**1.30.11**)
+
 * C++标准库string的实现存在缺陷，当节点内存满负荷运转时，使用字符串(String)会导致数据节点crash，通过重新实现string修复。(**1.30.11**)
+
 * 分区被完全删除后，first和last取值到长度为1的NULL向量，预期为空。(**1.30.11**)
+
 * 节点重启后重新定义流数据持久化时报告"contain invalid data"异常。(**1.30.11**)
+
 * dropPartition 时报错："Failed to find physical table from Table\_Name when delete tablet chunk"。(**1.30.11**) 
+
 * 对新建的维度表做upsert!时报错。(**1.30.11**)
+
 * 系统参数`localExecutors`设置为0时，在执行cancelJob等功能时，导致系统崩溃. (**1.30.12**)
+
 * 修复分布式表在反复执行删除、更新、新增和节点重启操作时，可能出现的下列状况：（1）The symbol column xxx  or the associated symbol base [] is corrupted. （2）Failed to load column. Expected xxx rows, but actually loaded xxx rows. （3）sym.col contains \(xxx rows\) than requested \(xxx rows\).\] （4）Invalid symbol file. （5）某些分区只有部分副本汇报成功。（6）节点重启时日志中出现错误 Invalid log entry type，导致无法重启。(**1.30.12**)
+
 * 修复了几个导致部分chunk一直处于recovering（恢复中）状态的场景。(**1.30.12**)
+
 * SQL语句 exec count\(\*\) from t（t为分布式表）被多个线程同时执行时，某些线程产生的结果可能是一个向量（分别记录每个分区的记录数）。正确的结果应该是一个标量（总的记录数量）。(**1.30.12**)
+
 * SQL语句分组计算（group by）时，如果系统采用了哈希算法，对symbol类型的字段使用count函数，计算结果可能不正确，空值会当作非空值计数。(**1.30.12**)
+
 * 使用SQL Delete语句对一个包含字符串列（Symbol类型的列没有影响）的大内存表（通常几千万行以上）执行删除操作时（通过where语句指定过滤条件)，有概率出现系统崩溃. (**1.30.12**)
+
 * 分布式表（左表）与未分区内存表（右表）关联（join），连接的列为分区列，where子句中包含了非分区列，而且该列同时出现在两个表中，计算结果不正确。(**1.30.12**)
+
 * 未分区内存表（左表）和分布式表（右表）关联（join），且分组子句（group by）中包含了分区列，计算结果不正确。(**1.30.12**)
+
 * 版本1.30.6中引入的会话窗口引擎（`createSessionWindowEngine`）计算有误，输出结果不正确。(**1.30.12**)
+
 * replay函数回放历史数据到共享的输出表时，应该在append数据时对数据表加锁，但实际没有加锁。如果有多个任务都在往共享表append数据，可能导致节点崩溃. (**1.30.12**)
+
 * 往异常检测引擎输入乱序数据时可能发生计算的死循环，导致执行getStreamEngineStat等其它功能时卡住。(**1.30.12**)
+
 * 用api往高可用流表写入数据，反复切换流表raft组中的leader，有概率出现数据丢失。(**1.30.12**)
+
 * `dropStreamTable`不能删除内存中的流数据表。(**1.30.12**)
+
 * 先append数据到右表，再append数据到左表，且时间类型为4字节类型时（例如datetime和time类型），`AsofJoinEngine`可能输出错误结果。(**1.30.12**)
+
 * 持久化元代码（Meta Code）时没有持久化包含的自定义函数。导致加载持久化的元代码时，可能出现系统崩溃（找不到自定义函数导致）. (**1.30.12**)
+
 * for语句在for(index in start:end)这种模式下，index使用了同一个Constant对象（循环时修改Consant的值）。如果循环语句异步执行（譬如submitJob函数提交任务），可能导致index对象被多个线程并发调用，计算结果与期望不一致。(**1.30.12**)
+
 * `eqFloat`返回的值类型错误，应该是bool类型（true或false），实际返回double类型（0或1）。(**1.30.12**)
+
 * `gram`函数多次执行，出现计算结果有误的情况。(**1.30.12**)
+
 * 删除分布式表（使用dropTable或dropPartition）在提交时失败，导致事务回滚后，再次查询该表时结果不符合预期。删除该表缓存后，查询恢复正常。(**1.30.13**)
+
 * 配置参数datanodeRestartInterval后,在高可用环境下会一直重启数据节点, 数据节点无法关闭。(**1.30.13**)
+
 * 键值表（keyed table）或索引表（indexed table）和内存表等值关联时，抛出OOM异常或导致系统崩溃。(**1.30.13**)
+
 * Reactive state engine、cross sectional engine、equal join engine、asof join engine输出到异步持久化流表时crash。(**1.30.13**)
+
 * 当最近一个事务操作是删除表的分区，且事务处于决议状态，数据节点有可能给出错误的决议结果。(**1.30.13**)
+
 * 当使用remoteRun函数远程取消流表订阅时，远程连接可能卡死。(**1.30.13**)
+
 * 当多个数据节点向控制节点汇报元数据，如果时间相差很大，会出现元数据一直处于recovering状态。(**1.30.13**)
+
 * 恢复某个分区后立刻进行checkpoint， 并且后续该分区没有再写入，会导致元数据和数据不一致。(**1.30.13**)
+
 * 对空矩阵进行行操作如rowSum会导致系统崩溃。(**1.30.13**)
+
 * 高可用流表使用函数`setStreamTableFilterColumn`设置filter后, 重启节点后filter字段消失。(**1.30.13**)
+
 * python api序列化时间类型时，由于发生内存踩踏而导致api收到错误消息。(**1.30.13**)
+
 * 多副本集群，设置dataSync=1时可能出现读取数据失败或者读取到全部空值。(**1.30.13**)
+
 * `mr`函数中数据源的脚本长度超过1024字节时，远程执行的数据源错误的将脚本字符串作为执行结果。(**1.30.13**)
+
 * 大压力写入数据时，偶发写任务卡住的情况。(**1.30.14**)
+
 * Cache Engine处理不当，导致symbose base一直无法被回收。如果随着时间推移，包含SYMBOL类型的分区一直增加，导致内存使用量一直缓慢上升。(**1.30.14**)
+
 * 如果事务有rollback，则redo log不会被回收。(**1.30.14**)
+
 * 写入更新删除并发时，读取文件时会出现有时读到的数据比预期少，或者某些表会有空行，或者有些chunk状态不正确。(**1.30.14**)
+
 * 多次写入时重启会报“returned from name node didn't contain any site”。(**1.30.14**)
+
 * 控制节点高可用，重启leader，偶尔会导致数据节点 crash。(**1.30.14**)
+
 * 由于raft模块在leader切换时处理不当，导致控制节点在高可用的情况下，同一个chunk在数据节点上有时候会对应多个chunkId。(**1.30.14**)
+
 * 控制节点在高可用的情况下，频繁切换leader，导致写入或查询过程中任务卡住。(**1.30.14**)
+
 * 在大量并发线程同时增加不存在的值分区时，由于线程的冲突和重试时间太短，导致某些新增值分区添加失败，抛出异常。(**1.30.14**)
+
 * 使用非字符串非SYMBOL类型的值去更新分布式表的SYMBOL类型列，会导致symbol base被破坏。(**1.30.14**)
+
 * 集群的数据节点在重启时收到大量的客户端请求，有可能在后续的鉴权中，出现登录了却当作guest处理的情况。(**1.30.14**)
+
 * `tableInsert`将一个包含多行数据但某些列缺失的字典插入内存表时报异常。(**1.30.14**)
+
 * replay回放三个数据表表时，会出现两个表的回放速度明显快于第三个表。(**1.30.14**)
+
 * replay回放到持久化流表log会报错“Error in Replayer::output: Immutable sub vector doesn't support method serialize”。(**1.30.14**)
+
 * `kurtosis`和`skew`在流计算引擎中结果精度较低。(**1.30.14**)
+
 * `createDailyTimeSeriesEngine`使用force Trigger导致计算结果有session区间之外的时间。(**1.30.14**)
+
 * TimeSeriesEngine指定fill 并且两个分组之间时间相差较大，计算结果可能出错。(**1.30.14**)
+
 * `createAsofJoinEngine`数据乱序时结果不对。(**1.30.14**)
+
 * 没有输出表时，横截面引擎作为返回表会报字段缺失错误。(**1.30.14**)
+
 * 一个引用的数据表调用函数`colNames`无法返回列名。(**1.30.14**)
+
 * `saveText`保存空表时候会抛异常。(**1.30.14**)
+
 * `cumvarp`和`cumstdp`应用在矩阵上时错误地调用了`cumvar`和`cumstd`，导致结果不正确。(**1.30.14**)
+
 * `try catch`语句的catch部分包含多行代码时，实际上只有第一行代码会被执行。(**1.30.14**)
+
 * 模块中有系统同名函数时，`parseExpr`指定模块，没有优先取模块中的函数。(**1.30.14**)
+
 * `interval`函数在时间列为分区列且duration可以整除分区列的单位时，会多生成数据，这个bug是在1.30.13中引入的。(**1.30.14**)
+
 * 当`interval`函数指定step参数且处理的列存在缺失的区间时，结果不正确。(**1.30.14**)
+
 * order by在第二列为负数时，且第二列或之后的数据为浮点数(double或float)，且一个小组的数据的个数小于等于7个，且包含两个以上的负数，会导致负数之间的相对排序错误。(**1.30.14**)
+
 * 诸如exec col1 from t  group by col1的sql语句返回结果不是向量。(**1.30.14**)
+
 * 对huge temporal vector使用min和max函数，应该返回对应的时间类型，但实际上返回一个长整型。(**1.30.14**)
+
 * `mskew`输入的值过大会出现非法值INF。(**1.30.14**)
+
 * 使用`funcByName`且参数为聚合函数时，和context by同时使用结果只会返回一行。(**1.30.14**)
+
 * window join在右表时间列有重复值时计算结果不正确。(**1.30.14**)
+
 * 自定义函数中的常量均被标记为static，使用时必须先复制。函数序列化时丢失了static标记。(**1.30.14**)
+
 * JIT版本的数据节点在`loadColumn`的时候，若发生OOM，则会crash。(**1.30.14**)
+
 * 修复了写入、删除、checkpoint、恢复并发的场景下数据库不稳定的问题。(**1.30.15**)
+
 * 高可用集群有时候控制节点无法启动，报错"Failed to read rsa public key file"。(**1.30.15**)
+
 * 集群Python API多并发有时候会出现数据节点死锁。(**1.30.15**)
+
 * 控制节点上关于chunk的信息落后于数据节点。(**1.30.15**)
+
 * 系统恢复之后发生了事务决议导致数据错乱。(**1.30.15**)
+
 * redolog在系统恢复之后再重放，可能导致数据丢失。(**1.30.15**)
+
 * 时序聚合引擎中append的table的列数小于dummyTable的列数时会crash。(**1.30.15**)
+
 * 流数据高可用，将发布端的leader多次kill之后，再往发布端写入数据，订阅端有时收不到新数据。(**1.30.15**)
+
 * `interval`在指定线性填充方式，同时where指定的开始时间没有数据，且group by多个字段的时候，会出现错误的结果。(**1.30.15**)
+
 * 当特殊字符作为列名时，`sqlCol`会错误地把字段名称当作共享表的引用来处理。(**1.30.15**)
+
 * 当y中的数据为连续的相等数据时，`mslr`计算会产生正无穷。(**1.30.15**)
+
 * `eachPre`函数在计算矩阵时，如果矩阵行数过多，则会导致crash。(**1.30.15**)
+
 * `mpercentile`计算偶尔会卡住。(**1.30.15**)
+
 * `temporalParse`对时间向量转换失败的情况下，返回的结果不正确，应该为NULL。(**1.30.15**)
+
 * 对空表进行update时，使用context by语句，不能产生新的列。(**1.30.15**)
+
 * where 条件中"!="前面没有空格时解析失败。(**1.30.15**)
+
 * 当事务刷盘过慢，可能会出现 redo log 回收超时，导致重启后数据丢失。（**1.30.16**）
+
 * 通过一个dolphindb server同时启动多个dolphindb 集群，出现数据节点无法启动的报错”Failed to open public key file. No such file or directory.”。（**1.30.16**）
+
 * 高可用集群设置了定时任务（scheduled job），有时会出现因为各个控制节点初始用户的uuid不同，导致切换leader后，原有的定时任务在新leader上认证失败而无法执行的问题。（**1.30.16**）
+
 * 数据节点崩溃之后，代理节点每隔一秒而不是按照参数 datanodeRestartInterval配置的时间来重启数据节点。（**1.30.16**）
+
 * 定时任务（scheduled job）如果包含了SQL update语句，且 where 条件中使用了函数，则在系统重启时反序列化会失败。（**1.30.16**）
+
 * 对分布式表更新后，若提交事务（commit）失败，则旧的物理目录不会被回收。（**1.30.16**）
+
 * 高并发写入场景下，当 redo log 所在磁盘占满时，会概率性导致 redo log 回收线程死锁。（**1.30.16**）
+
 * 数据节点写入数据时内存不足时，未报错 Out of Memory，而是卡住一段时间后崩溃。（**1.30.16**）
+
 * OLAP 存储引擎在各种并发操作时出现节点随机下线的情况。等待一段时间后节点上线， getTabletsMeta返回结果显示丢失一个副本的数据，但实际上并没有丢失。（**1.30.16**）
+
 * 事务回滚出现超时场景下，chunk 的状态设置错误，导致流表持久化报错。（**1.30.16**）
+
 * 横截面引擎（cross-sectional engine）参数校验出错，指定 *timeColumn* 的情况下，没有指定 *useSystemTime* 或者指定 *useSystemTime* 为true，未抛出异常。（**1.30.16**）
+
 * 时间序列引擎（time-series engine）中当指定 *useSystemTime* 为true且 *outputTable* 是分布式表时，有时会抛出类型不匹配的异常。（**1.30.16**）
+
 * 用于流数据处理的Asof Join Engine指定 *delayedTime* 的情况下，有时写入数据会出现crash。（**1.30.16**）
+
 * 流数据高可用，两次append的数据都超过65536，如果此时发生rollback，index.log会重复写入两条一样的index导致报错”index.log contains invalid data.“。（**1.30.16**）
+
 * windows系统下，向time-series engine, daily time-series engine 和 asof join engine写入数据，有时会发生 crash。（**1.30.16**）
+
 *  subExecutor还有任务在执行，此时，使用 unsubscribeTable 成功取消订阅，但getStreamingStat().subWorkers 仍能查询到被取消订阅的topic。（**1.30.16**）
+
 * 节点重启之后，高可用流表有时会加载失败；流表和订阅的 raft 组都切换 leader 之后，高可用订阅自动重连失败。（**1.30.16**）
+
 * 横截面引擎 *triggeringPattern* 为 'keyCount' 且 *triggeringInterval* 为 tuple 时，会输出重复数据。（**1.30.16**）
+
 * 流表包含 BLOB 类型，从磁盘中加载报错“Failed to decompress the vector. Invalid message format”。（**1.30.16**）
+
 * 流表在写入 BLOB 数据且单行数据大于 64KB 时会 crash。（**1.30.16**）
+
 * 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，加载该内存表时出现节点crash。（**1.30.16**）
+
 * 使用readRecord!导入二进制文件，会报错“Read only object or object without ownership can‘t be applied to mutable function readRecord!”。（**1.30.16**）
+
 * 函数调用时，若右括号不在同一行，有时解析会报错。（**1.30.16**）
+
 * 查询一个值分区的分布式表，按分区列分组获取每个组最后的K条记录（context by partitionCol limit -k），且在某个分区里不存在满足 where 条件的数据时，会查到不满足条件的数据。（**1.30.16**）
+
 * SQL中调用rolling/moving函数时，若不指定生成列的列名，则会报错”More than one column has the duplicated name”。（1.30.16）
 * interval在某个 *step* 区间内没有数据时，会生成空值。（**1.30.16**）
+
 * sliceByKey的 *rowKeys* 的参数设置错误时，server 会 crash。 （**1.30.16**）
+
 * 函数replace!修改一个向量，引入空值后，没有正确设置空值标志。（**1.30.16**）
+
+* 集群各节点之间在线同步数据时，若使用 `mr` 并行计算，可能导致节点崩溃。（**1.30.17**）
+
+* 若在 1.30.16 之前版本中对分区名带有“.”字符的数据库分区进行 `backup` 备份，在1.30.16 版本中通过 `migrate` 恢复数据时，可能报错。（**1.30.17**）
+
+* 由于 1.30.16 引入的新功能，导致从 1.30.16 升级到 2.00.4 版本时出现兼容性问题。（**1.30.17**）
+
+* 查询数据库时，有时会出现报错“The remote call task doesn't associate any site.”。（**1.30.17**）
+
+* 进行过 `upsert` / `update` / `delete` 操作的数据库，若使用 `imtUpdateChunkVersionOnDataNode` 更新了数据节点上的版本号，可能导致数据读取错误。（**1.30.17**）
+
+* 由于 raft log 追加写有问题，导致高可用集群有时重启后无法正常启动。（**1.30.17**）
+
+* 在 Windows 系统中，通过 `dropTable` 成功删除空表后，若通过 `renameTable` 把另一个表命名为此表，会报错提示文件已存在。（**1.30.17**）
+
+* 具有 TABLE_WRITE 权限的用户在写入数据时，因数据库无法自动添加 VALUE 分区，导致写入失败。（**1.30.17**）
+
+* 当时间序列引擎（time-series streaming engine）的 *windowSize* 参数是一个向量，且 metrics 参数为自定义函数时，可能导致系统崩溃。（**1.30.17**）
+
+* 流数据高可用计算引擎中，当 follower 在写快照时有可能会死锁，导致后续收到的 raft log 无法被处理，占用内存不断增大。（**1.30.17**）
+
+* 往高可用流表写入数据时，写入数据已经持久化，但 log 还未发送到 follower 时，若所有数据节点宕机，重启后节点间数据会不一致。（**1.30.17**）
+
+* 重启节点后从磁盘加载持久化数据时，需要删除过期的 rowIndex 时误将最后一个 rowIndex 删除，导致数据缺失。（**1.30.17**）
+
+* 流数据高可用状态下，两次 append 数据，每次数据都超过 65536 行，且leader 节点数据同步到 follower 上时发生了 leader 切换，会导致原 leader 节点重启后自动加载持久化流表失败。（**1.30.17**）
+
+* 当高可用流表所在的 raft 组和高可用订阅的 raft 组不同时，如果两组 leader 同时切换或重启，而高可用流表所在 raft 组的 leader 节点竞选成功晚于高可用订阅的 raft 组，会导致自动重订阅失败。（**1.30.17**）
+
+* 订阅（`subscribeTable`）时设置参数 *offset*=-2，参数设置无效。（**1.30.17**）
+
+* 修正了 `atImax` 和 `atImin` 在参数为多列矩阵时的计算方式。自本版本起，这两个函数将对矩阵的每一列分别查找最值，并以向量的形式返回每一列的计算结果。（**1.30.17**）
+
+* 对内存表和共享流表做表连接，可能导致系统崩溃。（**1.30.17**）
+
+* SQL 查询中，`select` 与 `pivot by` 一起使用时，若在 `select` 子句中增加一列常量，会导致系统崩溃。（**1.30.17**）
+
+* 提交定时任务时，若定时任务的函数有使用{}来生成字典，则会报错无法序列化。（**1.30.17**）
+
+* 连接两个共享表时会报错“Unrecognized column name”。（**1.30.17**）
+
+* 使用 `sql` 函数生成查询，当 *from* 参数指定为表连接时，执行结果有误。（**1.30.17**）
+
+* 当一个分布式表按时间进行值分区，且分区粒度大于分区列的时间精度时，跨库表连接时会报错。（**1.30.17**）
+
+* `mmad` 和 `mad` 函数在 *useMedian* 参数为 true 时计算结果有误。同时在流数据引擎中修复了此问题。（**1.30.17**）
+
+* 函数 `sqlDS` 中，在 `where` 条件语句中使用运算符过滤时间列时，没有正确分区剪枝。（**1.30.17**）
+
+* 函数 `replayDS` 数据源解析时，对 `where` 条件语句中的 date col 表达式解析有误，没有正确分区剪枝。（**1.30.17**）
+
+* 当函数中包含 window join 计算，且窗口参数 *window* 为 duration 数据对时，则添加函数视图（addFunctionView）时 server 端会在反序列化时报错。（**1.30.17**）
+
+* 对时间分区列进行查询，当查询条件的时间粒度大于分区列的时间粒度时，查询结果有误。（**1.30.17**）
+
+* `zigzag` 函数中，当参数 *percent* 为 false，参数 *retrace* 为 true 时，计算结果有误。（**1.30.17**）
+
+* 函数 `loadText` 读取文件第一行时，“-”开头的负数识别为列名。（**1.30.17**）
+
+* 在 SQL `group by` 语句中使用 `min` 或 `max` 函数时，向函数传入两个参数时，计算结果错误。（**1.30.17**）
 
 ### DolphinDB 插件
 
@@ -822,23 +1143,41 @@
     ```
     pip3 install dolphindb==1.30.0.5
     ```
+    
     * 提供partitionTableAppender支持向分布式表并发写入数据。(**1.30.0.6**)
+    
     * run函数提供fetchSize参数，支持每次读取fetchSize行记录。(**1.30.0.6**)
+    
     * 流数据订阅时支持批量处理。(**1.30.0.6**)
+    
     * run执行完毕后自动清除本会话内生成的变量。(**1.30.0.6**)
+    
     * 连接时进行Server版本的兼容性检查。(**1.30.0.6**)
+    
     * `tableAppender`函数提供写入数据时自动转换时间类型功能。(**1.30.0.6**)
+    
     * 取消Python API安装时pandas版本必须低于1.0的限制。(**1.30.0.7**)
+    
     * `DBConnectionPool`新增了`runTaskAsyn`函数，实现并行异步任务调用接口简化。(**1.30.0.8**)
+    
     * 修复update函数where条件不生效的问题。(**1.30.0.8**)
+    
     * 修复使用Python API异步追加数据时，客户端会crash的问题。(**1.30.0.8**)
+    
     * 修复使用Python API两次upload同一个名字的named object, 报错该named object无法找到的问题。(**1.30.0.8**)
+    
     * orca: 添加`rolling rank`函数。(**1.30.0.9**)
+    
     * orca: `rolling mean`增加支持加权平均值功能。(**1.30.0.9**)
+    
     * orca: 新增函数orca.read_in_memory_table: 支持读取DolphinDB内存表。(**1.30.0.9**)
+    
     * orca: 新增orca.panel函数。(**1.30.0.9**)
+    
     * orca: 修复window join中where失效的问题。(**1.30.0.9**)
+    
     * orca: 移除groupby中lazy参数，groupby只支持以lazy方式进行计算。(**1.30.0.9**)
+    
     * orca: 修复orca.panel函数。(**1.30.0.10**)
     
 * C++ API
