@@ -2,12 +2,12 @@
   - [1. Background](#1-Background)
   - [2. Terms and Definitions](#2-Terms-and-Definitions)
   - [3. Compatibility Level](#3-Compatibility-Level)
-   - [3.1 Compatibility Level 1](#31-Compatibility-Level-1)
-   - [3.2 Compatibility Level 2](#32-Compatibility-Level-2)
-   - [3.3 Compatibility Level 3](#33-Compatibility-Level-3)
-   - [3.4 Compatibility Level 4](#34-Compatibility-Level-4)
-   - [3.5 Compatibility Level 5](#35-Compatibility-Level-5)
-   - [3.6 Overview of Compatibility Levels](#36-Overview-of-Compatibility-Levels)
+    - [3.1 Compatibility Level 1](#31-Compatibility-Level-1)
+    - [3.2 Compatibility Level 2](#32-Compatibility-Level-2)
+    - [3.3 Compatibility Level 3](#33-Compatibility-Level-3)
+    - [3.4 Compatibility Level 4](#34-Compatibility-Level-4)
+    - [3.5 Compatibility Level 5](#35-Compatibility-Level-5)
+    - [3.6 Overview of Compatibility Levels](#36-Overview-of-Compatibility-Levels)
   - [4. Commitment](#4-Commitment)
 
 ## 1. Background
@@ -149,3 +149,27 @@ A major version upgrade of the DolphinDB server, such as from 1.20 to 1.30, from
 A patch version upgrade of the DolphinDB server, such as from 1.30.17 to 1.30.18, usually meets Level 4 or 5 standards, and occasionally only meets Level 3 standards. However, a minor version upgrade of the DolphinDB beta releases may have significant modifications and can only meet Compatibility Level 1 or 2 standards.
 
 If an upgrade skips versions, the compatibility standards take the minimum of the compatibility levels between the adjacent versions. For example, the compatibility level is 4 when upgrading from 1.30.16 to 1.30.17, and 3 from 1.30.17 to 1.30.18, then the upgrade from 1.30.16 to 1.30.18 meets Level 3 standards. To upgrade with multiple versions skipped, you can contact DolphinDB technical support for risk assessment.
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
