@@ -1,9 +1,12 @@
-# DolphinDB发行说明
+# DolphinDB 发行说明
 
-## DolphinDB兼容性标准
-[DolphinDB兼容性标准](./../DolphinDB_compatibility_levels.md)
+- [DolphinDB 发行说明](#dolphindb-发行说明)
+  - [DolphinDB 服务器](#dolphindb-服务器)
+  - [DolphinDB 插件](#dolphindb-插件)
+  - [客户端工具](#客户端工具)
+  - [API](#api)
 
-## DolphinDB服务器
+## DolphinDB 服务器
 
 版本号： 1.30.0
 
@@ -165,7 +168,7 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.16.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.16_JIT.zip)
 
-版本号： 1.30.17
+版本号： 1.30.17 &nbsp;&nbsp;&nbsp; [三级兼容](./../DolphinDB_compatibility_levels.md/#33-三级兼容性标准) 1.30.16
 
 发行日期： 2022-03-29
 
@@ -174,12 +177,6 @@
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.17_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.17.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.17_JIT.zip)
-
-兼容性标准：
-
-| 版本             | 兼容性等级                                                                                        |
-| ------------------- | --------------------------------------------------------------------------- |
-| 1.30.16 - 1.30.17 <br> 1.30.XX - 2.00.5    | 二级：升级后插件和API需要重新编译。 |
 
 
 > 新功能
@@ -240,7 +237,7 @@
 
 * `createReactiveStateEngine`增加了可选参数 keepOrder。(**1.30.8**)
 
-* 新增 `spearmanr`和`mutualInfo`两个相关性的计算函数。	(**1.30.9**)
+* 新增 `spearmanr`和`mutualInfo`两个相关性的计算函数。(**1.30.9**)
 
 * 新增函数createDailyTimeSeriesEngine，用于创建支持会话的时间序列聚合引擎。每个会话的结束点和开始点可以做一些特殊处理。 (**1.30.9**)
 
@@ -389,7 +386,7 @@
 * 新增 SQL 语句 `alter`，用于在已有的表中添加列。（**1.30.17**）
 
 * 新增 SQL 语句 `create`，用于创建数据库或表。（**1.30.17**）
-  
+
 
 > 改进
 
@@ -463,7 +460,7 @@
 
 * `firstNot`和`lastNot`用于分布式表时，支持指定第2个参数。(**1.30.9**)
 
-* `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。	(**1.30.9**)
+* `tableInsert`往分布式表写入数据时，返回值从写入记录数改为成功写入的记录数。(**1.30.9**)
 
 * 若由于数据在分区之外而没有成功写入，会在日志中记录warning。(**1.30.9**)
 
@@ -642,7 +639,8 @@
   新版本使用了 WebSocket 协议，增加了对 DolphinDB 二进制协议的支持，对浏览器的要求也随之提高，可能需要用户更新浏览器到最新的版本，推荐使用 Chrome 最新版或 Edge 最新版。（**1.30.16**）
 
 * OLAP 引擎支持在 Windows 环境中开启 dataSync（即设置配置项 *dataSync* = 1）。（**1.30.17**）
-函数 `subscribeTable` 新增可选参数 *userId* 和 *password*，系统在用户退出后自动尝试重新登录，保证订阅数据成功写入分布式表。（**1.30.17**）
+
+* 函数 `subscribeTable` 新增可选参数 *userId* 和 *password*，系统在用户退出后自动尝试重新登录，保证订阅数据成功写入分布式表。（**1.30.17**）
 
 * `getStreamingStat().subWorkers` 函数返回结果 throttle 统一为以毫秒为单位。（**1.30.17**）
 
@@ -675,7 +673,7 @@
 * 函数 `rand` 和 `normal` 的参数 *count* 支持输入数据对，用于指定生成矩阵的维度。（**1.30.17**）
 
 * row 系列逻辑函数（`rowAnd`, `rowOr`, `rowXor`）支持输入整数。（**1.30.17**）
-`bar` 函数新增参数 *closed*，用于指定分组包含左边界或右边界。（**1.30.17**）
+  `bar` 函数新增参数 *closed*，用于指定分组包含左边界或右边界。（**1.30.17**）
 
 * 滑动窗口函数的参数 *X* 是索引序列或索引矩阵，且window是正整数时，窗口按照索引滑动。（**1.30.17**）
 
@@ -776,7 +774,7 @@
 
 * 设置系统定期回收策略的数据库，被删除后未及时清理回收策略。(**1.30.9**)
 
-* 一库多表，并发写入和删除不同分区，重启后查询报错symbol base is corrupted	(**1.30.9**)
+* 一库多表，并发写入和删除不同分区，重启后查询报错symbol base is corrupted(**1.30.9**)
 
 * 持续的重复下列操作：删除一个分布式表的分区，写入数据到这个分区，重启数据库进程，有几率出现元数据和数据不一致的情况。(**1.30.9**)
 
@@ -788,11 +786,11 @@
 
 * 异常检测引擎在指定多个keyColumn，计算复合表达式指标时，计算结果有误。(**1.30.9**)
 
-* 执行continue之后无法进入下一次循环。此问题从1.30.6版本引入。	(**1.30.9**)
+* 执行continue之后无法进入下一次循环。此问题从1.30.6版本引入。(**1.30.9**)
 
 * 流数据高可用切换leader后在某些场景下订阅客户端接受不到数据。 (**1.30.9**)
 
-* 高可用流表不指定keyColumn会crash。	(**1.30.9**)
+* 高可用流表不指定keyColumn会crash。(**1.30.9**)
 
 * 矩阵按布尔条件取列数据时结果不符合预期。(**1.30.9**)
 
@@ -1024,7 +1022,7 @@
 
 * windows系统下，向time-series engine, daily time-series engine 和 asof join engine写入数据，有时会发生 crash。（**1.30.16**）
 
-*  subExecutor还有任务在执行，此时，使用 unsubscribeTable 成功取消订阅，但getStreamingStat().subWorkers 仍能查询到被取消订阅的topic。（**1.30.16**）
+* subExecutor还有任务在执行，此时，使用 unsubscribeTable 成功取消订阅，但getStreamingStat().subWorkers 仍能查询到被取消订阅的topic。（**1.30.16**）
 
 * 节点重启之后，高可用流表有时会加载失败；流表和订阅的 raft 组都切换 leader 之后，高可用订阅自动重连失败。（**1.30.16**）
 
@@ -1109,7 +1107,7 @@
 
 * 在 SQL `group by` 语句中使用 `min` 或 `max` 函数时，向函数传入两个参数时，计算结果错误。（**1.30.17**）
 
-### DolphinDB 插件
+## DolphinDB 插件
 
 * Python 插件
 
@@ -1123,7 +1121,7 @@
     * `mysql::load`中添了allowEmptyTable参数，可以设置是否返回一个空表。(**1.30.12**)
 
 
-### 客户端工具
+## 客户端工具
 
 * GUI
     * **注意**：1.30及以上版本的Server不兼容低于1.30.0版本的GUI，请从官网下载最新版本GUI客户端。
@@ -1131,58 +1129,34 @@
     * 增加下载查询结果到GUI本地csv功能。
     * GUI画图函数plot多曲线可共享y轴。(**1.30.13**)
 
-### API 
+## API
 
-* Java API
-
-    * 提供分布式库并行写入接口，数据自动按分区规划通过连接池并行入库。
-
-* Python API
-
-    * 优化数据传输性能, 最新Server版本请升级Python API到1.30.0.5
-    ```
-    pip3 install dolphindb==1.30.0.5
-    ```
-    
-    * 提供partitionTableAppender支持向分布式表并发写入数据。(**1.30.0.6**)
-    
-    * run函数提供fetchSize参数，支持每次读取fetchSize行记录。(**1.30.0.6**)
-    
-    * 流数据订阅时支持批量处理。(**1.30.0.6**)
-    
-    * run执行完毕后自动清除本会话内生成的变量。(**1.30.0.6**)
-    
-    * 连接时进行Server版本的兼容性检查。(**1.30.0.6**)
-    
-    * `tableAppender`函数提供写入数据时自动转换时间类型功能。(**1.30.0.6**)
-    
-    * 取消Python API安装时pandas版本必须低于1.0的限制。(**1.30.0.7**)
-    
-    * `DBConnectionPool`新增了`runTaskAsyn`函数，实现并行异步任务调用接口简化。(**1.30.0.8**)
-    
-    * 修复update函数where条件不生效的问题。(**1.30.0.8**)
-    
-    * 修复使用Python API异步追加数据时，客户端会crash的问题。(**1.30.0.8**)
-    
-    * 修复使用Python API两次upload同一个名字的named object, 报错该named object无法找到的问题。(**1.30.0.8**)
-    
-    * orca: 添加`rolling rank`函数。(**1.30.0.9**)
-    
-    * orca: `rolling mean`增加支持加权平均值功能。(**1.30.0.9**)
-    
-    * orca: 新增函数orca.read_in_memory_table: 支持读取DolphinDB内存表。(**1.30.0.9**)
-    
-    * orca: 新增orca.panel函数。(**1.30.0.9**)
-    
-    * orca: 修复window join中where失效的问题。(**1.30.0.9**)
-    
-    * orca: 移除groupby中lazy参数，groupby只支持以lazy方式进行计算。(**1.30.0.9**)
-    
-    * orca: 修复orca.panel函数。(**1.30.0.10**)
-    * session 对象增加了keepAliveTime参数，设置检测 TCP 存活的时间间隔，默认为30秒。在大数据量访问时，给该参数设置一个较大值，可以避免TCP连接掉线。（**1.30.0.15**）
-    * 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.0.16.1**）
-    * 支持200及以上版本的服务器。（**1.30.0.16.1**）
-    * 支持数组向量（array vector）的上传与下载。（**1.30.0.16.1**）
-    
-* C++ API
-    * 新增batchTableWriter (**1.30.12**)
+- Java API
+  - 提供分布式库并行写入接口，数据自动按分区规划通过连接池并行入库。
+- Python API
+  - 优化数据传输性能, 最新Server版本请升级Python API到1.30.0.5
+    pip3 install dolphindb==1.30.0.5。 (**1.30.0.5**)
+  - 提供partitionTableAppender支持向分布式表并发写入数据。(**1.30.0.6**)
+  - run函数提供fetchSize参数，支持每次读取fetchSize行记录。(**1.30.0.6**)
+  - 流数据订阅时支持批量处理。(**1.30.0.6**)
+  - run执行完毕后自动清除本会话内生成的变量。(**1.30.0.6**)
+  - 连接时进行Server版本的兼容性检查。(**1.30.0.6**)
+  - tableAppender函数提供写入数据时自动转换时间类型功能。(**1.30.0.6**)
+  - 取消Python API安装时pandas版本必须低于1.0的限制。(**1.30.0.7**)
+  - DBConnectionPool新增了runTaskAsyn函数，实现并行异步任务调用接口简化。(**1.30.0.8**)
+  - 修复update函数where条件不生效的问题。(**1.30.0.8**)
+  - 修复使用Python API异步追加数据时，客户端会crash的问题。(**1.30.0.8**)
+  - 修复使用Python API两次upload同一个名字的named object, 报错该named object无法找到的问题。(**1.30.0.8**)
+  - orca: 添加rolling rank函数。(**1.30.0.9**)
+  - orca: rolling mean增加支持加权平均值功能。(**1.30.0.9**)
+  - orca: 新增函数orca.read_in_memory_table: 支持读取DolphinDB内存表。(**1.30.0.9**)
+  - orca: 新增orca.panel函数。(**1.30.0.9**)
+  - orca: 修复window join中where失效的问题。(**1.30.0.9**)
+  - orca: 移除groupby中lazy参数，groupby只支持以lazy方式进行计算。(**1.30.0.9**)
+  - orca: 修复orca.panel函数。(**1.30.0.10**)
+  - session 对象增加了keepAliveTime参数，设置检测 TCP 存活的时间间隔，默认为30秒。在大数据量访问时，给该参数设置一个较大值，可以避免TCP连接掉线。（**1.30.0.15**）
+  - 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.0.16.1**）
+  - 支持200及以上版本的服务器。（**1.30.0.16.1**）
+  - 支持数组向量（array vector）的上传与下载。（**1.30.0.16.1**）
+- C++ API
+  - 新增batchTableWriter (**1.30.12**)

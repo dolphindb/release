@@ -1,7 +1,8 @@
 # DolphinDB发行说明
 
-## DolphinDB兼容性标准
-[DolphinDB兼容性标准](./../DolphinDB_compatibility_levels.md)
+- [DolphinDB发行说明](#dolphindb发行说明)
+  - [DolphinDB服务器](#dolphindb服务器)
+  - [GUI](#gui)
 
 ## DolphinDB服务器
 
@@ -53,7 +54,7 @@
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4_ABI.zip) | 
 
-版本号： 2.00.5
+版本号： 2.00.5 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.4, 1.30.16 和 1.30.17
 
 发行日期： 2022-03-29
 
@@ -62,13 +63,6 @@
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
-
-兼容性标准：
-
-| 版本             | 兼容性等级                                                                                        |
-| --------------- | --------------------------------------------------------------------- |
-| 2.00.4 - 2.00.5 <br> 1.30.XX - 2.00.5    | 二级：升级后插件和API需要重新编译。  |
-
 
 > 新功能
 
@@ -736,6 +730,6 @@ Bug fixes:
 
 * 在 SQL `group by` 语句中使用 `min` 或 `max` 函数时，向函数传入两个参数时，计算结果错误。（**2.00.5**）
 
-> GUI
+## GUI
 
 * GUI画图函数plot多曲线可共享y轴。(**2.00.1**)
