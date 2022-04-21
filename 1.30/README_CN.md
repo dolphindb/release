@@ -1156,5 +1156,13 @@
   - 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.0.16.1**）
   - 支持200及以上版本的服务器。（**1.30.0.16.1**）
   - 支持数组向量（array vector）的上传与下载。（**1.30.0.16.1**）
+  - 增加  MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用压缩等功能。（**1.30.0.17.1**）
+  - session 对象增加 compress 参数，支持数据的压缩下载。（**1.30.0.17.1**）
+  - 减少了 session 对 Python 全局锁的占用时间。（**1.30.0.17.1**）
+  - Table 新增 toList 方法，可将 array vector 的数据转换为二维数组，方便使用。（**1.30.0.17.1**）
+  - PartitionedTableAppender 支持写入表时自动转换日期时间类型。（**1.30.0.17.1**）
+  - session.database 新增 engine, atomic, enableChunkGranularityConfig 参数。仅2.00.0及以上版本 server 的TSDB 引擎支持这些参数。（**1.30.0.17.1**）
+  - Database.createPartitionedTable 新增 compressMethods, sortColumns, keepDuplicates 参数。仅2.00.0及以上版本 server 的TSDB 引擎支持这些参数。（**1.30.0.17.1**）
+  - 修正 session.subscribe 存在数据丢失的问题。（**1.30.0.17.1**）
 - C++ API
   - 新增batchTableWriter (**1.30.12**)
