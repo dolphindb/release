@@ -2,6 +2,34 @@
 
 ## DolphinDB Server
 
+Version: 2.00.6 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.5
+
+Release Date: 2022-05-09
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
+
+Version: 2.00.5 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.4/1.30.16/1.30.17
+
+Release Date: 2022-03-29
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
+
+Version: 2.00.4
+
+Release Date: 2022-01-10
+
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.4_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.4_ABI.zip) 
+
 Version: 2.0.0
 
 Release Date: 2021-07-31
@@ -12,20 +40,52 @@ Release Date: 2021-07-31
 [Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.0.0.zip) |
 [Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.0.0_JIT.zip)
 
-Version: 2.00.4
-
-Release Date: 2022-01-10
-
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.4.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.4_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.4_ABI.zip) 
-
 
 
 > New Features
 
-* Released the TSDB storage engine. The `database` function provides an optional parameter engineType, the default value is OLAP, which is the old storage engine. If you create a database based on the TSDB storage engine, set the engineType to TSDB. (**2.00.0**)
-* The data based on the TSDB storage engine supports the new data type BLOB. (**2.00.0**)
+* Added new function `cells` to retrieve multiple cells from a matrix by the specified row and col indices. (**2.00.6**)
+* Added new function `randDiscrete` for sampling from a discrete probability distribution. (**2.00.6**)
+* Added new functions `dynamicGroupCumsum` and `dynamicGroupCumcount`, and their state functions in the reactive state streaming engine. (**2.00.6**)
+* Added new function `getTSDBCompactionTaskStatus` to get the status of level file compaction tasks of the TSDB engine. (**2.00.6**)
+* Added new function `createDistributedInMemoryTable` to create a distributed in-memory table. (**2.00.6**)
+* Support tiered storage to store cold data on slow hard disks or object storage (Amazon S3). These data are read-only. (**2.00.6**)
+* Added new parameter *sortKeyMappingFunction* to function `createPartitionedTable` in the TSDB engine to apply mapping functions to the sortKey for optimal performance. (**2.00.6**)
+* Optimized the update performance in the TSDB engine. (**2.00.6**)
+* Added new function `toCharArray` to split a string into a vector of characters. (**2.00.6**)
+* Added new configuration parameter *maxDynamicLocalExecutor* to specify the maximum number of dynamically-generated local executors and the frequency at which they are generated. (**2.00.6**)
+* Added `transaction` statement to encapsulate multiple SQL statements on an in-memory table or a shared table into one transaction. (**2.00.6**)
+* Support asynchronous data sorting in the TSDB cache engine. Specify the configuration parameter *TSDBAsyncSortingWorkerNum* as the number of threads for asynchronous sorting, and the default value is 1. (**2.00.5**)
+* Snapshot isolation is supported in the TSDB engine. (**2.00.5**)
+* The TSDB engine can be used on Windows. (**2.00.5**)
+* You can enable dataSync for the OLAP engine by setting configuration parameter *dataSync* = 1 on Windows. (**2.00.5**)
+* Added new parameters *userId* and *password* to function `subscribeTable`. The system will attempt to log in after a user is logged out accidentally to make sure the subscribed data can be written to a DFS table. (**2.00.5**)
+* You can specify a function returning array vector for the parameter *metrics* of the reactive state streaming engine (`createReactiveStateEngine`). (**2.00.5**)
+* Function `getStreamingStat().subWorkers` returns throttle in milliseconds. (**2.00.5**)
+* You can specify multiple matching columns for the asof join engine. (**2.00.5**)
+* Added new parameters *snapshotDir* and *snapshotIntervalInMsgCount* to the cross-sectional streaming engine to enable snapshot; Added new parameter *raftGroup* to enable high availability. (**2.00.5**)
+* Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**2.00.5**)
+* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
+* Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**2.00.5**)
+* When applying an aggregate function, such as `quantile`, to a column in a table, if the data type of the column is not supported, the result is a NULL value. (**2.00.5**)
+* The SQL `pivot by` clause supports columns of UUID type. (**2.00.5**)
+* The upper limit of the result of function `ceil` or `floor` is raised to 2^53. (**2.00.5**)
+* If the last column of a `pivot by` clause is a partitioning column, and no aggregate or order-sensitive functions are included in the `select` clause, the performance has been optimized by nearly five times. (**2.00.5**)
+* Function `med`, `kama` and `wma` now support vectors of BOOL type. (**2.00.5**)
+* The parameter *colNames* of command `addColumn` can start with a digit. (**2.00.5**)
+* When loading a csv file with function `loadText` or `loadTextEx`,  the upper limit for the first row of data is raised to 256 KB. (**2.00.5**)
+* Aggregate functions, window functions and vectorized functions support table as an input. (**2.00.5**)
+* The parameter *count* of function `rand` or `normal` supports a pair to specify the dimension of a matrix. (**2.00.5**)
+* Row-based logic functions (`rowAnd`, `rowOr` and `rowXor`) support input of INT type. (**2.00.5**)
+* Added new parameter *arrayDelimiter* to functions `loadText` and `loadTextEx` to load csv files containing array vectors. (**2.00.5**)
+* Added new parameter *closed* to function `bar` to specify whether the left or right boundary is inclusive in each group. (**2.00.5**)
+* For a moving function, when *X* is an indexed series or an indexed matrix and *window* is a positive integer, the window slides over the index. (**2.00.5**)
+* The parameters of a user-defined function can be defined across multiple lines and separated by a comma. (**2.00.5**)
+* For a SQL `order by` clause, you can refer to a column by its name or the `as` alias. (**2.00.5**)
+* You can now specify a vector of SECOND, TIME or NANOTIME type for the parameter *X* of function `dailyAlignedBar`. (**2.00.5**)
+* The server can transfer tables containing array vectors to Python API in pickle format. (**2.00.5**)
+* Added new parameter *forceTriggerSessionEndTime* to the daily time-series streaming engine to specify the waiting time to trigger calculation in the window containing *sessionEnd*. (**2.00.5**)
+* Modified the parameter *forceTriggerTime* of the daily time-series streaming engine and the time-series streaming engine. The calculation in an uncompleted window of a group can be triggered by the latest ingested data of any other group. If the parameter *fill* is set, the specified filling methods are used to fill the results of the empty windows in the meantime. (**2.00.5**)
 * Tables in the same partition can now be updated, written and deleted concurrently. (**2.00.4**)
 * The type of data written into a temporal column of an in-memory table will be automatically converted to the data type of the column. (**2.00.4**)
 * Data node can now be recovered online with the latest data from other nodes. You can also enable asynchronous recovery via configuration. (**2.00.4**)
@@ -48,9 +108,27 @@ Release Date: 2022-01-10
 * Added new functions `rowCorr`, `rowCovar`, `rowBeta`, `rowWsum` and `rowWavg` for row-based calculation. (**2.00.4**)
 * Added new functions `movingWindowIndex` and `movingTopNIndex` to obtain index of the elements in a moving window. The result is an array vector of INDEX[] type. (**2.00.4**)
 * Added new function `fflush` to flush buffer data to your file system. (**2.00.4**)
+* Released the TSDB storage engine. The `database` function provides an optional parameter engineType, the default value is OLAP, which is the old storage engine. If you create a database based on the TSDB storage engine, set the engineType to TSDB. (**2.00.0**)
+* The data based on the TSDB storage engine supports the new data type BLOB. (**2.00.0**)
 
 > Improvements
 
+* Optimized the performance of `select count(*)` on a table in the TSDB database. (**2.00.6**)
+* Reduced the time to load the index of the TSDB storage engine. (**2.00.6**)
+* Improved the performance of writing and reading SYMBOL type of data. (**2.00.6**)
+* The window functions `cummed` and `cumpercentile` can now be used as state functions in the reactive state streaming engine (`createReactiveStateEngine`). (**2.00.6**)
+* Added new parameter *closed* to time-series streaming engines (`createTimeSeriesEngine` and `createDailyTimeSeriesEngine`) to specify whether the left boundary or right boundary of the calculation window is inclusive. (**2.00.6**)
+* The *keyColumn* parameter of `streamEngineParser` is now case-insensitive. (**2.00.6**)
+* Added new parameter *keyPurgeFreqInSec* to time-series streaming engines (`createTimeSeriesEngine` and `createDailyTimeSeriesEngine`) to remove groups with no incoming data for a long time. (**2.00.6**)
+* Optimized the performance for using user-defined functions in time-series streaming engines (`createTimeSeriesEngine` and `createDailyTimeSeriesEngine`). (**2.00.6**)
+* `streamFilter` now supports processing columns of standard stream tables. Previously it only processes the output of heterogeneous `replay()`. (**2.00.6**)
+* The *metrics* parameter of `createTimeSeriesEngine` and `createDailyTimeSeriesEngine` now supports matrices. (**2.00.6**)
+* Now support queries where (1) the `group by` columns are not the partitioning columns, and (2) order-sensitive functions are applied to the queried columns. (**2.00.6**)
+* The rule parameter of `resample` now supports "H", "L", "U", "min", "N", and "S". Added new parameters *closed*, *label*, and *origin* to set the interval of groups. (**2.00.6**)
+* Function `byRow` now supports the array vector. (**2.00.6**)
+* If an error is raised during the execution of the `replay` function, a runtime exception will be thrown. (**2.00.6**)
+* Function `matrix` can convert a fixed length array vector to a matrix. (**2.00.6**)
+* Optimized the performance of generating random integers. (**2.00.6**)
 * The performance of querying the latest records of a certain column with TSDB engine is improved by up to hundreds of times. (**2.00.4**)
 * Improved query performance of *top* clause in TSDB engine. (**2.00.4**)
 * Improved performance of accessing precomputed data in TSDB engine. (**2.00.4**)
@@ -83,6 +161,29 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 
 > Issues Fixed
 
+* An OOM error caused by concurrent writes, queries or calculations may lead to a server hang-up. (**2.00.6**)
+* If data deduplication is enabled in the TSDB engine, when writes and reads are conducted at the same time, the result may be incorrect. (**2.00.6**)
+* When writes and reads are conducted in the OLAP engine at the same time, the result may be incorrect. (**2.00.6**)
+* A query using `exec` with `limit 1` in the TSDB engine returns a table rather than a vector. (**2.00.6**)
+* When writing to an OLAP cache engine, if an exception other than OOM occurs, the system will repeatedly attempt to rewrite, which leads to a server hang-up. (**2.00.6**)
+* If a data node is started via the web interface or a cluster is restarted repeatedly, defunct processes are generated. (**2.00.6**)
+* If `moveReplicas` is called after executing `suspendRecovery`, it fails to move some of the chunks. (**2.00.6**)
+* If a cluster is rebooted after submitting concurrent tasks, some chunks are always in the status of RECOVERING. (**2.00.6**)
+* If `delete` is used to delete large amount of data, incorrect information may be written to the checkpoint file, which causes a node to crash and cannot be restarted. (**2.00.6**)
+* If snapshot is enabled in the reactive state streaming engine, resubscription to a table with different metrics causes a server crash. (**2.00.6**)
+* Appending a single record to the lookup join engine may cause a server crash. (**2.00.6**)
+* If the data written to a high-availability stream table are in different schema, they can still enter the persistent queue, and the error “Can't find the object with name” is reported after a leader switch. (**2.00.6**)
+* If the parameter *fill* is specified for `createDailyTimeSeriesEngine`, the result of date without data is filled. (**2.00.6**)
+* A non-admin user can use function `createUser`. (**2.00.6**)
+* The command `changePwd` does not limit the length of the new password. (**2.00.6**)
+* If an array vector takes up large amount of memory but does not reach warningMemSize, an OOM error is raised. (**2.00.6**)
+* `matrix([],[])` leads to a server crash. (**2.00.6**)
+* When using `exec` with `pivot by`, if no function is used on the `exec` column, the statement will generate a table, rather than a matrix. (**2.00.6**)
+* If numJobs > 1 or numJobs = -1 is set in function `randomForestClassifier` for concurrent jobs, a repeated use of dataSource leads to a server crash. (**2.00.6**)
+* If the parameter duration of function `interval` has different precision with that of the parameter X, a crash occurs. (**2.00.6**)
+* When creating an in-memory keyed table with `keyedTable(keyColumns, table)`, if the keyColumns in the table have duplicate values, a memory leak occurs. (**2.00.6**)
+* For moving functions that can be used on matrices, such as `mcorr` and `mwavg`, when calculating on indexed matrices, the label column may be lost in the result. (**2.00.6**)
+* Function `LoadTextEx` does not report an error when an exception of data loading occurs since 2.00.4. (**2.00.6**)
 * A redo log recovery timeout may occur when a transaction is slowly synchronized to disk, resulting in data loss after the server restarts. (**2.00.4**)
 * A data node fails to start and reports the error message "Failed to open public key file. No such file or directory" when starting multiple DolphinDB clusters on one server. (**2.00.4**)
 * A scheduled job on a high availability cluster may fail to execute due to authentication failure of the switched leader because the initial UUIDs are different between controllers. (**2.00.4**)

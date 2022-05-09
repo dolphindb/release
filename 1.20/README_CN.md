@@ -213,6 +213,13 @@
 [Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.24_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.24.zip) |
 
+版本号： 1.20.25
+
+发行日期： 2022-05-09
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.25.zip) | 
+[Linux64 ABI=1 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.20.25_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.20.25.zip) |
 
 
 > 新功能
@@ -513,6 +520,12 @@
 * `mpercentile`计算偶尔会卡住。（**1.20.24**）
 * OPC插件存在内存泄漏。（**1.20.24**）
 * `sliceByKey`的 *rowKeys* 的参数设置错误时，server 会 crash。（**1.20.24**）
+* 数据持续写入 OLAP 存储引擎导致 Cache Engine 刷盘的同时进行查询，查询结果有时会不正确。（**1.20.25**）
+* windows 环境，controller.cfg 中参数 maxConnections 设置超过 64，控制节点无法连接。（**1.20.25**）
+* 写入后查询会出现报错："symbol base is corrupted."。（**1.20.25**）
+* 使用 t[`id, 2:] 形式获取表数据，会导致系统crash。（**1.20.25**）
+* 往Cache Engine 写入数据时，发生 OOM 之后出现写入数据不一致。（**1.20.25**）
+* SQL 语句 order by 多个字段时，当第一列的值全部相同且数据量很大的时候，出现查询结果不对。（**1.20.25**）
 
 
 ### DolphinDB 插件
