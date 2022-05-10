@@ -7,7 +7,7 @@
 
 ## DolphinDB Server
 
-Version: 1.30.18 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.17
+Version: 1.30.18 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.17
 
 Release Date: 2022-05-09
 
@@ -17,7 +17,7 @@ Release Date: 2022-05-09
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.18.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.18_JIT.zip)
 
-Version: 1.30.17 &nbsp;&nbsp;&nbsp; [Compatibility Level 3](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#33-compatibility-level-3) with 1.30.16
+Version: 1.30.17 &nbsp;&nbsp;&nbsp; [Compatibility Level 3](./../DolphinDB_compatibility_levels_EN.md#33-compatibility-level-3) with 1.30.16
 
 Release Date: 2022-03-29
 
