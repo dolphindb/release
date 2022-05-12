@@ -553,3 +553,8 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 - Added new parameters *engine*, *atomic*, *enableChunkGranularityConfig* for `session.database`. Note that these parameters are only supported in the TSDB engine (provided in DolphinDB server 2.00.0 and later). (**1.30.0.17.1**) 
 - Added new parameters *compressMethods*, *sortColumns*, *keepDuplicates* to `database.createPartitionedTable`. Note that these parameters are only supported in the TSDB engine (provided in DolphinDB server 2.00.0 and later). (**1.30.0.17.1**) 
 - Fixed the data loss issue with `session.subscribe`. (**1.30.0.17.1**) 
+- Support NumPy 1.22.3 and Pandas 1.4.2 (excluding Pandas 1.3.0). (**1.30.0.17.2**) 
+- You can import a DataFrame with arrays to DolphinDB as a table with array vectors. (**1.30.0.17.2**) 
+- Fixed issues of uploading and downloading any vectors. (**1.30.0.17.2**) 
+- Changed the data type of `errorCode` of Class `ErrorCodeInfo` from int to string. (**1.30.0.17.2**)  
+- Added new methods `hasError` and `succeed` to check whether the data is written properly. (**1.30.0.17.2**) 
