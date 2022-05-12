@@ -1253,5 +1253,8 @@
   - session.database 新增 engine, atomic, enableChunkGranularityConfig 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.0.17.1**）
   - `Database.createPartitionedTable` 新增 compressMethods, sortColumns, keepDuplicates 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.0.17.1**）
   - 修正 session.subscribe 存在数据丢失的问题。（**1.30.0.17.1**）
+  - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（1.30.0.17.2）
+  - 支持上传 array vector 到 server 端，支持 DataFrame 内嵌数组方式创建包含 array vector 字段的表。修复 any vector 上传和下载的问题。（1.30.0.17.2）
+  - `ErrorCodeInfo` 类的 `errorCode` 由整数类型调整为字符串类型，并增加 `hasError` 和 `succeed` 方法来获取数据写入是否正常。（1.30.0.17.2）
 - C++ API
   - 新增 `batchTableWriter` (**1.30.12**)
