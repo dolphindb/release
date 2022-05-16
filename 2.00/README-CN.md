@@ -10,69 +10,69 @@
 
 发行日期： 2021-07-31
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.0.0.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.0.0_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.0.0_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.0.0.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.0.0_JIT.zip)
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.0.0.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.0.0_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.0.0_ABI.zip) | 
+[Windows binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.0.0.zip) |
+[Windows JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.0.0_JIT.zip)
 
 版本号： 2.00.1
 
 发行日期： 2021-08-25
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.1.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.1_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.1_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.1.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.1_JIT.zip)
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.1.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.1_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.1_ABI.zip) | 
+[Windows binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.1.zip) |
+[Windows JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.1_JIT.zip)
 
 版本号： 2.00.2
 
 发行日期： 2021-11-05
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.2.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.2_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.2_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.2.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.2_JIT.zip)
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.2.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.2_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.2_ABI.zip) | 
+[Windows binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.2.zip) |
+[Windows JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.2_JIT.zip)
 
 版本号： 2.00.3
 
 发行日期： 2021-11-22
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.3.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.3_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.3_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.3.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.3_JIT.zip)
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.3.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.3_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.3_ABI.zip) | 
+[Windows binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.3.zip) |
+[Windows JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.3_JIT.zip)
 
 版本号： 2.00.4
 
 发行日期： 2022-01-10
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.4_ABI.zip) | 
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.4.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.4_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.4_ABI.zip) | 
 
 版本号： 2.00.5 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.4, 1.30.16 和 1.30.17
 
 发行日期： 2022-03-29
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.5.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.5_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.5_ABI.zip) | 
+[Windows binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.5.zip) |
+[Windows JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.5_JIT.zip)
 
 版本号： 2.00.6 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.5
 
 发行日期： 2022-05-09
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
+[Linux binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.6.zip) | 
+[Linux JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.6_JIT.zip) | 
+[Linux ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux_V2.00.6_ABI.zip) | 
+[Windows binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.6.zip) |
+[Windows JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win_V2.00.6_JIT.zip)
 
 > 新功能
 
@@ -668,7 +668,7 @@ Bug fixes:
 
 * 流表包含 BLOB 类型，从磁盘中加载报错：“Failed to decompress the vector. Invalid message format”。（**2.00.4**）
 
-* 流表在写入 BLOB 数据且单行数据大于 64KB 时会 crash。（**2.00.4**）
+* 流表在写入 BLOB 数据且单行数据大于 KB 时会 crash。（**2.00.4**）
 
 * 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，加载该内存表时出现节点 crash。（**2.00.4**）
 
@@ -814,7 +814,7 @@ Bug fixes:
 
 * 调用 `olsEx` 方法，传入一个查询结果为空的数据源后，数据节点发生 crash。（**2.00.6**）
 
-* 为 `addFunctionView`  传入自定义函数包含超过64k的字符串时，会导致 server crash。（**2.00.6**）
+* 为 `addFunctionView`  传入自定义函数包含超过k的字符串时，会导致 server crash。（**2.00.6**）
 
 * `mcorr`, `mwavg`等支持矩阵计算的 m 系列函数对索引矩阵做计算时，计算结果 lable 列会丢失。（**2.00.6**）
 
