@@ -64,6 +64,16 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
 
+版本号： 2.00.6 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.5
+
+发行日期： 2022-05-09
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
+
 > 新功能
 
 * 发布TSDB存储引擎。`database` 函数提供了一个可选参数 engine，默认值为 `OLAP`，即旧的存储引擎。如果创建基于 TSDB 存储引擎的数据库，engine 设置为 `TSDB` 即可。(**2.00.0**)
@@ -209,6 +219,27 @@
 * 新增 SQL 语句 `alter`，用于在已有的表中添加列。（**2.00.5**）
 
 * 新增 SQL 语句 `create`，用于创建数据库或表。（**2.00.5**）
+
+* 新增函数 `cells`，使矩阵输出由参数 row 和 col 指定位置的元素值。（**2.00.6**）
+
+* 新增函数 `randDiscrete`，支持按指定概率分布离散抽样。（**2.00.6**）
+
+* 新增计算函数 `dynamicGroupCumsum` 和 `dynamicGroupCumcount`，并在响应式状态引擎中增加了对应的状态函数。（**2.00.6**）
+
+* 新增函数 `createDistributedInMemoryTable` 支持创建分布式共享内存表。（**2.00.6**）
+
+* 新增分级存储功能，可以将冷数据存储到低速硬盘或者对象存储（比如 Amazon S3）上，且这些冷数据只读不可写。（**2.00.6**）
+
+* TSDB 引擎下创建数据表的函数 `createPartitionedTable` 新增参数 sortKeyMappingFunction，通过为 sortColumns 引入映射函数来降低分区内时间线的个数，以提升查询性能。（**2.00.6**）
+
+* 优化了 TSDB 引擎更新数据的性能。（**2.00.6**）
+
+* 新增函数 `toCharArray`，将字符串拆分为由字符组成的向量。（**2.00.6**）
+
+* 新增配置项 maxDynamicLocalExecutor 限制本地动态执行线程的产生频率与数量上限 （**2.00.6**）
+
+* 新增 `transaction` 语句，将对单个内存表（或共享内存表）操作的多个 SQL 语句封装为一个事务 （**2.00.6**）
+
 
 改进
 
@@ -440,6 +471,38 @@
 * 日级时间序列聚合引擎（daily time-series streaming engine）新增参数 forceTriggerSessionEndTime，用于指定强制触发 sessionEnd 的窗口。（**2.00.5**）
 
 * 日级时间序列聚合引擎（daily time-series streaming engine）和时间序列聚合引擎（time-series streaming engine）修改参数 forceTriggerTime，未计算的窗口由计算结束后的最新数据触发。若设置了参数 fill，则同时填充无数据的窗口。（**2.00.5**）
+
+* TSDB引擎下，优化了 select count(*) 查询数据表记录数的性能。（**2.00.6**）
+
+* 减少 TSDB 引擎加载索引的耗时。（**2.00.6**）
+  
+* 提升了 SYMBOL 数据类型的读写性能。（**2.00.6**）
+
+* 响应式状态引擎支持 `cummed` 和 `cumpercentile` 两个窗口函数。（**2.00.6**）
+
+* 时序引擎（`createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine`）新增参数 closed 来控制计算窗口的闭合边界。（**2.00.6**）
+
+* `streamEngineParser` 的 keyColumn 参数取消对传入列名的大小写判断。（**2.00.6**）
+
+* `createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine` 新增参数 keyPurgeFreqInSec, 用于清理长时间无数据的分组。（**2.00.6**）
+
+* 优化时序聚合引擎自定义函数性能。（**2.00.6**）
+
+* `streamFilter` 支持对普通流表的列数据进行过滤、分发。（**2.00.6**）
+
+* `createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine` 的 metrics 支持对矩阵进行运算。（**2.00.6**）
+
+* 以下SQL分组计算支持reshuffle：分组字段与分区字段不同，且对 select 选择的列调用了序列相关函数。（**2.00.6**）
+
+* `resample` 函数的 rule 参数支持 "H", "L", "U", "min", "N" 以及 "S"，且新增了参数 closed，label 和 origin，可以对分组区间进行设置。（**2.00.6**）
+
+* `byRow` 函数支持输入 array vector。（**2.00.6**）
+
+* `replay` 函数在执行过程中如果报错，则直接抛出异常。（**2.00.6**）
+
+* `matrix` 函数支持将每行都等长的 array vector 转化为矩阵。（**2.00.6**）
+
+* 优化了生成随机整数的性能。（**2.00.6**）
 
 Bug fixes:
 
@@ -728,6 +791,62 @@ Bug fixes:
 * 函数 `loadText` 读取文件第一行时，“-”开头的负数识别为列名。（**2.00.5**）
 
 * 在 SQL `group by` 语句中使用 `min` 或 `max` 函数时，向函数传入两个参数时，计算结果错误。（**2.00.5**）
+
+* 并发进行写入、查询或计算时，有时出现因 Out of memory 导致系统卡住。（**2.00.6**）
+
+* TSDB引擎开启去重功能，实时写入的同时进行实时查询，有时返回结果不正确。（**2.00.06**）
+
+* 数据持续写入 OLAP 存储引擎导致 Cache Engine 刷盘的同时进行查询，查询结果有时会不正确。（**2.00.6**）
+
+* TSDB 引擎下，exec 语句搭配 limit 1 时，返回的是只有一个值的表，而不是一个向量。（**2.00.06**）
+
+* 向 OLAP 引擎 Cache Engine 中写入数据时，若抛出非 out of memory 的异常，则会一直重试导致系统卡住。（**2.00.6**）
+
+* web 界面启用数据节点或反复重启集群，代理节点会产生僵尸子进程。（**2.00.6**）
+
+* `suspendRecovery` 后调用 `moveReplicas` 函数，部分 chunk 未转移。（**2.00.6**）
+
+* 提交并行任务后重启集群，重启后有几个 chunk 一直处于 RECOVERING 状态。（**2.00.6**）
+
+* 使用 `delete` 语句删除大量数据时，会出现因 checkpoint 文件写入错误信息而导致节点 crash，无法再次启动的问题。（**2.00.6**）
+
+* `createReactiveStateEngine` 中开启 snapshot，当取消订阅之后再次订阅时，若 metrics 与第一次订阅不同，则会导致 server crash。（**2.00.6**）
+
+* lookup join 引擎插入单条数据可能导致 server crash。（**2.00.6**）
+
+* 即使写入高可用流表 schema 不一致，仍然会被放到持久化队列，导致 leader 切换后会报错："Can't find the object with name"。（**2.00.6**）
+
+* `createDailyTimeSeriesEngine` 如果指定 fill，会对输入表中间不包含数据的日期进行填充。（**2.00.6**）
+
+* 非 admin 用户可以调用 `createUser` 函数。（**2.00.6**）
+
+* `changePwd` 没有限制新密码的长度。（**2.00.6**）
+
+* `loadText` 加载数据到内存表时，若某列数据全部为中文字符，或同时包含中文字符和数字时，会忽略中文字符。（**2.00.6**）
+
+* array vector 占用内存非常大，但没有达到 warningMemSize，出现："out of memory" 的报错。（**2.00.06**）
+
+* 使用 `matrix([],[])` 语句会导致 crash。（**2.00.6**）
+
+* `exec` 搭配 `pivot by`，若不对 `exec` 选择的列字段调用函数，不会生成一个矩阵，而是生成一个 table。（**2.00.6**）
+
+* `randomForestClassifier` 如果设置 numJobs > 1 或者 numJobs=-1，当重复使用同一个 dataSource 进行训练时，则会导致 server crash。（**2.00.6**）
+
+* `interval`函数的 duration 的时间精度与实际数据的精度不匹配导致 crash。（**2.00.6**）
+
+* keyedTable(keyColumns, table) 创建键值内存表时，若 table 存在重复键值，发生内存泄露。（**2.00.6**）
+
+* 调用 `olsEx` 方法，传入一个查询结果为空的数据源后，数据节点发生 crash。（**2.00.6**）
+
+* 为 `addFunctionView`  传入自定义函数包含超过64k的字符串时，会导致 server crash。（**2.00.6**）
+
+* `mcorr`, `mwavg`等支持矩阵计算的 m 系列函数对索引矩阵做计算时，计算结果 lable 列会丢失。（**2.00.6**）
+ 
+* `loadTextEx` 导入数据发生异常时不报错，此为2.00.4版本引入的bug。（**2.00.06**）
+
+* TSDB 存储引擎下创建数据库表，对包含 “.” 的 SYMBOL 类型字段进行值分区，查询时会忽略 sql 语句中 “.”。（**2.00.06**）
+
+* Web 管理界面：文件系统 (DFS) 白屏、任务展开异常、交互编程界面执行结果是包含 NULL 值的 vector 时表格无法显示。（**2.00.6**）
 
 ## GUI
 
