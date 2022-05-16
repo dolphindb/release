@@ -792,62 +792,6 @@ Bug fixes:
 
 * 在 SQL `group by` 语句中使用 `min` 或 `max` 函数时，向函数传入两个参数时，计算结果错误。（**2.00.5**）
 
-* 并发进行写入、查询或计算时，有时出现因 Out of memory 导致系统卡住。（**2.00.6**）
-
-* TSDB引擎开启去重功能，实时写入的同时进行实时查询，有时返回结果不正确。（**2.00.06**）
-
-* 数据持续写入 OLAP 存储引擎导致 Cache Engine 刷盘的同时进行查询，查询结果有时会不正确。（**2.00.6**）
-
-* TSDB 引擎下，exec 语句搭配 limit 1 时，返回的是只有一个值的表，而不是一个向量。（**2.00.06**）
-
-* 向 OLAP 引擎 Cache Engine 中写入数据时，若抛出非 out of memory 的异常，则会一直重试导致系统卡住。（**2.00.6**）
-
-* web 界面启用数据节点或反复重启集群，代理节点会产生僵尸子进程。（**2.00.6**）
-
-* `suspendRecovery` 后调用 `moveReplicas` 函数，部分 chunk 未转移。（**2.00.6**）
-
-* 提交并行任务后重启集群，重启后有几个 chunk 一直处于 RECOVERING 状态。（**2.00.6**）
-
-* 使用 `delete` 语句删除大量数据时，会出现因 checkpoint 文件写入错误信息而导致节点 crash，无法再次启动的问题。（**2.00.6**）
-
-* `createReactiveStateEngine` 中开启 snapshot，当取消订阅之后再次订阅时，若 metrics 与第一次订阅不同，则会导致 server crash。（**2.00.6**）
-
-* lookup join 引擎插入单条数据可能导致 server crash。（**2.00.6**）
-
-* 即使写入高可用流表 schema 不一致，仍然会被放到持久化队列，导致 leader 切换后会报错："Can't find the object with name"。（**2.00.6**）
-
-* `createDailyTimeSeriesEngine` 如果指定 fill，会对输入表中间不包含数据的日期进行填充。（**2.00.6**）
-
-* 非 admin 用户可以调用 `createUser` 函数。（**2.00.6**）
-
-* `changePwd` 没有限制新密码的长度。（**2.00.6**）
-
-* `loadText` 加载数据到内存表时，若某列数据全部为中文字符，或同时包含中文字符和数字时，会忽略中文字符。（**2.00.6**）
-
-* array vector 占用内存非常大，但没有达到 warningMemSize，出现："out of memory" 的报错。（**2.00.06**）
-
-* 使用 `matrix([],[])` 语句会导致 crash。（**2.00.6**）
-
-* `exec` 搭配 `pivot by`，若不对 `exec` 选择的列字段调用函数，不会生成一个矩阵，而是生成一个 table。（**2.00.6**）
-
-* `randomForestClassifier` 如果设置 numJobs > 1 或者 numJobs=-1，当重复使用同一个 dataSource 进行训练时，则会导致 server crash。（**2.00.6**）
-
-* `interval`函数的 duration 的时间精度与实际数据的精度不匹配导致 crash。（**2.00.6**）
-
-* keyedTable(keyColumns, table) 创建键值内存表时，若 table 存在重复键值，发生内存泄露。（**2.00.6**）
-
-* 调用 `olsEx` 方法，传入一个查询结果为空的数据源后，数据节点发生 crash。（**2.00.6**）
-
-* 为 `addFunctionView`  传入自定义函数包含超过64k的字符串时，会导致 server crash。（**2.00.6**）
-
-* `mcorr`, `mwavg`等支持矩阵计算的 m 系列函数对索引矩阵做计算时，计算结果 lable 列会丢失。（**2.00.6**）
- 
-* `loadTextEx` 导入数据发生异常时不报错，此为2.00.4版本引入的bug。（**2.00.06**）
-
-* TSDB 存储引擎下创建数据库表，对包含 “.” 的 SYMBOL 类型字段进行值分区，查询时会忽略 sql 语句中 “.”。（**2.00.06**）
-
-* Web 管理界面：文件系统 (DFS) 白屏、任务展开异常、交互编程界面执行结果是包含 NULL 值的 vector 时表格无法显示。（**2.00.6**）
-
 ## GUI
 
 * GUI画图函数plot多曲线可共享y轴。(**2.00.1**)
