@@ -387,7 +387,7 @@ Bug fixes:
 * 流表包含 BLOB 类型，从磁盘中加载报错：“Failed to decompress the vector. Invalid message format”。（**2.00.4**）
 * 流表在写入 BLOB 数据且单行数据大于 64KB 时会 crash。（**2.00.4**）
 * 给内存表增加的新列赋值时，错误的使用了 select 而不是 exec，加载该内存表时出现节点 crash。（**2.00.4**）
-* GUI 上访问包含 array vector 的内存表 session 会断开。（**2.00.4**）
+* 通过 GUI 访问包含 array vector 的内存表 session 会断开。（**2.00.4**）
 * 使用 `readRecord!` 导入二进制文件，会报错 ：“Read only object or object without ownership can‘t be applied to mutable function readRecord!”。（**2.00.4**）
 * 函数调用时，若右括号不在同一行，有时解析会报错。（**2.00.4**）
 * 表中包含 array vector 时，执行 `replayDS` 函数会导致节点 crash。（**2.00.4**）
