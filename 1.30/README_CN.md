@@ -1242,19 +1242,19 @@
   - orca: 移除 groupby 中 lazy 参数，groupby 只支持以 lazy 方式进行计算。(**1.30.0.9**)
   - orca: 修复 orca.panel 函数。(**1.30.0.10**)
   - session 对象增加了 keepAliveTime 参数，设置检测 TCP 存活的时间间隔，默认为30秒。在大数据量访问时，给该参数设置一个较大值，可以避免 TCP 连接掉线。（**1.30.0.15**）
-  - 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.0.16.1**）
-  - 支持200及以上版本的服务器。（**1.30.0.16.1**）
-  - 支持数组向量（array vector）的上传与下载。（**1.30.0.16.1**）
-  - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能。（**1.30.0.17.1**）
-  - session 对象增加 compress 参数，支持数据的压缩下载。（**1.30.0.17.1**）
-  - 减少了 session 对 Python 全局锁的占用时间。（**1.30.0.17.1**）
-  - Table 新增 `toList` 方法，可将 array vector 的数据转换为二维数组，方便使用。（**1.30.0.17.1**）
-  - `PartitionedTableAppender` 支持写入表时自动转换日期时间类型。（**1.30.0.17.1**）
-  - session.database 新增 engine, atomic, enableChunkGranularityConfig 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.0.17.1**）
-  - `Database.createPartitionedTable` 新增 compressMethods, sortColumns, keepDuplicates 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.0.17.1**）
-  - 修正 session.subscribe 存在数据丢失的问题。（**1.30.0.17.1**）
-  - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（1.30.0.17.2）
-  - 支持上传 array vector 到 server 端，支持 DataFrame 内嵌数组方式创建包含 array vector 字段的表。修复 any vector 上传和下载的问题。（1.30.0.17.2）
-  - `ErrorCodeInfo` 类的 `errorCode` 由整数类型调整为字符串类型，并增加 `hasError` 和 `succeed` 方法来获取数据写入是否正常。（1.30.0.17.2）
+  - 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.16.1**）
+  - 支持200及以上版本的服务器。（**1.30.16.1**）
+  - 支持数组向量（array vector）的上传与下载。（**1.30.16.1**）
+  - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能。（**1.30.17.1**）
+  - session 对象增加 compress 参数，支持数据的压缩下载。（**1.30.17.1**）
+  - 减少了 session 对 Python 全局锁的占用时间。（**1.30.17.1**）
+  - Table 新增 `toList` 方法，可将 array vector 的数据转换为二维数组，方便使用。（**1.30.17.1**）
+  - `PartitionedTableAppender` 支持写入表时自动转换日期时间类型。（**1.30.17.1**）
+  - session.database 新增 engine, atomic, enableChunkGranularityConfig 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.17.1**）
+  - `Database.createPartitionedTable` 新增 compressMethods, sortColumns, keepDuplicates 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.17.1**）
+  - 修正 session.subscribe 存在数据丢失的问题。（**1.30.17.1**）
+  - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（**1.30.17.2**）
+  - 支持上传 array vector 到 server 端，支持 DataFrame 内嵌数组方式创建包含 array vector 字段的表。修复 any vector 上传和下载的问题。（**1.30.17.2**）
+  - `ErrorCodeInfo` 类的 `errorCode` 由整数类型调整为字符串类型，并增加 `hasError` 和 `succeed` 方法来获取数据写入是否正常。（**1.30.17.2**）
 - C++ API
   - 新增 `batchTableWriter` (**1.30.12**)
