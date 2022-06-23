@@ -132,7 +132,7 @@ Release Date: 2021-07-31
 * The performance of querying the latest records of a certain column with TSDB engine is improved by up to hundreds of times. (**2.00.4**)
 * Improved query performance of *top* clause in TSDB engine. (**2.00.4**)
 * Improved performance of accessing precomputed data in TSDB engine. (**2.00.4**)
-* When updating in-memory tables with assignment statements, you can now use BOOL arrays in row filters. For example, *t[`y, t[`y]>0] = 0* where *t* is a table and *y* is a column of *t*. (**2.00.4**)
+* When updating in-memory tables with assignment statements, you can now use BOOL arrays in row filters. For example, *t[\`y, t[\`y]>0] = 0* where *t* is a table and *y* is a column of *t*. (**2.00.4**)
 * New optional parameter *sortColumns* is added to function `upsert!`. Use this parameter to specify the sorting columns based on which the updated table will be sorted. (**2.00.4**)
 * `cancelJob` and `cancelConsoleJob` now support cancelling multiple jobs. Job cancelling is also faster when cluster is stuck. (**2.00.4**)
 * The parameter *schema* in function `loadText` now supports array vector. (**2.00.4**)
