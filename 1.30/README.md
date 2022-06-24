@@ -558,4 +558,4 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 - Fixed issues of uploading and downloading any vectors. (**1.30.0.17.2**) 
 - Changed the data type of `errorCode` of Class `ErrorCodeInfo` from int to string. (**1.30.0.17.2**)  
 - Added new methods `hasError` and `succeed` to check whether the data is written properly. (**1.30.0.17.2**) 
-- Fixed an issue where the creation of objects in class `DBConnectionPool` fails when the parameter *loadBalance* is set to True.
+- Fixed an issue where the creation of objects in class `DBConnectionPool` fails when the parameter *loadBalance* is set to True. (**1.30.0.17.3**) 
