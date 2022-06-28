@@ -1229,30 +1229,10 @@
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
-  - 优化数据传输性能, 最新Server版本请升级 Python API 到1.30.0.5
-    pip3 install dolphindb==1.30.0.5。 (**1.30.0.5**)
-  - 提供 `partitionTableAppender` 支持向分布式表并发写入数据。(**1.30.0.6**)
-  - `run` 函数提供 fetchSize 参数，支持每次读取 fetchSize 行记录。(**1.30.0.6**)
-  - 流数据订阅时支持批量处理。(**1.30.0.6**)
-  - `run` 执行完毕后自动清除本会话内生成的变量。(**1.30.0.6**)
-  - 连接时进行 Server 版本的兼容性检查。(**1.30.0.6**)
-  - `tableAppender` 函数提供写入数据时自动转换时间类型功能。(**1.30.0.6**)
-  - 取消 Python API 安装时 pandas 版本必须低于1.0的限制。(**1.30.0.7**)
-  - DBConnectionPool 新增了 `runTaskAsyn` 函数，实现并行异步任务调用接口简化。(**1.30.0.8**)
-  - 修复 `update` 函数 where 条件不生效的问题。(**1.30.0.8**)
-  - 修复使用 Python API 异步追加数据时，客户端会 crash 的问题。(**1.30.0.8**)
-  - 修复使用 Python API 两次 upload 同一个名字的 named object, 报错该 named object 无法找到的问题。(**1.30.0.8**)
-  - orca: 添加 rolling rank 函数。(**1.30.0.9**)
-  - orca: rolling mean 增加支持加权平均值功能。(**1.30.0.9**)
-  - orca: 新增函数 orca.read_in_memory_table: 支持读取 DolphinDB 内存表。(**1.30.0.9**)
-  - orca: 新增 orca.panel 函数。(**1.30.0.9**)
-  - orca: 修复 window join 中 where 失效的问题。(**1.30.0.9**)
-  - orca: 移除 groupby 中 lazy 参数，groupby 只支持以 lazy 方式进行计算。(**1.30.0.9**)
-  - orca: 修复 orca.panel 函数。(**1.30.0.10**)
-  - session 对象增加了 keepAliveTime 参数，设置检测 TCP 存活的时间间隔，默认为30秒。在大数据量访问时，给该参数设置一个较大值，可以避免 TCP 连接掉线。（**1.30.0.15**）
-  - 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.16.1**）
-  - 支持200及以上版本的服务器。（**1.30.16.1**）
-  - 支持数组向量（array vector）的上传与下载。（**1.30.16.1**）
+  - 指定 DBConnectionPool 的 loadBalance 为 True 时，线程池创建失败。（**1.30.17.3**）
+  - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（**1.30.17.2**）
+  - 支持上传 array vector 到 server 端，支持 DataFrame 内嵌数组方式创建包含 array vector 字段的表。修复 any vector 上传和下载的问题。（**1.30.17.2**）
+  - `ErrorCodeInfo` 类的 `errorCode` 由整数类型调整为字符串类型，并增加 `hasError` 和 `succeed` 方法来获取数据写入是否正常。（**1.30.17.2**）
   - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能。（**1.30.17.1**）
   - session 对象增加 compress 参数，支持数据的压缩下载。（**1.30.17.1**）
   - 减少了 session 对 Python 全局锁的占用时间。（**1.30.17.1**）
@@ -1261,15 +1241,37 @@
   - session.database 新增 engine, atomic, enableChunkGranularityConfig 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.17.1**）
   - `Database.createPartitionedTable` 新增 compressMethods, sortColumns, keepDuplicates 参数。仅 2.00.0 及以上版本 server 的 TSDB 引擎支持这些参数。（**1.30.17.1**）
   - 修正 session.subscribe 存在数据丢失的问题。（**1.30.17.1**）
-  - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（**1.30.17.2**）
-  - 支持上传 array vector 到 server 端，支持 DataFrame 内嵌数组方式创建包含 array vector 字段的表。修复 any vector 上传和下载的问题。（**1.30.17.2**）
-  - `ErrorCodeInfo` 类的 `errorCode` 由整数类型调整为字符串类型，并增加 `hasError` 和 `succeed` 方法来获取数据写入是否正常。（**1.30.17.2**）
+  - 版本命名规则进行了调整，与服务器版本保持一致。（**1.30.16.1**）
+  - 支持200及以上版本的服务器。（**1.30.16.1**）
+  - 支持数组向量（array vector）的上传与下载。（**1.30.16.1**）
+  - session 对象增加了 keepAliveTime 参数，设置检测 TCP 存活的时间间隔，默认为30秒。在大数据量访问时，给该参数设置一个较大值，可以避免 TCP 连接掉线。（**1.30.0.15**）
+  - orca: 修复 orca.panel 函数。(**1.30.0.10**)
+  - orca: 添加 rolling rank 函数。(**1.30.0.9**)
+  - orca: rolling mean 增加支持加权平均值功能。(**1.30.0.9**)
+  - orca: 新增函数 orca.read_in_memory_table: 支持读取 DolphinDB 内存表。(**1.30.0.9**)
+  - orca: 新增 orca.panel 函数。(**1.30.0.9**)
+  - orca: 修复 window join 中 where 失效的问题。(**1.30.0.9**)
+  - orca: 移除 groupby 中 lazy 参数，groupby 只支持以 lazy 方式进行计算。(**1.30.0.9**)
+  - DBConnectionPool 新增了 `runTaskAsyn` 函数，实现并行异步任务调用接口简化。(**1.30.0.8**)
+  - 修复 `update` 函数 where 条件不生效的问题。(**1.30.0.8**)
+  - 修复使用 Python API 异步追加数据时，客户端会 crash 的问题。(**1.30.0.8**)
+  - 修复使用 Python API 两次 upload 同一个名字的 named object, 报错该 named object 无法找到的问题。(**1.30.0.8**)
+  - 取消 Python API 安装时 pandas 版本必须低于1.0的限制。(**1.30.0.7**)
+  - 提供 `partitionTableAppender` 支持向分布式表并发写入数据。(**1.30.0.6**)
+  - `run` 函数提供 fetchSize 参数，支持每次读取 fetchSize 行记录。(**1.30.0.6**)
+  - 流数据订阅时支持批量处理。(**1.30.0.6**)
+  - `run` 执行完毕后自动清除本会话内生成的变量。(**1.30.0.6**)
+  - 连接时进行 Server 版本的兼容性检查。(**1.30.0.6**)
+  - `tableAppender` 函数提供写入数据时自动转换时间类型功能。(**1.30.0.6**)
+  - 优化数据传输性能, 最新Server版本请升级 Python API 到1.30.0.5
+    pip3 install dolphindb==1.30.0.5。 (**1.30.0.5**)
+  
 - C++ API
-  - 新增 `batchTableWriter` (**1.30.12**)
   - 新增支持数组向量（array vector）。（**1.30.17.1**）
   - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能；（**1.30.17.1**）
   - DBConnection 对象增加 compress 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
   - 修复 API 高可用模式下，当数据节点安全关机后，C++ API 无法切换到正常节点继续写入的问题。（**1.30.17.1**）
+  - 新增 `batchTableWriter` (**1.30.12**)
 - C# API
   - 新增支持数组向量（array vector）。（**1.30.17.1**）
   - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能；（**1.30.17.1**）
