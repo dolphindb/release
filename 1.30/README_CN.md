@@ -1207,6 +1207,14 @@
 * MySQL 插件
     * `mysql::load` 中添了 allowEmptyTable 参数，可以设置是否返回一个空表。(**1.30.12**)
 
+* JDBC 插件
+
+    * 不区分以下 SQL 关键字大小写：select, from, where, as, last, or, order, group, by, interval, cgroup, having, update, set,  insert, into, values, delete, limit, top, map, pivot, partition, sample。(**1.30.17.1**)
+    * JDBCDataBaseMetaData 类新增 getSchemas 方法，用来获取当前连接 server 下的所有分布式数据库和数据表。(**1.30.17.1**)
+    * 新增支持 SYMBOL, BLOB, DATEHOUR, COMPLEX, DURATION, INT128, IPADDR 和 POINT 数据类型。(**1.30.17.1**)
+    * 修复写入 STRING 类型时出现报错的问题。(**1.30.17.1**)
+    * 修复 setNull 接口传入TIMESTAMP 类型空值报错的问题。(**1.30.17.1**)
+
 
 ## 客户端工具
 
