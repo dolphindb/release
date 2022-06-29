@@ -5,7 +5,7 @@ This document lists the release notes from DolphinDB version 0.60 and all subseq
 
 [DolphinDB V2.00 Release Notes](2.00/README.md) (release date : 2021-07-31)
 
-[DolphinDB V1.30 Release Notes](1.30/README_CN.md) (release date : 2020-12-29)
+[DolphinDB V1.30 Release Notes](1.30/README.md) (release date : 2020-12-29)
 
 [DolphinDB V1.20 Release Notes](1.20/README.md) (release date : 2020-07-07)
 
