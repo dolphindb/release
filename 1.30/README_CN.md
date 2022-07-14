@@ -1237,6 +1237,7 @@
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
+  - 修复上传 DataFrame 数据，且它的字符串类型列的首行为 None 时，出现上传失败的问题。（**1.30.0.17.4**）
   - 指定 DBConnectionPool 的 loadBalance 为 True 时，线程池创建失败。（**1.30.17.3**）
   - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（**1.30.17.2**）
   - 支持上传 array vector 到 server 端，支持 DataFrame 内嵌数组方式创建包含 array vector 字段的表。修复 any vector 上传和下载的问题。（**1.30.17.2**）
