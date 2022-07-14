@@ -2,6 +2,16 @@
 
 ## DolphinDB Server
 
+Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 4](./../DolphinDB_compatibility_levels_EN.md#34-compatibility-level-4) with 2.00.6
+
+Release Date: 2022-07-14
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
+
 Version: 2.00.6 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.5
 
 Release Date: 2022-05-09
@@ -41,9 +51,27 @@ Release Date: 2021-07-31
 [Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.0.0_JIT.zip)
 
 
-
 > New Features
 
+- Added new configuration parameters *memLimitOfQueryResult* and *memLimitOfTaskGroupResult* to restrict the memory usage of the intermediate and final results of queries; new function `getQueryStatus` to monitor the memory usage and execution status of the query. (**2.00.7**)
+- Added new function `getTSDBCompactionTaskStatus` to check the status of level file compaction tasks in the TSDB engine. (**2.00.7**)
+- Added new functions `isPeak` and `isValley` to determine if the current element is the peak/valley of the neighboring elements. (**2.00.7**)
+- Added new function `rowAt(X, Y)`. Return the element in each row of *X* based on the index specified by the corresponding element of Y. (**2.00.7**)
+- Added new functions `rowImin` and `rowImax` to get the index of the extreme value in each row. (**2.00.7**)
+- Added new machine learning function `gmm` to support Gaussian mixture model (GMM) clustering algorithms. (**2.00.7**)
+- Added new function `valueChanged` to detect the change between elements by comparing the current element with adjacent elements.  (**2.00.7**)
+- Added new functions `msum2` and `tmsum2` to calculate the sum of squares in a sliding window. (**2.00.7**)
+- Added new functions `prevState` and `nextState` to find the element with a different state before/after the current element. (Consecutive elements with the same value are considered to be of the same state.)  (**2.00.7**)
+- Added new function `getSupportBundle`. Return a file of support bundle containing system configuration and database information. (**2.00.7**)
+- Added new functions `topRange` and `lowRange`. For each element in *X*, return the maximum length of a window to the left of *X* where it is the max/min. The functions are also supported in the reactive state engine (`createReactiveStateEngine`). (**2.00.7**)
+- Added interpolation functions `spline`, `neville`, `dividedDifference`, and `loess`. (**2.00.7**)
+- Added new parameter `cumPositiveStreak` for the reactive state engine (`createReactiveStateEngine`). (**2.00.7**)
+- Added new streaming engine double ownership reactive state engine (`createDoubleOwnershipReactiveStateEngine`) with support for parallel computing of data with 2 grouping methods and different metrics. (**2.00.7**)
+- Introduced new table object “IPCInMemoryTable“, interprocess in-memory table. Added related functions `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` and `readIPCInMemoryTable`. Interprocess in-memory table can be used in streaming scenarios to enable efficient data transfer between the DolphinDB server and client on the same machine. (**2.00.7**)
+- Added new function `stretch` to stretch a vector evenly to the specified length. (**2.00.7**)
+- Added new function `getTransactionStatus` to get the status of transactions. Added new command `imtForceGCRedolog` to skip the garbage collection of a transaction with the specified ID. (**2.00.7**)
+- Added new module "ops" for database operations. This module contains some commonly-used scripts for operations such as cancelling unfinished jobs in the cluster, viewing disk usage of a DFS table, deleting recovering partitions, closing inactive sessions, etc. (**2.00.7**)
+- Added new function `setLogLevel` to dynamically adjust the log level on the current node. (**2.00.7**)
 * Added new function `cells` to retrieve multiple cells from a matrix by the specified row and col indices. (**2.00.6**)
 * Added new function `randDiscrete` for sampling from a discrete probability distribution. (**2.00.6**)
 * Added new functions `dynamicGroupCumsum` and `dynamicGroupCumcount`, and their state functions in the reactive state streaming engine. (**2.00.6**)
@@ -65,7 +93,7 @@ Release Date: 2021-07-31
 * You can specify multiple matching columns for the asof join engine. (**2.00.5**)
 * Added new parameters *snapshotDir* and *snapshotIntervalInMsgCount* to the cross-sectional streaming engine to enable snapshot; Added new parameter *raftGroup* to enable high availability. (**2.00.5**)
 * Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**2.00.5**)
-* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
+* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
 * Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**2.00.5**)
 * When applying an aggregate function, such as `quantile`, to a column in a table, if the data type of the column is not supported, the result is a NULL value. (**2.00.5**)
 * The SQL `pivot by` clause supports columns of UUID type. (**2.00.5**)
@@ -113,6 +141,29 @@ Release Date: 2021-07-31
 
 > Improvements
 
+- `getClusterPerf(true)` returns the information on all controllers in a high-availability cluster. This function also adds a return value *isLeader* to indicate whether the controller is the leader of the raft group. (**2.00.7**)
+- Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**2.00.7**)
+- When using function `restore`, `loadBackup`, or `getBackupMeta` to access the backup partitions in a database whose chunk granularity is at TABLE level, the physical index is no longer required when specifying the parameter *partition*. (**2.00.7**)
+- Function `getRecoveryTaskStatus` adds a new return value *FailureReason* to display the reason for the recovery task failure. (**2.00.7**)
+- Optimized the compression algorithm for `backup`. (**2.00.7**)
+- If a *jobId* does not exist when using `cancelJob`, the system no longer throws an exception. Instead, it outputs the error message with the *jobId* to the log. (**2.00.7**)
+- Now can specify the configuration parameter *persistenWorkerNum* for a high-availability stream table. (**2.00.7**)
+- Added new parameter *forceTriggerTime* to `createSessionWindowEngine` to trigger the calculation in the last window if *useSystemTime*=false. (**2.00.7**)
+- When processing standard stream tables with `streamFilter`, you can now specify metacode of Boolean expressions for the filter condition. (**2.00.7**)
+- You can include the time column and/or join column from the left or right table as the output column(s) in the the parameter *metrics* of functions `createEqualJoinEngine`, `createAsofJoinEngine` and `createLookupJoinEngine`. (**2.00.7**)
+- `replay` supports heterogeneous stream tables with columns of array vectors. (**2.00.7**)
+- The parameter *keyPurgeFilter* of `createReactiveStateEngine` must be metacode of Boolean expressions, otherwise an error will be raised. (**2.00.7**)
+- The parameter *metrics* of `createLookupJoinEngine` can be a tuple. (**2.00.7**)
+- Optimized the performance of `select count(*)` when the time granularity of a `group by` clause is more coarse-grained than that of a partition. (**2.00.7**)
+- Optimized the performance of querying the latest n records sorted in descending order with the `top` or `limit` clause. (**2.00.7**)
+- Optimized the performance of the following functions when calling function `rolling`: `cumsum`, `cummax`, `cummin`, `cumprod`, and `mcount`. (**2.00.7**)
+- tar.gz file for offline server installation. (**2.00.7**)
+- Renamed the following configuration parameters and functions for the OLAP storage engine and the original names are used as aliases: *chunkCacheEngineMemSize* to *OLAPCacheEngineSize*, `purgeCacheEngine` to `flushOLAPCache`, `setCacheEngineMemSize` to `setOLAPCacheEngineSize`, and `getCacheEngineMemSize` to `getOLAPCacheEngineSize`. (**2.00.7**)
+- Optimized the query performance by 2 times when the `context by` clause specifies a partitioning column. (**2.00.7**)
+- Added configuration parameter *enableDropPartitionSchema* to delete the corresponding partitionSchema returned by function `schema` after calling `dropPartition`. (**2.00.7**)
+- A subscription starts from the latest incoming data if the persisted offset cannot be found. (**2.00.7**)
+- You can specify 00:00:00 for the parameter *sessionEnd* of function `createDailyTimeSeriesEngine` to indicate the end time is 00:00:00 of the next day (i.e., 24:00:00 of the day). (**2.00.7**)
+- Function `trueRange` can be used as state function in the reactive state engine. (**2.00.7**)
 * Optimized the performance of `select count(*)` on a table in the TSDB database. (**2.00.6**)
 * Reduced the time to load the index of the TSDB storage engine. (**2.00.6**)
 * Improved the performance of writing and reading SYMBOL type of data. (**2.00.6**)
@@ -132,7 +183,7 @@ Release Date: 2021-07-31
 * The performance of querying the latest records of a certain column with TSDB engine is improved by up to hundreds of times. (**2.00.4**)
 * Improved query performance of *top* clause in TSDB engine. (**2.00.4**)
 * Improved performance of accessing precomputed data in TSDB engine. (**2.00.4**)
-* When updating in-memory tables with assignment statements, you can now use BOOL arrays in row filters. For example, *t[\`y, t[\`y]>0] = 0* where *t* is a table and *y* is a column of *t*. (**2.00.4**)
+* When updating in-memory tables with assignment statements, you can now use BOOL arrays in row filters. For example, *t[`y, t[`y]>0] = 0* where *t* is a table and *y* is a column of *t*. (**2.00.4**)
 * New optional parameter *sortColumns* is added to function `upsert!`. Use this parameter to specify the sorting columns based on which the updated table will be sorted. (**2.00.4**)
 * `cancelJob` and `cancelConsoleJob` now support cancelling multiple jobs. Job cancelling is also faster when cluster is stuck. (**2.00.4**)
 * The parameter *schema* in function `loadText` now supports array vector. (**2.00.4**)
@@ -156,8 +207,7 @@ Release Date: 2021-07-31
 * Improved stability of controller nodes in high availability clusters. (**2.00.4**)
 * Information on delete and update operations can be printed in log. (**2.00.4**)
 * Added subscription topic information to the error messages of the stream subscription task in the log. (**2.00.4**)
-* UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well.
-The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
+* UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 > Issues Fixed
 
