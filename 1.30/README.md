@@ -200,6 +200,23 @@ Release Date: 2020-12-29
 
 > New Features
 
+- Added new configuration parameters *memLimitOfQueryResult* and *memLimitOfTaskGroupResult* to restrict the memory usage of the intermediate and final results of queries; new function `getQueryStatus` to monitor the memory usage and execution status of the query. (**1.30.19**)
+- Added new functions `isPeak` and `isValley` to determine if the current element is the peak/valley of the neighboring elements. (**1.30.19**)
+- Added new function `rowAt(X, Y)`. Return the element in each row of *X* based on the index specified by the corresponding element of Y. (**1.30.19**)
+- Added new functions `rowImin` and `rowImax` to get the index of the extreme value in each row. (**1.30.19**)
+- Added new machine learning function `gmm` to support Gaussian mixture model (GMM) clustering algorithms. (**1.30.19**)
+- Added new function `valueChanged` to detect the change between elements by comparing the current element with adjacent elements.  (**1.30.19**)
+- Added new functions `msum2` and `tmsum2` to calculate the sum of squares in a sliding window. (**1.30.19**)
+- Added new functions `prevState` and `nextState` to find the element with a different state before/after the current element. (Consecutive elements with the same value are considered to be of the same state.)  (**1.30.19**)
+- Added new function `getSupportBundle`. Return a file of support bundle containing system configuration and database information. (**1.30.19**)
+- Added new functions `topRange` and `lowRange`. For each element in *X*, return the maximum length of a window to the left of *X* where it is the max/min. The functions are also supported in the reactive state engine (`createReactiveStateEngine`). (**1.30.19**)
+- Added new parameter `cumPositiveStreak` for the reactive state engine (`createReactiveStateEngine`). (**1.30.19**)
+- Added new streaming engine double ownership reactive state engine (`createDoubleOwnershipReactiveStateEngine`) with support for parallel computing of data with 2 grouping methods and different metrics. (**1.30.19**)
+- Introduced new table object “IPCInMemoryTable“, interprocess in-memory table. Added related functions `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` and `readIPCInMemoryTable`. Interprocess in-memory table can be used in streaming scenarios to enable efficient data transfer between the DolphinDB server and client on the same machine. (**1.30.19**)
+- Added new function `stretch` to stretch a vector evenly to the specified length. (**1.30.19**)
+- Added new function `getTransactionStatus` to get the status of transactions. Added new command `imtForceGCRedolog` to skip the garbage collection of a transaction with the specified ID. (**1.30.19**)
+- Added new module "ops" for database operations. This module contains some commonly-used scripts for operations such as cancelling unfinished jobs in the cluster, viewing disk usage of a DFS table, deleting recovering partitions, closing inactive sessions, etc. (**1.30.19**)
+- Added new function `setLogLevel` to dynamically adjust the log level on the current node. (**1.30.19**)
 * Added new function `cells` to retrieve multiple cells from a matrix by the specified row and col indices. (**1.30.18**)
 * Added new function `randDiscrete` for sampling from a discrete probability distribution. (**1.30.18**)
 * Added new functions `dynamicGroupCumsum` and `dynamicGroupCumcount`, and their state functions in the reactive state streaming engine. (**1.30.18**)
@@ -315,6 +332,24 @@ Release Date: 2020-12-29
 
 > Improvements
 
+- `getClusterPerf(true)` returns the information on all controllers in a high-availability cluster. This function also adds a return value *isLeader* to indicate whether the controller is the leader of the raft group. (**1.30.19**)
+- Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**1.30.19**)
+- When using function `restore`, `loadBackup`, or `getBackupMeta` to access the backup partitions in a database whose chunk granularity is at TABLE level, the physical index is no longer required when specifying the parameter *partition*. (**1.30.19**)
+- Function `getRecoveryTaskStatus` adds a new return value *FailureReason* to display the reason for the recovery task failure. (**1.30.19**)
+- Optimized the compression algorithm for `backup`. (**1.30.19**)
+- If a *jobId* does not exist when using `cancelJob`, the system no longer throws an exception. Instead, it outputs the error message with the *jobId* to the log. (**1.30.19**)
+- Now can specify the configuration parameter *persistenWorkerNum* for a high-availability stream table. (**1.30.19**)
+- Added new parameter *forceTriggerTime* to `createSessionWindowEngine` to trigger the calculation in the last window if *useSystemTime*=false. (**1.30.19**)
+- When processing standard stream tables with `streamFilter`, you can now specify metacode of Boolean expressions for the filter condition. (**1.30.19**)
+- You can include the time column and/or join column from the left or right table as the output column(s) in the the parameter *metrics* of functions `createEqualJoinEngine`, `createAsofJoinEngine` and `createLookupJoinEngine`. (**1.30.19**)
+- The parameter *keyPurgeFilter* of `createReactiveStateEngine` must be metacode of Boolean expressions, otherwise an error will be raised. (**1.30.19**)
+- The parameter *metrics* of `createLookupJoinEngine` can be a tuple. (**1.30.19**)
+- Optimized the performance of `select count(*)` when the time granularity of a `group by` clause is more coarse-grained than that of a partition. (**1.30.19**)
+- Optimized the performance of the following functions when calling function `rolling`: `cumsum`, `cummax`, `cummin`, `cumprod`, and `mcount`. (**1.30.19**)
+- tar.gz file for offline server installation. (**1.30.19**)
+- A subscription starts from the latest incoming data if the persisted offset cannot be found. (**1.30.19**)
+- You can specify 00:00:00 for the parameter *sessionEnd* of function `createDailyTimeSeriesEngine` to indicate the end time is 00:00:00 of the next day (i.e., 24:00:00 of the day). (**1.30.19**)
+- Function `trueRange` can be used as state function in the reactive state engine.
 * Improved the performance of writing and reading SYMBOL type of data. (**1.30.18**)
 * The window functions `cummed` and `cumpercentile` can now be used as state functions in the reactive state streaming engine (`createReactiveStateEngine`). (**1.30.18**)
 * Added new parameter *closed* to time-series streaming engines (`createTimeSeriesEngine` and `createDailyTimeSeriesEngine`) to specify whether the left boundary or right boundary of the calculation window is inclusive. (**1.30.18**)
@@ -332,7 +367,7 @@ Release Date: 2020-12-29
 * You can specify multiple matching columns for the asof join engine. (**1.30.17**)
 * Added new parameters *snapshotDir* and *snapshotIntervalInMsgCount* to the cross-sectional streaming engine to enable snapshot; Added new parameter *raftGroup* to enable high availability. (**1.30.17**)
 * Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**1.30.17**)
-* If a function with multiple returns is specified for the parameter metrics of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**1.30.17**)
+* If a function with multiple returns is specified for the parameter metrics of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**1.30.17**)
 * Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**1.30.17**)
 * The SQL `pivot by` clause supports columns of UUID type. (**1.30.17**)
 * The upper limit of the result of function `ceil` or `floor` is raised to 2^53. (**1.30.17**)
@@ -529,7 +564,6 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 * Null flag is not set after `replace!` a vector with NULL values. (**1.30.16**)
 
 
-
 ## API
 
 - Optimized data transmission performance. To connect to the latest DolphinDB server, upgrade Python API to 1.30.0.5 via pip3 `install dolphindb==1.30.0.5`. (**1.30.0.5**)
@@ -569,4 +603,4 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 - Changed the data type of `errorCode` of Class `ErrorCodeInfo` from int to string. (**1.30.0.17.2**)  
 - Added new methods `hasError` and `succeed` to check whether the data is written properly. (**1.30.0.17.2**) 
 - Fixed the issue where the creation of objects in class `DBConnectionPool` fails when the parameter *loadBalance* is set to True. (**1.30.0.17.3**) 
-- Fixed the issue where uploading a DataFrame fails if the first row of a string column is None. (**1.30.0.17.4**) 
+- Fixed the issue where uploading a DataFrame fails if the first row of a string column is None. (**1.30.0.17.4**) 
