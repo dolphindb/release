@@ -7,6 +7,16 @@
 
 ## DolphinDB Server
 
+Version: 1.30.19 &nbsp;&nbsp;&nbsp; [Compatibility Level 4](./../DolphinDB_compatibility_levels_EN.md#34-compatibility-level-4) with 1.30.18
+
+Release Date: 2022-07-14
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.19.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.19_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.19_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.19.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.19_JIT.zip)
+
 Version: 1.30.18 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.17
 
 Release Date: 2022-05-09
@@ -559,3 +569,4 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 - Changed the data type of `errorCode` of Class `ErrorCodeInfo` from int to string. (**1.30.0.17.2**)  
 - Added new methods `hasError` and `succeed` to check whether the data is written properly. (**1.30.0.17.2**) 
 - Fixed an issue where the creation of objects in class `DBConnectionPool` fails when the parameter *loadBalance* is set to True. (**1.30.0.17.3**) 
+- Fixed the issue where uploading a DataFrame fails if the first row of a string column is None. (**1.30.0.17.4**) 
