@@ -2,15 +2,17 @@
 
 ## DolphinDB Server
 
+<!--
 Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 4](./../DolphinDB_compatibility_levels_EN.md#34-compatibility-level-4) with 2.00.6
 
-Release Date: 2022-07-14
+Release Date: 2022-07-15
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
+-->
 
 Version: 2.00.6 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.5
 
