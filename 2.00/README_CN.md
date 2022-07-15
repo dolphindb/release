@@ -6,6 +6,16 @@
 
 ## DolphinDB服务器
 
+版本号： 2.00.7 &nbsp;&nbsp;&nbsp; [四级兼容](./../DolphinDB_compatibility_levels.md/#32-四级兼容性标准) 2.00.6
+
+发行日期： 2022-07-14
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
+
 版本号： 2.00.6 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.5
 
 发行日期： 2022-05-09
@@ -76,6 +86,27 @@
 
 > 新功能
 
+* 新增配置项 `memLimitOfQueryResult` 和 `memLimitOfTaskGroupResult` 以限制查询结果和子查询结果的内存占用；新增函数getQueryStatus 用于监控查询过程的内存占用及执行进度等信息。（**2.00.7**）  
+* 新增函数 `getTSDBCompactionTaskStatus`，用于获取 TSDB 引擎 level file 合并任务的状态。（**2.00.7**）
+* 新增函数 `isPeak` 和 `isValley`，判断当前元素是否是相邻元素中的峰值/谷值。（**2.00.7**）
+* 新增函数 `rowAt(X, Y)`，以 Y 为索引，逐行获取 X 中对应索引的元素。（**2.00.7**）
+* 新增函数 `rowImin` 和 `rowImax`，逐行获取最值点的索引。（**2.00.7**）
+* 新增机器学习相关函数 `gmm`，支持通过高斯混合模型来实现聚类算法。（**2.00.7**）
+* 新增函数 `valueChanged`，通过比较当前元素和相邻元素，计算元素间的变化。（**2.00.7**）
+* 新增函数 `msum2` 和 `tmsum2`，支持在滑动窗口内计算平方和。（**2.00.7**）
+* 新增函数 `prevState` 和 `nextState`，以连续且值相同的元素作为状态标识，寻找当前元素相邻前/后一个状态的元素值。（**2.00.7**）
+* 新增函数 `getSupportBundle`，返回系统基本的配置信息和数据库信息。（**2.00.7**）
+* 新增函数 `topRange` 和 `lowRange`，统计序列中的当前值是前多少周期内的最大/小值。并在 ReactiveStateEngine 中支持了该函数。（**2.00.7**）
+* 新增 `spline`, `neville`, `dividedDifference`, `loess`插值函数。（**2.00.7**）
+* ReactiveStateEngine 支持 `cumPositiveStreak` 函数。（**2.00.7**）
+* 新增流数据引擎 double-ownership reactive state engine (`createDoubleOwnershipReactiveStateEngine`)，支持按两种不同的分组方式分别应用不同的指标进行并行计算。（**2.00.7**）
+* 引入新的表对象：跨进程共享内存表 IPCInMemoryTable，并新增四个相关函数 `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` 和 `readIPCInMemoryTable`，分别用于创建跨进程共享内存表，加载跨进程共享内存表，销毁跨进程共享内存表，读取跨进程共享内存表中的数据。跨进程共享内存表可用于在流计算场景下，使 DolphinDB 服务端与同一个物理机上的客户端程序间能够高效地传递数据。（**2.00.7**）
+* 新增函数 `stretch`，将向量拉伸到指定长度。（**2.00.7**）
+* 新增函数 `getTransactionStatus`，获取事务的状态。新增命令 `imtForceGCRedolog`，取消等待指定编号的事务回收。（**2.00.7**）
+* 新增数据库运维模块 ops，包含一些用户常用的运维脚本，如：取消集群中未完成的作业，查看内存占用，删除未完成恢复的分区，关闭不活跃的会话等。（**2.00.7**）
+* 新增函数 `setLogLevel` 动态调整 server log 级别。（**2.00.7**）
+* ReactiveStateEngine 支持 `cumPositiveStreak` 函数。（**2.00.7**）
+* 新增 mmaxPositiveStreak 函数，计算在给定长度（以元素个数衡量）的滑动窗口内统计 X 中连续正数之和的最大值，并在响应式状态引擎中增加了对应的状态函数。（**2.00.7**）
 * 新增函数 `cells`，使矩阵输出由参数 row 和 col 指定位置的元素值。（**2.00.6**）
 * 新增函数 `randDiscrete`，支持按指定概率分布离散抽样。（**2.00.6**）
 * 新增计算函数 `dynamicGroupCumsum` 和 `dynamicGroupCumcount`，并在响应式状态引擎中增加了对应的状态函数。（**2.00.6**）
@@ -159,8 +190,31 @@
 * 发布TSDB存储引擎。`database` 函数提供了一个可选参数 engine，默认值为 `OLAP`，即旧的存储引擎。如果创建基于 TSDB 存储引擎的数据库，engine 设置为 `TSDB` 即可。(**2.00.0**)
 * 基于 TSDB 存储引擎的数据支持新的数据类型 BLOB。(**2.00.0**)
 
-改进
+> 改进
 
+* `getClusterPerf(true)` 返回高可用集群下所有控制节点的信息，且返回值新增 isLeader 字段，显示该控制节点是否为 raft 组的 leader。（**2.00.7**）
+* 在高可用集群环境下，通过 web 访问任意 controller 节点，会重定向到 leader 节点，能在 web 页面展示所有节点信息。（**2.00.7**）
+* 调用 `restore`, `loadBackup`, `getBackupMeta` 等函数查询备份的表级分区数据时，partition 参数无需指定物理索引名。（**2.00.7**）
+* `getRecoveryTaskStatus` 返回值新增 FailureReason 字段显示 recovery 任务失败的原因。（**2.00.7**）
+* 优化 `backup` 备份数据时的压缩功能。（**2.00.7**）
+* `cancelJob` 取消不存在的 job 时，系统不再抛出异常，而是打印错误信息到 log 文件。（**2.00.7**）
+* 高可用流表可通过配置项 *persistenceWorkerNum* 指定其持久化到磁盘的工作线程数量。（**2.00.7**）
+* `createSessionWindowEngine` 新增参数 *forceTriggerTime*，在 *useSystemTime=false* 时，强制触发最后一个窗口的计算输出。（**2.00.7**）
+* `streamFilter` 分发普通流表时，*filter* 参数的 *condition* 支持输入布尔表达式的元代码。（**2.00.7**）
+* `createEqualJoinEngine`, `createAsofJoinEngine` 和 `createLookupJoinEngine` 的 *metrics* 参数可以指定输出左表或右表的时间列/连接列。（**2.00.7**）
+* `replay` 回放的异构流表的列字段可以是数组向量(array vector)。（**2.00.7**）
+* `createReactiveStateEngine` 的 *keyPurgeFilter* 参数必须输入布尔类型的表达式，否则会报错。（**2.00.7**）
+* `createLookupJoinEngine` 的 *metrics* 参数支持输入元组。（**2.00.7**）
+* 当 group by 子句的时间粒度大于分区时间粒度时，优化了 select count(*) 语句的性能。（**2.00.7**）
+* 优化通过 top 或 limit 子句，查询按时间递减数据的最新 n 条记录的性能。（**2.00.7**）
+* 优化以下函数调用 `rolling` 函数时的计算性能：`cumsum`, `cummax`, `cummin`, `cumprod`, `mcount` 等。（**2.00.7**）
+* 以下 OLAP 引擎的配置参数名称进行了调整，原参数名依然有效：
+  *chunkCacheEngineMemSize* 更名为 *OLAPCacheEngineSize*、`purgeCacheEngine` 更名为 `flushOLAPCache`、`setCacheEngineMemSize` 更名为 `setOLAPCacheEngineSize`、`getCacheEngineMemSize` 更名为 `getOLAPCacheEngineSize`  （**2.00.7**）
+* 优化了在 context by 子句指定单个分区列场景的查询速度，性能约有两倍提升。（**2.00.7**）
+* 新增配置项 *enableDropPartitionSchema*，使得删除值分区时，同时删除数据库 schema 的 partitionSchema 中对应的分区。（**2.00.7**）
+* 流数据订阅时若无法获取持久化的 offset ，则从当前最新的开始订阅。（**2.00.7**）
+* `createDailyTimeSeriesEngine` 的参数 *sessionEnd* 支持指定 00:00:00 作为当天的 24:00:00（即第二天的 00:00:00）。（**2.00.7**）
+* `createReactiveStateEngine` 支持状态函数 `trueRange`。（**2.00.7**）
 * TSDB引擎下，优化了 select count(*) 查询数据表记录数的性能。（**2.00.6**）
 * 减少 TSDB 引擎加载索引的耗时。（**2.00.6**）  
 * 提升了 SYMBOL 数据类型的读写性能。（**2.00.6**）
@@ -293,8 +347,64 @@
 * Windows 安装包的 dolphindb.cfg, controller.cfg, cluster.cfg 默认配置项中移除 redolog 配置参数。(**2.00.1**)
 * 改进 redo log 的回放性能。在有大量小事务的情况下，性能有10倍以上的提升。(**2.00.1**)
 
-Bug fixes:
+> Bug fixes:
 
+* 向 OLAP 引擎持续写入数据时，出现 redo log 回收被卡住。（**2.00.7**）
+* 节点安全关机后，仍被控制节点判断为存活。（**2.00.7**）
+* 事务决议未完成前，分区锁因超时被释放，导致数据无法写入。（**2.00.7**）
+* `backup` 函数按条件备份数据时，对查询条件处理错误。（**2.00.7**）
+* 机器负载（load）过高情况下会导致 crash。（**2.00.7**）
+* 同时满足以下条件时出现 server crash：API 开启压缩选项，只查询1个分区的数据，查询的数据并不在 API 所在节点，且查询语句包含 group by 操作。（**2.00.7**）
+* 分布式表更新后重启集群，更新过程中产生的旧的物理目录有时不会被回收。（**2.00.7**）
+* 修复因 symbol base 序列化出错导致数据读取出错。（**2.00.7**）
+* 流数据订阅不到持久化流表内存中还存在但是磁盘上已删除的数据。（**2.00.7**）
+* `appendForJoin` 插入数据的列数若与 JoinEngine 的 leftTable, rightTable 的列数不一致，会导致 crash。（**2.00.7**）
+* 修复 `createSessionWindowEngine` 设置 *updateTime*，但输出表不是 keyedTable 时，一条数据到达引擎之后经过 2 * updateTime仍未参与计算，不会触发计算。（**2.00.7**）
+* DailyTimeSeriesEngine 在 SessionEnd 之后仍有数据输入可能会导致 crash。（**2.00.7**）
+* `createLookupJoinEngine` rightTable 是共享键值内存表时创建引擎会失败。（**2.00.7**）
+* 持久化流表写入过程中重启节点，重新加载过程因丢失部分数据导致解压失败而报错。（**2.00.7**）
+* `replay` 回放时，指定 *dateColumn* 和 *timeColumn* 为同一个 big array 类型的时间列，且设置 *absoluteRate=false* 时，server 会 crash。（**2.00.7**）
+* `createReactiveStateEngine` 的 *metrics* 参数指定为返回一个常量向量的自定义函数时未报错。（**2.00.7**）
+* `createAnomalyDetectionEngine` 的 *metrics* 参数中包含临时变量会导致 crash。（**2.00.7**）
+* 异常检测引擎(AnomalyDetectionEngine)启用 snapshot，重新创建引擎时指定不同于上个引擎的 metrics，没有抛出异常。（**2.00.7**）
+* 通过元编程对分布式表执行 context by 操作时，报错："The select clause of the query doesn't refer any column."。（**2.00.7**）
+* update 语句与 context by 配合使用时，若 set 的第一列为整数列，后面的列为浮点数列，则会对后面的列进行取整操作。（**2.00.7**）
+* 当 worker 数量非常少的时候，并发做 pivot by 查询，则可能会卡死。（**2.00.7**）
+* 对查询三级分区表数据语句使用 HINT_EXPLAIN 时，出现 server crash。（**2.00.7**）
+* STRING 类型的 subarray 调用 `binsrch` 函数时，结果不正确。（**2.00.7**）
+* 将 STRING 类型的向量通过 `cast` 函数转换为 tuple 时，结果为空。（**2.00.7**）
+* 对内存表的多个类型为 INT128 的列进行聚合计算时，出现报错：“The function min for reductive operations does not support data type INT128”。（**2.00.7**）
+* 通过 `getFunctionView` 获取函数视图时，返回结果中部分函数没有显示 body。（**2.00.7**）
+* 数组向量(array vector)应用 `removeHead!` 函数的结果不正确。（**2.00.7**）
+* 向一个空的 tuple append 它自己后，再加载该 tuple，server 发生 crash。（**2.00.7**）
+* SQL 查询调用 `interval` 插值场景下，当 where 子句指定的时间范围数据类型的粒度比 `interval` 的 duration 参数指定的时间粒度更大时，导致的 sever crash。（**2.00.7**）
+* sql 查询语句中调用 `twindow` 函数时，server 会 crash。（**2.00.7**）
+* update 分布式表时，set 后的列名与分布式表的列名大小写不一致，导致数据更新失败。（**2.00.7**）
+* 响应式状态引擎的 metrics 中包含函数 `iterate` 时，若启用了数据清理机制，且正在清理数据时插入了数据会报错："vector::_M_default_append"。（**2.00.7**）
+* 调用 `matrix([[datehour(0)],[datehour(0)]])` 创建 matrix 时，报错：“The data object for matrix function can't be string or any type”。（**2.00.7**）
+* `wj` 参数 *aggs* 指定为 countNanInf 报错："An window join function must be an aggregate function"。（**2.00.7**）
+* `createDailyTimeSeriesEngine` 不指定分组时，将前一天未计算的数据合入了第二天的第一个窗口。（**2.00.7**）
+* `createDailyTimeSeriesEngine` 跨天第一个窗口的数据计算结果不正确，且调用 fill 填充时，输出了 session 时间段外的数据。（**2.00.7**）
+* online recovery 过程中，部分处于 In-Progress 状态的任务无法恢复。（**2.00.7**）
+* `createTimeSeriesEngine` 指定 *useSystemTime=true* 时， *metrics* 中调用 `mode` 函数导致 server crash。（**2.00.7**）
+* `createReactiveStateEngine` 参数 *metrics* 包含 `tmove` 和 `move` 函数, 且 X 为 STRING, SYMBOL 类型时，会 crash。（**2.00.7**）
+* `wj` 参数 *aggs* 指定为 `atImax` 和 `atImin` 结果错误。（**2.00.7**）
+* 通过 `streamFilter` 引擎分发普通流表时，调用 `tableInsert` 插入数据报错。（**2.00.7**）
+* `streamFilter` 插入失败时由于报错信息过长导致 session 断开。（**2.00.7**）
+* `createTimeSeriesEngine` 和 `createDailyTimeSeriesEngin`e 参数 *metrics* 包含函数 `firstNot`, `lastNot`，并指定 *fill=`ffill* 时，输出不符合预期。（**2.00.7**）
+* `createReactiveStateEngine` 参数 *metrics* 包含 `mfirst`, `mlast`，且函数输入参数 X 的数据类型为 FLOAT, LONH, SHORT, CHART, BOOL, INT128, STRING, SYMBOL 时导致 server crash。
+* 增加 `fj` 对结果集行数的限制，不超过20亿行。（**2.00.7**）
+* 通过 `tableInsert` 插入数据到表，导致数据库的 atomic level 从 ‘CHUNK’ 转变为 ‘TRANS’ 。（**2.00.7**）
+* `createReactiveStateEngine` 参数 *metrics* 包含 tm 系列函数时，tm 系列函数参数 *window* 精度为 y, M, B 时计算结果不正确。（**2.00.7**）
+* server 2.00.6 windows 版本 TSDB 引擎文件描述符泄露。（**2.00.7**）
+* 修复浏览 online Recovery 重启节点后，两副本 string 列数据不一致。（**2.00.7**）
+* `resample` 函数输入索引是 TIME 类型的时间数据，参数 *origin* 指定 "end"，*rule* 指定为 "D"，查看返回结果报错："Invalid value for HourOfDay (valid values 0 - 23): 39"。（**2.00.7**）
+* 非 admin 管理员 grant/deny/revoke 自身权限时报错。（**2.00.7**）
+* TSDB 在 OOM 时引发的 redolog 回收异常。（**2.00.7**）
+* 当矩阵的某一行全为空，`byRow` 计算 `imin`, `imax` 时结果不正确。（**2.00.7**）
+* controller 节点宕机时，使用 `getControllerPref` 获取到的 agentsite 不正确。（**2.00.7**）
+* SQL 查询时调用 `interval` 和并通过用户自定义聚合函数进行聚合时，导致 crash。（**2.00.7**）
+* 未配置 *dataSync* 动态调用 `addNode` 函数增加节点报错。（**2.00.7**）
 * 并发进行写入、查询或计算时，有时出现因 Out of memory 导致系统卡住。（**2.00.6**）
 * TSDB引擎开启去重功能，实时写入的同时进行实时查询，有时返回结果不正确。（**2.00.06**）
 * 数据持续写入 OLAP 存储引擎导致 Cache Engine 刷盘的同时进行查询，查询结果有时会不正确。（**2.00.6**）
