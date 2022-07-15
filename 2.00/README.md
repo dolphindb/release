@@ -2,7 +2,7 @@
 
 ## DolphinDB Server
 
-Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 4](./../DolphinDB_compatibility_levels_EN.md#34-compatibility-level-4) with 2.00.6
+Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](./../DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 2.00.6
 
 Release Date: 2022-07-14
 
