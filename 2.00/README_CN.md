@@ -6,7 +6,7 @@
 
 ## DolphinDB服务器
 
-版本号： 2.00.7 &nbsp;&nbsp;&nbsp; [四级兼容](./../DolphinDB_compatibility_levels.md/#32-四级兼容性标准) 2.00.6
+版本号： 2.00.7 &nbsp;&nbsp;&nbsp; [一级兼容](./../DolphinDB_compatibility_levels.md/#32-一级兼容性标准) 2.00.6
 
 发行日期： 2022-07-14
 
