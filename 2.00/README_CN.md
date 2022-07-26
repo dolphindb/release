@@ -99,7 +99,7 @@
 * 新增函数 `topRange` 和 `lowRange`，统计序列中的当前值是前多少周期内的最大/小值。并在 ReactiveStateEngine 中支持了该函数。（**2.00.7**）
 * 新增 `spline`, `neville`, `dividedDifference`, `loess`插值函数。（**2.00.7**）
 * ReactiveStateEngine 支持 `cumPositiveStreak` 函数。（**2.00.7**）
-* 新增流数据引擎 double-ownership reactive state engine (`createDoubleOwnershipReactiveStateEngine`)，支持按两种不同的分组方式分别应用不同的指标进行并行计算。（**2.00.7**）
+* 新增流数据引擎 dual-ownership reactive state engine (`createDualOwnershipReactiveStateEngine`)，支持按两种不同的分组方式分别应用不同的指标进行并行计算。（**2.00.7**）
 * 引入新的表对象：跨进程共享内存表 IPCInMemoryTable，并新增四个相关函数 `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` 和 `readIPCInMemoryTable`，分别用于创建跨进程共享内存表，加载跨进程共享内存表，销毁跨进程共享内存表，读取跨进程共享内存表中的数据。跨进程共享内存表可用于在流计算场景下，使 DolphinDB 服务端与同一个物理机上的客户端程序间能够高效地传递数据。（**2.00.7**）
 * 新增函数 `stretch`，将向量拉伸到指定长度。（**2.00.7**）
 * 新增函数 `getTransactionStatus`，获取事务的状态。新增命令 `imtForceGCRedolog`，取消等待指定编号的事务回收。（**2.00.7**）
