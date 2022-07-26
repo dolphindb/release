@@ -66,7 +66,7 @@ Release Date: 2021-07-31
 - Added new functions `topRange` and `lowRange`. For each element in *X*, return the maximum length of a window to the left of *X* where it is the max/min. The functions are also supported in the reactive state engine (`createReactiveStateEngine`). (**2.00.7**)
 - Added interpolation functions `spline`, `neville`, `dividedDifference`, and `loess`. (**2.00.7**)
 - Added new parameter `cumPositiveStreak` for the reactive state engine (`createReactiveStateEngine`). (**2.00.7**)
-- Added new streaming engine double ownership reactive state engine (`createDoubleOwnershipReactiveStateEngine`) with support for parallel computing of data with 2 grouping methods and different metrics. (**2.00.7**)
+- Added new streaming engine dual ownership reactive state engine (`createDualOwnershipReactiveStateEngine`) with support for parallel computing of data with 2 grouping methods and different metrics. (**2.00.7**)
 - Introduced new table object “IPCInMemoryTable“, interprocess in-memory table. Added related functions `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` and `readIPCInMemoryTable`. Interprocess in-memory table can be used in streaming scenarios to enable efficient data transfer between the DolphinDB server and client on the same machine. (**2.00.7**)
 - Added new function `stretch` to stretch a vector evenly to the specified length. (**2.00.7**)
 - Added new function `getTransactionStatus` to get the status of transactions. Added new command `imtForceGCRedolog` to skip the garbage collection of a transaction with the specified ID. (**2.00.7**)
