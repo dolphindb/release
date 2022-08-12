@@ -899,6 +899,23 @@
     pip3 install dolphindb==1.30.0.5。 (**1.30.0.5**)
   
 - C++ API
+  - `MultithreadedTableWriter` 对象写入内存表时，参数 *dbPath* 和 *tableName* 的设置发生改变：*dbPath* 需设置为空，*tableName* 需为内存表表名。（**1.30.19.1**）
+  - API 端支持打印 `DBConnection.run` 的 中间结果信息。（**1.30.19.1**）
+  - (1) 新增 `tableUpsert` 对象，(2) `MultithreadedTableWriter` 新增参数 *mode* 和 *modeOption*，均可实现对索引内存表、键值内存表，或者 DFS 表通过 `upsert` 方式进行更新。（**1.30.19.1**）
+  - 支持上传或读取 INT128, UUID, IP 类型的数组向量。（**1.30.19.1**）
+  - `DBConnection.connect` 支持 *reconnect* 参数，实现非高可用场景下，自动重连节点。（**1.30.19.1**）
+  - 新增 `StreamDeserializer` 类，实现对异构流表的解析，同时，`subscribe` 函数新增 *streamDeserializer* 参数，接收经 `StreamDeserializer` 解析后的数据。（**1.30.19.1**）
+  - 解决 DBConnection 关闭后，端口没有及时释放的问题。（**1.30.19.1**）
+  - `tableAppender` 支持写入 array vector 类型数据。（**1.30.19.1**）
+  - 通过 API 连接集群服务器时，实现请求的负载均衡。（**1.30.19.1**）
+  - 支持线程通过 `setAffinity` 方法绑定到指定 CPU 核。（**1.30.19.1**）
+  - 时间类型的 array vector 支持自动转换类型。（**1.30.19.1**）
+  - 解决了流订阅无法取消、线程卡死、Crash 等问题。（**1.30.19.1**）
+  - 流订阅 `subscribe` 函数新增参数 *userName* 和 *password*，支持输入登录用户名密码。（**1.30.19.1**）
+  - 调整 array vector 创建方法。（**1.30.19.1**）
+  - 新增 `setColumnCompressTypes` 方法，实现表的各列数据按照指定的压缩方式压缩后上传。（**1.30.19.1**）
+  - 新增 `IPCInMemoryStreamClient` 支持订阅跨进程共享内存表。该功能仅 Linux 系统支持。（**1.30.19.1**）
+  - 支持通过 DDB_VERSION 宏定义指定 API 编译版本号（130或200）。（**1.30.19.1**）
   - 新增支持数组向量（array vector）。（**1.30.17.1**）
   - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能；（**1.30.17.1**）
   - DBConnection 对象增加 compress 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
