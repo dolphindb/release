@@ -826,16 +826,40 @@
 ## API
 
 - Java API
+  - 通过 API 连接集群服务器时，实现请求的负载均衡。（**1.30.19.1**）
+  - 新增 `StreamDeserializer` 类，实现对异构流表的解析，同时，`subscribe` 函数新增 deserializer 参数，接收经 `StreamDeserializer` 解析后的数据。（**1.30.19.1**）
+  - 流订阅 `subscribe` 函数新增参数 *userName* 和 *passWord* 支持输入登录用户名密码。（**1.30.19.1**）
+  - `DBConnection.connect` 支持 *reconnect* 参数，实现非高可用场景下，自动重连节点。（**1.30.19.1**）
+  - 改进 `ExclusiveDBConnectionPool` 类，实现后台并发运行多个 DBConnection。（**1.30.19.1**）
+  - `ExclusiveDBConnectionPool` 新增支持以下参数：*highAvailabilitySites*, *initialScript*, *compress*, *useSSL*, *usePython*。（**1.30.19.1**）
+  - `DBConnection.connect` 支持 *usePython* 参数，支持解析 python 脚本。（**1.30.19.1**）
+  - 新增 `BasicTableSchema` 类用于存储 BasicTable 的 rows, cols, colName, colType 等信息。（**1.30.19.1**）
+  - 在DBConnection.run中增加参数tableName参数用于在查询表时只读取表的schema信息而不读取整个表的数据，目前只支持内存表。（**1.30.19.1**）
+  - `MultithreadedTableWriter` 对象写入内存表时，参数 *dbPath* 和 *tableName* 的设置发生改变：*dbPath* 需设置为空，*tableName* 需为内存表表名。（**1.30.19.1**）
+  - `subscribe` 函数支持批量处理订阅消息。（**1.30.19.1**）
   - 提供分布式库并行写入接口，数据自动按分区规划通过连接池并行入库。
   - 新增支持 COMPLEX, POINT, SYMBOL 数据类型；新增支持数组向量（array vector）。（**1.30.17.1**）
-  - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能。（**1.30.17.1**）
-  - DBConnection 对象增加 compress 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
+  - 增加 `MultithreadedTableWriter` 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能。（**1.30.17.1**）
+  - `DBConnection` 对象增加 *compress* 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
   - 修复 API 高可用模式下，当数据节点安全关机后，Java API 无法切换到正常节点继续写入的问题。（**1.30.17.1**）
   - 修复 API 订阅流表时出现的问题（**1.30.17.1**）：
     - 订阅 window 版本 server 发布的流表时，出现 “Connection reset” 报错的问题；
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
+  - `session` 对象 *enableASYN* 参数名调整为 enableASYNC。（**1.30.19.1**）
+  - 新增系统变量 version，通过 dolphindb.__version__ 可以查看 API 的版本号。（**1.30.19.1**）
+  - `MultithreadedTableWriter` 对象写入内存表时，参数 dbPath 和 tableName 的设置发生改变： dbPath 需设置为空，tableName 需为内存表表名。（**1.30.19.1**）
+  - API 端支持返回 `s.run `的 print 结果。（**1.30.19.1**）
+  - (1) 新增 `tableUpsert` 对象，(2) `MultithreadedTableWriter` 新增参数 *mode* 和 *modeOption*，均可实现对索引内存表、键值内存表，或者 DFS 表通过 `upsert` 方式进行更新。（**1.30.19.1**）
+  - 支持上传或读取 INT128, UUID, IP 类型的数组向量，但上传或读取这些类型的数组向量时需设置 *enablePickle*=false。（**1.30.19.1**）
+  - 规范 API 空值处理方式。（**1.30.19.1**）
+  - `session.connect` 支持 *reconnect* 参数，实现非高可用场景下，自动重连节点。（**1.30.19.1**）
+  - 新增 `streamDeserializer` 类，实现对异构流表的解析，同时，`subscribe` 函数新增 *streamDeserializer* 参数，接收经 `streamDeserializer` 解析后的数据。（**1.30.19.1**）
+  - 解决通过 API 查询到的数据存在乱码时，无法下载数据的问题。（**1.30.19.1**）
+  - 解决 session 关闭后，端口没有及时释放的问题。（**1.30.19.1**）
+  - `tableAppender` 支持写入 array vector 类型数据。（**1.30.19.1**）
+  - 通过 API 连接集群服务器时，实现请求的负载均衡。（**1.30.19.1**）
   - 修复上传 DataFrame 数据，且它的字符串类型列的首行为 None 时，出现上传失败的问题。（**1.30.17.4**）
   - 指定 DBConnectionPool 的 loadBalance 为 True 时，线程池创建失败。（**1.30.17.3**）
   - 支持最新 Numpy 版本 1.22.3 和最新 Pandas 版本 1.4.2。仍旧不支持 Pandas 1.3.0 版本。（**1.30.17.2**）
@@ -881,11 +905,21 @@
   - 修复 API 高可用模式下，当数据节点安全关机后，C++ API 无法切换到正常节点继续写入的问题。（**1.30.17.1**）
   - 新增 `batchTableWriter` (**1.30.12**)
 - C# API
+  - 通过 API 连接集群服务器时，实现请求的负载均衡。（**1.30.19.1**）
+  - 新增 `StreamDeserializer` 类，实现对异构流表的解析，同时，`subscribe` 函数新增 *deserializer* 参数，接收经 `StreamDeserializer` 解析后的数据。（**1.30.19.1**）
+  - 流订阅 `subscribe` 函数新增参数 *userName* 和 *password* 支持输入登录用户名密码。（**1.30.19.1**）
+  - IVector 增加 `getEntity` 的方法。（**1.30.19.1**）
+  - `DBConnection.connect` 支持 *reconnect* 参数，实现非高可用场景下，自动重连节点。（**1.30.19.1**）
+  - 改进 `ExclusiveDBConnectionPool` 类，实现后台并发运行多个 DBConnection。（**1.30.19.1**）
+  - `ExclusiveDBConnectionPool` 增加 `run` 方法，支持将脚本发送至 DolphinDB 服务器运行。（**1.30.19.1**）
+  - `ExclusiveDBConnectionPool` 新增支持以下参数：*highAvailabilitySites*, *startup*, *compress*, *useSSL*, *usePython*。（**1.30.19.1**）
+  - `DBConnection.connect` 新增 *usePython* 参数，支持解析 python 脚本。（**1.30.19.1**）
+  - `MultithreadedTableWriter` 对象写入内存表时，参数 *dbPath* 和 *tableName* 的设置发生改变：*dbPath* 需设置为空，*tableName* 需为内存表表名。（**1.30.19.1**）
   - 新增支持数组向量（array vector）。（**1.30.17.1**）
-  - 增加 MultithreadedTableWriter 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能；（**1.30.17.1**）
-  - DBConnection 对象增加 compress 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
+  - 增加 `MultithreadedTableWriter` 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能；（**1.30.17.1**）
+  - `DBConnection` 对象增加 *compress* 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
   - 修复 API 高可用模式下，当数据节点安全关机后，C++ API 无法切换到正常节点继续写入的问题。（**1.30.17.1**）
   - 修复流数据订阅发生断线重连时，API 出现 crash 的问题。（**1.30.17.1**）
   - 提升了 SYMBOL 类型向量在 API 和 server 之间的传输效率。（**1.30.17.1**）
   - 新增支持 UUID, IPADDR, INT128 和 DATEHOUR 类型。（**1.30.17.1**）
-  - 增加 BatchTableWriter 类，支持批量异步写入数据到内存表、分区表。（**1.30.17.1**）
+  - 增加 `BatchTableWriter` 类，支持批量异步写入数据到内存表、分区表。（**1.30.17.1**）
