@@ -848,7 +848,7 @@
 
 - Python API
   - `session` 对象 *enableASYN* 参数名调整为 enableASYNC。（**1.30.19.1**）
-  - 新增系统变量 version，通过 dolphindb.__version__ 可以查看 API 的版本号。（**1.30.19.1**）
+  - 新增系统变量 version，通过 dolphindb.\__version\__ 可以查看 API 的版本号。（**1.30.19.1**）
   - `MultithreadedTableWriter` 对象写入内存表时，参数 dbPath 和 tableName 的设置发生改变： dbPath 需设置为空，tableName 需为内存表表名。（**1.30.19.1**）
   - API 端支持返回 `s.run `的 print 结果。（**1.30.19.1**）
   - (1) 新增 `tableUpsert` 对象，(2) `MultithreadedTableWriter` 新增参数 *mode* 和 *modeOption*，均可实现对索引内存表、键值内存表，或者 DFS 表通过 `upsert` 方式进行更新。（**1.30.19.1**）
