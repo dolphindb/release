@@ -7,7 +7,7 @@
 
 ## DolphinDB Server
 
-Version: 1.30.19 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](./../DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 1.30.18
+Version: 1.30.19 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 1.30.18
 
 Release Date: 2022-07-14
 
@@ -17,7 +17,7 @@ Release Date: 2022-07-14
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.19.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.19_JIT.zip)
 
-Version: 1.30.18 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.17
+Version: 1.30.18 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.17
 
 Release Date: 2022-05-09
 
@@ -27,7 +27,7 @@ Release Date: 2022-05-09
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.18.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.18_JIT.zip)
 
-Version: 1.30.17 &nbsp;&nbsp;&nbsp; [Compatibility Level 3](./../DolphinDB_compatibility_levels_EN.md#33-compatibility-level-3) with 1.30.16
+Version: 1.30.17 &nbsp;&nbsp;&nbsp; [Compatibility Level 3](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#33-compatibility-level-3) with 1.30.16
 
 Release Date: 2022-03-29
 
@@ -367,7 +367,7 @@ Release Date: 2020-12-29
 * You can specify multiple matching columns for the asof join engine. (**1.30.17**)
 * Added new parameters *snapshotDir* and *snapshotIntervalInMsgCount* to the cross-sectional streaming engine to enable snapshot; Added new parameter *raftGroup* to enable high availability. (**1.30.17**)
 * Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**1.30.17**)
-* If a function with multiple returns is specified for the parameter metrics of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**1.30.17**)
+* If a function with multiple returns is specified for the parameter metrics of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**1.30.17**)
 * Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**1.30.17**)
 * The SQL `pivot by` clause supports columns of UUID type. (**1.30.17**)
 * The upper limit of the result of function `ceil` or `floor` is raised to 2^53. (**1.30.17**)
@@ -564,43 +564,59 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 * Null flag is not set after `replace!` a vector with NULL values. (**1.30.16**)
 
 
+
 ## API
 
-- Optimized data transmission performance. To connect to the latest DolphinDB server, upgrade Python API to 1.30.0.5 via pip3 `install dolphindb==1.30.0.5`. (**1.30.0.5**)
-- Added `partitionedTableAppender` for concurrent writes to a partitioned DFS table. (**1.30.0.6**)
-- Added new parameter *fetchSize* to `run` to specify the number of rows retrieved each time. (**1.30.0.6**)
-- Support for batch processing in streaming data subscription. (**1.30.0.6**)
-- Added new parameter *clearMemory* to automatically clear the variables generated within a session once the execution of `run` is completed. (**1.30.0.6**)
-- Version compatibility check is performed when connecting to DolphinDB server. (**1.30.0.6**)
-- When writing a DataFrame to DolphinDB via `tableAppender`, the date and time types in the DataFrame are automatically converted to the date and time types specified by the target table. (**1.30.0.6**)
-- Removed the restriction that the pandas version must be lower than 1.0 for Python API installation. (**1.30.0.7**)
-- New method `runTaskAsyn` for `DBConnectionPool` to provide a convenient way to execute asynchronous tasks concurrently. (**1.30.0.8**)
-- Fixed the issue that the *where* condition specified in `update` took no effect. (**1.30.0.8**)
-- Fixed a client crash issue when appending data asynchronously to database via Python API. (**1.30.0.8**)
-- Fixed the error that occurred when the name of the named object uploaded via Python API was the same as that of the named object in a previous upload. (**1.30.0.8**)
+**Python**
+
+- The *enableASYN* parameter of `session` object is deprecated. Please use *enableASYNC* instead. (**1.30.19.1**)
+- Added new system variable *version*. You can check the version number of the API through `dolphindb._version_`. (**1.30.19.1**)
+- When writting to an in-memory table with `MultithreadedTableWriter`, *dbPath* must be set to NULL, and *tableName* must be specified as the in-memory table name. (**1.30.19.1**)
+- When calling `print()` with `s.run()`, the result can now be displayed on the API side. (**1.30.19.1**)
+- (1) Added new object `tableUpsert`. (2) Added new parameters *mode* and *modeOPtion* for `MultithreadedTableWriter` to update the indexed table, keyed table, or DFS table through upsert. (**1.30.19.1**)
+- Support uploading and reading array vectors of INT128, UUID, and IP types. Please set *enablePickle*=false before you upload or read array vectors of these types. (**1.30.19.1**)
+- Standardized the handling of null values. (**1.30.19.1**)
+- Support the *reconnect* parameter for `session.connect` to reconnect nodes automatically in scenarios where high availability is not enabled. (**1.30.19.1**)
+- Added new class `streamDeserializer` to parse the heterogeneous stream table. Added the *streamDeserializer* parameter for function `subscribe` to receive data parsed by *streamDeserializer*. (**1.30.19.1**)
+- Fixed an issue that the data cannot be downloaded when the data queried through the API has garbled characters. (**1.30.19.1**)
+- Fixed an issue that the port is not released in time after the session is closed. (**1.30.19.1**)
+- `tableAppender` now supports array vectors. (**1.30.19.1**)
+- Achieved load balancing of requests when connecting to the cluster through the API. (**1.30.19.1**)
+- Fixed the issue where the creation of objects in class `DBConnectionPool` fails when the parameter *loadBalance* is set to True. (**1.30.17.3**) 
+- Fixed the issue where uploading a DataFrame fails if the first row of a string column is None. (**1.30.17.4**) 
+- Support NumPy 1.22.3 and Pandas 1.4.2 (excluding Pandas 1.3.0). (**1.30.17.2**) 
+- You can import a DataFrame with arrays to DolphinDB as a table with array vectors. (**1.30.17.2**) 
+- Fixed issues of uploading and downloading any vectors. (**1.30.17.2**) 
+- Changed the data type of `errorCode` of Class `ErrorCodeInfo` from int to string. (**1.30.17.2**)  
+- Added new methods `hasError` and `succeed` to check whether the data is written properly. (**1.30.17.2**) 
+- Added new class `MultithreadedTableWriter` for multi-threaded writes to partitioned DFS tables, in-memory tables and dimension tables, with support for SSL communication, compressed communication, high-availability data writes and more. (**1.30.17.1**) 
+- New parameter *compress* for `session` objects for dowloading compressed data. (**1.30.17.1**) 
+- Reduced the time taken by the Python Global Interpreter Lock (GIL) in a session. (**1.30.17.1**) 
+- Added new method *toList* for table objects for converting array vectors to 2D arrays. (**1.30.17.1**) 
+- `PartitionedTableAppender` now supports automatic temporal type conversion for table writes. (**1.30.17.1**) 
+- Added new parameters *engine*, *atomic*, *enableChunkGranularityConfig* for `session.database`. Note that these parameters are only supported in the TSDB engine (provided in DolphinDB server 2.00.0 and later). (**1.30.17.1**) 
+- Added new parameters *compressMethods*, *sortColumns*, *keepDuplicates* to `database.createPartitionedTable`. Note that these parameters are only supported in the TSDB engine (provided in DolphinDB server 2.00.0 and later). (**1.30.17.1**) 
+- Fixed the data loss issue with `session.subscribe`. (**1.30.17.1**) 
+- Adjusted the version numbering scheme of Python API to keep it consistent with that of the DolphinDB server. (**1.30.16.1**)
+- Connection to 200 and later versions of DolphinDB server is now supported. (**1.30.16.1**)
+- Upload and download of array vectors are now supported. (**1.30.16.1**)
+- Added new parameter *keepAliveTime* for the `Session` class method `connect()` to specify the duration between two keepalive transmissions. The default value is 30 (seconds). Specify a greater value for this parameter when querying large amount of data to avoid disconnections. (**1.30.0.15**)
+- orca: Fixed the issue with the function `orca.panel`. (**1.30.0.10**)
 - orca: New function for calculating the rolling rank. (**1.30.0.9**)
 - orca: Support for calculating weighted rolling mean. (**1.30.0.9**)
 - orca: New function `orca.read_in_memory_table` for querying DolphinDB in-memory tables. (**1.30.0.9**)
 - orca: New function `orca.panel`. (**1.30.0.9**)
 - orca: Fixed the issue that the specified where condition took no effect in `window join`. (**1.30.0.9**) 
 - orca: Removed the *lazy* parameter from `groupby` as it only supports lazy evaluation now. (**1.30.0.9**) 
-- orca: Fixed the issue with the function `orca.panel`. (**1.30.0.10**)
-- Added new parameter *keepAliveTime* for the `Session` class method `connect()` to specify the duration between two keepalive transmissions. The default value is 30 (seconds). Specify a greater value for this parameter when querying large amount of data to avoid disconnections. (**1.30.0.15**)
-- Adjusted the version numbering scheme of Python API to keep it consistent with that of the DolphinDB server. (**1.30.0.16.1**)
-- Connection to 200 and later versions of DolphinDB server is now supported. (**1.30.0.16.1**)
-- Upload and download of array vectors are now supported. (**1.30.0.16.1**)
-- Added new class `MultithreadedTableWriter` for multi-threaded writes to partitioned DFS tables, in-memory tables and dimension tables, with support for SSL communication, compressed communication, high-availability data writes and more. (**1.30.0.17.1**) 
-- New parameter *compress* for `session` objects for dowloading compressed data. (**1.30.0.17.1**) 
-- Reduced the time taken by the Python Global Interpreter Lock (GIL) in a session. (**1.30.0.17.1**) 
-- Added new method *toList* for table objects for converting array vectors to 2D arrays. (**1.30.0.17.1**) 
-- `PartitionedTableAppender` now supports automatic temporal type conversion for table writes. (**1.30.0.17.1**) 
-- Added new parameters *engine*, *atomic*, *enableChunkGranularityConfig* for `session.database`. Note that these parameters are only supported in the TSDB engine (provided in DolphinDB server 2.00.0 and later). (**1.30.0.17.1**) 
-- Added new parameters *compressMethods*, *sortColumns*, *keepDuplicates* to `database.createPartitionedTable`. Note that these parameters are only supported in the TSDB engine (provided in DolphinDB server 2.00.0 and later). (**1.30.0.17.1**) 
-- Fixed the data loss issue with `session.subscribe`. (**1.30.0.17.1**) 
-- Support NumPy 1.22.3 and Pandas 1.4.2 (excluding Pandas 1.3.0). (**1.30.0.17.2**) 
-- You can import a DataFrame with arrays to DolphinDB as a table with array vectors. (**1.30.0.17.2**) 
-- Fixed issues of uploading and downloading any vectors. (**1.30.0.17.2**) 
-- Changed the data type of `errorCode` of Class `ErrorCodeInfo` from int to string. (**1.30.0.17.2**)  
-- Added new methods `hasError` and `succeed` to check whether the data is written properly. (**1.30.0.17.2**) 
-- Fixed the issue where the creation of objects in class `DBConnectionPool` fails when the parameter *loadBalance* is set to True. (**1.30.0.17.3**) 
-- Fixed the issue where uploading a DataFrame fails if the first row of a string column is None. (**1.30.0.17.4**) 
+- New method `runTaskAsyn` for `DBConnectionPool` to provide a convenient way to execute asynchronous tasks concurrently. (**1.30.0.8**)
+- Fixed the issue that the *where* condition specified in `update` took no effect. (**1.30.0.8**)
+- Fixed a client crash issue when appending data asynchronously to database via Python API. (**1.30.0.8**)
+- Fixed the error that occurred when the name of the named object uploaded via Python API was the same as that of the named object in a previous upload. (**1.30.0.8**)
+- Removed the restriction that the pandas version must be lower than 1.0 for Python API installation. (**1.30.0.7**)
+- Added `partitionedTableAppender` for concurrent writes to a partitioned DFS table. (**1.30.0.6**)
+- Added new parameter *fetchSize* to `run` to specify the number of rows retrieved each time. (**1.30.0.6**)
+- Support for batch processing in streaming data subscription. (**1.30.0.6**)
+- Added new parameter *clearMemory* to automatically clear the variables generated within a session once the execution of `run` is completed. (**1.30.0.6**)
+- Version compatibility check is performed when connecting to DolphinDB server. (**1.30.0.6**)
+- When writing a DataFrame to DolphinDB via `tableAppender`, the date and time types in the DataFrame are automatically converted to the date and time types specified by the target table. (**1.30.0.6**)
+- Optimized data transmission performance. To connect to the latest DolphinDB server, upgrade Python API to 1.30.0.5 via pip3 `install dolphindb==1.30.0.5`. (**1.30.0.5**)
