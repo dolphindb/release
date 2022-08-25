@@ -46,3 +46,5 @@ This document lists the release notes from DolphinDB version 0.60 and all subseq
 Server & API help document: http://www.dolphindb.com/help/  
 
 GUI & cluster manager help document: http://www.dolphindb.com/gui_help/  
+
+Slack community: http://dolphindb.slack.com/
