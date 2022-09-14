@@ -854,6 +854,12 @@
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
+  - 为函数添加注解，支持在调用函数时提示函数用法。（**1.30.19.2**）
+  - Windows 系统下，Python API 新增支持官网 Python3.8, Python3.9。（**1.30.19.2**）
+  - DBConnectionPool 的 runTaskAsync 函数支持上传数据。（**1.30.19.2**）
+  - session 增加 enableJobCancellation 方法，仅支持 Linux 系统，通过 Ctrl+C 取消进程中所有正在执行的 session.run() 的任务。（**1.30.19.2**）
+  - 解决了 Table 对象被删除后，服务器端不会自动释放资源的问题。（**1.30.19.2**）
+  - Linux aarch64 系统下，Python API 支持 conda 环境的 Python3.6-Python3.9。（**1.30.19.2**）
   - `session` 对象 *enableASYN* 参数名调整为 enableASYNC。（**1.30.19.1**）
   - 新增系统变量 version，通过 dolphindb.\__version\__ 可以查看 API 的版本号。（**1.30.19.1**）
   - `MultithreadedTableWriter` 对象写入内存表时，参数 dbPath 和 tableName 的设置发生改变： dbPath 需设置为空，tableName 需为内存表表名。（**1.30.19.1**）
