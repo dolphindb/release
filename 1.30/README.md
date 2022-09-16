@@ -569,6 +569,12 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 
 **Python**
 
+- Support function hints. (**1.30.19.2**)
+- Support official Python 3.8-3.9 on Windows. (**1.30.19.2**)
+- Support uploading data with function *runTaskAsync* of `DBConnectionPool`. (**1.30.19.2**)
+- Added new method *enableJobCancellation* to `session` on Linux. You can use Ctrl+C to cancel all tasks of `session.run()` that are being executed. (**1.30.19.2**)
+- Fixed an issue that the server does not automatically release resources after a Table object is deleted. (**1.30.19.2**)
+- Support Python 3.7-3.9 in conda environment on Linux aarch64. (**1.30.19.2**)
 - The *enableASYN* parameter of `session` object is deprecated. Please use *enableASYNC* instead. (**1.30.19.1**)
 - Added new system variable *version*. You can check the version number of the API through `dolphindb._version_`. (**1.30.19.1**)
 - When writting to an in-memory table with `MultithreadedTableWriter`, *dbPath* must be set to NULL, and *tableName* must be specified as the in-memory table name. (**1.30.19.1**)
