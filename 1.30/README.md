@@ -7,6 +7,16 @@
 
 ## DolphinDB Server
 
+Version: 1.30.20 &nbsp;&nbsp;&nbsp; [Compatibility Level 3](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#33-compatibility-level-3) with 1.30.19
+
+Release Date: 2022-09-30
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.20.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.20_JIT.zip)
+
 Version: 1.30.19 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 1.30.18
 
 Release Date: 2022-07-14
@@ -200,6 +210,30 @@ Release Date: 2020-12-29
 
 > New Features
 
+- Added new function `truncate` for deleting the data in a DFS table while keeping the table schema. (**1.30.20**)
+- Added new function `checkBackup` for checking the integrity of backup files. Added new function `getBackupStatus` for displaying the detailed information about database backup and restore jobs. (**1.30.20**)
+- Added new functions `backupDB`, `restoreDB`, `backupTable`, and `restoreTable` for backing up / restoring an entire database or table. (**1.30.20**)
+- Added new configuration parameter *logRetentionTime* for specifying the system log retention period. (**1.30.20**)
+- Added new function `triggerNodeReport` for triggering a chunk information report for the specified data node. (**1.30.20**)
+- Added new function `getResolutionTaskStatus` for getting the transactions in the resolution phase. (**1.30.20**)
+- The stream engine parser (`streamEngineParser`) now supports specifying user-defined functions with nested function as its *metrics*.
+- Added new function `conditionalIterate` for recursive computation of metrics through conditional iteration. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`).  (**1.30.20**)
+- Added new function `stateMavg` for calculating the moving average based on previous results. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`). (**1.30.20**)
+- Added new function `stateIterate` for linear recursion by linear iteration. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`). (**1.30.20**)
+- Function `mmaxPositiveStreak` can now be used in the reactive state stream engine (`createReactiveStateEngine`). (**1.30.20**)
+- Window join engine (`createWindowJoinEngine`): When the parameter *window*=0:0, the size of the calculation window over the right table is determined by the difference between the timestamps of the corresponding record in the left table and its most recent record. (**1.30.20**)
+- Added new function `regroup` for grouped aggregation over a matrix based on user-specified column and/or row labels. (**1.30.20**)
+- Added new functions `mifirstNot` and `milastNot` for returning the index of the first/last non-NULL element in a sliding window. (**1.30.20**)
+- Added new function `loc` for accessing the rows and columns of a matrix by label(s) or a Boolean vector. (**1.30.20**)
+- Added new function `til` for creating a vector of consecutive integers starting from 0. (**1.30.20**)
+- Added new functions `pack` and `unpack` for packing and unpacking binary data. (**1.30.20**)
+- Added new function `align` for aligning two matrices based on row labels and/or column labels using the specified join method. (**1.30.20**)
+- DolphinDB (JIT) now supports accessing vector elements by index which can be a vector or a pair. (**1.30.20**)
+- Web-based User Interface:
+  - "Shell" tab enhancements: Added new "Database" view for checking databases and tables. (**1.30.20**)
+  - Added new settings menu where you can customize the number of decimal places. For example, enter "2" to display numbers with 2 digits. (**1.30.20**)
+  - Added support for visualization of dictionaries. (**1.30.20**)
+  - You can now navigate to the associated documentation by clicking the error code (e.g., 'RefId: S00001'). (**1.30.20**)
 - Added new configuration parameters *memLimitOfQueryResult* and *memLimitOfTaskGroupResult* to restrict the memory usage of the intermediate and final results of queries; new function `getQueryStatus` to monitor the memory usage and execution status of the query. (**1.30.19**)
 - Added new functions `isPeak` and `isValley` to determine if the current element is the peak/valley of the neighboring elements. (**1.30.19**)
 - Added new function `rowAt(X, Y)`. Return the element in each row of *X* based on the index specified by the corresponding element of Y. (**1.30.19**)
@@ -332,6 +366,31 @@ Release Date: 2020-12-29
 
 > Improvements
 
+- Functions `backup`, `restore`, and `migrate` support backup and restore of database partitions by copying files. (**1.30.20**)
+- Metacode of SQL statements can be passed to the parameter *obj* of function `saveText`. Partitions can be queried in parallel and written with a single thread. (**1.30.20**)
+- The system raises an error message if you specify the configuration parameter *volumes* for a single node using macro variable `<ALIAS>`. (**1.30.20**)
+- The parameter *timeRepartitionSchema* of function `replayDS` supports more temporal types. (**1.30.20**)
+- Optimized the garbage collection logic of window join engine. (**1.30.20**)
+- Identical expressions using user-defined functions are only calculated once in the reactive state stream engine. (**1.30.20**)
+- Added SQL keyword `HINT_VECTORIZED` to enable vectorization for data grouping. (**1.30.20**)
+- Optimized the computing performance of function `rolling`. (**1.30.20**)
+- Function `getBackupList` returns column "updateTime" for the last update time and column "rows" for the number of records in a partition. (**1.30.20**)
+- Added a new key "rows" to the dictionary returned by function `getBackupMeta` to show the number of rows in a partition. (**1.30.20**)
+- Added access control to 31 functions, which can only be executed by a logged-in user or administrator. (**1.30.20**)
+- `updateLicense` throws an exception if the authorization mode changes. (**1.30.20**)
+- When accessing a vector by index, NULL values are returned if the indices are out of bounds in DolphinDB (standard and JIT version). (**1.30.20**)
+- Optimized crc32 algorithm. (**1.30.20**)
+- Optimized function `mrank`. (**1.30.20**)
+- The maximum length for the data converted by function `toJson` is no longer limited to 1000. (**1.30.20**)
+- Web-based User Interface:
+    - Enhanced code highlighting to keep it consistent with the DolphinDB extension for Visual Studio Code. (**1.30.20**)
+    - Numeric values are formatted with comma (,) as the thousands separator, e.g., `1,000,000,000`. (**1.30.20**)
+    - Updated keywords, code completion, and function documentation. (**1.30.20**)
+    - The execution information is displayed in a more compact layout. (**1.30.20**)
+    - Enhanced the "status" popover view to display status information in different categories. (**1.30.20**)
+    - Enhanced table pagination design and added tooltips for icon buttons. (**1.30.20**)
+    - "Job" tab enhancements: Adjusted the field names; Added support for job search by client IP. (**1.30.20**)
+    - Fixed an issue where the temporal labels were not correctly formatted in a `plot`. (**1.30.20**)
 - `getClusterPerf(true)` returns the information on all controllers in a high-availability cluster. This function also adds a return value *isLeader* to indicate whether the controller is the leader of the raft group. (**1.30.19**)
 - Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**1.30.19**)
 - When using function `restore`, `loadBackup`, or `getBackupMeta` to access the backup partitions in a database whose chunk granularity is at TABLE level, the physical index is no longer required when specifying the parameter *partition*. (**1.30.19**)
