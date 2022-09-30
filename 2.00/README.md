@@ -2,7 +2,17 @@
 
 ## DolphinDB Server
 
-Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](./../DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 2.00.6
+Version: 2.00.8 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.7/1.30.19
+
+Release Date: 2022-09-30
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8_JIT.zip)
+
+Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 2.00.6
 
 Release Date: 2022-07-14
 
@@ -12,7 +22,7 @@ Release Date: 2022-07-14
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
 
-Version: 2.00.6 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.5
+Version: 2.00.6 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.5
 
 Release Date: 2022-05-09
 
@@ -22,7 +32,7 @@ Release Date: 2022-05-09
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
 
-Version: 2.00.5 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](./../DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.4/1.30.16/1.30.17
+Version: 2.00.5 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://dolphindb.net/dolphindb/release/-/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.4/1.30.16/1.30.17
 
 Release Date: 2022-03-29
 
@@ -51,8 +61,41 @@ Release Date: 2021-07-31
 [Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.0.0_JIT.zip)
 
 
+
 > New Features
 
+- New SQL tracing tool for monitoring the time spent on the whole process of query execution. Added configuration parameter *traceLogDir* to specify the trace log path. (**2.00.8**)
+- Added new function `truncate` for deleting the data in a DFS table while keeping the table schema. (**2.00.8**)
+- Added new function `checkBackup` for checking the integrity of backup files. Added new function `getBackupStatus` for displaying the detailed information about database backup and restore jobs. (**2.00.8**)
+- Added new functions `backupDB`, `restoreDB`, `backupTable`, and `restoreTable` for backing up / restoring an entire database or table. (**2.00.8**)
+- Added new configuration parameter *logRetentionTime* for specifying the system log retention period. (**2.00.8**)
+- Added new function `triggerNodeReport` for triggering a chunk information report for the specified data node. (**2.00.8**)
+- Added new function `getResolutionTaskStatus` for getting the transactions in the resolution phase. (**2.00.8**)
+- The stream engine parser (`streamEngineParser`) now supports specifying user-defined functions with nested function as its *metrics*.
+- Added new function `conditionalIterate` for recursive computation of metrics through conditional iteration. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`). (**2.00.8**)
+- Added new function `stateMavg` for calculating the moving average based on previous results. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`). (**2.00.8**)
+- Function `mmaxPositiveStreak` can now be used in the reactive state stream engine (`createReactiveStateEngine`). (**2.00.8**)
+- Added new function `stateIterate` for linear recursion by linear iteration. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`). (**2.00.8**)
+- Window join engine (`createWindowJoinEngine`): When the parameter *window*=0:0, the size of the calculation window over the right table is determined by the difference between the timestamps of the corresponding record in the left table and its most recent record. (**2.00.8**)
+- Added support for new data type DECIMAL. Storage and computation involving the DECIMAL data type are also supported in some functions and the OLAP and TSDB storage engines. (**2.00.8**) 
+    Note that:
+    1. DECIMAL type columns cannot be specified as partitioning columns or sort columns (TSDB engine), or compressed using the “delta” method.
+    2. DECIMAL type columns cannot be modified or deleted with the functions `addColumn`/`replaceColumn!`/`dropColumns!`/`rename!`
+    3. The DECIMAL data type does not support stream data subscription and stream computing.
+    4. loadText does not support importing columns containing DECIMAL values.
+- Added new function `regroup` for grouped aggregation over a matrix based on user-specified column and/or row labels. (**2.00.8**)
+- Added new functions `mifirstNot` and `milastNot` for returning the index of the first/last non-NULL element in a sliding window. (**2.00.8**)
+- Added new function `loc` for accessing the rows and columns of a matrix by label(s) or a Boolean vector. (**2.00.8**)
+- Added new function `til` for creating a vector of consecutive integers starting from 0. (**2.00.8**)
+- Added new functions `pack` and `unpack` for packing and unpacking binary data. (**2.00.8**)
+- Added new function `align` for aligning two matrices based on row labels and/or column labels using the specified join method. (**2.00.8**)
+- DFS table join now supports full join. (**2.00.8**)
+- DolphinDB (JIT) now supports accessing vector elements by index which can be a vector or a pair. (**2.00.8**)
+- Web-based User Interface:
+  - "Shell" tab enhancements: Added new "Database" view for checking databases and tables. (**2.00.8**)
+  - Added new settings menu where you can customize the number of decimal places. For example, enter "2" to display numbers with 2 digits. (**2.00.8**)
+  - Added support for visualization of dictionaries. (**2.00.8**)
+  - You can now navigate to the associated documentation by clicking the error code (e.g., 'RefId: S00001'). (**2.00.8**)
 - Added new configuration parameters *memLimitOfQueryResult* and *memLimitOfTaskGroupResult* to restrict the memory usage of the intermediate and final results of queries; new function `getQueryStatus` to monitor the memory usage and execution status of the query. (**2.00.7**)
 - Added new function `getTSDBCompactionTaskStatus` to check the status of level file compaction tasks in the TSDB engine. (**2.00.7**)
 - Added new functions `isPeak` and `isValley` to determine if the current element is the peak/valley of the neighboring elements. (**2.00.7**)
@@ -93,7 +136,7 @@ Release Date: 2021-07-31
 * You can specify multiple matching columns for the asof join engine. (**2.00.5**)
 * Added new parameters *snapshotDir* and *snapshotIntervalInMsgCount* to the cross-sectional streaming engine to enable snapshot; Added new parameter *raftGroup* to enable high availability. (**2.00.5**)
 * Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**2.00.5**)
-* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
+* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
 * Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**2.00.5**)
 * When applying an aggregate function, such as `quantile`, to a column in a table, if the data type of the column is not supported, the result is a NULL value. (**2.00.5**)
 * The SQL `pivot by` clause supports columns of UUID type. (**2.00.5**)
@@ -141,6 +184,43 @@ Release Date: 2021-07-31
 
 > Improvements
 
+- Functions `backup`, `restore`, and `migrate` support backup and restore of database partitions by copying files. (**2.00.8**)
+- Functions `replaceColumn!`, `rename!`, and `dropColumn!` now support DFS tables. (**2.00.8**)
+- Added new parameter *deleteSchema* to function `dropPartition` to determine whether to delete the partition schema when deleting a VALUE partition. (**2.00.8**)
+- Function `dropDatabase` deletes all physical files for the specified database. (**2.00.8**)
+- Metacode of SQL statements can be passed to the parameter *obj* of function `saveText`. Partitions can be queried in parallel and written with a single thread. (**2.00.8**)
+- The system raises an error message if you specify the configuration parameter *volumes* for a single node using macro variable `<ALIAS>`. (**2.00.8**)
+- Support SQL `like` keyword in a `where` clause to search for a specified pattern of sort keys in the TSDB engine. (**2.00.8**)
+- Optimized the reading performance in TSDB engine. (**2.00.8**)
+- Optimized the performance of update, delete and upsert in the TSDB storage engine. (**2.00.8**)
+- Added parameter *nullFill* to function `createWindowJoinEngine` to fill in the NULL values in the output table. (**2.00.8**)
+- The parameter *timeRepartitionSchema* of function `replayDS` supports more temporal types. (**2.00.8**)
+- Optimized the garbage collection logic of window join engine. (**2.00.8**)
+- Identical expressions using user-defined functions are only calculated once in the reactive state stream engine. (**2.00.8**)
+- Added SQL keyword `HINT_VECTORIZED` to enable vectorization for data grouping. (**2.00.8**)
+- Optimized the query performance when the group by column is the VALUE partitioning column. (**2.00.8**)
+- Optimized the performance of left join of an in-memory table and a DFS table. (**2.00.8**)
+- Optimized the performance of SQL clause `pivot by`. (**2.00.8**)
+- Optimized the computing performance of function `rolling`. (**2.00.8**)
+- Function `getBackupList` returns column "updateTime" for the last update time and column "rows" for the number of records in a partition. (**2.00.8**)
+- Added a new key "rows" to the dictionary returned by function `getBackupMeta` to show the number of rows in a partition. (**2.00.8**)
+- Added optional parameter *containHeader* to functions `loadText`, `ploadText`, `loadTextEx`, and `textChunkDS` to indicate whether the file contains a header row. (**2.00.8**)
+- Added access control to 31 functions, which can only be executed by a logged-in user or administrator. (**2.00.8**)
+- `updateLicense` throws an exception if the authorization mode changed. (**2.00.8**)
+- No exception is thrown if the indices are out of bounds when slicing a vector. (**2.00.8**)
+- When accessing a vector by index, NULL values are returned if the indices are out of bounds in DolphinDB (standard and JIT version). (**2.00.8**)
+- Optimized crc32 algorithm. (**2.00.8**)
+- Optimized function `mrank`. (**2.00.8**)
+- The maximum length for the data converted by function `toJson` is no longer limited to 1000. (**2.00.8**)
+- Web-based User Interface:
+    - Enhanced code highlighting to keep it consistent with the DolphinDB extension for Visual Studio Code. (**2.00.8**)
+    - Numeric values are formatted with comma (,) as the thousands separator, e.g., `1,000,000,000`. (**2.00.8**)
+    - Updated keywords, code completion, and function documentation. (**2.00.8**)
+    - The execution information is displayed in a more compact layout. (**2.00.8**)
+    - Enhanced the "status" popover view to display status information in different categories. (**2.00.8**)
+    - Enhanced table pagination design and added tooltips for icon buttons. (**2.00.8**)
+    - "Job" tab enhancements: Adjusted the field names; Added support for job search by client IP. (**2.00.8**)
+    - Fixed an issue where the temporal labels were not correctly formatted in a `plot`. (**2.00.8**)
 - `getClusterPerf(true)` returns the information on all controllers in a high-availability cluster. This function also adds a return value *isLeader* to indicate whether the controller is the leader of the raft group. (**2.00.7**)
 - Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**2.00.7**)
 - When using function `restore`, `loadBackup`, or `getBackupMeta` to access the backup partitions in a database whose chunk granularity is at TABLE level, the physical index is no longer required when specifying the parameter *partition*. (**2.00.7**)
