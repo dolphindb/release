@@ -8,7 +8,7 @@
 
 ## DolphinDB 服务器
 
-版本号： 1.30.20 &nbsp;&nbsp;&nbsp; [三级兼容](./../DolphinDB_compatibility_levels.md/#33-三级兼容性标准) 1.30.19
+版本号： 1.30.20 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.19
 
 发行日期： 2022-09-30
 
