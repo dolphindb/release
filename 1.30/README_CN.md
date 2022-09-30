@@ -8,6 +8,16 @@
 
 ## DolphinDB 服务器
 
+版本号： 1.30.20 &nbsp;&nbsp;&nbsp; [三级兼容](./../DolphinDB_compatibility_levels.md/#33-三级兼容性标准) 1.30.19
+
+发行日期： 2022-09-30
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.20.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.20_JIT.zip)
+
 版本号： 1.30.19 &nbsp;&nbsp;&nbsp; [一级兼容](./../DolphinDB_compatibility_levels.md/#32-一级兼容性标准) 1.30.18
 
 发行日期： 2022-07-14
@@ -200,6 +210,32 @@
 
 > 新功能
 
+* 新增函数 `truncate` 用于清空分布式表数据，但仍保留表结构。（**1.30.20**）
+* 新增函数 `checkBackup `检查备份文件的完整性和正确性；新增函数 `getBackupStatus` 查询数据库备份和恢复任务详情。（**1.30.20**）
+* 新增函数 `backupDB/restoreDB/backupTable/restoreTable`，用于备份恢复整库/表。（**1.30.20**）
+* 新增配置项 `logRetentionTime`，设置系统日志的保留时间。（**1.30.20**）
+* 新增函数 `setLogLevel`，用于在线调整打印日志的级别。（**1.30.20**）
+* 新增函数 `triggerNodeReport`，强制触发 datanode 向 controller 汇报分区信息。（**1.30.20**）
+* 新增函数 `getResolutionTaskStatus` 查看当前进行中的事务决议任务状态。（**1.30.20**）
+* `streamEngineParser` 支持用户自定义函数中嵌套因子的解析。（**1.30.20**）
+* 新增函数 `conditionalIterate`，可通过条件迭代实现因子中的递归。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**1.30.20**）
+* 新增函数 `stateMavg`，可计算基于历史结果的移动平均。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**1.30.20**）
+* 新增函数 `stateIterate`，通过线性迭代实现线性递归。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**1.30.20**）
+* 响应式状态引擎 (`createReactiveStateEngine`) 支持 `mmaxPositiveStreak`。（**1.30.20**）
+* `createWindowJoinEngine` 参数 window=0:0 时，右表的计算窗口由左表相连两条数据的时间戳确定。（**1.30.20**）
+* 新增函数 `sumbars`，支持统计向前累加到指定值的周期数。（**1.30.20**）
+* 新增函数 `regroup`，按给定的行/列标签对矩阵进行分组聚合的操作。（**1.30.20**）
+* 新增滑动窗口函数 `mifirstNot`，`milastNot`，用于计算窗口内第一个和最后一个非空值。（**1.30.20**）
+* 新增函数 `loc`，通过标签或布尔向量获取矩阵指定的行和列的元素。（**1.30.20**）
+* 新增函数 `til`，用于生成一个从 0 开始的连续整型序列。（**1.30.20**）
+* 新增函数 `pack/unpack`，用于二进制字节流间的打包/解包。（**1.30.20**）
+* 新增函数 `align`，将两个矩阵按照两个指定方式连接，并根据行列标签对齐。（**1.30.20**）
+* JIT 支持使用索引向量或数据对访问向量。（**1.30.20**） 
+* web 界面（**1.30.20**）：
+  * 交互编程：新增数据库管理，支持查看数据库及表。
+  * 新增设置面板，支持自定义小数展示位数，如固定显示两位小数 1.00。
+  * 支持词典 (dict) 的可视化展示。
+  * 新增设置面板，支持自定义小数展示位数，如固定显示两位小数 1.00。
 * 新增配置项 `memLimitOfQueryResult` 和 `memLimitOfTaskGroupResult` 以限制查询结果和子查询结果的内存占用；新增函数getQueryStatus 用于监控查询过程的内存占用及执行进度等信息。（**1.30.19**）  
 * 新增函数 `isPeak` 和 `isValley`，判断当前元素是否是相邻元素中的峰值/谷值。（**1.30.19**）
 * 新增函数 `rowAt(X, Y)`，以 Y 为索引，逐行获取 X 中对应索引的元素。（**1.30.19**）
@@ -330,6 +366,32 @@
   
 > 改进
 
+* `backup` 支持通过拷贝分区文件方式进行备份，且可通过 restore/migrate 进行恢复。（**1.30.20**）
+* 调用 `dropDatabase` 删除数据库时，删除 database 所有相关的物理文件夹。（**1.30.20**）
+* `saveText` 支持传入 SQL 元代码，支持并行读取分布式表数据并存入磁盘。（**1.30.20**）
+* 使用宏变量<ALIAS>为单个节点配置 volumes 时增加错误提示。（**1.30.20**）
+* `replayDS` 函数的 *timeRepartitionSchema* 参数支持更多时间类型。（**1.30.20**）
+* 优化 window join 引擎垃圾回机制。（**1.30.20**）
+* 响应式状态引擎（`createReactiveStateEngine`）中包含自定义的相同表达式时不再重复计算。（**1.30.20**）
+* 新增加 HINT_VECTORIZED 来启用 vectorizedGrouping。（**1.30.20**）
+* 优化 `rolling` 函数的计算性能。（**1.30.20**）
+* `getBackupList` 返回的表增加字段 *updateTime* 和 *row*，分别记录分区最近一次修改时间和分区行数信息。（**1.30.20**）
+* `getBackupMeta` 返回的字典增加键值 rows 用于显示分区行数信息。（**1.30.20**）
+* 为 31 个内置函数增加了权限控制，需登录或管理员权限才可调用。（**1.30.20**）
+* `updateLicense` 时，若 license 授权类型改变，添加错误提示。（**1.30.20**）
+* 对 vector 进行切片时，如果指定的索引超出向量的索引范围，则返回空值，不再抛出异常。（**1.30.20**）
+* JIT 版本以索引方式读取 vector 某一元素时，若索引超过 index 的范围，用 NULL 填充。（**1.30.20**）
+* crc32 算法优化。（**1.30.20**）
+* 优化函数 `mrank`。（**1.30.20**）
+* `toJson` 函数可转换的数据取消最大长度为1000的限制。（**1.30.20**）
+* web 界面（**1.30.20**）：
+  * 优化代码高亮
+  * 数值支持千分位号（,）分隔，如 1,000,000,000。
+  * 关键字、函数提示、函数文档更新。
+  * 优化代码执行结果显示，使显示更紧凑。
+  * 优化状态管理面板，可分类显示状态信息。
+  * 优化了表格分页显示样式，并为新窗口打开等图标增加 tooltip。
+  * 作业管理: 优化任务字段名称，支持根据客户端 IP 搜索任务。
 * `getClusterPerf(true)` 返回高可用集群下所有控制节点的信息，且返回值新增 isLeader 字段，显示该控制节点是否为 raft 组的 leader。（**1.30.19**）
 * 在高可用集群环境下，通过 web 访问任意 controller 节点，会重定向到 leader 节点，能在 web 页面展示所有节点信息。（**1.30.19**）
 * 调用 `restore`, `loadBackup`, `getBackupMeta` 等函数查询备份的表级分区数据时，partition 参数无需指定物理索引名。（**1.30.19**）
@@ -509,6 +571,26 @@
   
 > Bug fixes:
 
+* 数据节点（datanode）序列化超过128M的分区元数据时，导致序列化失败。（**1.30.20**）
+* 回放 redo log 失败，导致 datanode 上分区状态错误。（**1.30.20**）
+* 启用分级存储功能，当分区转移到 coldVolume 时失败，会导致分区被误删。（**1.30.20**）
+* 建库时指定 atomic=‘CHUNK’ 时，控制节点元数据过大，导致启动慢。（**1.30.20**）
+* 进行 update 操作后，旧版本的数据被提前回收。（**1.30.20**）
+* `renameTable` 后旧表未及时回收。（**1.30.20**）
+* `dropPartition` 时分区以 "/" 结尾会导致 server crash。（**1.30.20**）
+* `dropPartition` 通过指定条件的方式无法删除创建分布式表（VALUE 分区）时自动新增的分区。（**1.30.20**）
+* 对同一张空表多次删除数据，会导致数据节点（datanode）元数据中表的 cid 错误。（**1.30.20**）
+* `dfsRecoveryConcurrency` 配置项设置后不生效。（**1.30.20**）
+* 响应式状态引擎（`createReactiveStateEngine`）metrics 中包含 talibNull 状态因子时，会创建失败。（**1.30.20**）
+* 创建 `streamEngineParser` 引擎时，若 metrics 使用外部变量，会导致 server crash。（**1.30.20**）
+* window join 左表行数小于 window 时会导致 server crash。（**1.30.20**）
+* exec 与 limit 一起使用，当返回条数不足 limit 限制条数会导致 server crash。（**1.30.20**）
+* `isDuplicated`, `nunique` 函数对 DOUBLE，FLOAT 类型数据计算结果不正确。（**1.30.20**）
+* 用户自定义函数内调用 `parseExpr` 无法解析。（**1.30.20**）
+* `getClusterPerf` 返回值字段 `maxRunningQueryTime` 显示结果不正确。（**1.30.20**）
+* `loadNpy` 读取过大的文件会crash。（**1.30.20**）
+* JIT 版本无法在 for 循环外部访问循环内部变量。（**1.30.20**）
+* web 界面：新增设置面板，支持自定义小数展示位数，如固定显示两位小数 1.00。（**1.30.20**）
 * 向 OLAP 引擎持续写入数据时，出现 redo log 回收被卡住。（**1.30.19**）
 * 节点安全关机后，仍被控制节点判断为存活。（**1.30.19**）
 * 事务决议未完成前，分区锁因超时被释放，导致数据无法写入。（**1.30.19**）

@@ -2,9 +2,18 @@
 
 - [DolphinDB发行说明](#dolphindb发行说明)
   - [DolphinDB服务器](#dolphindb服务器)
-  - [GUI](#gui)
 
 ## DolphinDB服务器
+
+版本号： 2.00.8 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.7 和 1.30.19
+
+发行日期： 2022-09-30
+ 
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8_JIT.zip)
 
 版本号： 2.00.7 &nbsp;&nbsp;&nbsp; [一级兼容](./../DolphinDB_compatibility_levels.md/#32-一级兼容性标准) 2.00.6
 
@@ -86,6 +95,34 @@
 
 > 新功能
 
+* 增加 SQL Trace 工具，用于监测 SQL 执行全流程耗时。并新增配置项 traceLogDir 用于配置 Trace 日志的存储路径。（**2.00.8**）
+* 新增函数 `truncate` 用于清空分布式表数据，但仍保留表结构。（**2.00.8**）
+* 新增函数 `checkBackup` 检查备份文件的完整性和正确性；新增函数 `getBackupStatus` 查询数据库备份和恢复任务详情。（**2.00.8**）
+* 新增函数 `backupDB/restoreDB/backupTable/restoreTable`，用于备份恢复整库/表。（**2.00.8**）
+* 新增配置项 `logRetentionTime`，设置系统日志的保留时间。（**2.00.8**）
+* 新增函数 `setLogLevel`，用于在线调整打印日志的级别。（**2.00.8**）
+* 新增函数 `triggerNodeReport`，强制触发 datanode 向 controller 汇报分区信息。（**2.00.8**）
+* 新增函数 `getResolutionTaskStatus` 查看当前进行中的事务决议任务状态。（**2.00.8**）
+* `streamEngineParser` 支持用户自定义函数中嵌套因子的解析。（**2.00.8**）
+* 新增函数 `conditionalIterate`，可通过条件迭代实现因子中的递归。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**2.00.8**）
+* 新增函数 `stateMavg`，可计算基于历史结果的移动平均。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**2.00.8**）
+* 新增函数 `stateIterate`，通过线性迭代实现线性递归。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**2.00.8**）
+* 响应式状态引擎 (`createReactiveStateEngine`) 支持 `mmaxPositiveStreak`。（**2.00.8**）
+* `createWindowJoinEngine` 参数 window=0:0 时，右表的计算窗口由左表相连两条数据的时间戳确定。（**2.00.8**）
+* 新增数据类型 DECIMAL。同时在 OLAP/TSDB 存储引擎及部分函数中支持 DECIMAL 存储及计算。需要注意：（**2.00.8**）
+  1. DECIMAL 类型字段不可作为分区列或 sortColumn （仅 TSDB 引擎），且不能使用 delta 压缩方式。
+  2. 不支持通过 `addColumn/replaceColumn!/dropColumns!/rename!` 修改或删除 DECIMAL 类型列。
+  3. DECIMAL 类型暂不支持流订阅及流计算。
+  4. loadText 不支持导入包含 DECIMAL 类型的列数据。
+* 新增函数 `sumbars`，支持统计向前累加到指定值的周期数。（**2.00.8**）
+* 新增函数 `regroup`，按给定的行/列标签对矩阵进行分组聚合的操作。（**2.00.8**）
+* 新增滑动窗口函数 `mifirstNot`，`milastNot`，用于计算窗口内第一个和最后一个非空值。（**2.00.8**）
+* 新增函数 `loc`，通过标签或布尔向量获取矩阵指定的行和列的元素。（**2.00.8**）
+* 新增函数 `til`，用于生成一个从 0 开始的连续整型序列。（**2.00.8**）
+* 新增函数 `pack/unpack`，用于二进制字节流间的打包/解包。（**2.00.8**）
+* 新增函数 `align`，将两个矩阵按照两个指定方式连接，并根据行列标签对齐。（**2.00.8**）
+* 支持分布式 full join。（**2.00.8**）
+* JIT 支持使用索引向量或数据对访问向量。（**2.00.8**） 
 * 新增配置项 `memLimitOfQueryResult` 和 `memLimitOfTaskGroupResult` 以限制查询结果和子查询结果的内存占用；新增函数getQueryStatus 用于监控查询过程的内存占用及执行进度等信息。（**2.00.7**）  
 * 新增函数 `getTSDBCompactionTaskStatus`，用于获取 TSDB 引擎 level file 合并任务的状态。（**2.00.7**）
 * 新增函数 `isPeak` 和 `isValley`，判断当前元素是否是相邻元素中的峰值/谷值。（**2.00.7**）
@@ -192,6 +229,34 @@
 
 > 改进
 
+* `backup` 支持通过拷贝分区文件方式进行备份，且可通过 restore/migrate 进行恢复。（**2.00.8**）
+* `replaceColumn!/rename!/dropColumns!` 函数支持分布式表。（**2.00.8**）
+* `dropPartition` 函数新增参数 *deleteSchema*，用于删除 VALUE 分区时同步删除表 schema 中的分区信息。（**2.00.8**）
+* 调用 `dropDatabase` 删除数据库时，删除 database 所有相关的物理文件夹。（**2.00.8**）
+* `saveText` 支持传入 SQL 元代码，支持并行读取分布式表数据并存入磁盘。（**2.00.8**）
+* 使用宏变量<ALIAS>为单个节点配置 volumes 时增加错误提示。（**2.00.8**）
+* 查询由 TSDB 创建的表时，支持对过滤条件中包含的 sortKey 字段进行 like 匹配。（**2.00.8**）
+* TSDB 读数据性能优化。（**2.00.8**）
+* 优化 TSDB 引擎 update，delete，upsert 性能。（**2.00.8**）
+* `createWindowJoinEngine` 新加可选参数 *nullFill*，对输出的结果的空值进行填充。（**2.00.8**）
+* `replayDS` 函数的 *timeRepartitionSchema* 参数支持更多时间类型。（**2.00.8**）
+* 优化 window join 引擎垃圾回机制。（**2.00.8**）
+* 响应式状态引擎（`createReactiveStateEngine`）中包含自定义的相同表达式时不再重复计算。（**2.00.8**）
+* 新增加 HINT_VECTORIZED 来启用 vectorizedGrouping。（**2.00.8**）
+* 当对分区列（时间列以 VALUE 分区）进行 group by 时，优化了分组查询性能。（**2.00.8**）
+* 提升了分布式 left join 的性能。（**2.00.8**）
+* 优化 pivot by 的性能。（**2.00.8**）
+* 优化 `rolling` 函数的计算性能。（**2.00.8**）
+* `getBackupList` 返回的表增加字段 *updateTime* 和 *row*，分别记录分区最近一次修改时间和分区行数信息。（**2.00.8**）
+* `getBackupMeta` 返回的字典增加键值 rows 用于显示分区行数信息。（**2.00.8**）
+* `loadText/ploadText/loadTextEx/textChunkDS` 函数增加可选参数 *containHeader*，表示数据文件是否包含列名信息。（**2.00.8**）
+* 为 31 个内置函数增加了权限控制，需登录或管理员权限才可调用。（**2.00.8**）
+* `updateLicense` 时，若 license 授权类型改变，添加错误提示。（**2.00.8**）
+* 对 vector 进行切片时，如果指定的索引超出向量的索引范围，则返回空值，不再抛出异常。（**2.00.8**）
+* JIT 版本以索引方式读取 vector 某一元素时，若索引超过 index 的范围，用 NULL 填充。（**2.00.8**）
+* crc32 算法优化。（**2.00.8**）
+* 优化函数 `mrank`。（**2.00.8**）
+* `toJson` 函数可转换的数据取消最大长度为1000的限制。（**2.00.8**）
 * `getClusterPerf(true)` 返回高可用集群下所有控制节点的信息，且返回值新增 isLeader 字段，显示该控制节点是否为 raft 组的 leader。（**2.00.7**）
 * 在高可用集群环境下，通过 web 访问任意 controller 节点，会重定向到 leader 节点，能在 web 页面展示所有节点信息。（**2.00.7**）
 * 调用 `restore`, `loadBackup`, `getBackupMeta` 等函数查询备份的表级分区数据时，partition 参数无需指定物理索引名。（**2.00.7**）
@@ -349,6 +414,31 @@
 
 > Bug fixes:
 
+* 向由 TSDB 引擎创建的表中写入包含 STRING 类型数据时发生内存泄漏。（**2.00.8**）
+* 配置 `TSDBCacheFlushWorkNum` 值小于 volumes 的数量时，会导致 TSDB 引擎数据刷盘无法完成。（**2.00.8**）
+* 数据节点（datanode）序列化超过128M的分区元数据时，导致序列化失败。（**2.00.8**）
+* 数据节点（datanode）上进行DDL操作，因事务决议失败，导致分区状态错误。（**2.00.8**）
+* 回放 redo log 失败，导致 datanode 上分区状态错误。（**2.00.8**）
+* 启用分级存储功能，当分区转移到 coldVolume 时失败，会导致分区被误删。（**2.00.8**）
+* 建库时指定 atomic=‘CHUNK’ 时，控制节点元数据过大，导致启动慢。（**2.00.8**）
+* TSDB 引擎使用 delete 删除分布式表出现内存占用过大。（**2.00.8**）
+* 进行 update 操作后，旧版本的数据被提前回收。（**2.00.8**）
+* `renameTable` 后旧表未及时回收。（**2.00.8**）
+* `dropPartition` 时分区以 "/" 结尾会导致 server crash。（**2.00.8**）
+* `dropPartition` 通过指定条件的方式无法删除创建分布式表（VALUE 分区）时自动新增的分区。（**2.00.8**）
+* 对同一张空表多次删除数据，会导致数据节点（datanode）元数据中表的 cid 错误。（**2.00.8**）
+* `dfsRecoveryConcurrency` 配置项设置后不生效。（**2.00.8**）
+* 往流表中插入单条 array vector 数据时，handler 执行失败。（**2.00.8**）
+* 响应式状态引擎（`createReactiveStateEngine`）metrics 中的自定义函数传入 array vector 数据类型导致 server crash。（**2.00.8**）
+* 响应式状态引擎（`createReactiveStateEngine`）metrics 中包含 talibNull 状态因子时，会创建失败。（**2.00.8**）
+* 创建 `streamEngineParser` 引擎时，若 metrics 使用外部变量，会导致 server crash。（**2.00.8**）
+* window join 左表行数小于 window 时会导致 server crash。（**2.00.8**）
+* exec 与 limit 一起使用，当返回条数不足 limit 限制条数会导致 server crash。（**2.00.8**）
+* `isDuplicated`, `nunique` 函数对 DOUBLE，FLOAT 类型数据计算结果不正确。（**2.00.8**）
+* 用户自定义函数内调用 `parseExpr` 无法解析。（**2.00.8**）
+* `getClusterPerf` 返回值字段 `maxRunningQueryTime` 显示结果不正确。（**2.00.8**）
+* `loadNpy` 读取过大的文件会crash。（**2.00.8**）
+* JIT 版本无法在 for 循环外部访问循环内部变量。（**2.00.8**）
 * 向 OLAP 引擎持续写入数据时，出现 redo log 回收被卡住。（**2.00.7**）
 * 节点安全关机后，仍被控制节点判断为存活。（**2.00.7**）
 * 事务决议未完成前，分区锁因超时被释放，导致数据无法写入。（**2.00.7**）
@@ -577,6 +667,3 @@
 * SQL 语句中使用 `interval` 子句插值时，分组字段可能出现空值。(**2.00.1**)
 * `mr` 函数中数据源的脚本长度超过1024字节时，远程执行的数据源错误的将脚本字符串作为执行结果。(**2.00.1**)
 
-## GUI
-
-* GUI画图函数plot多曲线可共享y轴。(**2.00.1**)
