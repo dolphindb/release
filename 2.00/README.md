@@ -6,41 +6,41 @@ Version: 2.00.8 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/do
 
 Release Date: 2022-09-30
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.8_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.8_JIT.zip)
 
 Version: 2.00.7 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 2.00.6
 
 Release Date: 2022-07-14
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.7_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
 
 Version: 2.00.6 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.5
 
 Release Date: 2022-05-09
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.6_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.6_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
 
 Version: 2.00.5 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.4/1.30.16/1.30.17
 
 Release Date: 2022-03-29
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.5_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.5_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
 
 Version: 2.00.4
 
