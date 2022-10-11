@@ -216,7 +216,7 @@
 * 新增配置项 `logRetentionTime`，设置系统日志的保留时间。（**1.30.20**）
 * 新增函数 `setLogLevel`，用于在线调整打印日志的级别。（**1.30.20**）
 * 新增函数 `triggerNodeReport`，强制触发 datanode 向 controller 汇报分区信息。（**1.30.20**）
-* 新增函数 `getResolutionTaskStatus` 查看当前进行中的事务决议任务状态。（**1.30.20**）
+* 新增函数 `getUnresolvedTxn` 查看当前进行中的事务决议任务状态。（**1.30.20**）
 * `streamEngineParser` 支持用户自定义函数中嵌套因子的解析。（**1.30.20**）
 * 新增函数 `conditionalIterate`，可通过条件迭代实现因子中的递归。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**1.30.20**）
 * 新增函数 `stateMavg`，可计算基于历史结果的移动平均。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**1.30.20**）

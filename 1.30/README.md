@@ -215,7 +215,7 @@ Release Date: 2020-12-29
 - Added new functions `backupDB`, `restoreDB`, `backupTable`, and `restoreTable` for backing up / restoring an entire database or table. (**1.30.20**)
 - Added new configuration parameter *logRetentionTime* for specifying the system log retention period. (**1.30.20**)
 - Added new function `triggerNodeReport` for triggering a chunk information report for the specified data node. (**1.30.20**)
-- Added new function `getResolutionTaskStatus` for getting the transactions in the resolution phase. (**1.30.20**)
+- Added new function `getUnresolvedTxn` for getting the transactions in the resolution phase. (**1.30.20**)
 - The stream engine parser (`streamEngineParser`) now supports specifying user-defined functions with nested function as its *metrics*.
 - Added new function `conditionalIterate` for recursive computation of metrics through conditional iteration. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`).  (**1.30.20**)
 - Added new function `stateMavg` for calculating the moving average based on previous results. This function can only be used in the reactive state stream engine (`createReactiveStateEngine`). (**1.30.20**)
