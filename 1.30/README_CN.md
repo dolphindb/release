@@ -1035,3 +1035,16 @@
   - 提升了 SYMBOL 类型向量在 API 和 server 之间的传输效率。（**1.30.17.1**）
   - 新增支持 UUID, IPADDR, INT128 和 DATEHOUR 类型。（**1.30.17.1**）
   - 增加 `BatchTableWriter` 类，支持批量异步写入数据到内存表、分区表。（**1.30.17.1**）
+- Go API
+  - 提供 RunScript 及 RunFile 接口支持发送脚本至服务器运行、提供 RunFunc 接口支持在服务器上执行内置或自定义函数、提供 Upload 接口支持上传本地变量至服务器。（**1.30.19**）
+  - 支持流数据订阅。（**1.30.19**）
+    - 支持三种订阅方式：返回订阅信息的 PollingClient、单协程回调 GoroutineClient 和多协程回调 GoroutinePooledClient
+    - 支持断线重连
+    - 不支持订阅异构流表
+    - 不支持自动将订阅信息封装成 Table 对象
+  - 支持连接池 partitionedTableAppender。（**1.30.19**）
+    - 连接池支持负载均衡
+    - 支持自定义负载均衡地址
+    - 不支持以下功能：压缩，SSL，异步通讯，设置 TCP Keepalive（仅支持长连接）
+  - 支持 7 种 DataForm：Scalar, Table, Vector, Set, Pair, Dictionary, Matrix, Chart。（**1.30.19**）
+  - 支持 29 种 DataType：VOID, BOOL, CHAR, SHORT, INT LONG, DATE, MONTH, TIME, MINUTE, SECOND, DATETIME, TIMESTAMP, NANOTIME, NANOTIMESTAMP, FLOAT, DOUBLE SYMBOL, STRING, UUID, ANY, DATEHOUR, DATEMINUTE, IP, INT128, BLOB, COMPLEX, POINT, DURATION。（**1.30.19**）
