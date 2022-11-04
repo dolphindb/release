@@ -626,6 +626,29 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 
 ## API
 
+**Java**
+
+- Achieved load balancing of requests when connecting to the cluster through the API. (**1.30.19.1**)
+- dded new class `streamDeserializer` to parse the heterogeneous stream table. Added the *streamDeserializer* parameter for function `subscribe` to receive data parsed by *streamDeserializer*. (**1.30.19.1**)
+- Added new parameters *userName* and *passWord* to function `subscribe`. (**1.30.19.1**)
+- Support the *reconnect* parameter for `DBConnection.connect` to reconnect nodes automatically in scenarios where high availability is not enabled. (**1.30.19.1**)
+- Improved the `ExclusiveDBConnectionPool` class to run multiple `DBConnection` concurrently in the background. (**1.30.19.1**)
+- Added new parameters *highAvailabilitySites*, *initialScript*, *compress*, *useSSL*, and *usePython* to `ExclusiveDBConnectionPool`. (**1.30.19.1**)
+- Added new parameter *usePython* to method `DBConnection.connect` to parse scripts with Python parser. (**1.30.19.1**)
+- Added class `BasicTableSchema` to store the schema (including rows, cols, colName, colType, etc.) information of BasicTable. (**1.30.19.1**)
+- Added new parameter *tableName* to `DBconnection.run` to obtain the schema of an in-memory table. (**1.30.19.1**)
+- When writting to an in-memory table with `MultithreadedTableWriter`, *dbPath* must be set to NULL, and *tableName* must be specified as the in-memory table name. (**1.30.19.1**)
+- Support batch processing in streaming data subscription. (**1.30.19.1**)
+- Support COMPLEX, POINT, and SYMBOL types. (**1.30.17.2**)
+- Support array vectors. (**1.30.17.2**)
+- Added class `MultithreadedTableWriter` for multi-threaded writes to DFS tables, in-memory tables and dimension tables. (**1.30.17.2**)
+- Added parameter *compress* to `DBConnection` method to support upload and download of compressed data. (**1.30.17.2**)
+- Fixed the issue where Java API fails to switch to another data node after the current node is shut down gracefully in high-availability mode. (**1.30.17.2**)
+- Fixed the following issues:
+  - When subscribing to a stream table published on Windows, an error "Connection reset" is reported;
+  - When subscribing to a stream table published on Linux, data cannot be ingested after API gets stuck. (**1.30.17.2**)
+
+
 **Python**
 
 - Support function hints. (**1.30.19.2**)
