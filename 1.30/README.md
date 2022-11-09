@@ -651,6 +651,10 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 
 **Python**
 
+- Added new `setTimeOut` method to the `session` class for configuring the TCP connection option TCP_USER_TIMEOUT. The method is only available on Linux. (**1.30.19.3**)
+- Added new parameter *sortKeyMappingFunction* to the `createPartitionedTable` method for dimensionality reduction of sort keys. (**1.30.19.3**) 
+- You can now upload a DataFrame in the specified data type by setting its `__DolphinDB_Type__` attribute. (**1.30.19.3**)
+- Fixed an issue where the uploading result of a Boolean object was incorrect. (**1.30.19.3**)
 - Support function hints. (**1.30.19.2**)
 - Support official Python 3.8-3.9 on Windows. (**1.30.19.2**)
 - Support uploading data with function *runTaskAsync* of `DBConnectionPool`. (**1.30.19.2**)
