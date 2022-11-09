@@ -214,7 +214,6 @@
 * 新增函数 `checkBackup `检查备份文件的完整性和正确性；新增函数 `getBackupStatus` 查询数据库备份和恢复任务详情。（**1.30.20**）
 * 新增函数 `backupDB/restoreDB/backupTable/restoreTable`，用于备份恢复整库/表。（**1.30.20**）
 * 新增配置项 `logRetentionTime`，设置系统日志的保留时间。（**1.30.20**）
-* 新增函数 `setLogLevel`，用于在线调整打印日志的级别。（**1.30.20**）
 * 新增函数 `triggerNodeReport`，强制触发 datanode 向 controller 汇报分区信息。（**1.30.20**）
 * 新增函数 `getUnresolvedTxn` 查看当前进行中的事务决议任务状态。（**1.30.20**）
 * `streamEngineParser` 支持用户自定义函数中嵌套因子的解析。（**1.30.20**）
@@ -247,7 +246,7 @@
 * 新增函数 `getSupportBundle`，返回系统基本的配置信息和数据库信息。（**1.30.19**）
 * 新增函数 `topRange` 和 `lowRange`，统计序列中的当前值是前多少周期内的最大/小值。并在 ReactiveStateEngine 中支持了该函数。（**1.30.19**）
 * 新增流数据引擎 dual-ownership reactive state engine (`createDualOwnershipReactiveStateEngine`)，支持按两种不同的分组方式分别应用不同的指标进行并行计算。（**1.30.19**）
-* 引入新的表对象：跨进程共享内存表 IPCInMemoryTable，并新增四个相关函数 `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` 和 `readIPCInMemoryTable`，分别用于创建跨进程共享内存表，加载跨进程共享内存表，销毁跨进程共享内存表，读取跨进程共享内存表中的数据。跨进程共享内存表可用于在流计算场景下，使 DolphinDB 服务端与同一个物理机上的客户端程序间能够高效地传递数据。（**1.30.19**）
+* 引入新的表对象：跨进程共享内存表 IPCInMemoryTable，并新增四个相关函数 `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable`，分别用于创建跨进程共享内存表，加载跨进程共享内存表，销毁跨进程共享内存表。跨进程共享内存表可用于在流计算场景下，使 DolphinDB 服务端与同一个物理机上的客户端程序间能够高效地传递数据。（**1.30.19**）
 * 新增函数 `stretch`，将向量拉伸到指定长度。（**1.30.19**）
 * 新增函数 `getTransactionStatus`，获取事务的状态。新增命令 `imtForceGCRedolog`，取消等待指定编号的事务回收。（**1.30.19**）
 * 新增数据库运维模块 ops，包含一些用户常用的运维脚本，如：取消集群中未完成的作业，查看内存占用，删除未完成恢复的分区，关闭不活跃的会话等。（**1.30.19**）
@@ -259,7 +258,9 @@
 * 新增计算函数 `dynamicGroupCumsum` 和 `dynamicGroupCumcount`，并在响应式状态引擎中增加了对应的状态函数。（**1.30.18**）
 * 新增函数 `createDistributedInMemoryTable` 支持创建分布式共享内存表。（**1.30.18**）
 * 新增分级存储功能，可以将冷数据存储到低速硬盘或者对象存储（比如 Amazon S3）上，且这些冷数据只读不可写。（**1.30.18**）
+* 新增配置项 maxDynamicLocalExecutor 限制本地动态执行线程的产生频率与数量上限。（**1.30.18**）
 * 新增 `transaction` 语句，将对单个内存表（或共享内存表）操作的多个 SQL 语句封装为一个事务 （**1.30.18**）
+* 新增函数 `getRecoveryWorkerNum` 获取当前用于 chunk 恢复的工作线程数。（**1.30.17**）
 * 新增命令 `resetRecoveryWorkerNum` 动态修改用于 chunk 恢复的工作线程数。（**1.30.17**）
 * 支持使用命令 `kill -15 $PID` 或集群 web 管理界面安全关机。（**1.30.17**）
 * 新增运维函数 `imtUpdateChunkVersionOnDataNode`，修改数据节点上对应 chunkId 的版本号。维护集群中多副本数据之间，或数据节点与控制节点之间的版本一致性。（**1.30.17**）
@@ -279,13 +280,11 @@
 * 新增函数 `existSubscriptionTopic`，用于判断某一个订阅是否已经创建。（**1.30.16**）
 * 新增函数 `createLookupJoinEngine`，支持将流数据表和流数据表、内存表或者分布式表（目前只支持维度表）做左连接。（**1.30.16**）
 * 新增函数 `moveChunksAcrossVolume`，在增加新的 volume 后，用于转移旧 volume 的部分 chunk 到新 volume。（**1.30.16**）
-* 增加新的 volume 后，可以使用 `resetDBDirMeta` 函数转移老的 volume 上的 meta log 目录到新的 volume。（**1.30.16**）
 * 新增 10 个 TopN 函数 `msumTopN`, `mavgTopN`, `mstdpTopN`, `mstdTopN`, `mvarTopN`, `mvarpTopN`, `mcorrTopN`, `mbetaTopN`, `mcovarTopN`, `mwsumTopN`，且 `createReactiveStateEngine` 引擎支持它们相应的状态函数。（**1.30.16**）
 * 新增函数 `makeKey` 和 `makeOrderedKey`，可以将多个列合并成一个 BLOB 列，用作字典或集合的键值，其中 `makeOrderedKey` 的结果保留了多个字段的排序顺序。（**1.30.16**）
 * 新增高阶函数 `aggrTopN`，用以计算根据排序列获取的前N行数据的聚合结果。（**1.30.16**）
 * 新增高阶函数 `window` 和 `twindow`。与 `move` 与 `tmove` 类似，但适用于更通用的场景，对于窗口边界的处理稍有不同 。（**1.30.16**）
-* 新增配置项 raftElectionTick，用以配置 raft 切换 leader 的心跳时间。同时新增函数 `setCacheEngineMemSize`, `setTimeoutTick`, `setTSDBCacheEngineSize`, `setMaxMemSize`, `setReservedMemSize` 和 `setMaxBlockSizeForReservedMemory` 支持在线修改对应的配置项。（**1.30.16**）
-* 新增函数 `fixedLengthArrayVector`，支持将多个向量合成一个 array vector。（**1.30.16**）
+* 新增配置项 raftElectionTick，用以配置 raft 切换 leader 的心跳时间。同时新增函数 `setCacheEngineMemSize`, `setTimeoutTick`, `setMaxMemSize`, `setReservedMemSize` 和 `setMaxBlockSizeForReservedMemory` 支持在线修改对应的配置项。（**1.30.16**）
 * 新增函数 `loadNpz`支持导入 numpy 的 npz 文件。（**1.30.16**）
 * 新增函数 `suspendRecovery` 用于暂停 recovery 任务，新增函数 `resumeRecovery` 用于重启 `recovery` 任务。（**1.30.16**）
 * 新增函数 `rowCorr`, `rowCovar`, `rowBeta`, `rowWsum`, `rowWavg`，可以对每行数据进行计算。（**1.30.16**）
@@ -436,7 +435,7 @@
 * 命令 `addColumn` 新增列名支持以数字开头。（**1.30.17**）
 * 函数 `loadText` 和 `loadTextEx` 导入 csv 文件时，第一行数据的读取上限为 256 KB。（**1.30.17**）
 * 聚合函数、窗口函数和向量函数支持表作为输入参数。（**1.30.17**）
-* 函数 `rand` 和 `normal` 的参数 count 支持输入数据对，用于指定生成矩阵的维度。（**1.30.17**）
+* 函数 `rand` 和 `norm` 的参数 count 支持输入数据对，用于指定生成矩阵的维度。（**1.30.17**）
 * row 系列逻辑函数（`rowAnd`, `rowOr`, `rowXor`）支持输入整数。（**1.30.17**） 
 * `bar` 函数新增参数 closed，用于指定分组包含左边界或右边界。（**1.30.17**）
 * 滑动窗口函数的参数 X 是索引序列或索引矩阵，且 window 是正整数时，窗口按照索引滑动。（**1.30.17**）
@@ -638,7 +637,6 @@
 * 修复浏览 online Recovery 重启节点后，两副本 string 列数据不一致。（**1.30.19**）
 * `resample` 函数输入索引是 TIME 类型的时间数据，参数 *origin* 指定 "end"，*rule* 指定为 "D"，查看返回结果报错："Invalid value for HourOfDay (valid values 0 - 23): 39"。（**1.30.19**）
 * 非 admin 管理员 grant/deny/revoke 自身权限时报错。（**1.30.19**）
-* TSDB 在 OOM 时引发的 redolog 回收异常。（**1.30.19**）
 * 当矩阵的某一行全为空，`byRow` 计算 `imin`, `imax` 时结果不正确。（**1.30.19**）
 * controller 节点宕机时，使用 `getControllerPref` 获取到的 agentsite 不正确。（**1.30.19**）
 * 未配置 *dataSync* 动态调用 `addNode` 函数增加节点报错。（**1.30.19**）
