@@ -934,6 +934,10 @@
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
+  - `session` 类新增 `setTimeOut` 方法，用于设置 TCP 连接的 TCP_USER_TIMEOUT 选项。仅 Linux 系统生效。（**1.30.19.3**）
+  - `createPartitionedTable` 新增参数 *sortKeyMappingFunction*，支持对 sortKey 降维。（**1.30.19.3**）
+  - DataFrame 在指定 `__DolphinDB_Type__` 属性后，可以按照指定类型上传。（**1.30.19.3**）
+  - 修复 Python API 上传 object 类型的 Bool 数据时出现数值错误的问题。（**1.30.19.3**）
   - 为函数添加注解，支持在调用函数时提示函数用法。（**1.30.19.2**）
   - Windows 系统下，Python API 新增支持官网 Python3.8, Python3.9。（**1.30.19.2**）
   - DBConnectionPool 的 runTaskAsync 函数支持上传数据。（**1.30.19.2**）
