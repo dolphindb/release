@@ -13,7 +13,8 @@
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.8_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.8_JIT.zip) |
+[Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.8.zip)|
 
 版本号： 2.00.7 &nbsp;&nbsp;&nbsp; [一级兼容](./../DolphinDB_compatibility_levels.md/#32-一级兼容性标准) 2.00.6
 
@@ -23,7 +24,8 @@
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.7_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.7_JIT.zip) |
+[Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.7.zip)|
 
 版本号： 2.00.6 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.5
 
@@ -33,7 +35,7 @@
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.6_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.6_JIT.zip) |
 
 版本号： 2.00.5 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 2.00.4, 1.30.16 和 1.30.17
 
@@ -43,7 +45,7 @@
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.5_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.5_JIT.zip) |
 
 版本号： 2.00.4
 
@@ -100,7 +102,6 @@
 * 新增函数 `checkBackup` 检查备份文件的完整性和正确性；新增函数 `getBackupStatus` 查询数据库备份和恢复任务详情。（**2.00.8**）
 * 新增函数 `backupDB/restoreDB/backupTable/restoreTable`，用于备份恢复整库/表。（**2.00.8**）
 * 新增配置项 `logRetentionTime`，设置系统日志的保留时间。（**2.00.8**）
-* 新增函数 `setLogLevel`，用于在线调整打印日志的级别。（**2.00.8**）
 * 新增函数 `triggerNodeReport`，强制触发 datanode 向 controller 汇报分区信息。（**2.00.8**）
 * 新增函数 `getUnresolvedTxn` 查看当前进行中的事务决议任务状态。（**2.00.8**）
 * `streamEngineParser` 支持用户自定义函数中嵌套因子的解析。（**2.00.8**）
@@ -109,7 +110,7 @@
 * 新增函数 `stateIterate`，通过线性迭代实现线性递归。仅可用于响应式状态引擎 (`createReactiveStateEngine`) 。（**2.00.8**）
 * 响应式状态引擎 (`createReactiveStateEngine`) 支持 `mmaxPositiveStreak`。（**2.00.8**）
 * `createWindowJoinEngine` 参数 window=0:0 时，右表的计算窗口由左表相连两条数据的时间戳确定。（**2.00.8**）
-* 新增数据类型 DECIMAL。同时在 OLAP/TSDB 存储引擎及部分函数中支持 DECIMAL 存储及计算。需要注意：（**2.00.8**）
+* 新增数据类型 DECIMAL。同时在 OLAP/TSDB 存储引擎及部分函数中支持 DECIMAL 存储及计算。新增函数 `decimal32` 和 `decimal64`。需要注意：（**2.00.8**）
   1. DECIMAL 类型字段不可作为分区列或 sortColumn （仅 TSDB 引擎），且不能使用 delta 压缩方式。
   2. 不支持通过 `addColumn/replaceColumn!/dropColumns!/rename!` 修改或删除 DECIMAL 类型列。
   3. DECIMAL 类型暂不支持流订阅及流计算。
@@ -137,7 +138,7 @@
 * 新增 `spline`, `neville`, `dividedDifference`, `loess`插值函数。（**2.00.7**）
 * ReactiveStateEngine 支持 `cumPositiveStreak` 函数。（**2.00.7**）
 * 新增流数据引擎 dual-ownership reactive state engine (`createDualOwnershipReactiveStateEngine`)，支持按两种不同的分组方式分别应用不同的指标进行并行计算。（**2.00.7**）
-* 引入新的表对象：跨进程共享内存表 IPCInMemoryTable，并新增四个相关函数 `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable` 和 `readIPCInMemoryTable`，分别用于创建跨进程共享内存表，加载跨进程共享内存表，销毁跨进程共享内存表，读取跨进程共享内存表中的数据。跨进程共享内存表可用于在流计算场景下，使 DolphinDB 服务端与同一个物理机上的客户端程序间能够高效地传递数据。（**2.00.7**）
+* 引入新的表对象：跨进程共享内存表 IPCInMemoryTable，并新增四个相关函数 `createIPCInMemoryTable`, `loadIPCInMemoryTable`, `dropIPCInMemoryTable`，分别用于创建跨进程共享内存表，加载跨进程共享内存表，销毁跨进程共享内存表。跨进程共享内存表可用于在流计算场景下，使 DolphinDB 服务端与同一个物理机上的客户端程序间能够高效地传递数据。（**2.00.7**）
 * 新增函数 `stretch`，将向量拉伸到指定长度。（**2.00.7**）
 * 新增函数 `getTransactionStatus`，获取事务的状态。新增命令 `imtForceGCRedolog`，取消等待指定编号的事务回收。（**2.00.7**）
 * 新增数据库运维模块 ops，包含一些用户常用的运维脚本，如：取消集群中未完成的作业，查看内存占用，删除未完成恢复的分区，关闭不活跃的会话等。（**2.00.7**）
@@ -152,8 +153,8 @@
 * TSDB 引擎下创建数据表的函数 `createPartitionedTable` 新增参数 sortKeyMappingFunction，通过为 sortColumns 引入映射函数来降低分区内时间线的个数，以提升查询性能。（**2.00.6**）
 * 优化了 TSDB 引擎更新数据的性能。（**2.00.6**）
 * 新增函数 `toCharArray`，将字符串拆分为由字符组成的向量。（**2.00.6**）
-* 新增配置项 maxDynamicLocalExecutor 限制本地动态执行线程的产生频率与数量上限 （**2.00.6**）
-* 新增 `transaction` 语句，将对单个内存表（或共享内存表）操作的多个 SQL 语句封装为一个事务 （**2.00.6**）
+* 新增配置项 maxDynamicLocalExecutor 限制本地动态执行线程的产生频率与数量上限。（**2.00.6**）
+* 新增 `transaction` 语句，将对单个内存表（或共享内存表）操作的多个 SQL 语句封装为一个事务。（**2.00.6**）
 * 新增命令 `enableTSDBAsyncSorting` 和 `disableTSDBAsyncSorting` 用于开启和关闭 TSDB 引擎 cache engine 的异步数据排序功能。（**2.00.5**）
 * 新增函数 `getRecoveryWorkerNum` 获取当前用于 chunk 恢复的工作线程数。（**2.00.5**）
 * 新增命令 `resetRecoveryWorkerNum` 动态修改用于 chunk 恢复的工作线程数。（**2.00.5**）
@@ -196,7 +197,7 @@
 * 新增 `fflush` 函数，帮助将缓存中的数据写入文件系统。（**2.00.4**）
 * 支持匿名的聚合函数定义。(**2.00.3**)
 * 支持 postStart.dos 文件，可用于启动 DolphinDB 时挂载定时任务。(**2.00.3**)
-* 新增 tcmalloc 控制预留内存配置选项，当内存占用接近 `maxMemSize` 的时候，控制能够分配的内存块的最大尺寸，避免因 OOM 导致 crash。(**2.00.3**)
+* 新增配置参数 reservedMemSize 和 maxBlockSizeForReservedMemory，当内存占用接近 maxMemSize 的时候，控制能够分配的内存块的最大尺寸，避免因 OOM 导致 crash。(**2.00.3**)
 * 增加 `cumfirstNot`,`cumlastNot`, `mfirst`, `mlast`等函数，以及在响应式引擎中实现它们的状态函数。(**2.00.3**)
 * 新增函数 `oneHot`，用于做 one hot（独热）编码。(**2.00.3**)
 * 新增 `setAtomicLevel` 函数，用于修改历史数据库的配置以支持并发写入。(**2.00.3**)
@@ -318,7 +319,7 @@
 * 命令 `addColumn` 新增列名支持以数字开头。（**2.00.5**）
 * 函数 `loadText` 和 `loadTextEx` 导入 csv 文件时，第一行数据的读取上限为 256 KB。（**2.00.5**）
 * 聚合函数、窗口函数和向量函数支持表作为输入参数。（**2.00.5**）
-* 函数 `rand` 和 `normal` 的参数 count 支持输入数据对，用于指定生成矩阵的维度。（**2.00.5**）
+* 函数 `rand` 和 `norm` 的参数 count 支持输入数据对，用于指定生成矩阵的维度。（**2.00.5**）
 * 函数 `loadText` 和 `loadTextEx` 新增参数 arrayDelimiter，支持导入包含 array vector 的 csv 文件。（**2.00.5**）
 * row 系列逻辑函数（`rowAnd`, `rowOr`, `rowXor`）支持输入整数。（**2.00.5**）
 * `bar` 函数新增参数 closed，用于指定分组包含左边界或右边界。（**2.00.5**）

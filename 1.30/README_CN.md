@@ -17,6 +17,7 @@
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.20_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.20.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.20_JIT.zip)
+[Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.20.zip)
 
 版本号： 1.30.19 &nbsp;&nbsp;&nbsp; [一级兼容](./../DolphinDB_compatibility_levels.md/#32-一级兼容性标准) 1.30.18
 
@@ -27,6 +28,7 @@
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.19_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.19.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.19_JIT.zip)
+[Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.19.zip)
 
 版本号： 1.30.18 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.17
 
