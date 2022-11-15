@@ -15,7 +15,8 @@ Release Date: 2022-09-30
 [Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.20_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.20_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.20.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.20_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.20_JIT.zip) |
+[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.20.zip)
 
 Version: 1.30.19 &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#31-compatibility-level-1) with 1.30.18
 
@@ -25,7 +26,8 @@ Release Date: 2022-07-14
 [Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.19_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.19_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.19.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.19_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.19_JIT.zip) |
+[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.19.zip)
 
 Version: 1.30.18 &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.17
 
