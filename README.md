@@ -47,4 +47,4 @@ Server & API help document: http://www.dolphindb.com/help/
 
 GUI & cluster manager help document: http://www.dolphindb.com/gui_help/  
 
-Slack community: http://dolphindb.slack.com/
+Slack community: https://dolphindb.slack.com/join/shared_invite/zt-1e9w27dfl-3W2hYVIU4~HTfhCF4pE1Dg#/shared-invite/email
