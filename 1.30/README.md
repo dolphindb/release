@@ -653,6 +653,14 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 
 **Python**
 
+ - When subscribing to a stream table, if *msgAsTable*=True and *batchSize* is a positive integer, the messages will be processed by block. (**1.30.19.4**)
+ - Python API now supports NumPy up to version 1.23.4, and pandas 1.5.2. (**1.30.19.4**)
+ - Error message enhancements for data uploads. (**1.30.19.4**)
+ - Error message enhancements for Python API on MacOS. (**1.30.19.4**)
+ - Fixed an error when downloading data containing timestamps before 1970. (**1.30.19.4**)
+ - Fixed a failure when writing data containing columns of type INT128/IPADDR/UUID/BLOB through `tableAppender`, `tableUpsert` and `PartitionedTableAppender`.（**1.30.19.4**）
+ - Added error message when the specified value for *batchSize* is a decimal in stream subscription. (**1.30.19.4**)
+ - Fixed server memory leak caused by undestroyed temporary database handle or table handle when deleting a partition with `s.dropPartition` or loading a table with `s.loadTable`. (**1.30.19.4**）
 - Added new `setTimeOut` method to the `session` class for configuring the TCP connection option TCP_USER_TIMEOUT. The method is only available on Linux. (**1.30.19.3**)
 - Added new parameter *sortKeyMappingFunction* to the `createPartitionedTable` method for dimensionality reduction of sort keys. (**1.30.19.3**) 
 - You can now upload a DataFrame in the specified data type by setting its `__DolphinDB_Type__` attribute. (**1.30.19.3**)
