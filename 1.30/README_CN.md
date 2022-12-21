@@ -936,6 +936,14 @@
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
+  - 流订阅指定 *msgAsTable* = True 且指定 *batchSize* 为正整数时，将基于消息块处理记录。（**1.30.19.4**）
+  - python API 最高支持 NumPy 1.23.4 和 pandas 1.5.2。（**1.30.19.4**）
+  - 优化上传数据报错信息。（**1.30.19.4**）
+  - 优化 Mac python API 报错信息。（**1.30.19.4**）
+  - 修复下载的数据中时间戳小于1970时，会报错的问题。（**1.30.19.4**）
+  - 修复通过 `tableAppender`, `tableUpsert`, `PartitionedTableAppender` 写入包含 INT128, IPADDR, UUID, BLOB 类型列时，写入失败的问题。（**1.30.19.4**）
+  - 流订阅指定 *batchSize* 为小数时增加报错提示。（**1.30.19.4**）
+  - 修复通过 `s.dropPartition` 删除分区，或通过 `s.loadTable` 加载表时，由于创建的临时 database handle 和 table handle 未销毁而造成 server 内存泄漏的问题。（**1.30.19.4**）
   - `session` 类新增 `setTimeOut` 方法，用于设置 TCP 连接的 TCP_USER_TIMEOUT 选项。仅 Linux 系统生效。（**1.30.19.3**）
   - `createPartitionedTable` 新增参数 *sortKeyMappingFunction*，支持对 sortKey 降维。（**1.30.19.3**）
   - DataFrame 在指定 `__DolphinDB_Type__` 属性后，可以按照指定类型上传。（**1.30.19.3**）
