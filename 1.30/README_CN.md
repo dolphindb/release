@@ -8,6 +8,18 @@
 
 ## DolphinDB 服务器
 
+版本号： 1.30.21 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.20
+
+发行日期： 2023-02-16
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21_JIT.zip)
+[Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.21.zip)
+
+
 版本号： 1.30.20 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.19
 
 发行日期： 2022-09-30
@@ -212,6 +224,36 @@
 
 > 新功能
 
+* 新增功能 License Server，用于根据 license 的限制分配节点的硬件资源。新增相关函数 `getLicenseServerResourceInfo`，`getRegisteredNodeInfo`，相关配置项 `licenseServerSite`，`bindCores`。（**1.30.21**）
+* 新增配置项 `thirdPartyAuthenticator`，用于第三方系统校验用户权限。通过指定该参数，在用户登录时，系统会通过第三方系统进行权限验证。（**1.30.21**）
+* 插件启动时会自动检查版本。（**1.30.21**）
+* 新增集群间数据异步复制功能，将主集群数据复制到从集群，且保证主、从集群数据一致，实现了集群异地容灾。（**1.30.21**）
+* 新增对 arrow 格式的支持。加载 arrow 插件后，Python API 可以 arrow 协议跟 DolphinDB 交互。（**1.30.21**）
+* 新增命令 `setMaxConnections` 用于在线修改当前节点的最大连接数。（**1.30.21**）    
+* 新增函数 `demean`，用于对数据去均值化处理。同时在响应式状态引擎中支持该函数。（**1.30.21**）   
+* 函数 `dict` 和 `syncDict` 新增参数 `ordered` 用于创建有序字典，支持键值对的顺序与输入顺序保持一致；支持两个字典的二元操作，以及字典和 scalar, vector的二元操作。（**1.30.21**）    
+* 新增累计窗口函数 `cumnunique`，用于统计元素累积的唯一值数量。同时在响应式状态引擎中支持该函数。 （**1.30.21**）       
+* 新增函数 `strFormat`，用于动态字符串的构建。（**1.30.21**）    
+* 新增函数 `nanInfFill` 用于替换 NaN 和 Inf 值。（**1.30.21**）
+* 新增函数 `byColumn`，使 `accumulate` 等高阶函数支持列内竖向计算。同时在流计算中支持该函数。（**1.30.21**）    
+* 新增函数 `volumeBar` 用于数据的累积分组。（**1.30.21**）    
+* 新增函数 `enlist` 用于将标量或向量，转化为由其作为元素值的向量或元组。（**1.30.21**） 
+* 新增运算符 `eachAt(@)` 和 `at(\[\])` 类似，支持访问 vector, matrix, table, array vector, tuple, dictionary 和 function。    （**1.30.21**）
+* 新增函数 `latestKeyedTable`, `latestIndexedTable`，用于创建时间序列相关的键值表和索引表。支持按某一列（通常为时间列）的值进行条件更新，只有值更大的新记录才会更新具有相同主键的原表中的记录。（**1.30.21**）
+* 新增部分兼容标准 SQL 的功能。包括（**1.30.21**）：    
+    * 新增语句：`drop`（支持删库，删表操作），`create local temporary table`（支持创建本地临时内存表），`alter`（新增支持列名重命名，删除列），`case when`, `union/union all`, `join on`, `with as`（支持 `with` 关键字使用参数对列重命名）        
+    * 新增谓词：`(not) between and`, `is null/is not null`, `(not) exists/not exist`, `any/all`       
+    * 新增函数：`nullIf`, `coalesce`        
+    * 新增关键字：`distinct`（单个或多个字段去重），`nulls first/nulls last`（`order by` 关键字）        
+* 支持多表 `join` 语句，`join` 语法支持使用别名，且支持 `join` 的对象是一个 SQL 子查询。（**1.30.21**）
+* 支持 `select` 常量时不指定别名，此时常量值将作为列名。（**1.30.21**）    
+* 支持条件语句中 `in` 等谓词以及运算符对 SQL 子查询返回的结果表进行操作。 （**1.30.21**）   
+* 每次对 DFS 表进行 update/upsert/delete 操作，都会产生一个版本。系统会回收历史版本，回收时间由新增配的置项 `oldChunkVersionRetentionTime` 控制。用于设置历史版本 chunk 的保存时间。（**1.30.21**）    
+* 提供各大交易所的交易日历及用户自定义交易日历的功能，支持在函数 `temporalAdd`, `resample`, `asfreq`, `transFreq` 中根据用户及定义的交易日历进行计算。新增相关置项 `marketHolidayDir`，新增相关函数 `addMarketHoliday`, `updateMarketHoliday`, `getMarketCalendar` 用于增加更新和获取自定义交易日历信息。（**1.30.21**）
+* 新增函数 `genericStateIterate`, `genericTStateIterate` 流数据中窗口迭代计算。（**1.30.21**）
+* `createWindowJoinEngine` 函数 *window* = 0:0 且 *useSystemtime* = true 时，支持数组向量的计算。（**1.30.21**）
+* 新增函数 `movingWindowData` 和 `tmovingWindowData`，用于获取流计算中历史滑动窗口的数据。（**1.30.21**）  
+* 响应式状态引擎中支持 `if-else` 语句的计算。（**1.30.21**）
 * 新增函数 `truncate` 用于清空分布式表数据，但仍保留表结构。（**1.30.20**）
 * 新增函数 `checkBackup `检查备份文件的完整性和正确性；新增函数 `getBackupStatus` 查询数据库备份和恢复任务详情。（**1.30.20**）
 * 新增函数 `backupDB/restoreDB/backupTable/restoreTable`，用于备份恢复整库/表。（**1.30.20**）
@@ -367,6 +409,69 @@
   
 > 改进
 
+* 元数据文件添加 checksum。（**1.30.21**）    
+* 清空由 controller 转变为 follower 的控制节点的恢复事务，以避免 follower 节点的恢复日志过多地占用磁盘空间。（**1.30.21**）    
+* 支持在日志文件中输出备份恢复过程的相关信息。（**1.30.21**）
+* 函数 `interval` 新增参数 `closed`, `label`, `origin`。（**1.30.21**）    
+* 函数 `getRecentJobs` 新增返回值字段 clientIp 和 clientPort 用于获取客户端的 IP 和 Port 信息。（**1.30.21**）    
+* 函数 `ema` 新增配置项 `warmup`，配置后前 *window* - 1 个元素也会计算输出。（**1.30.21**）    
+* 高阶函数 `accumulate` 和 `reduce` 支持输入一元函数和三元函数。（**1.30.21**）    
+* 响应式状态引擎和时间序列聚合引擎新增参数 `outputElapsedMicroseconds` 用于计算耗时统计。（**1.30.21**）    
+* 函数 `rank` 和 `rowRank` 新增参数 `precision`，用于设置排序值的精度。（**1.30.21**）    
+* 函数 `groups` 参数 `mode` 支持 "vector", "tuple"。（**1.30.21**）    
+* 函数 `linearTimeTrend` 支持对矩阵和表的计算。（**1.30.21**）    
+* 支持高阶函数迭用，高阶函数 `eachLeft`, `eachRight`, `eachPre`, `eachPost`, `reduce` 新增参数 `consistent`，支持子任务结果的类型和形式可以不一致。（**1.30.21**）
+* 函数 `rank` 和 `rowRank` 的参数 `tiesMethod` 支持使用 first 按照原数据的顺序排名。（**1.30.21**）    
+* 函数 `cut` 支持将数据拆分成标量。（**1.30.21**）    
+* 函数 `split` 支持输入字符串向量。（**1.30.21**）    
+* 函数 `rowAt` 支持以数组向量为索引。（**1.30.21**）    
+* 矩阵支持以 slice 方式取行元素。（**1.30.21**）    
+* 取消了创建 tuple 时其 size 不能超过1048576的限制。（**1.30.21**）    
+* 大部分计算函数支持 DECIMAL 数据类型。（**1.30.21**）    
+* 用函数 `array` 创建 tuple 时支持默认值为 STRING 类型。（**1.30.21**）    
+* 函数 `memSize` 可以显示 any vector 的内存占用。（**1.30.21**）
+* 降低了当列数较多的情况下查询最后数据合并的耗时。（**1.30.21**）    
+* `getSessionMemoryStat` 返回值增加了缓存状态的打印，包含维度表，表数据，cache engine，字典编码等缓存占用信息，以及流数据发布和订阅队列深度的信息。（**1.30.21**）    
+* 函数 `setColumnComment` 支持为 mvccTable 增加注释信息。（**1.30.21**）    
+* 支持通过多线程 merge 不同分区的结果。（**1.30.21**）    
+* 矩阵支持混合使用 pair 和 vector 作为行列索引的值。（**1.30.21**）    
+* 支持在数据节点上调用权限相关的函数。（**1.30.21**）    
+* 调整了 `regularArrayMemoryLimit` 实际生效的参数值为配置值与 maxMemSize/2 中的较小值。（**1.30.21**）    
+* 允许流数据订阅客户端变成接受数据的一方。（**1.30.21**）
+* `streamFilter` 的参数 `condition` 支持传入内置函数。 （**1.30.21**）   
+* 函数 `replay` 新增参数 `sortColumns`，相同回放时间戳的数据将根据该参数指定的字段进行排序。（**1.30.21**）    
+* 支持同构 N 对 1 回放和异构流表回放数据源时的数据源的自动对齐。（**1.30.21**）
+* 在流计算引擎中调用滑动窗口函数时，window 的上限修改为 102400。（**1.30.21**）
+* 优化了异构流表的回放性能。（**1.30.21**）    
+* `streamEngineParser` 支持解析 `byRow` 嵌套 `contextby` 函数，放入横截面引擎进行计算。（**1.30.21**）
+* 响应式状态引擎使用 moving 函数时，支持计算数组向量。（**1.30.21**）    
+* 优化 `createWindowJoinEngine` 在 *window* = 0:0 时的计算延迟。（**1.30.21**）    
+* 支持在流计算中使用高阶函数 `accumulate`。（**1.30.21**）    
+* 优化了 `streamEngineParser` 的解析性能。（**1.30.21**）
+* 提升了多表异构回放的速度。（**1.30.21**）
+* 共享表 append/insert into 语句支持通过 `transaction` 语句实现事务。（**1.30.21**）    
+* 支持使用 `select` 子句中的列别名或者新创建的列作为 where 的过滤条件。（**1.30.21**）    
+* 优化了当 `pivot by` 最后一列为分区列时的性能。（**1.30.21**）    
+* `context by` 支持 matrix 和 table 的输入形式。（**1.30.21**）    
+* 提高了`context by` 和 `group by` 在分组较多的情况下的计算性能。（**1.30.21**）    
+* 优化了 `lsj` 在大数据量下的性能。（**1.30.21**）    
+* 支持 SQL 语句 where 条件里时间类型可以自动转换为 interval 分组的时间类型。（**1.30.21**）    
+* 放开了在 SQL 查询使用 in 元组作为查询条件时，元组内元素个数的限制。（**1.30.21**）    
+* 改进了权限管理功能，包括（**1.30.21**）：    
+    * 新增了更细粒度的表权限（TABLE\_INSERT/TABLE\_UPDATE/TABLE\_DELETE），以及库权限（DB\_INSERT/DB\_UPDATE/DB\_DELETE）。        
+    * 修改了 DB\_MANAGE 的权限，不再支持创库，只支持对库进行 DDL 级别的操作管理。        
+    * 修改了 DB\_OWNER 的权限，支持用户创建指定前缀的库。        
+    * 约束了不同权限下 getAllDBs，getClusterDFSDatabases，getDFSDatabases，getDFSTablesByDatabase 等函数返回值查看范围。        
+    * 新增了权限类型 QUERY\_RESULT\_MEM\_LIMIT，TASK\_GROUP\_MEM\_LIMIT 用于约束用户查询内存的上限。        
+    * 修改了 DDL/DML 操作的权限校验机制。    
+* 使用 JIT 来增强流数据引擎中自定义函数的性能。（**1.30.21**）    
+* JIT 支持 ratio operator。（**1.30.21**）    
+* `ReactiveStateEngine` JIT 优化支持传入向量常量。（**1.30.21**）    
+* JIT 支持 `sum`, `avg`, `count`, `size`, `min`, `max`, `iif` 等常用函数。（**1.30.21**）
+* JIT 支持 `moving`。（**1.30.21**）
+* JIT 版本，`ratio` 操作支持参数为 CHAR 类型和 FLOAT 类型。（**1.30.21**）
+* 改进了函数 `getSystemCpuUsage` 的返回值。（**1.30.21**）
+* 根据配置项 `openblasThreads` 创建 open blas 线程数，而不是根据 CPU 核数创建。（**1.30.21**）
 * `backup` 支持通过拷贝分区文件方式进行备份，且可通过 restore/migrate 进行恢复。（**1.30.20**）
 * 调用 `dropDatabase` 删除数据库时，删除 database 所有相关的物理文件夹。（**1.30.20**）
 * `saveText` 支持传入 SQL 元代码，支持并行读取分布式表数据并存入磁盘。（**1.30.20**）
@@ -572,6 +677,37 @@
   
 > Bug fixes:
 
+* 高可用方案中客户端重复提交写入任务。（**1.30.21**）    
+* 聚合函数运算得到的内存表，后续参与 move 等移动函数的运算时会修改本身内存表数据。（**1.30.21**）    
+* window join 的 metric 用匿名聚合函数时报错。（**1.30.21**）    
+* 按月分区，where 条件的时间类型和列的时间类型不同时且为当月的最后一天时，查询结果有缺失。（**1.30.21**）    
+* `ols` 自变量为字符串类型会导致 crash。（**1.30.21**）    
+* 在 `transaction` 语句中使用 mvcc 表会导致 crash。（**1.30.21**）    
+* `corr` 函数与 `deltas` 函数联用，加了 as 之后结果不正确。（**1.30.21**）    
+* kill -9 直接关闭 server 后会导致一些 redo log 不回收。（**1.30.21**）    
+* 响应式状态引擎计算时，若表里面有 STRING 类型，偶尔会导致 crash。（**1.30.21**）    
+* `submitJob` 时，若 metacode 包含未定义变量，执行时会导致 crash。（**1.30.21**）    
+* 集群网络故障后网络恢复，有时会导致节点 crash。（**1.30.21**）    
+* 元编程计算时使用 partial function 并启用 context by 会导致结果不正确。（**1.30.21**）    
+* `replayDS`中 `sqlObj` 无法识别为 metacode，导致错误的报错。（**1.30.21**）       
+* 若 lj 的左表为内存表，右表为分布式表，且右表的数据库路径包含多层目录（如数据库路径 dfs://mydbs/quotedb)，则会报错。（**1.30.21**）    
+* `createTimeSeriesAggregator`，当 `metric` 包含 keyColumn 时，会报错。（**1.30.21**）
+* 高可用集群下当两个节点同时执行 `getClusterPerf` 函数会导致死锁。（**1.30.21**）    
+* `accumulate` 多次执行时偶尔会 crash。（**1.30.21**）    
+* `createDailyTimeSeriesEngine` 计算完成后，在一些场景下查询结果中的时间类型数据会报错。（**1.30.21**）
+* TSDB 引擎下，表中启用了 sortKeyMappingHashFunction，集群环境下，在多线程并发查询时，偶尔会报错或崩溃。（**1.30.21**）
+* 两个空的字符串相加后，`isValid` 判断结果为非空。    
+* SQL 查询时多个过滤条件使用 or 连接，超过 128 个后返回结果为空。（**1.30.21**）    
+* `loadText` 时若抛出异常，在高压力下有时会导致死锁。（**1.30.21**）    
+* 函数添加到 FunctionView 后，查询得到的 body 少了一对括号。（**1.30.21**）    
+* `ftest` 的结果会出现 inf。（**1.30.21**）    
+* 字符串向量超出索引切片时会导致 crash。（**1.30.21**）    
+* 高阶函数 `each` 作用于自定义函数，且输入参数为 table 类型时，有时会 crash。（**1.30.21**）    
+* 创建 `CrossSectionalEngine` 后如果 append 的数据和 dummyTable 表结构不一致，不会抛出异常。（**1.30.21**）    
+* `loadTextEx` 导入数据时若数据库为值分区，且导入的数据包含建库时分区列未覆盖的部分，则查询不到该部分对应数据。（**1.30.21**）    
+* join 分布式表时，列为非分区列，`order by` 分区列且查询中有 `top` 子句，结果不正确。（**1.30.21**）
+* 序列化 `rpc` 或 `remoteRun` 返回的部分应用函数（partial application）时报错。（**1.30.21**）    
+* 在 job log 达到 1G 后，生成新的 job log 时，旧的 job log 会被丢弃。（**1.30.21**）
 * 数据节点（datanode）序列化超过128M的分区元数据时，导致序列化失败。（**1.30.20**）
 * 回放 redo log 失败，导致 datanode 上分区状态错误。（**1.30.20**）
 * 启用分级存储功能，当分区转移到 coldVolume 时失败，会导致分区被误删。（**1.30.20**）
@@ -912,9 +1048,89 @@
     * 增加export前的路径检查功能。（**1.30.19.2**）
     * 修复 python 模式下，GUI 端运行 nanotimestamp(-1)出现计算错误的问题。（**1.30.19.2**）
 
+* WEB
+    
+  > 新功能
+
+  **编辑器** 
+      
+  * 编辑器顶栏增加代码地图、回车补全配置，显示代码执行状态、支持点击取消执行中的作业。（**2.0.910**）
+  * 增加复制行、删除行功能。（**2.0.910**）
+  * 用户在字典中可选中文本。（**2.0.910**）
+  * 支持显示 decimal32/64 数据及由其组成的 array vector。（**2.0.910**）
+
+  **数据库面板**
+
+  * 新增查看数据表结构的功能，用户可以查看前一百行数据，添加列。（**2.0.910**）
+  * 数据库表再展开后为列，并支持修改注释。（**2.0.910**）
+
+  **用户界面**
+
+  * 终端的输出结果支持颜色。（**2.0.910**）
+  
+  > 改进
+
+  **编辑器** 
+      
+  * 布局优化，表格移至底部以显示更多列。（**2.0.910**）
+  * 代码编辑器统一改为自动保存，无需手动保存。（**2.0.910**）
+
+  **系统**
+
+  * 优化了页面加载速度。（**2.0.910**）
+  * 用户需要先登录才能查看数据节点日志。（**2.0.910**）
+
+  **用户界面**
+
+  * 优化数据视图显示：表格底部显示表的行、列、类型信息；当表内容高度溢出时，总是显示水平滚动条。（**2.0.910**）
+  * 优化字体，降低了文件大小。（**2.0.910**）
+  * 变量面板变量显示更紧凑。（**2.0.910**）
+  * 导航栏顶部显示节点类型。（**2.0.910**）
+
+  **数据库面板**
+
+  * 优化了数据库无权限的错误提示。（**2.0.910**）
+  * 路径中含有“.”的数据库支持分级展示，如 dfs://aaa.bbb.ccc。（**2.0.910**）
+
+  **作业管理**
+
+  * 作业管理中任务状态汉化，支持根据状态搜索。（**2.0.910**）
+
+  **用户手册**
+
+  * 官网用户手册中的函数文档已同步至最新。（**2.0.910**）
+
+  > Bug Fix
+  
+  **用户界面**
+
+  * 修复鼠标悬浮在 append! 等函数时没有正确显示函数提示的问题。（**2.0.910**）
+  * 修复矩阵最后一页数据显示异常的问题。（**2.0.910**）
+  * 修复终端 refid 错误链接需要点击两次的问题。（**2.0.910**）
+  * 修复终端字体显示异常的问题。（**2.0.910**）
+  * 关键字高亮逻辑修改，解决了set(), values() 函数被高亮的问题。（**2.0.910**）
+  * 修复了绘制k线图时横坐标不对的问题。（**2.0.910**）
+  * 修复顶部导航栏样式泄漏到编辑器的函数文档区域的问题，修复后编辑器的函数文档顶部高度恢复正常。（**2.0.910**）
+  * 修复终端和数据视图中时间显示不正确的问题。（**2.0.910**）
+  * 优化了登录错误时显示的错误信息。（**2.0.910**）
+
+  **数据库面板**
+
+  * 数据库面板高度可调整。（**2.0.910**）
+  * 数据库列表解决了卡顿问题。（**2.0.910**）
+  * 修复了左侧数据库、变量、共享变量面板、高度、宽度及滚动操作相关的缺陷。（**2.0.910**）
+
 ## API
 
 - Java API
+  - 新增 BasicDecimal32, BasicDecimal64, BasicDecimal32Vector 和 BasicDecimal64Vector 类，用于创建 Decimal 类型数据。支持压缩后上传及下载 Decimal 类型数据。（**1.30.20.2**）
+  - `MultithreadedTableWriter` 类新增参数 *callbackHandler* 支持回调。（**1.30.20.2**）
+  - `MultithreadedTableWriter` 类支持写入 Decimal 类型数据。（**1.30.20.2**）
+  - `MultithreadedTableWriter` 类新增参数 *mode* 和 *pModeOption* 支持 append! 或 upsert! 两种方式更新表。（**1.30.20.2**）
+  - 新增 `AutoFitTableUpsert` 类及其 `upsert` 方法，以单线程方式 upsert! 表数据。（**1.30.20.2**）
+  - 修复 `BasicTable` 的 `getRowJson` 方法返回不规范 JSON 的问题。（**1.30.20.2**）
+  - 新增 `Append` 方法，支持向 Vector 种追加数据。（**1.30.20.2**）
+  - 支持通过 `partitionedTableApender` 向分布式表中写入 array vector 类型数据。（**1.30.20.2**）
   - 通过 API 连接集群服务器时，实现请求的负载均衡。（**1.30.19.1**）
   - 新增 `StreamDeserializer` 类，实现对异构流表的解析，同时，`subscribe` 函数新增 deserializer 参数，接收经 `StreamDeserializer` 解析后的数据。（**1.30.19.1**）
   - 流订阅 `subscribe` 函数新增参数 *userName* 和 *passWord* 支持输入登录用户名密码。（**1.30.19.1**）
