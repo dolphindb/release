@@ -7,7 +7,7 @@
 
 版本号： 2.00.9 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.8 和 1.30.20
 
-发行日期： 2023-02-16
+发行日期： 2023-02-15
  
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9_JIT.zip) | 
@@ -308,8 +308,7 @@
 * 调整了 `regularArrayMemoryLimit` 实际生效的参数值为配置值与 maxMemSize/2 中的较小值。（**2.00.9**）    
 * 修改了分布式库表数量的最大上限。（**2.00.9**）    
 * TSDB 除最后一列之外的 sortColumn，在查询时支持部分时间的自动转换。（**2.00.9**）
-* 允许流数据订阅客户端变成接受数据的一方。（**2.00.9**）
-* 在流订阅反转的基础上支持 WebSocket 连接。（**2.00.9**）
+* 发布端通过订阅端发起的连接发送流数据，订阅端不需要额外提供监听端口。（**2.00.9**）
 * 响应式状态引擎支持不定长的数组向量计算。（**2.00.9**）    
 * `streamFilter` 的参数 `condition` 支持传入内置函数。 （**2.00.9**）   
 * 函数 `replay` 新增参数 `sortColumns`，相同回放时间戳的数据将根据该参数指定的字段进行排序。（**2.00.9**）    

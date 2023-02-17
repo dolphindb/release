@@ -10,7 +10,7 @@
 
 版本号： 1.30.21 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.20
 
-发行日期： 2023-02-16
+发行日期： 2023-02-15
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21_JIT.zip) | 
@@ -18,7 +18,6 @@
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21_JIT.zip)
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.21.zip)
-
 
 版本号： 1.30.20 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.19
 
@@ -437,7 +436,7 @@
 * 矩阵支持混合使用 pair 和 vector 作为行列索引的值。（**1.30.21**）    
 * 支持在数据节点上调用权限相关的函数。（**1.30.21**）    
 * 调整了 `regularArrayMemoryLimit` 实际生效的参数值为配置值与 maxMemSize/2 中的较小值。（**1.30.21**）    
-* 允许流数据订阅客户端变成接受数据的一方。（**1.30.21**）
+* 发布端通过订阅端发起的连接发送流数据，订阅端不需要额外提供监听端口。（**1.30.21**）
 * `streamFilter` 的参数 `condition` 支持传入内置函数。 （**1.30.21**）   
 * 函数 `replay` 新增参数 `sortColumns`，相同回放时间戳的数据将根据该参数指定的字段进行排序。（**1.30.21**）    
 * 支持同构 N 对 1 回放和异构流表回放数据源时的数据源的自动对齐。（**1.30.21**）
@@ -1036,10 +1035,11 @@
 ## 客户端工具
 
 * GUI
-    * **注意**：1.30 及以上版本的 Server 不兼容低于 1.30.0 版本的 GUI，请从官网下载最新版本 GUI 客户端。
-    * 1.30.7 及以上版本的 Server, 需要配合 GUI1.30.7 版本使用DURATION类型。
-    * 增加下载查询结果到 GUI 本地 csv 功能。
-    * GUI 画图函数 plot 多曲线可共享y轴。(**1.30.13**)
+    * 支持将内存表以 DolphinDB 私有格式保存到本地或上传至服务器。（**1.30.21.1**）
+    * 支持部分标准 SQL 的关键字高亮。（**1.30.21.1**）
+    * 支持查看 DECIMAL 类型数据。（**1.30.21.1**）
+    * 支持 DECIMAL32 和 DECIMAL64 关键字高亮。（**1.30.21.1**）
+    * 支持查看列类型为 ANY VECTOR 的表。（**1.30.21.1**）
     * 修复通过 GUI 变量浏览器无法查看 array vector 类型变量的问题。（**1.30.19.1**）
     * 修复通过 GUI 变量浏览器无法查看 array vector 类型变量的问题。（**1.30.19.1**）
     * 优化报错信息显示。（**1.30.19.1**）
@@ -1047,6 +1047,10 @@
     * 优化export table信息显示，在GUI下方的log窗口中显示成功与失败的文件。（**1.30.19.2**）
     * 增加export前的路径检查功能。（**1.30.19.2**）
     * 修复 python 模式下，GUI 端运行 nanotimestamp(-1)出现计算错误的问题。（**1.30.19.2**）
+    * GUI 画图函数 plot 多曲线可共享y轴。(**1.30.13**)
+    * 增加下载查询结果到 GUI 本地 csv 功能。
+    * 1.30.7 及以上版本的 Server, 需要配合 GUI1.30.7 版本使用 DURATION 类型。
+    * **注意**：1.30 及以上版本的 Server 不兼容低于 1.30.0 版本的 GUI，请从官网下载最新版本 GUI 客户端。
 
 * WEB
     
@@ -1123,6 +1127,18 @@
 ## API
 
 - Java API
+  - 所有 Vector 类新增 `Append` 方法。（**1.30.21.1**）
+  - 新增 `AutoFitTableUpsert` 类。（**1.30.21.1**）
+  - `MultithreadedTableWriter` 新增以 upsert 模式插入数据。（**1.30.21.1**）
+  - `MultithreadedTableWriter` 新增回调接口。（**1.30.21.1**）
+  - 支持通过 `PartitionedTableAppender` 向分布式表中插入 array vector。（**1.30.21.1**）
+  - 支持 DECIMAL 类型数据。（**1.30.21.1**）
+  - 支持流订阅通过 API 发起的连接接收数据。（**1.30.21.1**）
+  - 优化了 array vector 应用 `getRowJson` 后的结果，使其符合 JSON 规范。（**1.30.21.1**）
+  - 优化了 API 交互流程，避免高可用场景下重复提交数据。（**1.30.21.1**）
+  - 修复错误：解析服务器返回 month(0)~month(11) 的结果时，显示数据不正确。（**1.30.21.1**）
+  - 修复错误：`MultithreadedTableWriter` 向表中写入大量 array vector 数据时，报错 "connection has been closed"。（**1.30.21.1**）
+  - 修复错误：查询结果达到 268,435,455（即(2^32-1)/16）以上时发生数据紊乱。（**1.30.21.1**）
   - 新增 BasicDecimal32, BasicDecimal64, BasicDecimal32Vector 和 BasicDecimal64Vector 类，用于创建 Decimal 类型数据。支持压缩后上传及下载 Decimal 类型数据。（**1.30.20.2**）
   - `MultithreadedTableWriter` 类新增参数 *callbackHandler* 支持回调。（**1.30.20.2**）
   - `MultithreadedTableWriter` 类支持写入 Decimal 类型数据。（**1.30.20.2**）
@@ -1152,6 +1168,19 @@
     - 订阅 linux 版本 server 发布的流表时，出现因 API 卡住导致无法接收订阅数据的问题。
 
 - Python API
+  - 新增支持 Python3.10。（**1.30.21.1**）
+  - `Session` 和 `DBConnectionPool` 新增 `protocol` 参数，在构建函数时进行使用，可指定数据格式的传输协议。（**1.30.21.1**）
+  - 支持流订阅通过 API 发起的连接接收数据。（**1.30.21.1**）
+  - `DBConnectionPool.addTask` 新增 `args` 参数，可以接收已定义的对象。（**1.30.21.1**）
+  - 支持 `tableAppender`, `tableUpsert` 和 `PartitionedTableAppender` 上传 IPADDR, UUID 和 INT128 类型的数据。（**1.30.21.1**）
+  - 支持基于 Apache Arrow 协议下载数据。（**1.30.21.1**）
+  - 支持使用 DolphinDB 自定义的数据报文格式（简称 DDB 协议）下载和上传 DECIMAL 类型数据。（**1.30.21.1**）
+  - 优化了报错信息。（**1.30.21.1**）
+  - 修复错误：macOS 重复创建 MultithreadedTableWriter 后提示创建信号量失败。（**1.30.21.1**）
+  - 修复错误：开启 pickle 后下载包含 STRING 类型列的空表提示 "unmarshall failed"。（**1.30.21.1**）
+  - 修复错误：流订阅中包含 array vector 数据时发生 API Abort。（**1.30.21.1**）
+  - 修复错误：在 uWSGI 中调用 Python API 执行 SQL，API 发生段错误。（**1.30.21.1**）
+  - 修复错误：上传数据中包含空值 np.nan 时，服务器结果产生字符 NaN 而非空值。（**1.30.21.1**）
   - 流订阅指定 *msgAsTable* = True 且指定 *batchSize* 为正整数时，将基于消息块处理记录。（**1.30.19.4**）
   - python API 最高支持 NumPy 1.23.4 和 pandas 1.5.2。（**1.30.19.4**）
   - 优化上传数据报错信息。（**1.30.19.4**）
@@ -1222,6 +1251,18 @@
     pip3 install dolphindb==1.30.0.5。 (**1.30.0.5**)
   
 - C++ API
+  - `MultithreadedTableWriter` 新增回调接口。（**1.30.21.1**）
+  - 新增工具类 `DdbVector`，用于创建 DolphinDB 常用的各种类型的 Vector。（**1.30.21.1**）
+  - 新增工具类 `Executor`，用于创建 DolphinDB 的匿名线程。（**1.30.21.1**）
+  - 新增工具类 `ResultSet`，用于对表进行按行遍历。（**1.30.21.1**）
+  - 新增工具类 `enumVectorData`，用于快速遍历 Vector 的元素。（**1.30.21.1**）
+  - 优化了取消订阅高可用流表的步骤，不再必须传入 Leader 节点的地址和端口，可以使用订阅传入的 Follower 节点的地址和端口。（**1.30.21.1**）
+  - 支持 DECIMAL 类型的 array vector 的上传、下载、压缩和解压缩。（**1.30.21.1**）
+  - 支持流订阅通过 API 发起的连接接收数据。（**1.30.21.1**）
+  - 修复错误：在使用 Visual Studio 编译 API 时，_USRDLL 发生冲突。已修改为_DDBAPIDLL。（**1.30.21.1**）
+  - 修复错误：使用 `PartitionedTableAppender` 接口频繁读写表数据，发生内存泄漏。（**1.30.21.1**）
+  - 修复错误：取消流订阅时，未及时释放占用的端口。（**1.30.21.1**）
+  - 优化高可用流表取消订阅的步骤，可以使用 Leader 节点或发起订阅的 Follower 节点的地址和端口。（**1.30.21.1**）
   - `MultithreadedTableWriter` 对象写入内存表时，参数 *dbPath* 和 *tableName* 的设置发生改变：*dbPath* 需设置为空，*tableName* 需为内存表表名。（**1.30.19.1**）
   - API 端支持打印 `DBConnection.run` 的 中间结果信息。（**1.30.19.1**）
   - (1) 新增 `tableUpsert` 对象，(2) `MultithreadedTableWriter` 新增参数 *mode* 和 *modeOption*，均可实现对索引内存表、键值内存表，或者 DFS 表通过 `upsert` 方式进行更新。（**1.30.19.1**）
@@ -1244,7 +1285,14 @@
   - DBConnection 对象增加 compress 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
   - 修复 API 高可用模式下，当数据节点安全关机后，C++ API 无法切换到正常节点继续写入的问题。（**1.30.17.1**）
   - 新增 `batchTableWriter` (**1.30.12**)
+
 - C# API
+  - 在 NET Core 版本的 C# API 中，DBConection 新增异步接口。（**1.30.21.1**）
+  - MultithreadedTableWriter 新增回调接口。（**1.30.21.1**）
+  - 新增 AutoFitTableUpsert 类。（**1.30.21.1**）
+  - `MultithreadedTableWriter` 新增以 upsert 模式插入数据。（**1.30.21.1**）
+  - 支持流订阅通过 API 发起的连接接收数据。（**1.30.21.1**）
+  - 修复错误：在没有接收到流数据时进行重连，订阅参数 offset 报错。（**1.30.21.1**）
   - 通过 API 连接集群服务器时，实现请求的负载均衡。（**1.30.19.1**）
   - 新增 `StreamDeserializer` 类，实现对异构流表的解析，同时，`subscribe` 函数新增 *deserializer* 参数，接收经 `StreamDeserializer` 解析后的数据。（**1.30.19.1**）
   - 流订阅 `subscribe` 函数新增参数 *userName* 和 *password* 支持输入登录用户名密码。（**1.30.19.1**）

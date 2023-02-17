@@ -653,14 +653,28 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 
 **Python**
 
- - When subscribing to a stream table, if *msgAsTable*=True and *batchSize* is a positive integer, the messages will be processed by block. (**1.30.19.4**)
- - Python API now supports NumPy up to version 1.23.4, and pandas 1.5.2. (**1.30.19.4**)
- - Error message enhancements for data uploads. (**1.30.19.4**)
- - Error message enhancements for Python API on MacOS. (**1.30.19.4**)
- - Fixed an error when downloading data containing timestamps before 1970. (**1.30.19.4**)
- - Fixed a failure when writing data containing columns of type INT128/IPADDR/UUID/BLOB through `tableAppender`, `tableUpsert` and `PartitionedTableAppender`.（**1.30.19.4**）
- - Added error message when the specified value for *batchSize* is a decimal in stream subscription. (**1.30.19.4**)
- - Fixed server memory leak caused by undestroyed temporary database handle or table handle when deleting a partition with `s.dropPartition` or loading a table with `s.loadTable`. (**1.30.19.4**）
+- Updated pybind11 to v2.9.2. (**1.30.21.1**)
+- Added support for Python 3.10. (**1.30.21.1**)
+- Added a new parameter *protocol* to `Session` and `DBConnectionPool` constructors to specify the data transfer protocol. (**1.30.21.1**) 
+- Subscribed data can now be transmitted using the connection initiated by the subscriber through Python API. (**1.30.21.1**)
+- Added a new parameter *args* to pass user-defined objects to  `DBConnectionPool.addTask`. (**1.30.21.1**)
+- `tableAppender`, `tableUpsert` and `PartitionedTableAppender` now support uploading IPaddr, UUID, and INT128 values. (**1.30.21.1**) 
+- Added support for downloading data using the Apache Arrow format. (**1.30.21.1**)
+- Added support for downloading and uploading DECIMAL values using the DolphinDB-customized data communication protocol. (**1.30.21.1**)
+- Error message enhancements (**1.30.21.1**)
+- Fixed semaphore creation error which is raised after multiple creations of `MultithreadedTableWriter` in macOS. (**1.30.21.1**) 
+- Fixed the “unmarshall failed“ error when downloading an empty table containing STRING columns with pickle enabled. (**1.30.21.1**)
+- Fixed the issue where the request is aborted when the subscribed data contains array vectors. (**1.30.21.1**)
+- Fixed the issue in uWSGI when executing a SQL query with the Python API. (**1.30.21.1**)
+- Fixed the issue when uploading *np.nan* values, the server displays “NaN“ instead of converting them to NULL values. (**1.30.21.1**)
+- When subscribing to a stream table, if *msgAsTable*=True and *batchSize* is a positive integer, the messages will be processed by block. (**1.30.19.4**)
+- Python API now supports NumPy up to version 1.23.4, and pandas 1.5.2. (**1.30.19.4**)
+- Error message enhancements for data uploads. (**1.30.19.4**)
+- Error message enhancements for Python API on MacOS. (**1.30.19.4**)
+- Fixed an error when downloading data containing timestamps before 1970. (**1.30.19.4**)
+- Fixed a failure when writing data containing columns of type INT128/IPADDR/UUID/BLOB through `tableAppender`, `tableUpsert` and `PartitionedTableAppender`.（**1.30.19.4**）
+- Added error message when the specified value for *batchSize* is a decimal in stream subscription. (**1.30.19.4**)
+- Fixed server memory leak caused by undestroyed temporary database handle or table handle when deleting a partition with `s.dropPartition` or loading a table with `s.loadTable`. (**1.30.19.4**）
 - Added new `setTimeOut` method to the `session` class for configuring the TCP connection option TCP_USER_TIMEOUT. The method is only available on Linux. (**1.30.19.3**)
 - Added new parameter *sortKeyMappingFunction* to the `createPartitionedTable` method for dimensionality reduction of sort keys. (**1.30.19.3**) 
 - You can now upload a DataFrame in the specified data type by setting its `__DolphinDB_Type__` attribute. (**1.30.19.3**)
