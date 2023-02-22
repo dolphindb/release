@@ -2,6 +2,7 @@
 
 - [DolphinDB Release Notes](#dolphindb-release-notes)
   - [DolphinDB Server](#dolphindb-server)
+  - [Client Tools](#client-tools)
   - [API](#api)
 
 
@@ -231,11 +232,6 @@ Release Date: 2020-12-29
 - Added new functions `pack` and `unpack` for packing and unpacking binary data. (**1.30.20**)
 - Added new function `align` for aligning two matrices based on row labels and/or column labels using the specified join method. (**1.30.20**)
 - DolphinDB (JIT) now supports accessing vector elements by index which can be a vector or a pair. (**1.30.20**)
-- Web-based User Interface:
-  - "Shell" tab enhancements: Added new "Database" view for checking databases and tables. (**1.30.20**)
-  - Added new settings menu where you can customize the number of decimal places. For example, enter "2" to display numbers with 2 digits. (**1.30.20**)
-  - Added support for visualization of dictionaries. (**1.30.20**)
-  - You can now navigate to the associated documentation by clicking the error code (e.g., 'RefId: S00001'). (**1.30.20**)
 - Added new configuration parameters *memLimitOfQueryResult* and *memLimitOfTaskGroupResult* to restrict the memory usage of the intermediate and final results of queries; new function `getQueryStatus` to monitor the memory usage and execution status of the query. (**1.30.19**)
 - Added new functions `isPeak` and `isValley` to determine if the current element is the peak/valley of the neighboring elements. (**1.30.19**)
 - Added new function `rowAt(X, Y)`. Return the element in each row of *X* based on the index specified by the corresponding element of Y. (**1.30.19**)
@@ -384,17 +380,7 @@ Release Date: 2020-12-29
 - Optimized crc32 algorithm. (**1.30.20**)
 - Optimized function `mrank`. (**1.30.20**)
 - The maximum length for the data converted by function `toJson` is no longer limited to 1000. (**1.30.20**)
-- Web-based User Interface:
-    - Enhanced code highlighting to keep it consistent with the DolphinDB extension for Visual Studio Code. (**1.30.20**)
-    - Numeric values are formatted with comma (,) as the thousands separator, e.g., `1,000,000,000`. (**1.30.20**)
-    - Updated keywords, code completion, and function documentation. (**1.30.20**)
-    - The execution information is displayed in a more compact layout. (**1.30.20**)
-    - Enhanced the "status" popover view to display status information in different categories. (**1.30.20**)
-    - Enhanced table pagination design and added tooltips for icon buttons. (**1.30.20**)
-    - "Job" tab enhancements: Adjusted the field names; Added support for job search by client IP. (**1.30.20**)
-    - Fixed an issue where the temporal labels were not correctly formatted in a `plot`. (**1.30.20**)
 - `getClusterPerf(true)` returns the information on all controllers in a high-availability cluster. This function also adds a return value *isLeader* to indicate whether the controller is the leader of the raft group. (**1.30.19**)
-- Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**1.30.19**)
 - When using function `restore`, `loadBackup`, or `getBackupMeta` to access the backup partitions in a database whose chunk granularity is at TABLE level, the physical index is no longer required when specifying the parameter *partition*. (**1.30.19**)
 - Function `getRecoveryTaskStatus` adds a new return value *FailureReason* to display the reason for the recovery task failure. (**1.30.19**)
 - Optimized the compression algorithm for `backup`. (**1.30.19**)
@@ -469,8 +455,6 @@ Release Date: 2020-12-29
 * Improved stability of controller nodes in high availability clusters. (**1.30.16**)
 * Information on delete and update operations can be printed in log. (**1.30.16**)
 * Added subscription topic information to the error messages of the stream subscription task in the log. (**1.30.16**) 
-* UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well.
-The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge. (**1.30.16**)
 * Modified the parameter *forceTriggerTime* in the time-series engine. (**1.30.15**)
 * If *updateTime* in the time-series engine is specified, the output table is no longer restricted to a keyed table. (**1.30.15**)
 * Added new parameter *triggeringInterval* in the cross sectional engine (`createCrossSectionalEngine`) to specify the *interval* or *keyCount* at the latest timestamp to trigger calculation. (**1.30.15**)
@@ -624,7 +608,62 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 * Wrongly-specified parameter *rowKeys* of function `sliceByKey` leads to server crash. (**1.30.16**)
 * Null flag is not set after `replace!` a vector with NULL values. (**1.30.16**)
 
+## Client Tools
 
+**Web-Based User Interface**
+
+> New Features
+
+- Added switches for enabling/disabling code minimap (code outline) and code completion to the toolbar at the top of the editor. The toolbar also displays the code execution status and you can cancel a long running job by clicking “Executing“. （**2.0.910**）
+- Added shortcuts to copy line up/down. （**2.0.910**）
+- Support for displaying Decimal32/64 values and array vectors of these two data types. （**2.0.910**）
+- In the **Dataview**, you can now select the text in a dictionary. （**2.0.910**） 
+- A new menu is added to each DFS table in the Database view. You to view table schema, preview the first 100 records, and add columns to the table. （**2.0.910**）
+- In the **Database** view, you can now expand a DFS table to view its columns in a list and edit the comment of each column. （**2.0.910**）
+- Support for colored output in the terminal. （**2.0.910**）
+- Added new settings menu where you can customize the number of decimal places. For example, enter "2" to display numbers with 2 digits. (**1.30.20**)
+- Added support for visualization of dictionaries. (**1.30.20**)
+- You can now navigate to the associated documentation by clicking the error code (e.g., 'RefId: S00001'). (**1.30.20**)
+- "Shell" tab: Added new "Database" view for checking databases and tables. (**1.30.20**)
+
+> Improvements
+
+- Layout enhancements - table preview is now displayed at the bottom of the editor to fit more columns. （**2.0.910**）
+- Code in the editor is now auto saved. （**2.0.910**）
+- Improved page load speed. （**2.0.910**）
+- Data view enhancements: (1) column, row and data type information is displayed below each table; (2) enhanced horizontal scroll bar to display full table. （**2.0.910**）
+- Enhanced the fonts to reduce file size. （**2.0.910**）
+- Reduced line height in the **Local Variables** and **Shared Variables** views. （**2.0.910**）
+- The type of the connected node is now displayed at the top navigation bar. （**2.0.910**）
+- Enhanced **Dataview** display. （**2.0.910**）
+- Enhanced error messages for insufficient privileges to access database. （**2.0.910**）
+- If the path of a DFS database contains dots (e.g., `dfs://aaa.bbb.ccc`), it is recognized as its directory structure. The database is displayed under a directory tree in the **Database** view. （**2.0.910**）
+- The function documentation popup is now up to date with the DolphinDB official manual online. （**2.0.910**）
+- Users must log in to check the data node logs. （**2.0.910**）
+- Enhanced code highlighting to keep it consistent with the DolphinDB extension for Visual Studio Code. (**1.30.20**)
+- Numeric values are formatted with comma (,) as the thousands separator, e.g., `1,000,000,000`. (**1.30.20**)
+- Updated keywords, code completion, and function documentation. (**1.30.20**)
+- The execution information is displayed in a more compact layout. (**1.30.20**)
+- Enhanced the "status" popover view to display status information in different categories. (**1.30.20**)
+- Enhanced table pagination design and added tooltips for icon buttons. (**1.30.20**)
+- "Job" tab enhancements: Adjusted the field names; Added support for job search by client IP. (**1.30.20**)
+- Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**1.30.19**)
+- With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge. (**1.30.16**)
+    
+> Issues Fixed
+
+- Fixed function documentation display issue when you hover over functions such as `append!`. （**2.0.910**）
+- Fixed the matrix display issue. （**2.0.910**）
+- Fixed the REFID links in the terminal. （**2.0.910**）
+- Fixed font display issues in the terminal. （**2.0.910**）
+- Enhanced syntax highlighting logic; Fixed highlighting issues with `set()` and `values()`. （**2.0.910**）
+- Fixed the horizontal axis display issue when plotting an OHLC chart. （**2.0.910**）
+- Fixed the function documentation popup display issue. （**2.0.910**）
+- Fixed the date and time display issue in the terminal and **Dataview**. （**2.0.910**）
+- Enhanced the messages on login failures. （**2.0.910**）
+- The height of the **Database** view can now be resized. （**2.0.910**）
+- Fixed the lag issues in the database list. （**2.0.910**）
+- Fixed an issue where the temporal labels were not correctly formatted in a `plot`. (**1.30.20**)
 
 ## API
 
@@ -656,7 +695,7 @@ The new version of Web-Based Cluster Manager uses the WebSocket protocol to enha
 - Updated pybind11 to v2.9.2. (**1.30.21.1**)
 - Added support for Python 3.10. (**1.30.21.1**)
 - Added a new parameter *protocol* to `Session` and `DBConnectionPool` constructors to specify the data transfer protocol. (**1.30.21.1**) 
-- Subscribed data can now be transmitted using the connection initiated by the subscriber through Python API. (**1.30.21.1**)
+- Subscribed data can now be pushed using the connection initiated by the subscriber through Python API. (**1.30.21.1**)
 - Added a new parameter *args* to pass user-defined objects to  `DBConnectionPool.addTask`. (**1.30.21.1**)
 - `tableAppender`, `tableUpsert` and `PartitionedTableAppender` now support uploading IPaddr, UUID, and INT128 values. (**1.30.21.1**) 
 - Added support for downloading data using the Apache Arrow format. (**1.30.21.1**)
