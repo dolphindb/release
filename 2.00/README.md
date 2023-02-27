@@ -5,6 +5,7 @@
     - [New Features](#new-features)
     - [Improvements](#improvements)
     - [Issues Fixed](#issues-fixed)
+  - [Web-Based User Interface](#web-based-user-interface)
 
 ## DolphinDB Server
 
@@ -290,7 +291,7 @@ Release Date: 2021-07-31
 
 * Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**2.00.5**)
 
-* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
+* If a function with multiple returns is specified for the parameter *metrics* of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**2.00.5**)
 
 * Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**2.00.5**)
 
@@ -810,3 +811,101 @@ Release Date: 2021-07-31
 * Wrongly-specified parameter *rowKeys* of function `sliceByKey` leads to server crash. (**2.00.4**)
 
 * Null flag is not set after `replace!` a vector with NULL values. (**2.00.4**)
+
+## Web-Based User Interface
+
+> New Features
+
+- Added switches for enabling/disabling code minimap (code outline) and code completion to the toolbar at the top of the editor. The toolbar also displays the code execution status and you can cancel a long running job by clicking "Executing". (**2.00.9**)
+
+- Added shortcuts to copy line up/down. (**2.00.9**)
+
+- Support for displaying Decimal32/64 values and array vectors of these two data types. (**2.00.9**)
+
+- In the **Dataview**, you can now select the text in a dictionary. (**2.00.9**) 
+
+- A new menu is added to each DFS table in the Database view. You to view table schema, preview the first 100 records, and add columns to the table. (**2.00.9**)
+
+- In the **Database** view, you can now expand a DFS table to view its columns in a list and edit the comment of each column. (**2.00.9**)
+
+- Support for colored output in the terminal. (**2.00.9**)
+
+- Added new settings menu where you can customize the number of decimal places. For example, enter "2" to display numbers with 2 digits. (**2.00.8**)
+
+- Added support for visualization of dictionaries. (**2.00.8**)
+
+- You can now navigate to the associated documentation by clicking the error code (e.g., 'RefId: S00001'). (**2.00.8**)
+
+- "Shell" tab: Added new "Database" view for checking databases and tables. (**2.00.8**)
+
+> Improvements
+
+- Layout enhancements - table preview is now displayed at the bottom of the editor to fit more columns. (**2.00.9**)
+
+- Code in the editor is now auto saved. (**2.00.9**)
+
+- Improved page load speed. (**2.00.9**)
+
+- Data view enhancements: (1) column, row and data type information is displayed below each table; (2) enhanced horizontal scroll bar to display full table. (**2.00.9**)
+
+- Enhanced the fonts to reduce file size. (**2.00.9**)
+
+- Reduced line height in the **Local Variables** and **Shared Variables** views. (**2.00.9**)
+
+- The type of the connected node is now displayed at the top navigation bar. (**2.00.9**)
+
+- Enhanced **Dataview** display. (**2.00.9**)
+
+- Enhanced error messages for insufficient privileges to access database. (**2.00.9**)
+
+- If the path of a DFS database contains dots (e.g., `dfs://aaa.bbb.ccc`), it is recognized as its directory structure. The database is displayed under a directory tree in the **Database** view. (**2.00.9**)
+
+- The function documentation popup is now up to date with the DolphinDB official manual online. (**2.00.9**)
+
+- Users must log in to check the data node logs. (**2.00.9**)
+
+- Enhanced code highlighting to keep it consistent with the DolphinDB extension for Visual Studio Code. (**2.00.8**)
+
+- Numeric values are formatted with comma (,) as the thousands separator, e.g., `1,000,000,000`. (**2.00.8**)
+
+- Updated keywords, code completion, and function documentation. (**2.00.8**)
+
+- The execution information is displayed in a more compact layout. (**2.00.8**)
+
+- Enhanced the "status" popover view to display status information in different categories. (**2.00.8**)
+
+- Enhanced table pagination design and added tooltips for icon buttons. (**2.00.8**)
+
+- "Job" tab enhancements: Adjusted the field names; Added support for job search by client IP. (**2.00.8**)
+
+- Now when connecting to a controller of a high-availability cluster on the web-based cluster manager, you will be redirected to the leader where information on all nodes are displayed. (**2.00.7**)
+
+- With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge. (**2.00.4**)
+    
+> Issues Fixed
+
+- Fixed function documentation display issue when you hover over functions such as `append!`. (**2.00.9**)
+
+- Fixed the matrix display issue. (**2.00.9**)
+
+- Fixed the REFID links in the terminal. (**2.00.9**)
+
+- Fixed font display issues in the terminal. (**2.00.9**)
+
+- Enhanced syntax highlighting logic; Fixed highlighting issues with `set()` and `values()`. (**2.00.9**)
+
+- Fixed the horizontal axis display issue when plotting an OHLC chart. (**2.00.9**)
+
+- Fixed the function documentation popup display issue. (**2.00.9**)
+
+- Fixed the date and time display issue in the terminal and **Dataview**. (**2.00.9**)
+
+- Enhanced the messages on login failures. (**2.00.9**)
+
+- The height of the **Database** view can now be resized. (**2.00.9**)
+
+- Fixed the lag issues in the database list. (**2.00.9**)
+
+- Fixed an issue where the temporal labels were not correctly formatted in a `plot`. (**2.00.8**)
+
+- If a data node is started via the web interface or a cluster is restarted repeatedly, defunct processes are generated. (**2.00.8**)

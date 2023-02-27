@@ -794,7 +794,7 @@ Release Date: 2020-12-29
 
 * Added new functions `getLeftStream` and `getRightStream` to support cascade of join engines. (**1.30.17**)
 
-* If a function with multiple returns is specified for the parameter metrics of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**1.30.17**)
+* If a function with multiple returns is specified for the parameter metrics of a cross-sectional streaming engine (`createCrossSectionalEngine`) or a time-series streaming engine (`createTimeSeriesEngine`), the returned column names can be unspecified when creating the streaming engine. (**1.30.17**)
 
 * Added new command `addAccessControl` to add access control on a shared in-memory table (stream table included) or the streaming engine object. (**1.30.17**)
 
@@ -1083,8 +1083,6 @@ Release Date: 2020-12-29
 
 * When writing to an OLAP cache engine, if an exception other than OOM occurs, the system will repeatedly attempt to rewrite, which leads to a server hang-up. (**1.30.18**)
 
-* If a data node is started via the web interface or a cluster is restarted repeatedly, defunct processes are generated. (**1.30.18**)
-
 * If `moveReplicas` is called after executing `suspendRecovery`, it fails to move some of the chunks. (**1.30.18**)
 
 * If a cluster is rebooted after submitting concurrent tasks, some chunks are always in the status of RECOVERING. (**1.30.18**)
@@ -1195,19 +1193,19 @@ Release Date: 2020-12-29
 
 > New Features
 
-- Added switches for enabling/disabling code minimap (code outline) and code completion to the toolbar at the top of the editor. The toolbar also displays the code execution status and you can cancel a long running job by clicking "Executing". （**2.0.910**）
+- Added switches for enabling/disabling code minimap (code outline) and code completion to the toolbar at the top of the editor. The toolbar also displays the code execution status and you can cancel a long running job by clicking "Executing". (**1.30.21**)
 
-- Added shortcuts to copy line up/down. （**2.0.910**）
+- Added shortcuts to copy line up/down. (**1.30.21**)
 
-- Support for displaying Decimal32/64 values and array vectors of these two data types. （**2.0.910**）
+- Support for displaying Decimal32/64 values and array vectors of these two data types. (**1.30.21**)
 
-- In the **Dataview**, you can now select the text in a dictionary. （**2.0.910**） 
+- In the **Dataview**, you can now select the text in a dictionary. (**1.30.21**) 
 
-- A new menu is added to each DFS table in the Database view. You to view table schema, preview the first 100 records, and add columns to the table. （**2.0.910**）
+- A new menu is added to each DFS table in the Database view. You to view table schema, preview the first 100 records, and add columns to the table. (**1.30.21**)
 
-- In the **Database** view, you can now expand a DFS table to view its columns in a list and edit the comment of each column. （**2.0.910**）
+- In the **Database** view, you can now expand a DFS table to view its columns in a list and edit the comment of each column. (**1.30.21**)
 
-- Support for colored output in the terminal. （**2.0.910**）
+- Support for colored output in the terminal. (**1.30.21**)
 
 - Added new settings menu where you can customize the number of decimal places. For example, enter "2" to display numbers with 2 digits. (**1.30.20**)
 
@@ -1219,29 +1217,29 @@ Release Date: 2020-12-29
 
 > Improvements
 
-- Layout enhancements - table preview is now displayed at the bottom of the editor to fit more columns. （**2.0.910**）
+- Layout enhancements - table preview is now displayed at the bottom of the editor to fit more columns. (**1.30.21**)
 
-- Code in the editor is now auto saved. （**2.0.910**）
+- Code in the editor is now auto saved. (**1.30.21**)
 
-- Improved page load speed. （**2.0.910**）
+- Improved page load speed. (**1.30.21**)
 
-- Data view enhancements: (1) column, row and data type information is displayed below each table; (2) enhanced horizontal scroll bar to display full table. （**2.0.910**）
+- Data view enhancements: (1) column, row and data type information is displayed below each table; (2) enhanced horizontal scroll bar to display full table. (**1.30.21**)
 
-- Enhanced the fonts to reduce file size. （**2.0.910**）
+- Enhanced the fonts to reduce file size. (**1.30.21**)
 
-- Reduced line height in the **Local Variables** and **Shared Variables** views. （**2.0.910**）
+- Reduced line height in the **Local Variables** and **Shared Variables** views. (**1.30.21**)
 
-- The type of the connected node is now displayed at the top navigation bar. （**2.0.910**）
+- The type of the connected node is now displayed at the top navigation bar. (**1.30.21**)
 
-- Enhanced **Dataview** display. （**2.0.910**）
+- Enhanced **Dataview** display. (**1.30.21**)
 
-- Enhanced error messages for insufficient privileges to access database. （**2.0.910**）
+- Enhanced error messages for insufficient privileges to access database. (**1.30.21**)
 
-- If the path of a DFS database contains dots (e.g., `dfs://aaa.bbb.ccc`), it is recognized as its directory structure. The database is displayed under a directory tree in the **Database** view. （**2.0.910**）
+- If the path of a DFS database contains dots (e.g., `dfs://aaa.bbb.ccc`), it is recognized as its directory structure. The database is displayed under a directory tree in the **Database** view. (**1.30.21**)
 
-- The function documentation popup is now up to date with the DolphinDB official manual online. （**2.0.910**）
+- The function documentation popup is now up to date with the DolphinDB official manual online. (**1.30.21**)
 
-- Users must log in to check the data node logs. （**2.0.910**）
+- Users must log in to check the data node logs. (**1.30.21**)
 
 - Enhanced code highlighting to keep it consistent with the DolphinDB extension for Visual Studio Code. (**1.30.20**)
 
@@ -1263,29 +1261,31 @@ Release Date: 2020-12-29
     
 > Issues Fixed
 
-- Fixed function documentation display issue when you hover over functions such as `append!`. （**2.0.910**）
+- Fixed function documentation display issue when you hover over functions such as `append!`. (**1.30.21**)
 
-- Fixed the matrix display issue. （**2.0.910**）
+- Fixed the matrix display issue. (**1.30.21**)
 
-- Fixed the REFID links in the terminal. （**2.0.910**）
+- Fixed the REFID links in the terminal. (**1.30.21**)
 
-- Fixed font display issues in the terminal. （**2.0.910**）
+- Fixed font display issues in the terminal. (**1.30.21**)
 
-- Enhanced syntax highlighting logic; Fixed highlighting issues with `set()` and `values()`. （**2.0.910**）
+- Enhanced syntax highlighting logic; Fixed highlighting issues with `set()` and `values()`. (**1.30.21**)
 
-- Fixed the horizontal axis display issue when plotting an OHLC chart. （**2.0.910**）
+- Fixed the horizontal axis display issue when plotting an OHLC chart. (**1.30.21**)
 
-- Fixed the function documentation popup display issue. （**2.0.910**）
+- Fixed the function documentation popup display issue. (**1.30.21**)
 
-- Fixed the date and time display issue in the terminal and **Dataview**. （**2.0.910**）
+- Fixed the date and time display issue in the terminal and **Dataview**. (**1.30.21**)
 
-- Enhanced the messages on login failures. （**2.0.910**）
+- Enhanced the messages on login failures. (**1.30.21**)
 
-- The height of the **Database** view can now be resized. （**2.0.910**）
+- The height of the **Database** view can now be resized. (**1.30.21**)
 
-- Fixed the lag issues in the database list. （**2.0.910**）
+- Fixed the lag issues in the database list. (**1.30.21**)
 
 - Fixed an issue where the temporal labels were not correctly formatted in a `plot`. (**1.30.20**)
+
+- If a data node is started via the web interface or a cluster is restarted repeatedly, defunct processes are generated. (**1.30.20**)
 
 ## API
 
@@ -1392,11 +1392,11 @@ Release Date: 2020-12-29
 
 - Fixed an error when downloading data containing timestamps before 1970. (**1.30.19.4**)
 
-- Fixed a failure when writing data containing columns of type INT128/IPADDR/UUID/BLOB through `tableAppender`, `tableUpsert` and `PartitionedTableAppender`.（**1.30.19.4**）
+- Fixed a failure when writing data containing columns of type INT128/IPADDR/UUID/BLOB through `tableAppender`, `tableUpsert` and `PartitionedTableAppender`.(**1.30.19.4**)
 
 - Added error message when the specified value for *batchSize* is a decimal in stream subscription. (**1.30.19.4**)
 
-- Fixed server memory leak caused by undestroyed temporary database handle or table handle when deleting a partition with `s.dropPartition` or loading a table with `s.loadTable`. (**1.30.19.4**）
+- Fixed server memory leak caused by undestroyed temporary database handle or table handle when deleting a partition with `s.dropPartition` or loading a table with `s.loadTable`. (**1.30.19.4**)
 
 - Added new `setTimeOut` method to the `session` class for configuring the TCP connection option TCP_USER_TIMEOUT. The method is only available on Linux. (**1.30.19.3**)
 
