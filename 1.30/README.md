@@ -243,8 +243,6 @@ Release Date: 2020-12-29
 
 - Support Apache Arrow format. (**1.30.21**)
 
-- Added function `getTSDBSortKeyEntry` to show the sort key information of all chunks. (**1.30.21**)
-
 - Added command `setMaxConnections` to dynamically configure the maximum connections on the current node. (**1.30.21**)
 
 - Added function `demean` to center a data set. This function can be used as a state function in the reactive state engine. (**1.30.21**)
@@ -268,7 +266,7 @@ Release Date: 2020-12-29
 
 - Added function `enlist` to return a vector (or tuple) with a scalar (or vector) as its element. (**1.30.21**)
 
-- Added operator `eachAt(@)` to access elements of vector/tuple/matrix/table/dictionary/array vector by index. (**1.30.21**)
+- Added operator `eachAt(@)` to access elements of vector/tuple/matrix/table/dictionary by index. (**1.30.21**)
 
 - Added new functions `latestKeyedTable` and `latestIndexedTable` to create a keyed table or indexed table with a time column. When a new record is appended to the table, it only overwrites the existing record with the same primary key if its timestamp is larger than the original one. (**1.30.21**)
 
@@ -428,9 +426,7 @@ Release Date: 2020-12-29
 
 * Added new higher-order functions `window` and `twindow` for more general scenarios than move and tmove, with slightly different handling of window boundaries. (**1.30.16**)
 
-* Added new configuration parameter *raftElectionTick*, which specifies the waiting time to receive a heartbeat from the leader in a raft group before the followers switch to a new leader. Added new functions `setCacheEngineMemSize`, `setTimeoutTick`, `setTSDBCacheEngineSize`, `setMaxMemSize`, `setReservedMemSize` and `setMaxBlockSizeForReservedMemory` to support modifying the associated configuration online. (**1.30.16**)
-
-* Added new function `fixedLengthArrayVector` to combine multiple vectors into an array vector. (**1.30.16**)
+* Added new configuration parameter *raftElectionTick*, which specifies the waiting time to receive a heartbeat from the leader in a raft group before the followers switch to a new leader. Added new functions `setCacheEngineMemSize`, `setTimeoutTick`, `setMaxMemSize`, `setReservedMemSize` and `setMaxBlockSizeForReservedMemory` to support modifying the associated configuration online. (**1.30.16**)
 
 * Added new function `loadNpz` to import *.npz* files from NumPy. (**1.30.16**)
 
@@ -1159,8 +1155,6 @@ Release Date: 2020-12-29
 
 * The parser may report an error for function calls when the right bracket is not placed on the same line as the left bracket. (**1.30.16**)
 
-* Executing function `replayDS` on a table with array vectors causes a node crash. (**1.30.16**)
-
 * When querying a partitioned table with value domain for the last k rows of records in each group (`context by partitionCol limit -k`), some of the results do not satisfy the where conditions if no eligible data exists in a partition. (**1.30.16**)
 
 * An error "More than one column has the duplicated name" occurs when calling function `rolling` or `moving` in SQL statement without specifying the generated column name. (**1.30.16**)
@@ -1197,7 +1191,7 @@ Release Date: 2020-12-29
 
 - Added shortcuts to copy line up/down. (**1.30.21**)
 
-- Support for displaying Decimal32/64 values and array vectors of these two data types. (**1.30.21**)
+- Support for displaying Decimal32/64 values. (**1.30.21**)
 
 - In the **Dataview**, you can now select the text in a dictionary. (**1.30.21**) 
 
