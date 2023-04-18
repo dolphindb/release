@@ -1285,6 +1285,8 @@ Release Date: 2020-12-29
 
 ### Java
 
+- - The `getString` method will no longer return scientific notation for Float and Double data types when the absolute value is less than 0.000001 or greater than 1000000.0. (**1.30.21.3**)
+
 - Added method `append` to all vector classes. (**1.30.21.1**)
 
 - Added class `AutoFitTableUpsert`. (**1.30.21.1**)
@@ -1347,6 +1349,24 @@ Release Date: 2020-12-29
 
 
 ### Python
+
+- pandas version 1.0.0 or higher is now required as a dependency. （**1.30.21.2**）
+
+- Fixed a segmentation error when calling the `getUnwrittenData` method after the MultithreadedTableWriter failed to insert data. （**1.30.21.2**）
+
+- Downloading of BLOB data larger than 64 KB is now supported. （**1.30.21.2**）
+
+- Fixed an issue where out-of-bounds access occurred when subscribing to data from DolphinDB server version 1.30.21/2.00.9 or later on MAC ARM. （**1.30.21.2**）
+
+- Fixed incorrect data type conversion when uploading null values of *np.datetime64* type.（**1.30.21.2**）
+
+- Fixed decimal overflow when uploading a vector with the first element being a *Decimal("NaN")*. （**1.30.21.2**）
+
+- Fixed a segmentation error when downloading BLOB sets using the PROTOCOL_DDB protocol. （**1.30.21.2**）
+
+- Fixed an issues where a session variable named “db“ was overwritten when calling the `loadTableBySQL` method. （**1.30.21.2**）
+
+- Fixed an issue where the process would be stuck when data was not retrieved after calling the `addTask` method of DBConnectionPool. （**1.30.21.2**）
 
 - Updated pybind11 to v2.9.2. (**1.30.21.1**)
 
