@@ -1122,7 +1122,7 @@
 
 ### Java API
 
-  - - Float 和 Double 类型的数据在满足绝对值小于0.000001或者大于1000000.0时，使用 getString 的返回值不再使用科学计数法。（1.30.21.3）
+  - Float 和 Double 类型的数据在满足绝对值小于0.000001或者大于1000000.0时，使用 getString 的返回值不再使用科学计数法。（1.30.21.3）
   - 所有 Vector 类新增 `Append` 方法。（**1.30.21.1**）
   - 新增 `AutoFitTableUpsert` 类。（**1.30.21.1**）
   - `MultithreadedTableWriter` 新增以 upsert 模式插入数据。（**1.30.21.1**）
