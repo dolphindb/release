@@ -13,12 +13,12 @@ Version: **2.00.9** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.co
 
 Release Date: 2022-02-15
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9_JIT.zip) |
-[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V2.00.9.zip)|
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.3_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.3_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.3_JIT.zip) |
+[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V2.00.9.1.zip)
 
 
 Version: **2.00.8** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.7/1.30.19
@@ -83,6 +83,10 @@ Release Date: 2021-07-31
 
 
 ### New Features
+
+- Added configuration parameter *mvccCheckpointThreshold* to set the threshold for the operations to trigger a checkpoint. (**2.00.9.3**)
+
+- Added function `forceMvccCheckpoint` to manually trigger a checkpoint. (**2.00.9.3**)
 
 - Added license server to manage resources for nodes specified by license. (**2.00.9**)
   - Related functions: `getLicenseServerResourceInfo`, `getRegisteredNodeInfo`.
@@ -382,6 +386,16 @@ Release Date: 2021-07-31
 * The data based on the TSDB storage engine supports the new data type BLOB. (**2.00.0**)
 
 ### Improvements
+
+- Function `getClusterDFSTables` returns DFS tables to which the user has access. (**2.00.9.3**)
+
+- Parameter *leftTable* of function `createWindowJoinEngine` supports columns of array vectors. (**2.00.9.3**)
+
+- Parameter *handler* of function `subscribeTable` supports shared in-memory table, keyed table, and indexed table. (**2.00.9.3**)
+
+- Function `cut` now supports tables/matrices. (**2.00.9.3**)
+
+- Ordered Dictionary now supports unary window functions. (**2.00.9.3**)
 
 - Support checksum for the metadata files. (**2.00.9**)
 
