@@ -1285,6 +1285,8 @@ Release Date: 2020-12-29
 
 ### Java
 
+- - The `getString` method will no longer return scientific notation for Float and Double data types when the absolute value is less than 0.000001 or greater than 1000000.0. (**1.30.21.3**)
+
 - Added method `append` to all vector classes. (**1.30.21.1**)
 
 - Added class `AutoFitTableUpsert`. (**1.30.21.1**)
