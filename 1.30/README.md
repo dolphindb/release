@@ -19,12 +19,12 @@ Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.c
 
 Release Date: 2022-02-15
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21_JIT.zip) |
-[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.21.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.3.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.3_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.3_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.3.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.3_JIT.zip)
+[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.21.1.zip)
 
 Version: **1.30.20** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.19
 
@@ -230,6 +230,10 @@ Release Date: 2020-12-29
 
 
 ### New Features
+
+- Added configuration parameter *mvccCheckpointThreshold* to set the threshold for the operations to trigger a checkpoint. (**1.30.21.3**)
+
+- Added function `forceMvccCheckpoint` to manually trigger a checkpoint. (**1.30.21.3**)
 
 - Added license server to manage resources for nodes specified by license. (**1.30.21**)
   - Related functions: `getLicenseServerResourceInfo`, `getRegisteredNodeInfo`.
@@ -586,6 +590,14 @@ Release Date: 2020-12-29
 
 
 ### Improvements
+
+- Function `getClusterDFSTables` returns DFS tables to which the user has access. (**1.30.21.3**)
+
+- Parameter *handler* of function `subscribeTable` supports shared in-memory table, keyed table, and indexed table. (**1.30.21.3**)
+
+- Function `cut` now supports tables/matrices. (**1.30.21.3**)
+
+- Ordered Dictionary now supports unary window functions. (**1.30.21.3**)
 
 - Support checksum for the metadata files. (**1.30.21**)
 
@@ -1285,7 +1297,7 @@ Release Date: 2020-12-29
 
 ### Java
 
-- - The `getString` method will no longer return scientific notation for Float and Double data types when the absolute value is less than 0.000001 or greater than 1000000.0. (**1.30.21.3**)
+- The `getString` method will no longer return scientific notation for Float and Double data types when the absolute value is less than 0.000001 or greater than 1000000.0. (**1.30.21.3**)
 
 - Added method `append` to all vector classes. (**1.30.21.1**)
 
@@ -1351,7 +1363,6 @@ Release Date: 2020-12-29
 ### Python
 
 - pandas version 1.0.0 or higher is now required as a dependency. （**1.30.21.2**）
-
 - Fixed a segmentation error when calling the `getUnwrittenData` method after the MultithreadedTableWriter failed to insert data. （**1.30.21.2**）
 
 - Downloading of BLOB data larger than 64 KB is now supported. （**1.30.21.2**）
