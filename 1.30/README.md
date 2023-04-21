@@ -1181,6 +1181,8 @@ Release Date: 2020-12-29
 
 ### GUI
 
+- Fixed an issue of incorrect target path when synchronizing modules. (**1.30.21.3**)
+
 - Enhanced syntax highlighting for some SQL keywords. (**1.30.21.1**)
 
 - Data of DECIMAL type can now be displayed. (**1.30.21.1**)
