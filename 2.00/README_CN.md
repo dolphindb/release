@@ -13,11 +13,11 @@
 
 发行日期： 2023-02-15
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.3.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.3_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.3_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.3.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.3_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.4_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.4_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.4_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.9.1.zip)|
 
 版本号： 2.00.8 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.7 和 1.30.19
@@ -112,6 +112,9 @@
 
 ### 新功能
 
+* 支持使用数据类型符号 P 声明 DECIMAL 类型的常量数据。（**2.00.9.4**）
+* 新增配置项 `logicOrIgnoreNull`，设置 `or` 函数在操作数中包含 NULL 时的处理方式。默认值为 true：当另一个操作数非零或为零时，返回 true 或 false。若需要 `or` 函数的行为和旧版本保持一致，则应该将该配置设置为 false。（**2.00.9.4**）
+* `case when` 语句后支持使用 `is null` 判断。（**2.00.9.4**）
 * 对 MVCC 表，新增配置项 `mvccCheckpointThreshold` 用于设置创建检查点的操作次数阈值；新增函数 `forceMvccCheckpoint`，用于手动触发创建 MVCC 表的检测点。（**2.00.9.3**）
 * 新增功能 License Server，用于根据 license 的限制分配节点的硬件资源。新增相关函数 `getLicenseServerResourceInfo`，`getRegisteredNodeInfo`，相关配置项 `licenseServerSite`，`bindCores`。（**2.00.9**）
 * 新增配置项 `thirdPartyAuthenticator`，用于第三方系统校验用户权限。通过指定该参数，在用户登录时，系统会通过第三方系统进行权限验证。（**2.00.9**）
@@ -279,6 +282,11 @@
 
 ### 改进
 
+* `createTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**2.00.9.4**）
+* 在安全关机情况下，通过 `datanodeRestartInterval` 指定自动启动数据节点的时间后，实际执行时会在该时间基础上增加一个系统预设时间（100秒）。（**2.00.9.4**）
+* `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**2.00.9.4**）
+* DolphinDB 的 `between and` 语句与标准 SQL 的 `between and` 语句兼容。（**2.00.9.4**）
+* 添加了与创建、加载、删除跨进程共享内存表（IPCInMem 表）相关的日志信息，以便更好地跟踪和调试这些操作。（**2.00.9.4**）
 * `getClusterDFSTables` 仅显示对用户可见的表。（**2.00.9.3**）
 * `createWindowJoinEngine` 的 *leftTable* 参数可以包含数组向量类型列。（**2.00.9.3**）
 * `subscribeTable` 的 *handler* 参数支持指定为共享内存表、共享键值表或共享索引表。（**2.00.9.3**）
@@ -346,7 +354,12 @@
     * 修改了 DB\_OWNER 的权限，支持用户创建指定前缀的库。        
     * 约束了不同权限下 getAllDBs，getClusterDFSDatabases，getDFSDatabases，getDFSTablesByDatabase 等函数返回值查看范围。        
     * 新增了权限类型 QUERY\_RESULT\_MEM\_LIMIT，TASK\_GROUP\_MEM\_LIMIT 用于约束用户查询内存的上限。        
-    * 修改了 DDL/DML 操作的权限校验机制。    
+    * 修改了 DDL/DML 操作的权限校验机制。  
+    * 增加参数校验：
+      * 当 objs 的颗粒度与 accessType不匹配时，会报错。
+      * 当赋予 TABLE_READ/TABLE_WRITE/DBOBJ_*/VIEW_EXEC 权限时，会检查对应的对象（DB/table/functionView）是否存在，如果不存在会报错。
+      * 当对象（DB/table/functionView）被删除时，会回收对应的权限。如果再次创建同名的 db/table/functionView，则需要重新赋予权限。
+      * 当 table 改名后，对应的权限依然保留。
 * 使用 JIT 来增强流数据引擎中自定义函数的性能。（**2.00.9**）    
 * JIT 支持 ratio operator。（**2.00.9**）      
 * JIT 支持 `sum`, `avg`, `count`, `size`, `min`, `max`, `iif` 等常用函数。（**2.00.9**）
@@ -532,6 +545,32 @@
 
 ### 故障修复
 
+* `toJson` 传入的 tuple 中包含数值型标量时，转换结果错误。（**2.00.9.4**）
+* 如果字典中的 value 是ANY类型的向量，则使用 toJson 转换后会出现缺失元素的情况。（**2.00.9.4**）
+* 使用 `bar` 查询分区表时，如果将 `bar` 的 interval 参数设置为 0，则可能会导致 server 崩溃。（**2.00.9.4**）
+* 通过 `replay` 函数进行异构回放时，若输入标识为 SYMBOL 类型，则出现报错。此为 2.00.9 版本引入的 bug。（**2.00.9.4**）
+* 执行多个定时作业任务，因部分定时作业序列化失败而导致所有定时作业反序列化失败。（**2.00.9.4**）
+* 通过 `scheduleJob` 设置的定时任务序列化失败但仍然生效。（**2.00.9.4**）
+* `array` 函数的 defaultValue 参数指定为向量，导致 server 崩溃。（**2.00.9.4**）
+* `upsert!` 函数的 newData 参数为非表类型时，导致 server 崩溃。（**2.00.9.4**）
+* 使用 upsert! 更新表数据时，同时满足以下条件，导致更新失败（**2.00.9.4**）：
+  * 仅更新一条数据
+  * newData 表中含有 NULL 值
+  * 设置 gnoreNull=true
+* 通过 `update` 对 mvcc 表一次新增多列时出现类型不匹配的报错。（**2.00.9.4**）
+* 通过 `update from ` 语句更新 TSDB 引擎中设置了 keepDuplicates=LAST的表，结果不正确。（**2.00.9.4**）
+* `group by` 一个包含特殊字符（控制字符、标点符号、数学符号和其它特殊符号等）的列时，返回结果里会忽略这些特殊字符。（**2.00.9.4**）
+* 通过 `addColumn` 向 TSDB 引擎中的表添加列后导致数据错误以及宕机。（**2.00.9.4**）
+* `dropColumns!` 不能删除顺序分区内存表。（**2.00.9.4**）
+* 控制节点在加载本地磁盘分区表时可能出现宕机。（**2.00.9.4**）
+* `getClusterDFSTables` 函数会返回已经删除或不存在的表。（**2.00.9.4**）
+* 添加新的数据节点并执行 `moveReplicas()` 后，出现分区物理路径和元数据记录不一致。（**2.00.9.4**）
+* N 对 N 流表回访时，如果某个 timePartition 中输入数据源为空表，则出现输出表数据错位。（**2.00.9.4**）
+* window join 引擎的 nullFill 参数格式为 [[]]，且指定 window=0:0 时，输出的行数和左表不一致。（**2.00.9.4**）
+* 创建流数据引擎时，因未对某个内部变量进行初始化导致引擎偶尔创建失败。（**2.00.9.4**）
+* 对 TSDB 引擎下的表并发写入和查询时，当发生 OOM 时，查询线程概率性出现 crash。（**2.00.9.4**）
+* 分区物理文件夹不存在（手动删除）后，可能导致 flush 数据到磁盘时丢数据或者主动进行 flush 的操作（如 dropTable）卡住。（**2.00.9.4**）
+* `temporalAdd` 函数的 unit 指定为 "M" 时，结果不正确。（**2.00.9.4**）
 * 不同事务操作相同分区时，偶尔出现存储数据错误。（**2.00.9.3**） 
 * 对用户赋予 DB_READ 或 TABLE_READ 权限后，偶尔出现无法查询数据。（**2.00.9.3**） 
 * 在高可用集群环境中，若控制器节点在关闭时，raft 日志未能完全写入，当其重新启动时发生崩溃。（**2.00.9.3**） 
