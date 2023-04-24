@@ -597,8 +597,6 @@ Release Date: 2020-12-29
 
 - The *outputElapsedInMicroseconds* parameter of function `createTimeSeriesEngine` is renamed to *outputElapsedMicroseconds*. (**1.30.21.4**)
 
-- In the case of a graceful shutdown, an additional time of 100 seconds is automatically added to the time specified by parameter *datanodeRestartInterval* for the data node to be restarted. (**1.30.21.4**)
-
 - The fields "createTime" and "lastActiveTime" returned by function `getSessionMemoryStat` are now displayed in local time. (**1.30.21.4**)
 
 - Enhanced support for `between and` with standard SQL features. (**1.30.21.4**)
@@ -1104,6 +1102,50 @@ Release Date: 2020-12-29
 * STRING longer than 65535 bytes will be automatically converted to BLOB during serialization. (**1.30.1**)
 
 ### Issues Fixed
+
+- When the configuration parameter *datanodeRestartInterval* was set to a time less than 100 seconds, the data node was immediately restarted by the controller in a graceful shutdown situation or after the cluster was restarted. (**1.30.21.4**)
+
+- Incorrect conversion when the input of function `toJson` was a tuple which contains numeric scalars. (**1.30.21.4**)
+
+- Incorrect conversion when the input of function `toJson` was a dictionary with its values being vectors of ANY type. (**1.30.21.4**)
+
+- A server crash may occur when function `bar` with parameter *interval* set to 0 was used to query a partitioned table. (**1.30.21.4**)
+
+- For N-to-1 replay, an error was reported when the key of the dictionary (set by parameter *inputTables*) was specified as SYMBOL type. This bug occurred since version 1.30.21. (**1.30.21.4**)
+
+- Scheduled jobs failed to be executed due to the unsuccessful deserialization of file jobEditlog.meta at node startup. (**1.30.21.4**)
+
+- Scheduled jobs were still executed until the next server startup, even though the serialization was unsuccessful when they were created. (**1.30.21.4**)
+
+- A server crash occurred when the *defaultValue* parameter of function `array` is specified as a vector. (**1.30.21.4**)
+
+- Passing non-table data to the *newData* parameter of `upsert!` could crash the DolphinDB server. (**1.30.21.4**)
+
+- The `upsert!()` function would fail when the following three conditions were satisfied at the same time: (**1.30.21.4**)
+
+    - Only one record was to be updated
+    - The newData parameter contained NULL values
+    - The ignoreNull parameter was set to true
+
+- Attempting to add multiple new columns to an MVCC table in an `update` statement would result in a data type error. (**1.30.21.4**)
+
+- When specifying a column containing special characters such as control characters, punctuation marks, and mathematical symbols in the `group by` clause of a query, these special characters were improperly ignored. (**1.30.21.4**)
+
+- `dropColumns!` could not delete in-memory tables with sequential partitions. (**1.30.21.4**)
+
+- A controller may crash when loading a partitioned table from the local disk. (**1.30.21.4**)
+
+- Function `getClusterDFSTables` may return tables that have been deleted or do not exist. (**1.30.21.4**)
+
+- The physical paths of partitions may not match the metadata after new data nodes are added and `moveReplicas()` is executed. (**1.30.21.4**)
+
+- For N-to-N replay, if an element of the input data source for a table was empty, data in the output table may be misplaced. (**1.30.21.4**)
+
+- Occasional failures of creating a streaming engine due to uninitialized internal variables. (**1.30.21.4**)
+
+- For operations involving data flushing, data may be lost or the operations may get stuck if the physical directory of a partition did not exist (e.g., it had been manually deleted). (**1.30.21.4**)
+
+- Incorrect result of the `temporalAdd` function when specifying the parameter unit as "M". (**1.30.21.4**)
 
 * An OOM error caused by concurrent writes, queries or calculations may lead to a server hang-up. (**1.30.18**)
 
