@@ -709,6 +709,12 @@ Release Date: 2020-12-29
   - Added privilege types QUERY_RESULT_MEM_LIMIT and TASK_GROUP_MEM_LIMIT to set the upper limit of the memory usage of queries.
   - Access control-related functions now can be called on data nodes.
   - Modified the permission verification mechanism of DDL/DML operations.
+  - Added parameter validation for access control:
+
+    - An error is reported if the granularity of objs does not match the accessType of `grant`, `deny`, or `revoke`.
+    - When the TABLE_READ/TABLE_WRITE/DBOBJ_*/VIEW_EXEC permission is granted, the existence of the applied object (database/table/function view) is checked first. If it does not exist, an error is reported.
+    - When an object (database/table/function view) is deleted, the applied permissions are revoked. If a new object with the same name is created later, the permissions must be reassigned.
+    - Permissions are retained for renamed tables.
 
 - Optimized the performance of user-defined functions in streaming engines in DolphinDB (JIT).  (**1.30.21**)
 
