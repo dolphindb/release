@@ -13,11 +13,11 @@ Version: **2.00.9** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.co
 
 Release Date: 2022-02-15
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.3.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.3_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.3_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.3.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.3_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.4_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.4_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.4_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V2.00.9.1.zip)
 
 
@@ -84,6 +84,11 @@ Release Date: 2021-07-31
 
 ### New Features
 
+- Constants now can be declared as DECIMAL type with the data type symbol "P". (**2.00.9.4**)
+
+- Added new configuration parameter *logicOrIgnoreNull*. The default value is true, which means to ignore NULL values in the operands. It should be set to false if you need the behavior of the `or` function to be consistent with old versions. (**2.00.9.4**)
+
+- `is null` is now supported in a `case when` clause. (**2.00.9.4**)
 - Added configuration parameter *mvccCheckpointThreshold* to set the threshold for the operations to trigger a checkpoint. (**2.00.9.3**)
 
 - Added function `forceMvccCheckpoint` to manually trigger a checkpoint. (**2.00.9.3**)
@@ -386,6 +391,16 @@ Release Date: 2021-07-31
 * The data based on the TSDB storage engine supports the new data type BLOB. (**2.00.0**)
 
 ### Improvements
+
+- The *outputElapsedInMicroseconds* parameter of function `createTimeSeriesEngine` is renamed to *outputElapsedMicroseconds*. (**2.00.9.4**)
+
+- In the case of a graceful shutdown, an additional time of 100 seconds is automatically added to the time specified by parameter *datanodeRestartInterval* for the data node to be restarted. (**2.00.9.4**)
+
+- The fields "createTime" and "lastActiveTime" returned by function `getSessionMemoryStat` are now displayed in local time. (**2.00.9.4**)
+
+- Enhanced support for `between and` with standard SQL features. (**2.00.9.4**)
+
+- More operations on the IPC in-memory tables are logged for better tracking and debugging. (**2.00.9.4**)
 
 - Function `getClusterDFSTables` returns DFS tables to which the user has access. (**2.00.9.3**)
 
