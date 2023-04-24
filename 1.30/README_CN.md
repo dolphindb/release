@@ -415,7 +415,6 @@
 ### 改进
 
 * `createTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**1.30.21.4**）
-* 在安全关机情况下，通过 `datanodeRestartInterval` 指定自动启动数据节点的时间后，实际执行时会在该时间基础上增加一个系统预设时间（100秒）。（**1.30.21.4**）
 * `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**1.30.21.4**）
 * DolphinDB 的 `between and` 语句与标准 SQL 的 `between and` 语句兼容。（**1.30.21.4**）
 * 添加了与创建、加载、删除跨进程共享内存表（IPCInMem 表）相关的日志信息，以便更好地跟踪和调试这些操作。（**1.30.21.4**）
@@ -678,6 +677,7 @@
   
 ### 故障修复
 
+* 如果 `datanodeRestartInterval` 的设置时间小于系统预定义值100，在安全关机情况下或重启集群时，数据节点会立刻被控制节点启动。（**1.30.21.4**）
 * `toJson` 传入的 tuple 中包含数值型标量时，转换结果错误。（**1.30.21.4**）
 * 如果字典中的 value 是ANY类型的向量，则使用 toJson 转换后会出现缺失元素的情况。（**1.30.21.4**）
 * 使用 `bar` 查询分区表时，如果将 `bar` 的 interval 参数设置为 0，则可能会导致 server 崩溃。（**1.30.21.4**）
@@ -949,7 +949,7 @@
 * 自定义函数中的常量均被标记为 static，使用时必须先复制。函数序列化时丢失了 static 标记。(**1.30.14**)
 * JIT 版本的数据节点在 `loadColumn` 的时候，若发生 OOM，则会 crash。(**1.30.14**)
 * 删除分布式表（使用 `dropTable` 或 `dropPartition`）在提交时失败，导致事务回滚后，再次查询该表时结果不符合预期。删除该表缓存后，查询恢复正常。(**1.30.13**)
-* 配置参数 datanodeRestartInterval 后,在高可用环境下会一直重启数据节点, 数据节点无法关闭。(**1.30.13**)
+* 配置参数 datanodeRestartInterval 后，在高可用环境下会一直重启数据节点, 数据节点无法关闭。(**1.30.13**)
 * 键值表（keyed table）或索引表（indexed table）和内存表等值关联时，抛出 OOM 异常或导致系统崩溃。(**1.30.13**)
 * Reactive state engine, cross sectional engine, equal join engine, asof join engine 输出到异步持久化流表时 crash。(**1.30.13**)
 * 当最近一个事务操作是删除表的分区，且事务处于决议状态，数据节点有可能给出错误的决议结果。(**1.30.13**)

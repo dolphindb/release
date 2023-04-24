@@ -283,7 +283,6 @@
 ### 改进
 
 * `createTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**2.00.9.4**）
-* 在安全关机情况下，通过 `datanodeRestartInterval` 指定自动启动数据节点的时间后，实际执行时会在该时间基础上增加一个系统预设时间（100秒）。（**2.00.9.4**）
 * `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**2.00.9.4**）
 * DolphinDB 的 `between and` 语句与标准 SQL 的 `between and` 语句兼容。（**2.00.9.4**）
 * 添加了与创建、加载、删除跨进程共享内存表（IPCInMem 表）相关的日志信息，以便更好地跟踪和调试这些操作。（**2.00.9.4**）
@@ -545,6 +544,7 @@
 
 ### 故障修复
 
+* 如果 `datanodeRestartInterval` 的设置时间小于系统预定义值100，在安全关机情况下或重启集群时，数据节点会立刻被控制节点启动。（**2.00.9.4**）
 * `toJson` 传入的 tuple 中包含数值型标量时，转换结果错误。（**2.00.9.4**）
 * 如果字典中的 value 是ANY类型的向量，则使用 toJson 转换后会出现缺失元素的情况。（**2.00.9.4**）
 * 使用 `bar` 查询分区表时，如果将 `bar` 的 interval 参数设置为 0，则可能会导致 server 崩溃。（**2.00.9.4**）
