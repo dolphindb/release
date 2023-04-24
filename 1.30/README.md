@@ -19,11 +19,11 @@ Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.c
 
 Release Date: 2022-02-15
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.3.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.3_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.3_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.3.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.3_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4_JIT.zip)
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.21.1.zip)
 
 Version: **1.30.20** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.19
@@ -230,6 +230,10 @@ Release Date: 2020-12-29
 
 
 ### New Features
+
+- Added new configuration parameter *logicOrIgnoreNull*. The default value is true, which means to ignore NULL values in the operands. It should be set to false if you need the behavior of the `or` function to be consistent with old versions. (**1.30.21.4**)
+
+- `is null` is now supported in a `case when` clause. (**1.30.21.4**)
 
 - Added configuration parameter *mvccCheckpointThreshold* to set the threshold for the operations to trigger a checkpoint. (**1.30.21.3**)
 
@@ -590,6 +594,16 @@ Release Date: 2020-12-29
 
 
 ### Improvements
+
+- The *outputElapsedInMicroseconds* parameter of function `createTimeSeriesEngine` is renamed to *outputElapsedMicroseconds*. (**1.30.21.4**)
+
+- In the case of a graceful shutdown, an additional time of 100 seconds is automatically added to the time specified by parameter *datanodeRestartInterval* for the data node to be restarted. (**1.30.21.4**)
+
+- The fields "createTime" and "lastActiveTime" returned by function `getSessionMemoryStat` are now displayed in local time. (**1.30.21.4**)
+
+- Enhanced support for `between and` with standard SQL features. (**1.30.21.4**)
+
+- More operations on the IPC in-memory tables are logged for better tracking and debugging. (**1.30.21.4**)
 
 - Function `getClusterDFSTables` returns DFS tables to which the user has access. (**1.30.21.3**)
 
