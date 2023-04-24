@@ -394,8 +394,6 @@ Release Date: 2021-07-31
 
 - The *outputElapsedInMicroseconds* parameter of function `createTimeSeriesEngine` is renamed to *outputElapsedMicroseconds*. (**2.00.9.4**)
 
-- In the case of a graceful shutdown, an additional time of 100 seconds is automatically added to the time specified by parameter *datanodeRestartInterval* for the data node to be restarted. (**2.00.9.4**)
-
 - The fields "createTime" and "lastActiveTime" returned by function `getSessionMemoryStat` are now displayed in local time. (**2.00.9.4**)
 
 - Enhanced support for `between and` with standard SQL features. (**2.00.9.4**)
@@ -736,6 +734,58 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- When the configuration parameter *datanodeRestartInterval* was set to a time less than 100 seconds, the data node was immediately restarted by the controller in a graceful shutdown situation or after the cluster was restarted. (**2.00.9.4**)
+
+- Incorrect conversion when the input of function `toJson` was a tuple which contains numeric scalars. (**2.00.9.4**)
+
+- Incorrect conversion when the input of function `toJson` was a dictionary with its values being vectors of ANY type. (**2.00.9.4**)
+
+- A server crash may occur when function `bar` with parameter *interval* set to 0 was used to query a partitioned table. (**2.00.9.4**)
+
+- For N-to-1 replay, an error was reported when the key of the dictionary (set by parameter *inputTables*) was specified as SYMBOL type. This bug occurred since version 2.00.9. (**2.00.9.4**)
+
+- Scheduled jobs failed to be executed due to the unsuccessful deserialization of file jobEditlog.meta at node startup. (**2.00.9.4**)
+
+- Scheduled jobs were still executed until the next server startup, even though the serialization was unsuccessful when they were created. (**2.00.9.4**)
+
+- A server crash occurred when the *defaultValue* parameter of function `array` is specified as a vector. (**2.00.9.4**)
+
+- Passing non-table data to the *newData* parameter of `upsert!` could crash the DolphinDB server. (**2.00.9.4**)
+
+- The `upsert!()` function would fail when the following three conditions were satisfied at the same time:
+
+  - Only one record was to be updated
+  - The newData parameter contained NULL values
+  - The ignoreNull parameter was set to true
+
+- Attempting to add multiple new columns to an MVCC table in an `update` statement would result in a data type error. (**2.00.9.4**)
+
+- Using the `update...from...` statement to update a table (with keepDuplicates=LAST) in a TSDB database could produce incorrect results. (**2.00.9.4**)
+
+- When specifying a column containing special characters such as control characters, punctuation marks, and mathematical symbols in the `group by` clause of a query, these special characters were improperly ignored. (**2.00.9.4**)
+
+- After adding a column to a table of a TSDB database using `addColumn`, data errors and crashes may occur. (**2.00.9.4**)
+
+- `dropColumns!` could not delete in-memory tables with sequential partitions. (**2.00.9.4**)
+
+- A controller may crash when loading a partitioned table from the local disk. (**2.00.9.4**)
+
+- Function `getClusterDFSTables` may return tables that have been deleted or do not exist. (**2.00.9.4**)
+
+- The physical paths of partitions may not match the metadata after new data nodes are added and `moveReplicas()` is executed. (**2.00.9.4**)
+
+- For N-to-N replay, if an element of the input data source for a table was empty, data in the output table may be misplaced. (**2.00.9.4**)
+
+- Window join engine: Inconsistent row counts between the output table and the left input table when specifying *nullFill* as [[]] and *window* = 0:0. (**2.00.9.4**)
+
+- Occasional failures of creating a streaming engine due to uninitialized internal variables. (**2.00.9.4**)
+
+- For concurrent writes and queries to tables of a TSDB database, the query thread may crash when an OOM occurred. (**2.00.9.4**)
+
+- For operations involving data flushing, data may be lost or the operations may get stuck if the physical directory of a partition did not exist (e.g., it had been manually deleted). (**2.00.9.4**)
+
+- Incorrect result of the `temporalAdd` function when specifying the parameter unit as "M". (**2.00.9.4**)
 
 * An OOM error caused by concurrent writes, queries or calculations may lead to a server hang-up. (**2.00.6**)
 
