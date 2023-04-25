@@ -256,7 +256,7 @@
     * 新增语句：`drop`（支持删库，删表操作），`create local temporary table`（支持创建本地临时内存表），`alter`（新增支持列名重命名，删除列），`case when`, `union/union all`, `join on`, `with as`（支持 `with` 关键字使用参数对列重命名）        
     * 新增谓词：`(not) between and`, `is null/is not null`, `(not) exists/not exist`, `any/all`       
     * 新增函数：`nullIf`, `coalesce`        
-    * 新增关键字：`distinct`（单个或多个字段去重），`nulls first/nulls last`（`order by` 关键字）        
+    * 新增关键字：`distinct`（单个或多个字段去重），`nulls first/nulls last`（`order by` 关键字）  
 * 支持多表 `join` 语句，`join` 语法支持使用别名，且支持 `join` 的对象是一个 SQL 子查询。（**1.30.21**）
 * 支持 `select` 常量时不指定别名，此时常量值将作为列名。（**1.30.21**）    
 * 支持条件语句中 `in` 等谓词以及运算符对 SQL 子查询返回的结果表进行操作。 （**1.30.21**）   
@@ -300,6 +300,7 @@
 * 新增函数 `getTransactionStatus`，获取事务的状态。新增命令 `imtForceGCRedolog`，取消等待指定编号的事务回收。（**1.30.19**）
 * 新增数据库运维模块 ops，包含一些用户常用的运维脚本，如：取消集群中未完成的作业，查看内存占用，删除未完成恢复的分区，关闭不活跃的会话等。（**1.30.19**）
 * 新增函数 `setLogLevel` 动态调整 server log 级别。（**1.30.19**）
+* 新增函数 `getRedoLogGCStat` 用于获取 redo log 垃圾回收的状态。（**1.30.19**）
 * ReactiveStateEngine 支持 `cumPositiveStreak` 函数。（**1.30.19**）
 * 新增 mmaxPositiveStreak 函数，计算在给定长度（以元素个数衡量）的滑动窗口内统计 X 中连续正数之和的最大值，并在响应式状态引擎中增加了对应的状态函数。（**1.30.19**）
 * 新增函数 `cells`，使矩阵输出由参数 *row* 和 *col* 指定位置的元素值。（**1.30.18**）
@@ -414,7 +415,7 @@
   
 ### 改进
 
-* `createTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**1.30.21.4**）
+* `createTimeSeriesEngine`, `createDailyTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**1.30.21.4**）
 * `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**1.30.21.4**）
 * DolphinDB 的 `between and` 语句与标准 SQL 的 `between and` 语句兼容。（**1.30.21.4**）
 * 添加了与创建、加载、删除跨进程共享内存表（IPCInMem 表）相关的日志信息，以便更好地跟踪和调试这些操作。（**1.30.21.4**）
@@ -433,7 +434,10 @@
 * 函数 `rank` 和 `rowRank` 新增参数 `precision`，用于设置排序值的精度。（**1.30.21**）    
 * 函数 `groups` 参数 `mode` 支持 "vector", "tuple"。（**1.30.21**）    
 * 函数 `linearTimeTrend` 支持对矩阵和表的计算。（**1.30.21**）    
-* 支持高阶函数迭用，高阶函数 `eachLeft`, `eachRight`, `eachPre`, `eachPost`, `reduce` 新增参数 `consistent`，支持子任务结果的类型和形式可以不一致。（**1.30.21**）
+* 对高阶函数做了以下修改：（**1.30.21**）
+  * 支持高阶函数迭用， `eachLeft`, `eachRight`, `eachPre`, `eachPost`, `reduce` 新增参数 `consistent`，支持子任务结果的类型和形式可以不一致。
+  * 在默认情况下，`eachLeft`, `eachRight`, `eachPre`, `eachPost`, `cross`, `accumulate`, `reduce` 不再根据第一个子任务的计算结果来决定输出对象的形式，而是根据所有结果来决定输出对象的形式。
+  * `accumulate` 计算规则做了调整。若输入参数为矩阵，不再根据每一行来处理空值，而是在每次迭代中按列处理。
 * 函数 `rank` 和 `rowRank` 的参数 `tiesMethod` 支持使用 first 按照原数据的顺序排名。（**1.30.21**）    
 * 函数 `cut` 支持将数据拆分成标量。（**1.30.21**）   
 * 函数 `rowAt` 支持以数组向量为索引。（**1.30.21**）    
@@ -465,13 +469,22 @@
 * `context by` 支持 matrix 和 table 的输入形式。（**1.30.21**）    
 * 提高了`context by` 和 `group by` 的查询性能。（**1.30.21**）    
 * 优化了 `lsj` 在大数据量下的性能。（**1.30.21**）    
-* 支持 SQL 语句 where 条件里时间类型可以自动转换为 interval 分组的时间类型。（**1.30.21**） 
+* 支持 SQL 语句 where 条件里时间类型可以自动转换为 interval 分组的时间类型。（**1.30.21**）
+* 为兼容标准 SQL，对部分函数行为做了调整：（**1.30.21**）  
+  * 通过 `join` 函数进行连接时，必须为临时表指定表名。
+  * `distinct` 语句返回的结果列列名会在原始列名前加“distinct_”。
+  * `in` 语句后跟单列表，而无需将其转换为向量。
+* `func` 为内置函数名。（**1.30.21**） 
+* 以 `x[start:end]` 的形式访问 array vector 的结果发生变化。如果 end>size(x)，不再抛出异常，而是将超出范围的位置填充 NULL。（**2.00.9**） 
+* `contextSum2` 函数传入 array vector 时，会抛出异常而不是返回空值。（**2.00.9**）
+* 在定义包含特殊符号的字符串时，使用双引号（""）来包裹字符串，而不是使用反引号（`）。（**1.30.21**）
+* `interval` 函数增加校验，当 X 输入数据为整型数据时，不能指定 explicitOffset=true。（**1.30.21**）
 * 改进了函数 `getSystemCpuUsage` 的返回值。（**1.30.21**）  
 * 改进了权限管理功能，包括（**1.30.21**）：    
     * 新增了更细粒度的表权限（TABLE\_INSERT/TABLE\_UPDATE/TABLE\_DELETE），以及库权限（DB\_INSERT/DB\_UPDATE/DB\_DELETE）。        
     * 修改了 DB\_MANAGE 的权限，不再支持创库，只支持对库进行 DDL 级别的操作管理。        
-    * 修改了 DB\_OWNER 的权限，支持用户创建指定前缀的库。        
-    * 约束了不同权限下 getAllDBs，getClusterDFSDatabases，getDFSDatabases，getDFSTablesByDatabase 等函数返回值查看范围。        
+    * 修改了 DB\_OWNER 的权限，支持用户创建指定前缀的库，且会为 admin 用户自动赋予 DB\_OWNER 权限。       
+    * 增加以下函数权限校验：getAllDBs, getClusterDFSDatabases, getDFSDatabases, getDFSTablesByDatabase，只有拥有 DB_MANAGE 或 DB_OWNER 权限的用户才能调用。        
     * 新增了权限类型 QUERY\_RESULT\_MEM\_LIMIT，TASK\_GROUP\_MEM\_LIMIT 用于约束用户查询内存的上限。        
     * 修改了 DDL/DML 操作的权限校验机制。    
     * 增加参数校验：
@@ -479,6 +492,8 @@
       * 当赋予 TABLE_READ/TABLE_WRITE/DBOBJ_*/VIEW_EXEC 权限时，会检查对应的对象（DB/table/functionView）是否存在，如果不存在会报错。
       * 当对象（DB/table/functionView）被删除时，会回收对应的权限。如果再次创建同名的 db/table/functionView，则需要重新赋予权限。
       * 当 table 改名后，对应的权限依然保留。
+    * 如果某个用户 grant 了某个表的权限，deny 了另一个表的权限，则升级到新版本后，该用户会拥有所有表的这个权限。
+    * 权限管理相关函数可以在数据节点上执行。
 * 使用 JIT 来增强流数据引擎中自定义函数的性能。（**1.30.21**）    
 * JIT 支持 ratio operator。（**1.30.21**） 
 * JIT 支持 `sum`, `avg`, `count`, `size`, `min`, `max`, `iif` 等常用函数。（**1.30.21**）
@@ -497,10 +512,12 @@
 * 为 31 个内置函数增加了权限控制，需登录或管理员权限才可调用。（**1.30.20**）
 * `updateLicense` 时，若 license 授权类型改变，添加错误提示。（**1.30.20**）
 * 对 vector 进行切片时，如果指定的索引超出向量的索引范围，则返回空值，不再抛出异常。（**1.30.20**）
+* `subarray` 函数输入的范围越界，会返回空值，不再不抛出异常。（**1.30.20**）
 * JIT 版本以索引方式读取 vector 某一元素时，若索引超过 index 的范围，用 NULL 填充。（**1.30.20**）
 * crc32 算法优化。（**1.30.20**）
 * 优化函数 `mrank`。（**1.30.20**）
 * `toJson` 函数可转换的数据取消最大长度为1000的限制。（**1.30.20**）
+* `max` 和 `min` 函数处理时间类型数据的行为由统一转换为长整型改为统一时间类型精度后比较。（**1.30.20**）
 * `getClusterPerf(true)` 返回高可用集群下所有控制节点的信息，且返回值新增 isLeader 字段，显示该控制节点是否为 raft 组的 leader。（**1.30.19**）
 * 调用 `restore`, `loadBackup`, `getBackupMeta` 等函数查询备份的表级分区数据时，partition 参数无需指定物理索引名。（**1.30.19**）
 * `getRecoveryTaskStatus` 返回值新增 FailureReason 字段显示 recovery 任务失败的原因。（**1.30.19**）
@@ -512,21 +529,30 @@
 * `createEqualJoinEngine`, `createAsofJoinEngine` 和 `createLookupJoinEngine` 的 *metrics* 参数可以指定输出左表或右表的时间列/连接列。（**1.30.19**）
 * `createReactiveStateEngine` 的 *keyPurgeFilter* 参数必须输入布尔类型的表达式，否则会报错。（**1.30.19**）
 * `createLookupJoinEngine` 的 *metrics* 参数支持输入元组。（**1.30.19**）
+* `dropStreamEngine` 若传入不存在不存在的引擎名称，则会抛出异常。（**1.30.19**）
 * 当 group by 子句的时间粒度大于分区时间粒度时，优化了 select count(*) 语句的性能。（**1.30.19**）
-* 优化以下函数调用 `rolling` 函数时的计算性能：`cumsum`, `cummax`, `cummin`, `cumprod`, `mcount` 等。（**1.30.19**）
+* 修改 `rolling` 函数行为：（**1.30.19**）
+  * `rolling` 的 *funArgs* 参数只能是向量或矩阵。如果需要输入多个向量，则用元组表示。
+  * 如果输入参数中包含矩阵，根据矩阵的每一列分别计算，返回具有相同列数的矩阵。
+  * *func* 的输出结果只能是标量或向量。如果输出结果是向量，则 *window* 与 *step* 必须相等。
+  * 优化以下函数调用 `rolling` 函数时的计算性能：`cumsum`, `cummax`, `cummin`, `cumprod`, `mcount` 等。
 * 流数据订阅时若无法获取持久化的 offset ，则从当前最新的开始订阅。（**1.30.19**）
 * `createDailyTimeSeriesEngine` 的参数 *sessionEnd* 支持指定 00:00:00 作为当天的 24:00:00（即第二天的 00:00:00）。（**1.30.19**）
-* `createReactiveStateEngine` 支持状态函数 `trueRange`。（**1.30.19**）
+* `createReactiveStateEngine` 支持状态函数 `trueRange`；若 *metrics* 中指定返回常量的状态函数，则会抛出异常。（**1.30.19**）
 * 提升了 SYMBOL 数据类型的读写性能。（**1.30.18**）
 * 响应式状态引擎支持 `cummed` 和 `cumpercentile` 两个窗口函数。（**1.30.18**）
 * 时序引擎（`createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine`）新增参数 closed 来控制计算窗口的闭合边界。（**1.30.18**）
 * `streamEngineParser` 的 keyColumn 参数取消对传入列名的大小写判断。（**1.30.18**）
 * `createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine` 新增参数 keyPurgeFreqInSec, 用于清理长时间无数据的分组。（**1.30.18**）
 * 优化时序聚合引擎自定义函数性能。（**1.30.18**）
+* 通过 `share` 语句将普通内存表共享时，增加共享表变量名校验。（**1.30.18**）
 * `streamFilter` 支持对普通流表的列数据进行过滤、分发。（**1.30.18**）
 * `createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine` 的 metrics 支持对矩阵进行运算。（**1.30.18**）
 * `resample` 函数的 rule 参数支持 "H", "L", "U", "min", "N" 以及 "S"，且新增了参数 closed，label 和 origin，可以对分组区间进行设置。（**1.30.18**）
 * `replay` 函数在执行过程中如果报错，则直接抛出异常。（**1.30.18**）
+* `tmbeta(T, X, Y, window)`, `cumbeta(X, Y)`, `rowBeta(X, Y)` 函数的参数位置调整为 `tmbeta(T, Y, X, window)`, `cumbeta(Y, X)`, `rowBeta(Y, X)`。（**1.30.18**）
+* 在集群模式下，若 `redoLogDir` 配置为相同路径，则会报错。（**1.30.18**）
+* `contextSum` 和 `contextSum2` 的输入参数是表时，只有对应列都是数值类型时才返回结果。（**1.30.18**）
 * 优化了生成随机整数的性能。（**1.30.18**）  
 * OLAP 引擎支持在 Windows 环境中开启 dataSync（即设置配置项 dataSync = 1）。（**1.30.17**）
 * 函数 `subscribeTable` 新增可选参数 userId 和 password，系统在用户退出后自动尝试重新登录，保证订阅数据成功写入分布式表。（**1.30.17**）
@@ -537,10 +563,16 @@
 * 若横截面引擎（cross-sectional streaming engine）和时间序列引擎（time-series streaming engine）参数 metrics 指定的函数有多个返回值，创建引擎时无需指定列名。（**1.30.17**）
 * 新增命令 `addAccessControl` 对共享内存表（包括共享流表）或流数据引擎对象增加权限控制。（**1.30.17**）
 * SQL `pivot by` 语句支持转换 UUID 类型的列。（**1.30.17**）
+* `rowNo` 函数应用于 SQL 查询语句中时，将按照序列相关函数处理。（**1.30.17**）
 * 函数 `ceil` 和 `floor` 结果的范围上限提升为2^53。（**1.30.17**）
 * 若 SQL `pivot by` 语句最后一列为分区列，且 `select` 字段不包含聚合函数或序列函数，`pivot by` 语句性能提升近五倍。（**1.30.17**）
 * 函数 `med` 参数支持 BOOL 类型。（**1.30.17**）
 * 函数 `ema`, `kama` 和 `wma` 支持计算 BOOL 类型向量。（**1.30.17**）
+* 调用 `slice` 函数时 ，当 rowIndex 或 colIndex 越界时，不再抛出异常，而是返回空值。（**1.30.17**）
+* 调用 `spearmanr` 函数时，当 X 是矩阵，Y 是标量时，返回结果由 NULL 变成 0。（**1.30.17**）
+* 调用 `mutualInfo` 函数时，当 X 是矩阵，Y 是标量时，返回结果由标量变成向量。（**1.30.17**）
+* `listTables` 函数返回的表名调整为对大小写敏感。（**1.30.17**）
+* 性能监控度量值（metrics） 若小于0，则返回0。（**1.30.17**）
 * 命令 `addColumn` 新增列名支持以数字开头。（**1.30.17**）
 * 函数 `loadText` 和 `loadTextEx` 导入 csv 文件时，第一行数据的读取上限为 256 KB。（**1.30.17**）
 * 聚合函数、窗口函数和向量函数支持表作为输入参数。（**1.30.17**）
@@ -778,7 +810,7 @@
 * 修复因 symbol base 序列化出错导致数据读取出错。（**1.30.19**）
 * 流数据订阅不到持久化流表内存中还存在但是磁盘上已删除的数据。（**1.30.19**）
 * `appendForJoin` 插入数据的列数若与 JoinEngine 的 leftTable, rightTable 的列数不一致，会导致 crash。（**1.30.19**）
-* 修复 `createSessionWindowEngine` 设置 *updateTime*，但输出表不是 keyedTable 时，一条数据到达引擎之后经过 2 * updateTime仍未参与计算，不会触发计算。（**1.30.19**）
+* 修复 `createSessionWindowEngine` 设置 *updateTime*，但输出表不是 keyedTable 时，一条数据到达引擎之后经过 2*updateTime仍未参与计算，不会触发计算。（**1.30.19**）
 * DailyTimeSeriesEngine 在 SessionEnd 之后仍有数据输入可能会导致 crash。（**1.30.19**）
 * `createLookupJoinEngine` rightTable 是共享键值内存表时创建引擎会失败。（**1.30.19**）
 * 持久化流表写入过程中重启节点，重新加载过程因丢失部分数据导致解压失败而报错。（**1.30.19**）
@@ -828,11 +860,13 @@
 * lookup join 引擎插入单条数据可能导致 server crash。（**1.30.18**）
 * 即使写入高可用流表 schema 不一致，仍然会被放到持久化队列，导致 leader 切换后会报错："Can't find the object with name"。（**1.30.18**）
 * `createDailyTimeSeriesEngine` 如果指定 fill，会对输入表中间不包含数据的日期进行填充。（**1.30.18**）
+* `createDailyTimeSeriesEngine` 若指定 windowSize 大于 step，fill="none"，在指定 forceTriggerTime 后，没有触发最后一个滑动了 step 之后的窗口的计算。（**1.30.18**）
 * 非 admin 用户可以调用 `createUser` 函数。（**1.30.18**）
 * `changePwd` 没有限制新密码的长度。（**1.30.18**）
 * `loadText` 加载数据到内存表时，若某列数据全部为中文字符，或同时包含中文字符和数字时，会忽略中文字符。（**1.30.18**）
 * 使用 matrix([],[]) 语句会导致 crash。（**1.30.18**）
 * `exec` 搭配 `pivot by`，若不对 `exec` 选择的列字段调用函数，不会生成一个矩阵，而是生成一个 table。（**1.30.18**）
+* 从分布式表 exec 单列时，返回的类型为内存表。（**1.30.18**）
 * `randomForestClassifier` 如果设置 numJobs > 1 或者 numJobs=-1，当重复使用同一个 dataSource 进行训练时，则会导致 server crash。（**1.30.18**）
 * `interval`函数的 duration 的时间精度与实际数据的精度不匹配导致 crash。（**1.30.18**）
 * keyedTable(keyColumns, table) 创建键值内存表时，若 table 存在重复键值，发生内存泄露。（**1.30.18**）
