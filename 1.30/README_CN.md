@@ -1098,7 +1098,13 @@
     * `mysql::load` 中添了 allowEmptyTable 参数，可以设置是否返回一个空表。(**1.30.12**)
 
 * JDBC 插件
-
+    * 修复若 URL 设置的 databasePath 中包含无权限的表，则出现报错且无法连接的问题。（**1.30.21.1**）
+    * 新增连接属性 tableName，可以加载指定的表。（**1.30.21.1**）
+    * 改进：只连接一个节点时，若未设置高可用参数，则默认在连接失败或因网络问题导致连接断开时，都会自动进行重连。（**1.30.21.1**）
+    * 新增高可用配置参数 enableHighAvailability，与参数 highAvailability 功能相同，使用时只需设置其中一个参数即可，推荐使用 enableHighAvailability。须保证两个参数配置相同；若配置冲突则会报错。（**1.30.21.1**）
+    * 新增支持 Decimal 数据类型，用户可以对 Decimal 类型数据进行查询、更新等 SQL 操作。（**1.30.20.1**）
+    * JDBC 中的 Java API 升级后，Vector 中的 get 方法返回值由 Scalar 变成 Entity。其中在用到如下函数时须将数据强转为 Scalar。
+    isNull, setNull, getNumber, getTemporal, hashBucket, getJsonString, getScale（**1.30.20.1**）
     * 不区分以下 SQL 关键字大小写：select, from, where, as, last, or, order, group, by, interval, cgroup, having, update, set,  insert, into, values, delete, limit, top, map, pivot, partition, sample。(**1.30.17.1**)
     * JDBCDataBaseMetaData 类新增 getSchemas 方法，用来获取当前连接 server 下的所有分布式数据库和数据表。(**1.30.17.1**)
     * 新增支持 SYMBOL, BLOB, DATEHOUR, COMPLEX, DURATION, INT128, IPADDR 和 POINT 数据类型。(**1.30.17.1**)
