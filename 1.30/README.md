@@ -231,7 +231,7 @@ Release Date: 2020-12-29
 
 ### New Features
 
-- Added new configuration parameter *logicOrIgnoreNull*. The default value is true, which means to ignore NULL values in the operands. It should be set to false if you need the behavior of the `or` function to be consistent with old versions. (**1.30.21.4**)
+- Added new configuration parameter `logicOrIgnoreNull`. The default value is true, which means to ignore NULL values in the operands. It should be set to false if you need the behavior of the `or` function to be consistent with old versions. (**1.30.21.4**)
 
 - `is null` is now supported in a `case when` clause. (**1.30.21.4**)
 
@@ -714,6 +714,7 @@ Release Date: 2020-12-29
     - When an object (database/table/function view) is deleted, the applied permissions are revoked. If a new object with the same name is created later, the permissions must be reassigned.
     - Permissions are retained for renamed tables.
 
+
 - Optimized the performance of user-defined functions in streaming engines in DolphinDB (JIT).  (**1.30.21**)
 
 - DolphinDB (JIT) supports operator `ratio`.  (**1.30.21**)
@@ -783,6 +784,8 @@ Release Date: 2020-12-29
 - A subscription starts from the latest incoming data if the persisted offset cannot be found. (**1.30.19**)
 
 - You can specify 00:00:00 for the parameter *sessionEnd* of function `createDailyTimeSeriesEngine` to indicate the end time is 00:00:00 of the next day (i.e., 24:00:00 of the day). (**1.30.19**)
+
+- The number of rows in the result set of `fj` is limited to a maximum of 2 billion rows. (**1.30.19**)
 
 - Function `trueRange` can be used as state function in the reactive state engine. (**1.30.18**)
 
@@ -1146,6 +1149,232 @@ Release Date: 2020-12-29
 - For operations involving data flushing, data may be lost or the operations may get stuck if the physical directory of a partition did not exist (e.g., it had been manually deleted). (**1.30.21.4**)
 
 - Incorrect result of the `temporalAdd` function when specifying the parameter unit as "M". (**1.30.21.4**)
+
+- Data storage error may occur when different operations were performed on the same partition. (**1.30.21.3**)
+
+- Users who are given DB_READ or TABLE_READ privileges may not be able to execute queries. (**1.30.21.3**)
+
+- Server crashed in a high-availability cluster when reading raft logs at the reboot of the controller. (**1.30.21.3**)
+
+- Server crashed when using `loadText` to load a CSV file that contains unpaired double quotes (""). (**1.30.21.3**)
+
+- After new columns were added to an MVCC table, a server crash occurred when checking the table schema with function `schema` or adding comments to the new columns with function `setColumnComment`. (**1.30.21.3**)
+
+- Invisible characters in the partitioning column resulted in inconsistent versions between controller and data node. (**1.30.21.3**)
+
+- Server crashed when updating the in-memory table with index out of bounds. (**1.30.21.3**)
+
+- A server crash may occur when users login frequently in high-concurrency scenarios. (**1.30.21.3**)
+
+- Server crashed when a user-defined function was specified for the metric of function `StreamEngineParser`. (**1.30.21.3**)
+
+- When the stream table was not defined on the publisher, the reconnection on the subscriber resulted in file descriptor leaks. (**1.30.21.3**)
+
+- Server crashed when using function `parseExpr` to convert a string containing a lambda function. (**1.30.21.3**)
+
+- An error was reported when using function `parseExpr` to convert a string ending with a semicolon. (**1.30.21.3**)
+
+- Server crashed when using function `RepartitionDS` to repartition a joined table and parameter *partitionType* is specified as VALUE. (**1.30.21.3**)
+
+- If the matching columns of two partitioned table were not partitioning columns, and some partitioning columns of two tables have the same column name(s), incorrect result was returned when filtering the data with the partitioning columns of the right table. (**1.30.21.3**)
+
+- For a DFS table value-partitioned by month,  an incorrect result was output when filtering the data on the first day of a month by the `where` condition. (**1.30.21.3**)
+
+- Server crashed when using `order by` in conjunction with `limit` to sort column “DATE (case-sensitive)” in reverse order. (**1.30.21.3**)
+
+- For a DECIMAL column being rearranged by a `pivot by` clause, an incorrect result was output when performing distributed computing such as `rowSum` on a column specified in `select`. (**1.30.21.3**)
+
+- An incorrect result was output when performing time-series aggregate functions (e.g., `pre`, `rank`, etc.) on multiple columns. (**1.30.21.3**)
+
+- The data in the in-memory table returned by the aggregation function will be changed when it was subsequently calculated by moving functions such as move. The data in the in-memory table returned by the aggregation function will be changed when it was subsequently calculated by moving functions such as `move`. (**1.30.21**)
+
+- An error was reported when anonymous aggregate function was specified for *aggs* of `window join`. (**1.30.21**)
+
+- For a DFS table value-partitioned by month, an incorrect result was output if the temporal type specified in the `where` clause was inconsistent with that of table columns, and the where condition contained the last day of the month. (**1.30.21**)
+
+- Server crashed when the independent variables (parameter X) of function ols was specified as a string. (**1.30.21**)
+
+- Server crashed when using function loadText to import data of string type. (**1.30.21**)
+
+- Server crashed when an MVCC table is used in a transaction statement. (**1.30.21**)
+
+- Incorrect results for using `as` with function `deltas` in conjunction with function `corr`. (**1.30.21**)
+
+- Terminating the DolphinDB process with kill-9 command may cause redo logs not to be removed. (**1.30.21**)
+
+- A crash may occur when a table containing string columns was calculated in a reactive state engine. (**1.30.21**)
+
+- Submitting a metacode containing undefined variables via `submitJob` resulted in a crash. (**1.30.21**)
+
+- A node crash may occur after recovery from network failure in a cluster. (**1.30.21**)
+
+- Using partial application in metaprogramming with `context by` could obtain incorrect results. (**1.30.21**)
+
+- *sqlObj* could not be recognized as metacode in `replayDS`. (**1.30.21**)
+
+- If the left table of `lj` is an in-memory table and the right one is a DFS table which is located under a multilevel directory (e.g., *dfs://mydbs/quotedb*), an error would be reported. (**1.30.21**)
+
+- An error was reported when the *metric* of function `createTimeSeriesAggregator` contained a keyColumn. (**1.30.21**)
+
+- The `getClusterPerf` function caused deadlocks when executed by two nodes at the same time in a high-availability cluster. (**1.30.21**)
+
+- A crash may occur when the `accumulate` function was executed multiple times. (**1.30.21**)
+
+- After the execution of function `createDailyTimeSeriesEngine` was completed, an error may be reported for the data of temporal type in query results in some scenarios. (**1.30.21**)
+
+- Unexpected result returned by function `isValid` when adding two empty strings. (**1.30.21**)
+
+- Null values were returned when more than 128 filtering conditions connected with keyword `or` were specified in the where clause. (**1.30.21**)
+
+- An exception thrown by function `loadText` may lead to deadlocks under high load. (**1.30.21**)
+
+- After the function was added to function view, the body queried by function `getFunctionView` had one less pair of brackets. (**1.30.21**)
+
+- Server crashed when a string vector was retrieved by slicing with index out of bounds. (**1.30.21**)
+
+- A crash may occur when using higher-order function each to apply a user-defined function to a table. (**1.30.21**)
+
+- No exception was thrown when the data appended to the cross sectional engine did not match the schema of dummy table. (**1.30.21**)
+
+- When joining DFS tables with the matching column different from the partitioning column, if the join result was queried by a `select top` clause and `order by` partitioning column, an incorrect result was returned. (**1.30.21**)
+
+- An error was reported when using function `rpc` or `remoteRun` to call a partially applied function. (**1.30.21**)
+
+- The file storing job logs was lost when it reached 1G. (**1.30.21**)
+
+- The number of openBLAS-threads was determined based on the configuration parameter openblasThreads, not on the number of CPU cores. (**1.30.21**)
+
+- Serialization on a data node failed if the metadata of a partition exceeded 128M. (**1.30.20**)
+
+- Failure of replaying redo log resulted in partition status errors on the data node. (**1.30.20**)
+
+- Partition was wrongly deleted due to migration failure when the partition was moved to the configured *coldVolume* of tiered storage. (**1.30.20**)
+
+- When creating a database with atomic='CHUNK', slow startup occurred due to excessive metadata on the controller. (**1.30.20**)
+
+- Old data was prematurely reclaimed after update. (**1.30.20**)
+
+- The original table was not immediately reclaimed after the `renameTable` operation was performed. (**1.30.20**)
+
+- Server crashed when specifying a partition path ended with a "/" for function `dropPartition`. (**1.30.20**)
+
+- Users cannot delete partitions that were automatically added when creating a DFS table with VALUE-based partitions by specifying conditions for `dropPartition`. (**1.30.20**)
+
+- Repeated deletions on an empty table caused cid errors in the metadata stored on the data node. (**1.30.20**)
+
+- The parameter *dfsRecoveryConcurrency* did not take effect after configuration. (**1.30.20**)
+
+- `createReactiveStateEngine` failed when specifying factor `tablibNull` for the *metrics*. (**1.30.20**)
+
+- Server crashed when specifying external variables for the *metrics* of `streamEngineParser`. (**1.30.20**)
+
+- Server crashed when the row count of the left table was smaller than the window size in `window join`. (**1.30.20**)
+
+- Server crashed when using `exec` with `limit` and the number of returned rows is less than `limit`. (**1.30.20**)
+
+- The `isDuplicated` and `nunique` functions returned incorrect results when working with DOUBLE and FLOAT data types. (**1.30.20**)
+
+- Calling `parseExpr` in user-defined functions caused parsing failure. (**1.30.20**)
+
+- The function `getClusterPerf` returned incorrect value of *maxRunningQueryTime*. (**1.30.20**)
+
+- Server crashed when using `loadNpy` to read excessively large npy files. (**1.30.20**)
+
+- Variables defined within a for-loop could not be accessed outside the loop using DolphinDB JIT version. (**1.30.20**)
+
+- Garbage collection of redo log got stuck when data was continuously written to an OLAP database. (**1.30.19**)
+
+- A node was wrongly considered alive by the controller after graceful shutdown. (**1.30.19**)
+
+- Partition locks were prematurely released due to timeout before a transaction was resolved, which led to write failure. (**1.30.19**)
+
+- Query conditions were wrongly processed when backing up data by specifying the conditions. (**1.30.19**)
+
+- Server crashed when the machine load was excessively high. (**1.30.19**)
+
+- When a cluster was restarted after a DFS table was updated, the original physical directories may not be recycled. (**1.30.19**)
+
+- Serialization failure of symbol base caused read errors. (**1.30.19**)
+
+- Streaming subscription failed to obtain data that was in memory but had been deleted from disk. (**1.30.19**)
+
+- Server crashed when the number of columns inserted by `appendForJoin` did not match the table schema of the left or right table of a join engine. (**1.30.19**)
+
+- When the parameter *updateTime* of function `createSessionWindowEngine` was specified and the output table was not a keyed table, the calculation could not be triggered after 2 * *updateTime* when a record arrived. (**1.30.19**)
+
+- Server crashed when data was continuously ingested to a daily time series engine after the session end. (**1.30.19**)
+
+- Failed to create a lookup join engine when the right table was specified as a shared keyed table. (**1.30.19**)
+
+- If a node was restarted when a stream table was persisted to disk, data loss and decompression failure may occur. (**1.30.19**)
+
+- Server crashed when specifying a time column (of a big array form) for *dateColumn* and *timeColumn* of `replay` and setting *absoluteRate*=false. (**1.30.19**)
+
+- No error was reported when specifying a user-defined function with a constant return value for the *metrics* of a reactive state engine. (**1.30.19**)
+
+- Server crashed when specifying temporary variables for *metrics* of `createAnomalyDetectionEngine`. (**1.30.19**)
+
+- When using SQL `update` with `context by`, if the first column was set to integral type and the subsequent columns were set to floating-point types, values in the floating-point columns were rounded. (**1.30.19**)
+
+- Concurrent `pivot by` queries may get stuck with few number of worker threads. (**1.30.19**)
+
+- Server crashed when using `HINT_EXPLAIN` to query data from a three-level partitioned table. (**1.30.19**)
+
+- Incorrect results when using function `binsrch` on a subarray of STRING type. (**1.30.19**)
+
+- Function `cast` returned empty when converting a vector of STRING type to a tuple. (**1.30.19**)
+
+- When aggregating multiple INT128 columns of an in-memory table, an error “The function min for reductive operations does not support data type INT128” occurred. (**1.30.19**)
+
+- `getFunctionView` did not return some function view bodies. (**1.30.19**)
+
+- Server crashed when an empty tuple was appended to itself and then loaded. (**1.30.19**)
+
+- Server crashed when using `interval` interpolation in a SQL query, if the granularity of the data type specified for the time range in the where clause is greater than the time granularity specified by the *duration* parameter of `interval`. (**1.30.19**)
+
+- Server crashed when using the function `twindow` in a SQL query. (**1.30.19**)
+
+- `update` on a DFS table failed when the set column names did not match the original column names (including case sensitive inconsistencies). (**1.30.19**)
+
+- When the function `iterate` was included in the *metrics* of a reactive state engine and the data cleaning mechanism was enabled, if data was inserted while the historical data was being cleaned, an error "vector::_M_default_append" was reported. (**1.30.19**)
+
+- When calling `matrix([[datehour(0)],[datehour(0)]])` to create a matrix, an error "The data object for matrix function can't be string or any type" was reported. (**1.30.19**)
+
+- When specifying `countNanInf` for the parameter *aggs* of function `wj`, an error "An window join function must be an aggregate function" was reported. (**1.30.19**)
+
+- If no group was specified for `createDailyTimeSeriesEngine`, any uncalculated data from the previous day would be merged into the first window of the following day. (**1.30.19**)
+
+- The first window's calculation result across days in a daily time series engine was incorrect. Additionally, when the function `fill` was used to fill in NULL values, data outside the session was output. (**1.30.19**)
+
+- Tasks in *In-Progress* state could not be recovered during online recovery. (**1.30.19**)
+
+- Server crashed when specifying *useSystemTime*=true and `mode` for *metrics* of  `createTimeSeriesEngine`*.* (**1.30.19**)
+
+- When specifying the `tmove` or `move` function for the metrics of `createReactiveStateEngine`, the server would crash if *X* was of the STRING or SYMBOL type. (**1.30.19**)
+
+- Failed to insert data with `tableInsert` when splitting and assigning a stream table with `streamFilter`. (**1.30.19**)
+
+- The insert failure of `streamFilter` may cause session disconnection due to excessively long error messages. (**1.30.19**)
+
+- When specifying function `firstNot` or `lastNot` for the *metrics* of `createTimeSeriesEngine` or `createReactiveStateEngine` and setting *fill*=`ffill, the output did not match expectations. (**1.30.19**)
+
+- Server crashed when specifying function `mfirst` or `mlast` for the *metrics* of `createReactiveStateEngine`, and *X* was of FLOAT, SHORT, CHAR, BOOL, INT128, STRING, or SYMBOL type. (**1.30.19**)
+
+- Executing function `tableInsert` changed the atomic level of a database from 'CHUNK' to 'TRANS'. (**1.30.19**)
+
+- When specifying tm-functions for the *metrics* of `createReactiveStateEngine` and the *window* parameter of the function is set to y, M or B, the calculation result was incorrect. (**1.30.19**)
+
+- Inconsistent STRING columns between replicas after online recovery. (**1.30.19**)
+
+- When passing TIME type data to *index* of `resample` and setting *origin*=”end” and *rule*=”D”, an error "Invalid value for HourOfDay (valid values 0 - 23): 39" was reported. (**1.30.19**)
+
+- An error was reported when administrators (except the super admin) granted/denied/revoked permissions to themselves. (**1.30.19**)
+
+- Calculating `imin` or `imax` with `byRow` on a matrix with an empty row returned incorrect results. (**1.30.19**)
+
+- Function `getControllerPef` returned incorrect agent site when a controller crashed. (**1.30.19**)
+
+- When *dataSync* was not configured, an error occurred when dynamically calling the `addNode` function to add a node. (**1.30.19**)
 
 * An OOM error caused by concurrent writes, queries or calculations may lead to a server hang-up. (**1.30.18**)
 
