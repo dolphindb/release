@@ -23,7 +23,7 @@ Release Date: 2022-02-15
 [Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.21.1.zip)
 
 Version: **1.30.20** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.19
