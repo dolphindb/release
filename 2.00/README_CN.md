@@ -13,11 +13,11 @@
 
 发行日期： 2023-02-15
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.4.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.4_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.4_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.4.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.4_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.5_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.5_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.5_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.9.1.zip)|
 
 版本号： 2.00.8 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.7 和 1.30.19
@@ -576,6 +576,11 @@
 
 ### 故障修复
 
+* 查询 MVCC 表，对字符串类型列使用 order by 时，不支持同时搭配 limit 0, k（或 limit k）。（**2.00.9.5**）
+* 删除一个视图（dropFunctionView）时，由于写日志时未加锁，导致偶发宕机。 （**2.00.9.5**）
+* 等值连接（equi join，inner join）两个表，其中第一个连接列为 STRING 类型，第二个连接列为 NANOTIMESTAMP 类型时，返回结果不正确。（**2.00.9.5**）
+* 通过 loadTable 加载表时，由于对表名校验不严格，导致分级存储数据丢失。（**2.00.9.5**）
+* 禁用 SQL 的 select distinct 语句。SQL 语句中出现的 distinct 将按照函数的逻辑执行，即结果中返回的顺序不保证和原表中的相同，且列名为 distinct_xxx。（**2.00.9.5**）
 * 如果 `datanodeRestartInterval` 的设置时间小于系统预定义值100，在安全关机情况下或重启集群时，数据节点会立刻被控制节点启动。（**2.00.9.4**）
 * `toJson` 传入的 tuple 中包含数值型标量时，转换结果错误。（**2.00.9.4**）
 * 如果字典中的 value 是ANY类型的向量，则使用 toJson 转换后会出现缺失元素的情况。（**2.00.9.4**）
