@@ -19,11 +19,11 @@ Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.c
 
 Release Date: 2022-02-15
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.4_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.4_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.5.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.5_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.5_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.5.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.5_JIT.zip)
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.21.1.zip)
 
 Version: **1.30.20** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.19
@@ -1105,6 +1105,16 @@ Release Date: 2020-12-29
 * STRING longer than 65535 bytes will be automatically converted to BLOB during serialization. (**1.30.1**)
 
 ### Issues Fixed
+
+- An error occurred when using `order by` on columns of STRING type with `limit 0, k` or `limit k` on MVCC tables. (**1.30.21.5**)
+
+- When deleting a function view with `dropFunctionView`, a server crash may occur due to the absence of locking during log writing. (**1.30.21.5**)
+
+- When joining two tables with `equi join` or `inner join`, incorrect results were returned if the two matching columns are of STRING and NANOTIMESTAMP types. (**1.30.21.5**)
+
+- When loading tables with `loadTable`, data loss may occur on the cold storage tier if the table names were improperly verified. (**1.30.21.5**)
+
+- The `select distinct` statement is disabled. The keyword "distinct" is recognized as function `distinct`, i.e., the order of the elements in the result is not guaranteed to be the same as the input, and the column name is distinct_xxx. (**1.30.21.5**)
 
 - When the configuration parameter *datanodeRestartInterval* was set to a time less than 100 seconds, the data node was immediately restarted by the controller in a graceful shutdown situation or after the cluster was restarted. (**1.30.21.4**)
 
