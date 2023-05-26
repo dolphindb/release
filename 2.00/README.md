@@ -13,7 +13,7 @@ Version: **2.00.9** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.co
 
 Release Date: 2022-02-15
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.5.zip) | 
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.6.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.5_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.9.5_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.9.5.zip) |
@@ -739,6 +739,8 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- The results of DolphinDB's `ols` function are inconsistent with those of Python's `statsmodels.OLS` on Linux. (**2.00.9.6**)
 
 - An error occurred when using `order by` on columns of STRING type with `limit 0, k` or `limit k` on MVCC tables. (**2.00.9.5**)
 
