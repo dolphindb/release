@@ -576,7 +576,7 @@
 
 ### 故障修复
 
-* 在 Linux 系统下，DolphinDB 的 ols 函数计算结果和 Python statsmodels.OLS 的结果不一致。（**2.00.9.4**）
+* 在 Linux 系统下，DolphinDB 的 ols 函数计算结果和 Python statsmodels.OLS 的结果不一致。（**2.00.9.6**）
 * 查询 MVCC 表，对字符串类型列使用 order by 时，不支持同时搭配 limit 0, k（或 limit k）。（**2.00.9.5**）
 * 删除一个视图（dropFunctionView）时，由于写日志时未加锁，导致偶发宕机。 （**2.00.9.5**）
 * 等值连接（equi join，inner join）两个表，其中第一个连接列为 STRING 类型，第二个连接列为 NANOTIMESTAMP 类型时，返回结果不正确。（**2.00.9.5**）
