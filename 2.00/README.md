@@ -740,7 +740,7 @@ Release Date: 2021-07-31
 
 ### Issues Fixed
 
-- When a matrix is passed as an argument to the function `ols`, if the intermediate result is a singular matrix, the result is inconsistent with that of Python's `statsmodels.OLS` on Linux.  (**2.00.9.6**)
+- When a matrix is passed as an argument to the function `ols`, if the intermediate result is a singular matrix, the result is inconsistent with that of Python's `statsmodels.OLS`.  (**2.00.9.6**)
 
 - An error occurred when using `order by` on columns of STRING type with `limit 0, k` or `limit k` on MVCC tables. (**2.00.9.5**)
 
