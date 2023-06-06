@@ -659,8 +659,6 @@ Release Date: 2020-12-29
 
 - Modified the upper limit on the number of DFS databases and tables. (**1.30.21**)
 
-- The publisher will push streaming data to the subscriber using the TCP connection established by the subscriber. The subscriber no longer needs to provide a listening port. (**1.30.21**)
-
 - The filter condition of function `streamfilter` supports built-in functions. (**1.30.21**)
 
 - Added new parameter *sortColumns* for function `replay` to sort the data with the same timestamp. (**1.30.21**)
