@@ -1192,8 +1192,6 @@ Release Date: 2020-12-29
 
 - Server crashed when using `order by` in conjunction with `limit` to sort column “DATE (case-sensitive)” in reverse order. (**1.30.21.3**)
 
-- For a DECIMAL column being rearranged by a `pivot by` clause, an incorrect result was output when performing distributed computing such as `rowSum` on a column specified in `select`. (**1.30.21.3**)
-
 - An incorrect result was output when performing time-series aggregate functions (e.g., `pre`, `rank`, etc.) on multiple columns. (**1.30.21.3**)
 
 - The data in the in-memory table returned by the aggregation function will be changed when it was subsequently calculated by moving functions such as move. The data in the in-memory table returned by the aggregation function will be changed when it was subsequently calculated by moving functions such as `move`. (**1.30.21**)
