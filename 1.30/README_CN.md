@@ -1247,6 +1247,24 @@
 
 ### Python API
 
+  - 更新 Python API 用户手册。（**1.30.22.1**）
+  - 调整类名 tableUpsert 为 TableUpserter，与原有类名兼容。（**1.30.22.1**）
+  - 调整类名 tableAppender 为 TableAppender，与原有类名兼容。（**1.30.22.1**）
+  - 调整类名 session 为 Session，与原有类名兼容。（**1.30.22.1**）
+  - Session 和 DBConnectionPool 均新增参数 *show_output*，其用于指定是否在 Python 客户端展示脚本的输出内容。（**1.30.22.1**）
+  - TableAppender（原类名 tableAppender）, TableUpserter（原类名 tableUpsert）和 PartitionedTableAppender 新增支持写入数据时根据表结构自动进行类型转换。（**1.30.22.1**）
+  - 新增支持 Numpy 的 C order 模式。（**1.30.22.1**）
+  - 新增支持在上传 DataFrame 时，通过设置属性 __DolphinDB_Type__ 指定列类型以实现强制类型转换。（**1.30.22.1**）
+  - 新增支持 MultithreadedTableWriter 在写入流表时，若连接断开将自动进行重连。（**1.30.22.1**）
+  - 优化了部分报错信息。（**1.30.22.1**）
+  - 优化下载乱码字符串时的处理逻辑。（**1.30.22.1**）
+  - 删除了 Table 类在析构时的打印信息。（**1.30.22.1**）
+  - 若流订阅中 handler 发生错误将报错并打印异常信息。（**1.30.22.1**）
+  - 修复查询表时若添加多个 where 条件执行优先级异常的问题。（**1.30.22.1**）
+  - 修复在调用 TableAppender（原类名 tableAppender）, TableUpserter（原类名 tableUpsert）或 PartitionTableAppender 上传 BLOB, INT128, UUID 和 IPADDR 对应的 arrayVector 型的数据时提示警告信息的问题。（**1.30.22.1**）
+  - 修复流订阅中偶现提示解析消息失败的问题。（**1.30.22.1**）
+  - 修复 DBConnectionPool 在析构时未调用 shutDown 导致进程卡住的问题。（**1.30.22.1**）
+  - 修复了 TableAppender（原类名 tableAppender）, TableUpserter（原类名 tableUpsert） 和 PartitionedTableAppender 在引用 Session 或 DBConnectionPool 时，由于 Session 或 DBConnectionPool 提前析构导致无法使用的问题。（**1.30.22.1**）
   - 修复当 MultithreadedTableWriter 写入失败时，调用 getUnwrittenData 方法会导致段错误的问题。（**1.30.21.2**）
   - 修复无法下载超长 BLOB 数据（超过 64K长度）的问题。（**1.30.21.2**）
   - 修复 Mac  ARM 版本中在订阅 1.30.21、2.00.9及之后版本的 DolphinDB 时出现内存越界的问题。（**1.30.21.2**）
