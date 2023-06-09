@@ -22,11 +22,11 @@
 
 发行日期： 2023-02-15
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.5.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.5_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.5_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21.5.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21.5_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.6.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.6_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.21.6_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21.6.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.21.6_JIT.zip)
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.21.1.zip)
 
 版本号： 1.30.20 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.19
@@ -415,6 +415,7 @@
   
 ### 改进
 
+* 支持 `distinct` 关键字，用于对单个或多个字段去重。暂时不支持其与 `group by`, `context by` 或 `pivot by` 配合使用。（**1.30.21.6**）
 * `createTimeSeriesEngine`, `createDailyTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**1.30.21.4**）
 * `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**1.30.21.4**）
 * DolphinDB 的 `between and` 语句与标准 SQL 的 `between and` 语句兼容。（**1.30.21.4**）
@@ -442,7 +443,7 @@
 * 函数 `cut` 支持将数据拆分成标量。（**1.30.21**）   
 * 函数 `rowAt` 支持以数组向量为索引。（**1.30.21**）    
 * 矩阵支持以 slice 方式取行元素。（**1.30.21**）    
-* 取消了创建 tuple 时其 size 不能超过1048576的限制。（**1.30.21**）      
+* 取消了创建 tuple 时其 size 不能超过1048576的限制。（**1.30.21**）   
 * 用函数 `array` 创建 tuple 时支持默认值为 STRING 类型。（**1.30.21**）    
 * 函数 `memSize` 可以显示 any vector 的内存占用。（**1.30.21**）
 * 支持通过多线程 merge 不同分区的结果。降低了当列数较多的情况下查询最后数据合并的耗时。（**1.30.21**）    
@@ -450,7 +451,7 @@
 * 函数 `setColumnComment` 支持为 mvccTable 增加注释信息。（**1.30.21**）  
 * 矩阵支持混合使用 pair 和 vector 作为行列索引的值。（**1.30.21**）    
 * 支持在数据节点上调用权限相关的函数。（**1.30.21**）    
-* 调整了 `regularArrayMemoryLimit` 实际生效的参数值为配置值与 maxMemSize/2 中的较小值。（**1.30.21**）   
+* 调整了 `regularArrayMemoryLimit` 实际生效的参数值为配置值与 maxMemSize/2 中的较小值。（**1.30.21**）    
 * `streamFilter` 的参数 `condition` 支持传入内置函数。 （**1.30.21**）   
 * 函数 `replay` 新增参数 `sortColumns`，相同回放时间戳的数据将根据该参数指定的字段进行排序。（**1.30.21**）    
 * 支持同构 N 对 1 回放和异构流表回放数据源时的数据源的自动对齐。（**1.30.21**）
@@ -707,11 +708,22 @@
   
 ### 故障修复
 
-* 查询 MVCC 表，对字符串类型列使用 order by 时，不支持同时搭配 limit 0, k（或 limit k）。（**1.30.21.5**）
-* 删除一个视图（dropFunctionView）时，由于写日志时未加锁，导致偶发宕机。 （**1.30.21.5**）
-* 等值连接（equi join，inner join）两个表，其中第一个连接列为 STRING 类型，第二个连接列为 NANOTIMESTAMP 类型时，返回结果不正确。（**1.30.21.5**）
-* 通过 loadTable 加载表时，由于对表名校验不严格，导致分级存储数据丢失。（**1.30.21.5**）
-* 禁用 SQL 的 select distinct 语句。SQL 语句中出现的 distinct 将按照函数的逻辑执行，即结果中返回的顺序不保证和原表中的相同，且列名为 distinct_xxx。（**1.30.21.5**）
+* 修复在同时满足以下条件时，server 重启会产生函数视图与 module 函数名冲突的问题：
+
+  * 单节点模式
+  * 添加 module 中的函数到 functionView 后再删除该函数视图
+  * 配置项 `preloadModules` 指定了预加载该 module
+
+  同时优化了在其它情况下，当函数视图与 module 函数发生冲突时的报错信息。（**1.30.21.6**）
+* 服务器与客户端通过 SSL 通讯时，如果从服务器传输到客户端的数据量很大，可能会导致会话断开连接。（**1.30.21.6**）
+* 在集群模式且设置数据库为 atomic='CHUNK' 的情况下，对于同一个数据库下分区数据分布在不同节点上的不同表进行连接时，结果有时不正确。（**1.30.21.6**）
+* 状态引擎未处理 metrics 中的用户自定义函数的命名空间。（**1.30.21.6**）
+* 通过 `mskew` 或 `mkurtosis` 计算的数据中，若某个数据列连续存在相同值，且相同值的个数大于窗口长度（window），则计算结果不正确。（**1.30.21.6**）
+* 查询 MVCC 表，对字符串类型列使用 `order by` 时，不支持同时搭配 limit 0, k（或 limit k）。（**1.30.21.5**）
+* 删除一个视图（`dropFunctionView`）时，由于写日志时未加锁，导致偶发宕机。 （**1.30.21.5**）
+* 等值连接（`equi join`, `inner join`）两个表，其中第一个连接列为 STRING 类型，第二个连接列为 NANOTIMESTAMP 类型时，返回结果不正确。（**1.30.21.5**）
+* 通过 `loadTable` 加载表时，由于对表名校验不严格，导致分级存储数据丢失。（**1.30.21.5**）
+* 禁用 SQL 的 `select distinct` 语句。SQL 语句中出现的 `distinct` 将按照函数的逻辑执行，即结果中返回的顺序不保证和原表中的相同，且列名为 distinct_xxx。（**1.30.21.5**）
 * 如果 `datanodeRestartInterval` 的设置时间小于系统预定义值100，在安全关机情况下或重启集群时，数据节点会立刻被控制节点启动。（**1.30.21.4**）
 * `toJson` 传入的 tuple 中包含数值型标量时，转换结果错误。（**1.30.21.4**）
 * 如果字典中的 value 是ANY类型的向量，则使用 toJson 转换后会出现缺失元素的情况。（**1.30.21.4**）
@@ -1101,9 +1113,9 @@
 
 * JDBC 插件
 
-    * 方法 getObject 新增支持日期时间类型 LocalDate, LocalTime, LocalDateTime, java.util.Date, Timestamp。（**1.30.21.4**）  
+    * 方法 getObject 新增支持日期时间类型 LocalDate, LocalTime, LocalDateTime, java.util.Date, Timestamp。（**1.30.21.4**）
     * 修复连接 DolphinDB 时若指定 database 和 tableName，在断开重连后出现查询数据异常的问题。（**1.30.21.4**）
-    * 修复 JDBC PrepareStatement 使用 setString() 时存在字符串类型转换的问题。 （**1.30.21.4**）
+    * 修复 JDBC PrepareStatement 使用 setString() 时存在字符串类型转换的问题。（**1.30.21.4**）
     * 修复了执行 SQL 语句时，语句中与关键字相同的字符串被转成小写的问题。 （**1.30.21.3**）
     * 修复若 URL 设置的 databasePath 中包含无权限的表，则出现报错且无法连接的问题。（**1.30.21.1**）
     * 新增连接属性 tableName，可以加载指定的表。（**1.30.21.1**）

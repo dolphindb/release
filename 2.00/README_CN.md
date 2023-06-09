@@ -13,11 +13,11 @@
 
 发行日期： 2023-02-15
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.6.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.5_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.5_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.5.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.5_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.7_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.9.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.9.7_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.9.1.zip)|
 
 版本号： 2.00.8 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.7 和 1.30.19
@@ -283,6 +283,7 @@
 
 ### 改进
 
+* 支持 `distinct` 关键字，用于对单个或多个字段去重。暂时不支持其与 `group by`, `context by` 或 `pivot by` 配合使用。（**2.00.9.7**）
 * `createTimeSeriesEngine`, `createDailyTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**2.00.9.4**）
 * `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**2.00.9.4**）
 * DolphinDB 的 `between and` 语句与标准 SQL 的 `between and` 语句兼容。（**2.00.9.4**）
@@ -576,12 +577,23 @@
 
 ### 故障修复
 
+* 修复在同时满足以下条件时，server 重启会产生函数视图与 module 函数名冲突的问题：
+
+  * 单节点模式
+  * 添加 module 中的函数到 functionView 后再删除该函数视图
+  * 配置项 `preloadModules` 指定了预加载该 module
+
+  同时优化了在其它情况下，当函数视图与 module 函数发生冲突时的报错信息。（**2.00.9.7**）
+* 服务器与客户端通过 SSL 通讯时，如果从服务器传输到客户端的数据量很大，可能会导致会话断开连接。（**2.00.9.7**）
+* 在集群模式且设置数据库为 atomic='CHUNK' 的情况下，对于同一个数据库下分区数据分布在不同节点上的不同表进行连接时，结果有时不正确。（**2.00.9.7**）
+* 状态引擎未处理 metrics 中的用户自定义函数的命名空间。（**2.00.9.7**）
+* 通过 `mskew` 或 `mkurtosis` 计算的数据中，若某个数据列连续存在相同值，且相同值的个数大于窗口长度（window），则计算结果不正确。（**2.00.9.7**）
 * DolphinDB 的 ols 函数输入参数为矩阵时，若中间结果是奇异矩阵，则最后的计算结果和 Python statsmodels.OLS 的结果不一致。（**2.00.9.6**）
-* 查询 MVCC 表，对字符串类型列使用 order by 时，不支持同时搭配 limit 0, k（或 limit k）。（**2.00.9.5**）
-* 删除一个视图（dropFunctionView）时，由于写日志时未加锁，导致偶发宕机。 （**2.00.9.5**）
-* 等值连接（equi join，inner join）两个表，其中第一个连接列为 STRING 类型，第二个连接列为 NANOTIMESTAMP 类型时，返回结果不正确。（**2.00.9.5**）
-* 通过 loadTable 加载表时，由于对表名校验不严格，导致分级存储数据丢失。（**2.00.9.5**）
-* 禁用 SQL 的 select distinct 语句。SQL 语句中出现的 distinct 将按照函数的逻辑执行，即结果中返回的顺序不保证和原表中的相同，且列名为 distinct_xxx。（**2.00.9.5**）
+* 查询 MVCC 表，对字符串类型列使用 `order by` 时，不支持同时搭配 limit 0, k（或 limit k）。（**2.00.9.5**）
+* 删除一个视图（`dropFunctionView`）时，由于写日志时未加锁，导致偶发宕机。 （**2.00.9.5**）
+* 等值连接（`equi join`, `inner join`）两个表，其中第一个连接列为 STRING 类型，第二个连接列为 NANOTIMESTAMP 类型时，返回结果不正确。（**2.00.9.5**）
+* 通过 `loadTable` 加载表时，由于对表名校验不严格，导致分级存储数据丢失。（**2.00.9.5**）
+* 禁用 SQL 的 `select distinct` 语句。SQL 语句中出现的 `distinct` 将按照函数的逻辑执行，即结果中返回的顺序不保证和原表中的相同，且列名为 distinct_xxx。（**2.00.9.5**）
 * 如果 `datanodeRestartInterval` 的设置时间小于系统预定义值100，在安全关机情况下或重启集群时，数据节点会立刻被控制节点启动。（**2.00.9.4**）
 * `toJson` 传入的 tuple 中包含数值型标量时，转换结果错误。（**2.00.9.4**）
 * 如果字典中的 value 是ANY类型的向量，则使用 toJson 转换后会出现缺失元素的情况。（**2.00.9.4**）
