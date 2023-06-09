@@ -393,6 +393,8 @@ Release Date: 2021-07-31
 
 ### Improvements
 
+- Added keyword `distinct` to eliminate duplicate records. It is currently not supported to be used with `group by`, `context by`, or `pivot by`. (**2.00.9.7**)
+
 - The *outputElapsedInMicroseconds* parameter of function `createTimeSeriesEngine` is renamed to *outputElapsedMicroseconds*. (**2.00.9.4**)
 
 - The fields "createTime" and "lastActiveTime" returned by function `getSessionMemoryStat` are now displayed in local time. (**2.00.9.4**)
@@ -739,6 +741,22 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- A function name conflict occurred for the function view and module function at the server restart when the following conditions were satisfied at the same time (**2.00.9.7**):
+    - in a standalone mode;
+    - the function view was dropped after the module function was added to it;
+    - the function defined in the module was passed to the addFunctionView, and the function view was dropped then;
+    - the module was specified in the configuration parameter preloadModules to be preloaded.
+  
+  The error messages reported for other conflicts were enhanced.
+
+- In a cluster mode, when SSL was enabled (*enableHTTPS=true*) for connection, the session may be disconnected if a large amount of data was transferred from the server to the client. (**2.00.9.7**)
+
+- In a cluster mode, when joining tables under the same database (*atomic* = 'CHUNK') but on different nodes, incorrect results may be returned. (**2.00.9.7**)
+
+- The reactive state engine did not handle the namespaces defined in *metrics*. (**2.00.9.7**)
+
+- Incorrect results were returned by function `mskew` or `mkurtosis` if the input *X* contains consecutive identical values and the number of identical values is greater than *window*. (**2.00.9.7**)
 
 - When a matrix is passed as an argument to the function `ols`, if the intermediate result is a singular matrix, the result is inconsistent with that of Python's `statsmodels.OLS`.  (**2.00.9.6**)
 
