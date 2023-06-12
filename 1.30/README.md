@@ -1679,7 +1679,44 @@ Release Date: 2020-12-29
 
 ### Python
 
+- Bugfix: Fixed an issue where a TableAppender (previously known as: tableAppender), TableUpserter (previously known as: tableUpsert), or PartitionedTableAppender failed to obtain a reference to a Session or a DBConnectionPool as the object had already been destructed. (**1.30.22.1**)
+
+- Bugfix: Fixed an issue where DBConnectionPool was destructed without calling `shutDown()`, causing the process to get stuck. (**1.30.22.1**)
+
+- Bugfix: Fixed occasional message parsing failures when subscribing to data streams. (**1.30.22.1**)
+
+- Bugfix: Removed unnecessary warning messages when uploading array vectors of BLOB, INT128, UUID, or IPADDR type using  a TableAppender (previously known as: tableAppender), TableUpserter (previously known as: tableUpsert), or PartitionedTableAppender. (**1.30.22.1**)
+
+- Improvement: Enhanced message texts. (**1.30.22.1**)
+
+- Bugfix: Fixed an issue with the order of execution for queries containing multiple “where“ conditions. (**1.30.22.1**)
+
+- Bugfix: Fixed memory leak when uploading DataFrames containing DECIMAL columns. (**1.30.22.1**)
+
+- New feature: The MultithreadedTableWriter now supports automatic reconnection when writing to stream tables. (**1.30.22.1**)
+
+- Improvement: The class “session” has been renamed to “Session”. The old class name is still supported for backwards compatibility. (**1.30.22.1**)
+
+- Improvement: The class previously named “tableAppender” has been renamed to “TableAppender”. The old class name is still supported for backwards compatibility. (**1.30.22.1**)
+
+- Improvement: The class previously named “tableUpsert” has been renamed to “TableUpserter”. The old class name is still supported for backwards compatibility. (**1.30.22.1**)
+
+- New feature: A `__DolphinDB_Type__` attribute can now be specified when uploading DataFrames to explicitly cast columns into particular DolphinDB data types. (**1.30.22.1**)
+
+- New feature: The Session and DBConnectionPool classes now support a new *show_output* parameter to specify whether to print the output of script executions in the Python terminal. (**1.30.22.1**)
+
+- New feature: Support for uploading and downloading NumPy data in C order. (**1.30.22.1**)
+
+- Improvement: An error message will be reported if something goes wrong with the handler during stream data subscription. (**1.30.22.1**)
+
+- Improvement: The logic for handling garbled or corrupted string data has been improved. (**1.30.22.1**)
+
+- New feature: Classes TableAppender (previously known as: tableAppender), TableUpserter (previously known as: tableUpsert), and PartitionedTableAppender now support auto data type conversion based on the table schema. (**1.30.22.1**)
+
+- Improvement: The message that was previously printed when a Table object is destructed has been removed. (**1.30.22.1**)
+
 - pandas version 1.0.0 or higher is now required as a dependency. （**1.30.21.2**）
+
 - Fixed a segmentation error when calling the `getUnwrittenData` method after the MultithreadedTableWriter failed to insert data. （**1.30.21.2**）
 
 - Downloading of BLOB data larger than 64 KB is now supported. （**1.30.21.2**）
