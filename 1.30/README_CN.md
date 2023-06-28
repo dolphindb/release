@@ -1113,6 +1113,8 @@
 
 * JDBC 插件
 
+    * 新增支持 DECIMAL128 数据类型。（**1.30.22.1**）
+    * 新增支持连接属性 sqlStd，用于指定解析 SQL 语句的语法。（**1.30.22.1**）
     * 方法 getObject 新增支持日期时间类型 LocalDate, LocalTime, LocalDateTime, java.util.Date, Timestamp。（**1.30.21.4**）
     * 修复连接 DolphinDB 时若指定 database 和 tableName，在断开重连后出现查询数据异常的问题。（**1.30.21.4**）
     * 修复 JDBC PrepareStatement 使用 setString() 时存在字符串类型转换的问题。（**1.30.21.4**）
