@@ -1137,6 +1137,16 @@
 
 ### GUI
 
+  * 新增支持 DECIMAL128 数据。（**1.30.22.1**）
+  * 语言选择下拉框新增 Oracle、MySQL 选项。（**1.30.22.1**）
+  * 新增支持 select Null 语句。（**1.30.22.1**）
+  * 新增支持以下关键字高亮。（**1.30.22.1**）
+
+JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE、create database、inner join、sub、full outer join、right outer join、left outer join、drop table、if exists 、drop database、update...set、alter xxx drop/rename/add、create table、nulls first
+
+  * 新增 refresh 选项 ，支持刷新功能。（**1.30.22.1**）
+  * 新增加密同步选项“Synchronize module to server”，支持同步 module 到 server 并保存为加密 .dom 文件。（**1.30.22.1**）
+  * 优化了 #include 导入脚本的逻辑。（**1.30.22.1**）
   * 修复了同步 modules 时目标路径错误的问题。（**1.30.21.3**）
   * 支持将内存表以 DolphinDB 私有格式保存到本地或上传至服务器。(**1.30.21.1**)
   * 支持部分标准 SQL 的关键字高亮。（**1.30.21.1**）
