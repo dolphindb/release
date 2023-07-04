@@ -1496,6 +1496,21 @@ Release Date: 2020-12-29
 
 ### GUI
 
+- Added support for DECIMAL128 data type. (**1.30.22.1**)
+
+- Added "Oracle" and "MySQL" options to the language dropdown for SQL parsing. (**1.30.22.1**)
+
+- Added "refresh" option to refresh variables. (**1.30.22.1**)
+
+- Added "Synchronize module to server" option to synchronize a module to server and save it as an encrypted *.dom* file. (**1.30.22.1**)
+
+- Support `select NULL` statement.  (**1.30.22.1**)
+
+- The following keywords are highlighted  (**1.30.22.1**):
+JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, create database, inner join, sub, full outer join, right outer join, left outer join, drop table, if exists , drop database, update...set, alter xxx drop/rename/add, create table, and nulls first
+
+- Optimized the script import logic of `#include`. (**1.30.22.1**)
+
 - Fixed an issue of incorrect target path when synchronizing modules. (**1.30.21.3**)
 
 - Enhanced syntax highlighting for some SQL keywords. (**1.30.21.1**)
