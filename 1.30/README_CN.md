@@ -1228,6 +1228,12 @@ JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE
 
 ### Java API
 
+  - 新功能：新增开启高可用后，API 将优先随机连接低负载节点。（**1.30.22.2**）
+  - 新功能：部分数据类型新增获取数值的方法。（**1.30.22.2**）
+
+    BasicDouble, BasicFloat, BasicInt, BasicLong, BasicShort, BasicByte
+    
+  - 功能优化：升级 FastJson 版本至2.0.33。（**1.30.22.2**）
   - 新功能：新增支持 DECIMAL128 数据类型。（**1.30.22.1**）
   - 新功能：DBConnection 方法新增参数 *sqlStd*，用于解析 SQL 语句。（**1.30.22.1**）
   - 功能优化：优化了 BasicDBTask 的性能。（**1.30.22.1**）
