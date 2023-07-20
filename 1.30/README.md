@@ -690,7 +690,7 @@ Release Date: 2020-12-29
   
 - When importing a table using function `loadTextEx`, an error will be reported if the table schema does not match the schema of the target database. (**1.30.22**)
   
-- Added check for the *schema* parameter of function `loadTextEx`, i.e., whether the specified table is empty, and the "name" and "type" column is of STRING type. (**1.30.22**)
+- Added check for the *schema* parameter of function `loadTextEx`. Since this version, the table specified by schema MUST NOT be empty, and the "name" and "type" columns must be of STRING type. (**1.30.22**)
   
 - Added new parameter *tiesMethod*, which is used to process the group of records with the same value, for the following moving TopN functions: `mstdTopN`, `mstdpTopN`, `mvarTopN`, `mvarpTopN`, `msumTopN`, `mavgTopN`, `mwsumTopN`, `mbetaTopN`, `mcorrTopN`, `mcovarTopN`. (**1.30.22**)
   
