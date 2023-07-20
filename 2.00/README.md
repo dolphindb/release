@@ -473,6 +473,8 @@ Release Date: 2021-07-31
 
 ### Improvements
 
+- Configuration parameters *localExecutors* and *maxDynamicLocalExecutor* were discarded. (**2.00.10**)
+
 - Functions `window` and `percentChange` can be used as state functions in the reactive state engine. (**2.00.10**)
   
 - Support JOIN on multiple partitioned tables. (**2.00.10**)
