@@ -17,7 +17,7 @@
 
 Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.20
 
-Release Date: 2022-02-15
+Release Date: 2023-02-15
 
 [Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.6.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.6_JIT.zip) | 
