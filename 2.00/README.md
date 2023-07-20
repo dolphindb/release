@@ -539,7 +539,7 @@ Release Date: 2021-07-31
   
 - When importing a table using function `loadTextEx`, an error will be reported if the table schema does not match the schema of the target database. (**2.00.10**)
   
-- Added check for the *schema* parameter of function `loadTextEx`. It now ensures that the specified table is a non-empty table, and that the "name" and "type" columns are of STRING type. (**2.00.10**)
+- Added check for the *schema* parameter of function `loadTextEx`. Since this version, the table specified by schema MUST NOT be empty, and the "name" and "type" columns must be of STRING type. (**2.00.10**)
   
 - An error will be reported when importing a table via function `loadTextEx` to an OLAP database with tables containing array vectors or BLOB columns. (**2.00.10**)
   
