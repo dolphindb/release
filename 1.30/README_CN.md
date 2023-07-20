@@ -1,6 +1,7 @@
 # DolphinDB 发行说明
 
 - [DolphinDB 发行说明](#dolphindb-发行说明)
+  - [版本兼容性说明列表](#版本兼容性说明列表)
   - [DolphinDB 服务器](#dolphindb-服务器)
     - [新功能](#新功能)
     - [改进](#改进)
@@ -16,7 +17,22 @@
     - [C# API](#c-api-1)
     - [Go API](#go-api)
 
+## 版本兼容性说明列表
+
+详见 [版本兼容性说明列表](./../compatibility_lists_CN.md/#13022-版本)
+
 ## DolphinDB 服务器
+
+版本号： 1.30.22 &nbsp;&nbsp;&nbsp; [一级兼容](./../DolphinDB_compatibility_levels.md/#32-一级兼容性标准) 1.30.21
+
+发行日期： 2023-07-20
+
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22_JIT.zip)
+[Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.22.zip)
 
 版本号： 1.30.21 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.20
 
@@ -233,6 +249,28 @@
 
 ### 新功能
 
+* 新增配置项 *enableCoreDump*，设置是否生成 coredump。仅支持 Linux 系统。（**1.30.22**）
+* 新增配置项 *disableCoreDumpOnShutdown*，设置安全关机时是否产生 coredump。仅支持 Linux 系统。（**1.30.22**）
+* 新增配置项 *allowMissingPartitions*，设置是否忽略新增数据中所包含的分区方案外的数据。（**1.30.22**）
+* 新增配置项 *volumeUsageThreshold*，设置数据节点磁盘卷的可使用率。（**1.30.22**）
+* 新增函数 `writeLogLevel`，能够将指定级别的文本写入日志文件中。（**1.30.22**）
+* 新增函数 `sessionWindow`，对一个时间序列根据会话时间间隔进行分组。（**1.30.22**）
+* 新增函数 `summary`，生成输入数据的汇总统计信息，包含最小值、最大值、计数、均值、标准差和指定的百分位数。（**1.30.22**）
+* 新增函数 `encodeShortGenomeSeq`, `decodeShortGenomeSeq` 分别用于对 DNA 序列进行编解码。同时新增函数 `genShortGenomeSeq`，可在滑动窗口内进行编码。（**1.30.22**）
+* 新增函数 `GramSchmidt`，实现施密特正交化计算。（**1.30.22**）
+* 新增与 `lasso` 功能等价的函数 `lassoBasic`，其参数支持输入向量。（**1.30.22**）
+* 新增26个 TopN 系列函数（**1.30.22**）
+    * m系列：`mskewTopN`, `mkurtosisTopN`
+    * cum系列：`cumsumTopN`, `cumavgTopN`, `cumstdTopN`, `cumstdpTopN`, `cumvarTopN`, `cumvarpTopN`, `cumbetaTopN`, `cumcorrTopN`, `cumcovarTopN`, `umwsumTopN`, `cumskewTopN`, `cumkurtosisTopN`
+    * tm系列：`tmsumTopN`, `tmavgTopN`, `tmstdTopN`, `tmstdpTopN`, `tmvarTopN`, `tmvarpTopN`, `tmbetaTopN`, `tmcorrTopN`, `tmcovarTopN`, `tmwsumTopN`, `tmskewTopN`, `tmkurtosisTopN`
+* 新增 `initcap` 函数，将字符串的第一个字母变成大写，其他字母变小写。（**1.30.22**）
+* 新增三次样条插值函数 `splrep` 和 `splev`。（**1.30.22**）
+* 新增函数 `scs`，用于求解一次或二次规划函数在线性约束条件下的最优解。（**1.30.22**）
+* 新增函数 `temporalSeq`，按指定的间隔生成时间序列。（**1.30.22**）
+* 新增函数 `base64Encode和base64Decode`，支持 base64 加密与解密。（**1.30.22**）
+* 新增函数 `addFunctionTypeInferenceRule`，用于在 JIT 中添加自定义函数类型推导规则。（**1.30.22**）
+* JIT 支持 COMPLEX 类型。
+* 新增创建流数据多线程分发引擎的函数 `createStreamDispatchEngine`。（**1.30.22**）
 * 新增配置项 `logicOrIgnoreNull`，设置 `or` 函数在操作数中包含 NULL 时的处理方式。默认值为 true：当另一个操作数非零或为零时，返回 true 或 false。若需要 `or` 函数的行为和旧版本保持一致，则应该将该配置设置为 false。（**1.30.21.4**）
 * `case when` 语句后支持使用 `is null` 判断。（**1.30.21.4**）
 * 对 MVCC 表，新增配置项 `mvccCheckpointThreshold` 用于设置创建检查点的操作次数阈值；新增函数 `forceMvccCheckpoint`，用于手动触发创建 MVCC 表的检测点。（**1.30.21.3**）
@@ -415,6 +453,44 @@
   
 ### 改进
 
+* 配置项 `localExecutors` 和 `maxDynamicLocalExecutor` 停止使用。（**1.30.22**）
+* 响应式状态引擎新增支持状态函数 `window` 和 `percentChange`。（**1.30.22**）
+* 支持多个分区表之间进行连接。（**1.30.22**）
+* 优化了通过 `dropTable` 函数删除一个具有大量分区的表的性能。（**1.30.22**）
+* SQL 相关的关键词支持全部大写或全部小写。（**1.30.22**）
+* 支持使用逗号（,）操作符实现 `CROSS JOIN` 连接。例如：`select * from table1, table2`。（**1.30.22**）
+* SQL 语句支持换行。但由多个词组成的关键字，比如 `ORDER BY`, `GROUP BY`, `UNION ALL`, `INNER JOIN` 等不可拆分换行。（**1.30.22**）
+* SQL中支持运算符 `<>`，行为等价于 `!=`。（**1.30.22**）
+* SQL 支持 `NOT LIKE` 关键字。（**1.30.22**）
+* `sqlDS` 作用于对按 DATEHOUR 值分区的分布式表时，按日期进行过滤查询时，没有进行分区剪枝。（**1.30.22**）
+* `getRecoveryTaskStatus` 函数的返回值 Status 中的 Finish 改成 Finished，Abort 改成 Aborted。（**1.30.22**）
+* `HINT_EXPLAIN` 在 `GROUP BY` 部分，当分组算法为 “sort” 时，添加了 *inplaceOptimization* 和 *optimizedColumns* 字段，显示相关优化信息（**1.30.22**）
+* `rename!`, `replaceColumn!`, `dropColumns!` 函数不再对列名大小写敏感。（**1.30.22**）
+* `lasso`, `elasticNet` 新增参数 *swColName* 和 *checkInput*，分别用于指定样本权重列和是否对参数进行合法性验证。`ridge` 新增参数了 *swColName*。（**1.30.22**）
+* `qclp` 新增参数 *x0*, *c*, *eps* 和 *alpha*，分别用于指定绝对值的约束条件、求解精度和松弛参数。（**1.30.22**）
+* `loadText`，`pLoadText`, `extractTextSchema` 等函数，支持加载一条记录中包含多个换行符的数据文件。（**1.30.22**）
+* 函数 `loadText`, `pLoadText`, `loadTextEx`, `textChunkDS`, `extractTextSchema` 的 *delimiter* 参数可以指定多个字符。（**1.30.22**）
+* 通过 `loadTextEx` 导入数据表时，当导入的数据表各列类型与数据库表的类型不匹配时，增加报错提示。（**1.30.22**）
+* 如下 TopN 系列函数新增参数 *tiesMethod*，可以指定排序中存在多个相同值时的处理方式：`mstdTopN`, `mstdpTopN`, `mvarTopN`, `mvarpTopN`,`msumTopN`, `mavgTopN`, `mwsumTopN`, `mbetaTopN`, `mcorrTopN`, `mcovarTopN`。（**1.30.22**）
+* 提升 `knn` 函数的预测速度。（**1.30.22**）
+* 时序聚合引擎（`createTimeSeriesEngine` 和 `createDailyTimeSeriesEngine`）支持输出 array vector 类型数据列。（**1.30.22**）
+* 优化状态响应引擎 (ReactiveStateEngine) 中 `moving` 函数性能。（**1.30.22**）
+* 异常检测引擎（`createAnomalyDetectionEngine`）的 *keyColunm* 参数支持指定多个字段。（**1.30.22**）
+* `createWindowJoinEngine` 和 `createAsOfJoinEngine` 新增参数 *sortByTime*，用于设置数据是否在全局范围内按时间顺序进行输出。（**1.30.22**）
+* 支持通过 `share` 函数或语句将流计算引擎共享，以支持对其并发写入。
+* windowJoin 引擎（`createWindowJoinEngine`）因插入数据类型不对（要求插入 SYMBOL 类型，而实际插入 INT）导致插入失败时，增加报错提示。（**1.30.22**）
+* JIT 支持运算符 join（`<-`）。（**1.30.22**）
+* JIT 版本的 `isort` 函数，支持由多个等长向量组成的元组作为参数。（**1.30.22**）
+* JIT 中 `if` 表达式支持使用运算符 `in`。（**1.30.22**）
+* JIT 中向量支持使用布尔数组进行索引。（**1.30.22**）
+* 支持脚本内一行有多段如 /\**/ 的注释。（**1.30.22**）
+* `stringFormat` 函数新增以下功能：支持类型匹配，格式化对齐，指定小数输出位数，进制转换。（**1.30.22**）
+* `concat` 函数的第二个参数可以为空。（**1.30.22**）
+*  `take` 函数支持输入元组或表；`stretch` 函数支持输入矩阵或表。（**1.30.22**）
+*  函数 `in` 和 `find` 支持单列 table。（**1.30.22**）
+*  配置项 *moduleDir* 指定为相对目录时，系统寻找模块的默认路径为 *homeDir/modules*。（**1.30.22**）
+*  `in`, `binsrch`, `find`, `asof` 函数的返回值形式与入参 Y 的形式保持一致。（**1.30.22**）
+*  当 `rank` 输入 Any Vector 类型参数时，增加报错提示。（**1.30.22**）
 * 支持 `distinct` 关键字，用于对单个或多个字段去重。暂时不支持其与 `group by`, `context by` 或 `pivot by` 配合使用。（**1.30.21.6**）
 * `createTimeSeriesEngine`, `createDailyTimeSeriesEngine` 的耗时统计参数由 "outputElapsedInMicroseconds" 修正为 "outputElapsedMicroseconds"。（**1.30.21.4**）
 * `getSessionMemoryStat` 函数返回的 createTime 和 lastActiveTime 字段，由零时区时间改为当前时区的时间。（**1.30.21.4**）
@@ -708,6 +784,32 @@
   
 ### 故障修复
 
+* 当查询分布式表的数据量比较大时，若查询语句中使用了 `TOP` 和 `GROUP BY`，则可能报错找不到某列。（**1.30.22**）
+* SQL 查询时报错找不到某个列，但列名可能不正确。（**1.30.22**）
+* 向列数较多的分布式表的一个分区写入较多数据时，可能出现因写入失败而导致系统崩溃的问题。（**1.30.22**）
+* 并发加载和删除同一个数据库下的不同表后，再通过 `loadTable` 加载一个表，可能报找不到 *.tbl* 文件的错误。（**1.30.22**）
+* 在聚合函数中无法用 `head` 和 `tail` 函数。此为 1.30.18 引入的问题。（**1.30.22**）
+* 对维度表通过 `renameTable` 修改表名的同时进行查询，会导致死锁。（**1.30.22**）
+* 当分区个数过多时，SQL 查询通过 `BETWEEN AND` 进行剪枝操作会报错：`The number of partitions [xxxxx] relevant to the query is too large. `。（**1.30.22**）
+* `CASE WHEN` 语句中若使用运算、函数，会导致服务器崩溃。（**1.30.22**）
+* SQL 查询时使用 `DISTINCT` 关键字，在某些场景下可能结果不正确。（**1.30.22**）
+* 当查询采用 VALUE 或 RANGE 分区的分布式表时，若 `SELECT` 语句中的分区列使用了时间转换函数，并且在 `GROUP BY` 语句中对该列也使用了相同的时间函数，同时取了与 `SELECT` 语句中字段名称不同的别名，导致查询结果错误。（**1.30.22**）
+* 通过 SQL `DELETE` 语句删除数据时，若相关分区所有副本都下线，则会报错： `chunktype mismatched for path`。（**1.30.22**）
+* local executor 在进行任务调度时可能产生死锁。（**1.30.22**）
+* 响应式状态引擎中使用 JIT 用户自定义函数，当单次写入大量数据时，输出结果不正确。（**1.30.22**）
+* 多个节点同时执行 `unsubscribeTable` 时，可能出现死锁。（**1.30.22**）
+* 对持久化流表并发进行追加数据和保存流表，会出现 server 崩溃。（**1.30.22**）
+* `createWindowJoinEngine` 的 *metrics* 中若使用了列的别名，则聚合计算的结果错误。（**1.30.22**）
+* 通过 `DROP table` 语句删除流表，出现该流表无法被删除，也无法被取消订阅。（**1.30.22**）
+* 修复了一些语法（比如 "/" == "a"）解析的问题。（**1.30.22**）
+* 当 `ols` 第二个参数全是0时，输出的结果会多一列。（**1.30.22**）
+* `wj` 的 *aggs* 参数输入不规范时，因解析失败而导致 server crash。（**1.30.22**）
+* `expr` 函数中若传入了 DATEHOUR 类型，则结果不正确。（**1.30.22**）
+* *webLoginRequired* 启用时 web 无法正常加载。（**1.30.22**）
+* 使用 `cast` 转换 SYMBOL 数据时结果不正确。（**1.30.22**）
+* `nullFill` 对 `bucket` 函数返回值中的空值填充失败。（**1.30.22**）
+* 自定义函数中使用 `twindow` 调用了一个自定义匿名聚合函数，出现报错：`func must be an aggregate function.`。（**1.30.22**）
+* 启动 DolphinDB 进程时通过 *run* 参数指定运行脚本，若脚本包含 `submitJob`，则会导致 server 崩溃。（**1.30.22**）
 * 修复在同时满足以下条件时，server 重启会产生函数视图与 module 函数名冲突的问题：
 
   * 单节点模式
@@ -1142,7 +1244,7 @@
   * 新增支持 select Null 语句。（**1.30.22.1**）
   * 新增支持以下关键字高亮。（**1.30.22.1**）
 
-JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE、create database、inner join、sub、full outer join、right outer join、left outer join、drop table、if exists 、drop database、update...set、alter xxx drop/rename/add、create table、nulls first
+    JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE、create database、inner join、sub、full outer join、right outer join、left outer join、drop table、if exists 、drop database、update...set、alter xxx drop/rename/add、create table、nulls first
 
   * 新增 refresh 选项 ，支持刷新功能。（**1.30.22.1**）
   * 新增加密同步选项“Synchronize module to server”，支持同步 module 到 server 并保存为加密 .dom 文件。（**1.30.22.1**）
@@ -1170,6 +1272,14 @@ JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE
     
   > 新功能
       
+  * 通过 WEB 连接数据库时，增加 DolphinDB License 过期预警的提示弹窗。（**1.30.22**）
+  * 通过界面方式建表时，数据列的数据类型中增加 DECIMAL128 类型。（**1.30.22**）
+  * 增加通过界面方式创建数据库、数据表的功能。（**1.30.22**）
+  * 数据库界面可以展示系统中所有数据库、数据表（包含表结构，列、分区）等内容。（**1.30.22**）
+  * 编辑器界面增加执行代码、代码地图和回车补全设置按键。（**1.30.22**）
+  * 支持 `SELECT NULL` 语句。（**1.30.22**）
+  * 支持 SQL 关键字以大写形式使用。（**1.30.22**）
+  * 支持创建并显示 DECIMAL 数据类型。（**1.30.22**）
   * 编辑器顶栏增加代码地图、回车补全配置，显示代码执行状态、支持点击取消执行中的作业。（**1.30.21**）
   * 增加复制行、删除行功能。（**1.30.21**）
   * 用户在字典中可选中文本。（**1.30.21**）
@@ -1184,6 +1294,16 @@ JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE
   
   > 改进
 
+  * 优化右上角版本信息/节点信息菜单的显示样式。（**1.30.22**）
+  * 在数据库浏览器面点击展开表的同时，在数据浏览界面展示表内容。（**1.30.22**）
+  * 数据浏览界面中限制表格、向量、字典中的字符串可显示的最大长度为10000 个。（**1.30.22**）
+  * 控制节点和数据节点配置界面补全了所有可用的配置选项。（**1.30.22**）
+  * `regularArrayMemoryLimit` 配置参数的输入方式修改为输入框。（**1.30.22**）
+  * 取消参数配置界面对部分参数输入值的限制。（**1.30.22**）
+  * 在节点配置界面，若配置项的值为空，则不会将该配置写入配置文件。（**1.30.22**）
+  * 取消在功能面板中展示文件系统列表，并将文件系统功能整合到交互编程中的数据库中。（**1.30.22**）
+  * 日志浏览器调整至网页右边；数据浏览器调整至网页下方。（**1.30.22**）
+  * 日志浏览器中最多可显示 100000 行日志。（**1.30.22**）
   * 布局优化，表格移至底部以显示更多列。（**1.30.21**）
   * 代码编辑器统一改为自动保存，无需手动保存。（**1.30.21**）
   * 优化了页面加载速度。（**1.30.21**）
@@ -1209,6 +1329,15 @@ JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE
 
   > Bug Fix
   
+  * 数据库浏览界面中的维度表菜单下会显示分区。（**1.30.22**）
+  * 在未登录状态下，启动数据节点却没有弹框提示需要登录。（**1.30.22**）
+  * 当查询包含 DATE 类型数据的表时，在数据浏览界面，DATE 类型的 NULL 显示为 'null' 而不是空。（**1.30.22**）
+  * 向量中若包含单独的符号 `，则编辑器中部分文本的颜色显示不正确。（**1.30.22**）
+  * 在数据库浏览界面下，array vector 类型的列不会在列菜单中显示。（**1.30.22**）
+  * 本地变量中点击空的 SYMBOL 变量，会报错。（**1.30.22**）
+  * 日志浏览器和编辑器中的字体显示非等宽。（**1.30.22**）
+  * 当本地变量过多时，由于本地变量界面没有滚动条，导致变量溢出到共享变量界面显示。（**1.30.22**）
+  * 异步复制相关配置项的名称不正确。（**1.30.22**）
   * 修复鼠标悬浮在 append! 等函数时没有正确显示函数提示的问题。（**1.30.21**）
   * 修复矩阵最后一页数据显示异常的问题。（**1.30.21**）
   * 修复终端 refid 错误链接需要点击两次的问题。（**1.30.21**）
