@@ -15,6 +15,17 @@
 
 ## DolphinDB Server
 
+Version: **1.30.22** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-1) with 1.30.21
+
+Release Date: 2023-07-20
+
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22_JIT.zip)
+[Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.22.zip)
+
 Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.20
 
 Release Date: 2023-02-15
@@ -230,6 +241,50 @@ Release Date: 2020-12-29
 
 
 ### New Features
+
+- Added configuration parameter *enableCoreDump* to enable core dumps. It is only supported on Linux. (**1.30.22**)
+
+- Added configuration parameter *disableCoreDumpOnShutdown* to specify whether to generate core dumps on a graceful shutdown. It is only supported on Linux. (**1.30.22**)
+  
+- Added configuration parameter *allowMissingPartitions* to specify the behavior when incoming data contains new partition values that do not match any existing partitions. (**1.30.22**)
+  
+- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**1.30.22**)
+  
+- Added function `writeLogLevel` to write logs of the specified level to the log file. (**1.30.22**)
+  
+- Added function `sessionWindow` to group time-series data based on the session intervals. (**1.30.22**)
+  
+- Added function `summary` to generate summary statistics of input data, including min, max, count, avg, std, and percentiles. (**1.30.22**)
+
+- Added functions `encodeShortGenomeSeq` and `decodeShortGenomeSeq` to encode and decode DNA sequences. (**1.30.22**)
+  
+- Added function `genShortGenomeSeq` to perform DNA sequences encoding within a sliding window. (**1.30.22**)
+  
+- Added function `GramSchmidt` to implement the Gram–Schmidt orthonormalization. (**1.30.22**)
+  
+- Added function `lassoBasic` that shares equivalent function to `lasso` but takes vectors as input arguments. (**1.30.22**)
+  
+- Added 26 TopN functions: (**1.30.22**)
+  - m-functions: `mskewTopN`, `mkurtosisTopN`
+  - cum-functions: `cumsumTopN`, `cumavgTopN`, `cumstdTopN`, `cumstdpTopN`, `cumvarTopN`, `cumvarpTopN`, `cumbetaTopN`, `cumcorrTopN`, `cumcovarTopN`, `cumwsumTopN`, `cumskewTopN`, `cumkurtosisTopN`
+  - tm-functions: `tmsumTopN`, `tmavgTopN`, `tmstdTopN`, `tmstdpTopN`, `tmvarTopN`, `tmvarpTopN`, `tmbetaTopN`, `tmcorrTopN`, `tmcovarTopN`, `tmwsumTopN`, `tmskewTopN`, `tmkurtosisTopN`
+  
+- Added function `initcap` to set the first letter of each word in a string to uppercase and the rest to lowercase. (**1.30.22**)
+  
+- Added functions `splrep` and `splev` for cubic spline interpolation. (**1.30.22**)
+  
+- Added function `scs` to compute the optimal solution of linearly constrained linear or quadratic programming functions. (**1.30.22**)
+  
+- Added function `temporalSeq` to generate time series at specified intervals. (**1.30.22**)
+  
+
+- Added functions `base64Encode` and `base64Decode` to encode and decode Base64 digits. (**1.30.22**)
+  
+- Added function `addFunctionTypeInferenceRule` to specify the inference rule of user-defined functions in DolphinDB JIT version. (**1.30.22**)
+  
+- Added support for COMPLEX data type in DolphinDB JIT version. (**1.30.22**)
+
+- Added function `createStreamDispatchEngine` to create a streaming data dispatch engine. (**1.30.22**)
 
 - Added new configuration parameter `logicOrIgnoreNull`. The default value is true, which means to ignore NULL values in the operands. It should be set to false if you need the behavior of the `or` function to be consistent with old versions. (**1.30.21.4**)
 
@@ -594,6 +649,92 @@ Release Date: 2020-12-29
 
 
 ### Improvements
+
+- Functions `window` and `percentChange` can be used as state functions in the reactive state engine. (**1.30.22**)
+  
+- Support JOIN on multiple partitioned tables. (**1.30.22**)
+  
+- Optimized the performance when using the `dropTable` function to delete a table with a large number of partitions. (**1.30.22**)
+  
+- Support SQL keywords in all uppercase or lowercase. (**1.30.22**)
+  
+- Support comma (,) to CROSS JOIN tables. (**1.30.22**)
+  
+- Support line breaks for SQL statements, while keywords with multiple words, such as ORDER BY, GROUP BY, UNION ALL, INNER JOIN, cannot be split into two lines. (**1.30.22**)
+  
+- The implementation of  `select * from a join b` is changed from `select * from join(a, b)` to `select * from cj(a, b)`. (**1.30.22**)
+  
+- Support operator `<>` in SQL statements, which is equivalent to `!=`. (**1.30.22**)
+  
+- Support keyword NOT LIKE in SQL statements. (**1.30.22**)
+  
+- When LEFT JOIN, LEFT SEMI JOIN, FULL JOIN or EQUI JOIN on columns containing NULL values: (**1.30.22**)
+  - In the previous versions: a NULL value is matched to another NULL.
+  - Since the current version: a NULL value cannot be matched to another NULL.
+  
+- For function `sqlDS`, a DFS table partitioned by DATEHOUR selected in *sqlObj* will now be correctly filtered by date. (**1.30.22**)
+  
+- For the "Status" column returned by function `getRecoveryTaskStatus`, the previous status "Finish" is now changed to "Finished", "Abort" to "Aborted". (**1.30.22**)
+  
+- Added inplace optimization fields, i.e., *inplaceOptimization* and *optimizedColumns*, when using `HINT_EXPLAIN` to check the execution plan of a GROUP BY clause when *algo* is "sort". (**1.30.22**)
+  
+- The column name specified with the `rename!`, `replaceColumn!`, `dropColumns!` functions are no longer case sensitive. (**1.30.22**)
+  
+- Added new parameters *swColName* and *checkInput* for the `lasso` and `elasticNet` functions to specify the sample weight and validation check, respectively. Added new parameters *swColName* for the `ridge` function. (**1.30.22**)
+  
+- Added parameters *x0*, *c*, *eps*, and *alpha* for function `qclp` to specify absolute value constraints, solving accuracy, and relaxation parameters. (**1.30.22**)
+  
+- Functions `loadText`, `pLoadText`, and `extractTextSchema` now can load a data file that contains a record with multiple newlines. (**1.30.22**)
+  
+- The *delimiter* parameter of the `loadText`, `pLoadText`, `loadTextEx`, `textChunkDS`, `extractTextSchema` functions can be specified as one or more characters. (**1.30.22**)
+  
+- When importing a table using function `loadTextEx`, an error will be reported if the table schema does not match the schema of the target database. (**1.30.22**)
+  
+- Added check for the *schema* parameter of function `loadTextEx`, i.e., whether the specified table is empty, and the "name" and "type" column is of STRING type. (**1.30.22**)
+  
+- Added new parameter *tiesMethod*, which is used to process the group of records with the same value, for the following moving TopN functions: `mstdTopN`, `mstdpTopN`, `mvarTopN`, `mvarpTopN`, `msumTopN`, `mavgTopN`, `mwsumTopN`, `mbetaTopN`, `mcorrTopN`, `mcovarTopN`. (**1.30.22**)
+  
+- Optimized the prediction performance of function `knn`. (**1.30.22**)
+  
+- The time series engine and daily time series engine now can output columns holding array vectors. (**1.30.22**)
+  
+- Optimized the performance of the `moving` function used in the reactive state engine. (**1.30.22**)
+  
+- The anomaly detection engine now can specify multiple grouping columns for parameter *keyColumn.* (**1.30.22**)
+  
+- Added new parameter *sortByTime* for the `createWindowJoinEngine` and `createAsOfJoinEngine` functions to determine whether the result is returned in the order of timestamps globally. (**1.30.22**)
+  
+- The streaming engine can now be shared with the `share` function/statement for concurrent writes. (**1.30.22**)
+  
+- An error will be reported when using the `share` function/statement or the `enableTableShareAndPersistence` function to share the same table multiple times. (**1.30.22**)
+  
+- An error will be reported if the data of INT type is appended to a SYMBOL column of the left table of a window join engine. (**1.30.22**)
+
+- DolphinDB JIT version supports the `join` operator (<-). (**1.30.22**)
+  
+- The `isort` function in JIT version can take a tuple with vectors of equal length as input. (**1.30.22**)
+  
+- The `if` expression in JIT version supports the `in` operator. (**1.30.22**)
+  
+- Vectors can be accessed with Boolean index in JIT version. (**1.30.22**)
+  
+- Support comments with multiple /\**/ sections in one line.  (**1.30.22**)
+
+- The function `stringFormat` now supports: data type matching, format alignment, decimal digits, and base conversion. (**1.30.22**)
+  
+- The second parameter of function `concat` can be NULL. (**1.30.22**)
+  
+- Function `take` can take a tuple or table as input. (**1.30.22**)
+
+- Function `stretch` can take a matrix or table as input.   (**1.30.22**)
+  
+- Functions `in` and `find` support table with one column. (**1.30.22**)
+  
+- When the parameter *moduleDir* is configured as a relative path, the system searches the modules under the *homeDir/modules* directory. (**1.30.22**)
+  
+- The result of function `in`, `binsrch`, `find`, or `asof` takes the same format as the input argument *Y*. (**1.30.22**)
+  
+- An error is raised when passing a tuple to function `rank`. (**1.30.22**)
 
 - Added keyword `distinct` to eliminate duplicate records. It is currently not supported to be used with `group by`, `context by`, or `pivot by`. (**1.30.21.6**)
 
@@ -1106,11 +1247,63 @@ Release Date: 2020-12-29
 
 ### Issues Fixed
 
+- When querying a large DFS table using the SQL keyword TOP or GROUP BY, an error was potentially raised. (**1.30.22**)
+
+- When a SQL query specified a column name that couldn’t be recognized, the error message returned contained an incorrect column name instead of the actual unrecognized column name from the query. (**1.30.22**)
+
+- Failures to write to a partition of a DFS table with many columns could cause the server to crash. (**1.30.22**)
+
+- Concurrently loading and deleting multiple tables in a database could cause subsequent `loadTable` operations to fail with an error reporting it cannot find the *.tbl* file. (**1.30.22**)
+
+- The `head` and `tail` functions could not be used in aggregate functions. This bug was introduced in DolphinDB 1.30.18. (**1.30.22**)
+
+- A deadlock could occur when concurrently renaming a dimension table via `renameTable` and querying the same table.  (**1.30.22**)
+
+- When querying a table with a large number of partitions using a SQL query with BETWEEN...AND... for partition pruning, the error `The number of partitions [xxxxx] relevant to the query is too large` could be raised.  (**1.30.22**)
+
+- Using calculations or functions in a CASE WHEN condition could crash the server. (**1.30.22**)
+
+- Using the DISTINCT keyword in SQL queries could return incorrect results. (**1.30.22**)
+
+- When querying a VALUE or RANGE partitioned DFS table, if the SELECT clause and GROUP BY clause both applied the same time conversion function (e.g. `date()`) to the partitioning column, but used different aliases for that column, incorrect results could be returned. (**1.30.22**)
+
+- When deleting data from a partitioned table using a SQL DELETE statement, if all nodes storing the replicas for the relevant partition were offline, the error `chunktype mismatched for path` could be raised. (**1.30.22**)
+
+- The use of local executors could lead to deadlock situations during task scheduling. (**1.30.22**)
+
+- In the DolphinDB JIT version, when appending large amounts of data to a reactive state engine (`createReactiveStateEngine`) that used user-defined functions, incorrect results could be returned. (**1.30.22**)
+
+- A deadlock may occur when `unsubscribeTable` was called from multiple nodes simultaneously. (**1.30.22**)
+  
+- Server crashed when the capitalization of the column names specified in *metrics* and input tables of a left semi join engine (`createLeftSemiJoinEngine`) was inconsistent. (**1.30.22**)
+  
+- Server crashed when appending data to a stream table and persisting the table at the same time. (**1.30.22**)
+  
+- After `DROP table` was called to delete a stream table, the table could not be deleted or unsubscribed from. (**1.30.22**)
+  
+- Syntax parsing issues: statements such as `"/" == "a"` could not be parsed correctly. (**1.30.22**)
+
+- An additional column was output when the second parameter of function `ols` consisted solely of 0. (**1.30.22**)
+
+- Server crashed due to parsing failure when the parameter *aggs* of function `wj` was not compliant. (**1.30.22**)
+  
+- The result of function `expr` was incorrect if a DATEHOUR argument was passed. (**1.30.22**)
+  
+- The web interface could not be accessed properly if the parameter *webLoginRequired* was configured to true. (**1.30.22**)
+  
+- Incorrect results were returned when using `cast` to convert SYMBOL data. (**1.30.22**)
+
+- Function `nullFill` failed to fill the NULL values returned by function `bucket`. (**1.30.22**)
+  
+- When a user-defined anonymous aggregate function was called with `twindow` in another user-defined function, an error `func must be an aggregate function.` was raised. (**1.30.22**)
+  
+- When a DolphinDB process was started, server crashed if a script (as configured with parameter *run*) containing function `submitJob` was executed. (**1.30.22**)
+
 - A function name conflict occurred for the function view and module function at the server restart when the following conditions were satisfied at the same time (**1.30.21.6**):
-    - in a standalone mode;
-    - the function view was dropped after the module function was added to it;
-    - the function defined in the module was passed to the addFunctionView, and the function view was dropped then;
-    - the module was specified in the configuration parameter preloadModules to be preloaded.
+  - in a standalone mode;
+  - the function view was dropped after the module function was added to it;
+  - the function defined in the module was passed to the addFunctionView, and the function view was dropped then;
+  - the module was specified in the configuration parameter preloadModules to be preloaded.
   
   The error messages reported for other conflicts were enhanced.
 
@@ -1531,6 +1724,22 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 > New Features
 
+- If your DolphinDB license is expiring in two weeks or less, a warning message is displayed when connecting to DolphinDB databases. (**1.30.22**) 
+  
+- When creating new tables through the graphical user interface, the column data type dropdown now includes the DECIMAL128 data type option. (**1.30.22**)
+
+- You can now create databases and tables through a graphical user interface. (**1.30.22**)
+  
+- You can now view all databases and tables (including the schema, columns and partitions) in the **Database** view.  (**1.30.22**)
+  
+- If no code is selected, clicking the "Execute" button will now execute all of the code in the editor.  (**1.30.22**)
+  
+- Support for `select NULL` SQL statement.  (**1.30.22**)
+  
+- SQL keywords can now be recognized in all-capitalization.  (**1.30.22**)
+  
+- Support for creation and display of DECIMAL data type.  (**1.30.22**)
+
 - Added switches for enabling/disabling code minimap (code outline) and code completion to the toolbar at the top of the editor. The toolbar also displays the code execution status and you can cancel a long running job by clicking "Executing". (**1.30.21**)
 
 - Added shortcuts to copy line up/down. (**1.30.21**)
@@ -1554,6 +1763,26 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 - "Shell" tab: Added new "Database" view for checking databases and tables. (**1.30.20**)
 
 > Improvements
+
+- Enhanced the design of the popups displaying version and node information in the upper-right corner.  (**1.30.22**)
+
+- When a table is expanded in the **Database** view, the contents of that table are automatically displayed in the Data view.  (**1.30.22**)
+  
+- To prevent the interface from getting stuck, the Data view now limits displayed content to a maximum of 10,000 characters for tables, vectors, and dictionaries.  (**1.30.22**)
+  
+- The dropdown lists in the **Controller**/**Nodes Configuration** dialogs now include all available configuration parameters.  (**1.30.22**)
+  
+- The input for the *regularArrayMemoryLimit* configuration parameter has been changed from a dropdown menu to an input field in the **Nodes Configuration** dialog.  (**1.30.22**)
+  
+- Unnecessary input validation checks have been removed for certain configuration parameters in the **Controller/Nodes Configuration** dialogs.  (**1.30.22**)
+  
+- In the **Nodes Configuration** dialog, configuration parameters with  an empty **value** field will not be included in the configuration file.  (**1.30.22**)
+  
+- Removed the **DFS** tab from the left navigation pane. Database and table information is now integrated into the **Shell** tab **Database** view. (**1.30.22**)
+
+- Rearranged page layout: Moved the terminal view to the top right and the data view to the bottom. (**1.30.22**)
+  
+- The terminal view now displays up to 100,000 entries. (**1.30.22**)
 
 - Layout enhancements - table preview is now displayed at the bottom of the editor to fit more columns. (**1.30.21**)
 
@@ -1598,6 +1827,24 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 - With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge. (**1.30.16**)
     
 > Issues Fixed
+
+- Fixed an issue where partitions were incorrectly shown in the menu for dimension tables in the **Database** view. (**1.30.22**)
+  
+- The system now displays an error message if you try to start data nodes without first logging in. (**1.30.22**)
+  
+- Fixed an issue in the Data view where null values in DATE columns were incorrectly displayed as the string "null". Now, null DATE values are properly displayed as empty cells. (**1.30.22**)
+
+- Fixed incorrect syntax coloring in the Editor view for vectors containing empty string elements represented by a single back quote `. (**1.30.22**) 
+  
+- Fixed an issue where array vector columns were not included in the columns menu in the **Database** view. (**1.30.22**)
+
+- Clicking an empty symbol in the **Local Variables** view no longer triggers an error. (**1.30.22**)
+  
+- The fonts in the terminal view and editor are now displayed in a fixed-width format. (**1.30.22**)
+
+- The **Local Variables** view now has a scroll bar. Previously, content overflowed into the **Shared Variables** view without a scroll bar. (**1.30.22**)
+
+- Fixed incorrect configuration parameter names related to asynchronous replication. (**1.30.22**)
 
 - Fixed function documentation display issue when you hover over functions such as `append!`. (**1.30.21**)
 
