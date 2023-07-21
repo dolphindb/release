@@ -135,11 +135,12 @@
 * 新增配置项 *disableCoreDumpOnShutdown*，设置安全关机时是否产生 coredump。仅支持 Linux 系统。（**2.00.10**）
 * 新增配置项 *allowMissingPartitions*，设置是否忽略新增数据中所包含的分区方案外的数据。（**2.00.10**）
 * 新增配置项 *volumeUsageThreshold*，设置数据节点磁盘卷的可使用率。（**2.00.10**）
+* 新增函数 `listRemotePlugins` 和 `installPlugin`，分别用于查询可用的插件信息和下载插件。（**2.00.10**）
 * 新增函数 `writeLogLevel`，能够将指定级别的文本写入日志文件中。（**2.00.10**）
 * 新增函数 `sessionWindow`，对一个时间序列根据会话时间间隔进行分组。（**2.00.10**）
 * 新增函数 `summary`，生成输入数据的汇总统计信息，包含最小值、最大值、计数、均值、标准差和指定的百分位数。（**2.00.10**）
 * 新增函数 `encodeShortGenomeSeq`, `decodeShortGenomeSeq` 分别用于对 DNA 序列进行编解码。同时新增函数 `genShortGenomeSeq`，可在滑动窗口内进行编码。（**2.00.10**）
-* 新增函数 `GramSchmidt`，实现施密特正交化计算。（**2.00.10**）
+* 新增函数 `gramSchmidt`，实现施密特正交化计算。（**2.00.10**）
 * 新增与 `lasso` 功能等价的函数 `lassoBasic`，其参数支持输入向量。（**2.00.10**）
 * 新增26个 TopN 系列函数（**2.00.10**）
     * m 系列：`mskewTopN`, `mkurtosisTopN`
