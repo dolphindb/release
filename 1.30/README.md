@@ -249,7 +249,9 @@ Release Date: 2020-12-29
 - Added configuration parameter *allowMissingPartitions* to specify the behavior when incoming data contains new partition values that do not match any existing partitions. (**1.30.22**)
   
 - Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**1.30.22**)
-  
+
+- Added function `listRemotePlugins` to obtain a list of available plugins. Added function `installPlugin` to download a plugin. (**1.30.22**)
+
 - Added function `writeLogLevel` to write logs of the specified level to the log file. (**1.30.22**)
   
 - Added function `sessionWindow` to group time-series data based on the session intervals. (**1.30.22**)
@@ -260,7 +262,7 @@ Release Date: 2020-12-29
   
 - Added function `genShortGenomeSeq` to perform DNA sequences encoding within a sliding window. (**1.30.22**)
   
-- Added function `GramSchmidt` to implement the Gram–Schmidt orthonormalization. (**1.30.22**)
+- Added function `gramSchmidt` to implement the Gram–Schmidt orthonormalization. (**1.30.22**)
   
 - Added function `lassoBasic` that shares equivalent function to `lasso` but takes vectors as input arguments. (**1.30.22**)
   
