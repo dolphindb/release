@@ -133,7 +133,7 @@
 
 ### Bug 修复造成的系统影响
 
-- 本次升级必须更 dolphindb.dos，否则节点无法启动。
+- 本次升级必须更新 dolphindb.dos，否则节点无法启动。
 
 - `loadTextEx`  的 *schema* 参数增加了更为严格的校验。
     
@@ -300,7 +300,7 @@
 
 ### Bug 修复造成的系统影响
 
-- 本次升级必须更 dolphindb.dos，否则节点无法启动。
+- 本次升级必须更新 dolphindb.dos，否则节点无法启动。
 
 - `loadTextEx`  的 *schema* 参数增加了更为严格的校验。
     
