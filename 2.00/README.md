@@ -106,7 +106,9 @@ Release Date: 2021-07-31
 - Added configuration parameter *disableCoreDumpOnShutdown* to specify whether to generate core dumps on a graceful shutdown. It is only supported on Linux. (**2.00.10**)
   
 - Added configuration parameter *allowMissingPartitions* to specify the behavior when incoming data contains new partition values that do not match any existing partitions. (**2.00.10**)
-  
+
+- Added function `listRemotePlugins` to obtain a list of available plugins. Added function `installPlugin` to download a plugin. (**2.00.10**)
+
 - Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**2.00.10**)
   
 - Added function `writeLogLevel` to write logs of the specified level to the log file. (**2.00.10**)
@@ -119,7 +121,7 @@ Release Date: 2021-07-31
   
 - Added function `genShortGenomeSeq` to perform DNA sequences encoding within a sliding window. (**2.00.10**)
   
-- Added function `GramSchmidt` to implement the Gram–Schmidt orthonormalization. (**2.00.10**)
+- Added function `gramSchmidt` to implement the Gram–Schmidt orthonormalization. (**2.00.10**)
   
 - Added function `lassoBasic` that shares equivalent function to `lasso` but takes vectors as input arguments. (**2.00.10**)
   
