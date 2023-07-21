@@ -15,7 +15,7 @@
 
 ## DolphinDB Server
 
-Version: **1.30.22** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-1) with 1.30.21 &nbsp;&nbsp;&nbsp; For details, see [Compatibility Lists](https://github.com/dolphindb/release/blob/master/compatibility_lists.md#version-13022)
+Version: **1.30.22** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-1) with 1.30.21 &nbsp;&nbsp;&nbsp; For details, see [Compatibility Lists](https://github.com/dolphindb/release/blob/master/compatibility_changes.md#version-13022)
 
 Release Date: 2023-07-20
 
