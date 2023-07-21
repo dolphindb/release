@@ -1,4 +1,4 @@
-# Compatibility Lists
+# Compatibility Changes
 
 This file provides an overview of the new features and changes (including updates to match industry standards) in version 1.30.22/2.00.10 that may impact your existing scripts and configurations. 
 
