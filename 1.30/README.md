@@ -1949,6 +1949,8 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 ### Python
 
+- The old README file for the DolphinDB Python API is deprecated and no longer maintained. Please use the new DolphinDB Python API manual going forward for up-to-date documentation on the latest version. (**1.30.22.1**)
+
 - Bugfix: Fixed an issue where a TableAppender (previously known as: tableAppender), TableUpserter (previously known as: tableUpsert), or PartitionedTableAppender failed to obtain a reference to a Session or a DBConnectionPool as the object had already been destructed. (**1.30.22.1**)
 
 - Bugfix: Fixed an issue where DBConnectionPool was destructed without calling `shutDown()`, causing the process to get stuck. (**1.30.22.1**)
