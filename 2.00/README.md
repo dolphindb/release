@@ -107,10 +107,10 @@ Release Date: 2021-07-31
   
 - Added configuration parameter *allowMissingPartitions* to specify the behavior when incoming data contains new partition values that do not match any existing partitions. (**2.00.10**)
 
+- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**2.00.10**)
+
 - Added function `listRemotePlugins` to obtain a list of available plugins. Added function `installPlugin` to download a plugin. (**2.00.10**)
 
-- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**2.00.10**)
-  
 - Added function `writeLogLevel` to write logs of the specified level to the log file. (**2.00.10**)
   
 - Added function `sessionWindow` to group time-series data based on the session intervals. (**2.00.10**)
