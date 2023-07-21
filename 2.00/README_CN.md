@@ -10,7 +10,7 @@
 
 ## 版本兼容性说明列表
 
-详见 [版本兼容性说明列表](./../compatibility_lists_CN.md/#20010-版本)
+详见 [版本兼容性说明列表](./../compatibility_changes_CN.md/#20010-版本)
 
 ## DolphinDB服务器
 
