@@ -119,11 +119,11 @@ Release Date: 2021-07-31
 
 - Added functions `encodeShortGenomeSeq` and `decodeShortGenomeSeq` to encode and decode DNA sequences. (**2.00.10**)
   
-- Added function `genShortGenomeSeq` to perform DNA sequences encoding within a sliding window. (**2.00.10**)
+- Added function `genShortGenomeSeq` to perform DNA sequence encoding within a sliding window. (**2.00.10**)
   
 - Added function `gramSchmidt` to implement the Gram–Schmidt orthonormalization. (**2.00.10**)
   
-- Added function `lassoBasic` that shares equivalent function to `lasso` but takes vectors as input arguments. (**2.00.10**)
+- Added function `lassoBasic` that has equivalent function to `lasso` but takes vectors as input arguments. (**2.00.10**)
   
 - Added 26 TopN functions: (**2.00.10**)
   - m-functions：`mskewTopN`, `mkurtosisTopN`
