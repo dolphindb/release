@@ -264,7 +264,7 @@ Release Date: 2020-12-29
   
 - Added function `gramSchmidt` to implement the Gram–Schmidt orthonormalization. (**1.30.22**)
   
-- Added function `lassoBasic` that shares equivalent function to `lasso` but takes vectors as input arguments. (**1.30.22**)
+- Added function `lassoBasic` that has equivalent function to `lasso` but takes vectors as input arguments. (**1.30.22**)
   
 - Added 26 TopN functions: (**1.30.22**)
   - m-functions: `mskewTopN`, `mkurtosisTopN`
