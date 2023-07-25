@@ -132,8 +132,6 @@ Release Date: 2021-07-31
   
 - Added function `initcap` to set the first letter of each word in a string to uppercase and the rest to lowercase. (**2.00.10**)
   
-- Added functions `fiDuration` and `fiDirtyPrice` to calculate fixed income. (**2.00.10**)
-  
 - Added functions `splrep` and `splev` for cubic spline interpolation. (**2.00.10**)
   
 - Added function `scs` to compute the optimal solution of linearly constrained linear or quadratic programming functions. (**2.00.10**)
