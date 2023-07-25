@@ -130,7 +130,7 @@
 
 * 支持多个分布式表进行右连接（`right join`）。（**2.00.10**）
 * 新增配置项 *memLimitOfTempResult* 及函数 `setMemLimitOfTempResult`，设置表连接操作中产生的每个临时数据表允许占用的内存上限。（**2.00.10**）
-* 新增配置项 *intermediateResultsSpillDir*，指定计算过程中产生的中间结果表的临时存储目录。（**2.00.10**）
+* 新增配置项 *tempResultsSpillDir*，指定计算过程中产生的中间结果表的临时存储目录。（**2.00.10**）
 * 新增配置项 *enableCoreDump*，设置是否生成 coredump。仅支持 Linux 系统。（**2.00.10**）
 * 新增配置项 *disableCoreDumpOnShutdown*，设置安全关机时是否产生 coredump。仅支持 Linux 系统。（**2.00.10**）
 * 新增配置项 *allowMissingPartitions*，设置是否忽略新增数据中所包含的分区方案外的数据。（**2.00.10**）
