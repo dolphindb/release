@@ -222,7 +222,22 @@
 
 - `upsert!` 函数增加列数校验。在旧版本中，newData 的列数可以比原表少；而在新版本中，newData 的列数必须与原表的列数一致。
 
-- 新版本在 where 过滤条件中，对分区表的列使用了 in 谓词时，会报错。
+- 新版本中，在 where 过滤条件中，当使用 in 谓词指定分布式表中的列作为查询范围时，会报错。
+
+    ```
+    login("admin","123456")
+    if(existsDatabase("dfs://test_in")){
+        dropDatabase("dfs://test_in")
+    }
+    db=database("dfs://test_in", VALUE, 2015.01M..2016.01M)
+    t=table(take(2015.01M..2016.01M,10000) as date, 1..10000 as id, rand(100,10000) as v)
+    db.createPartitionedTable(t,`pt,`date).append!(t)
+    temp_t = db.loadTable(`pt)
+    select distinct date from temp_t where date in temporalAdd(date, 2M) 
+    //报错： Can't use 'in' precidate with partitioned table columns in where condition, please use sub query to do that.
+    //修改为子查询后可以正常执行
+    select distinct date from temp_t where date in select temporalAdd(date, 2M) from temp_t
+    ```
 
 - `wj` 和 `pwj` 不支持右表为分布式表。
 
