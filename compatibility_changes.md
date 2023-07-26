@@ -228,6 +228,21 @@ Please review the file carefully to understand how your current setup may be aff
 
 - An error will be reported when filtering data with a where condition in columns from a partitioned table.
 
+    ```
+    login("admin","123456")
+    if(existsDatabase("dfs://test_in")){
+        dropDatabase("dfs://test_in")
+    }
+    db=database("dfs://test_in", VALUE, 2015.01M..2016.01M)
+    t=table(take(2015.01M..2016.01M,10000) as date, 1..10000 as id, rand(100,10000) as v)
+    db.createPartitionedTable(t,`pt,`date).append!(t)
+    temp_t = db.loadTable(`pt)
+    select distinct date from temp_t where date in temporalAdd(date, 2M) 
+    //An error is reported: Can't use 'in' precidate with partitioned table columns in where condition, please use sub query to do that.
+    //SQL statement using a subquery after "in" can be executed properly
+    select distinct date from temp_t where date in select temporalAdd(date, 2M) from temp_t
+    ```
+
 - The right table of `wj`/`pwj` cannot be a DFS table.
 
 ### Plguins
@@ -397,6 +412,21 @@ Please review the file carefully to understand how your current setup may be aff
 - Added validation for `upsert!`: The number of newData columns must be consistent with that of the original table. In previous versions, table with fewer columns can be upserted.
 
 - An error will be reported when filtering data with a where condition in columns from a partitioned table.
+
+    ```
+    login("admin","123456")
+    if(existsDatabase("dfs://test_in")){
+        dropDatabase("dfs://test_in")
+    }
+    db=database("dfs://test_in", VALUE, 2015.01M..2016.01M)
+    t=table(take(2015.01M..2016.01M,10000) as date, 1..10000 as id, rand(100,10000) as v)
+    db.createPartitionedTable(t,`pt,`date).append!(t)
+    temp_t = db.loadTable(`pt)
+    select distinct date from temp_t where date in temporalAdd(date, 2M) 
+    //An error is reported: Can't use 'in' precidate with partitioned table columns in where condition, please use sub query to do that.
+    //SQL statement using a subquery after "in" can be executed properly
+    select distinct date from temp_t where date in select temporalAdd(date, 2M) from temp_t
+    ```
 
 - The right table of `wj`/`pwj` cannot be a DFS table.
 
