@@ -113,7 +113,7 @@ Please review the file carefully to understand how your current setup may be aff
 
     When joining multiple tables, the qualifier must be specified for a column existing in multiple tables. This behavior matches standard SQL semantics.
 
-- When a scalar is used after the `in` predicate in a SQL statement, elements of the condition column are no longer matched with the scalar. Instead, the scalar is treated as a one-element vector to check if the elements of the condition column are contained in that vector.
+- When a temporal scalar is used after the `in` predicate in a SQL statement, elements of the condition column are no longer matched with the scalar. Instead, the scalar is treated as a one-element vector to check if the elements of the condition column are contained in that vector.
 
     ```
     vec = [2012.01.01T00:00:00, 2012.01.01T23:59:59, 2012.01.10T00:00:00, 2012.01.10T23:59:59, 2012.01.31T00:00:00, 2012.01.31T23:59:59, 2012.02.01T00:00:00, 2012.02.01T23:59:59, 2012.02.15T00:00:00, 2012.02.15T23:59:59, 2012.02.29T00:00:00, 2012.02.29T23:59:59]
@@ -309,7 +309,7 @@ Please review the file carefully to understand how your current setup may be aff
 
     In previous versions, NULL values in join columns would be matched between the two joined tables. Since this version, NULL values will not be matched when joining.
 
-- When a scalar is used after the `in` predicate in a SQL statement, elements of the condition column are no longer matched with the scalar. Instead, the scalar is treated as a one-element vector to check if the elements of the condition column are contained in that vector.
+- When a temporal scalar is used after the `in` predicate in a SQL statement, elements of the condition column are no longer matched with the scalar. Instead, the scalar is treated as a one-element vector to check if the elements of the condition column are contained in that vector.
 
     ```
     vec = [2012.01.01T00:00:00, 2012.01.01T23:59:59, 2012.01.10T00:00:00, 2012.01.10T23:59:59, 2012.01.31T00:00:00, 2012.01.31T23:59:59, 2012.02.01T00:00:00, 2012.02.01T23:59:59, 2012.02.15T00:00:00, 2012.02.15T23:59:59, 2012.02.29T00:00:00, 2012.02.29T23:59:59]
