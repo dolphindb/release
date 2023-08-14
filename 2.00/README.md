@@ -9,15 +9,15 @@
 
 ## DolphinDB Server
 
-Version: **2.00.10** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-1) with 2.00.9/1.30.21&nbsp;&nbsp;&nbsp; For details, see [Compatibility Changes in Version 2.00.10](https://github.com/dolphindb/release/blob/master/compatibility_changes.md#version-20010)
+Version: **2.00.10** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.9/1.30.21 &nbsp;&nbsp;&nbsp; For details, see [Compatibility Changes in Version 2.00.10](https://github.com/dolphindb/release/blob/master/compatibility_changes.md#version-20010)
 
 Release Date: 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.1_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.1_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.1_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V2.00.10.zip)
 
 Version: **2.00.9** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.8/1.30.20
@@ -107,10 +107,10 @@ Release Date: 2021-07-31
   
 - Added configuration parameter *allowMissingPartitions* to specify the behavior when incoming data contains new partition values that do not match any existing partitions. (**2.00.10**)
 
-- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**2.00.10**)
-
 - Added function `listRemotePlugins` to obtain a list of available plugins. Added function `installPlugin` to download a plugin. (**2.00.10**)
-
+  
+- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**2.00.10**)
+  
 - Added function `writeLogLevel` to write logs of the specified level to the log file. (**2.00.10**)
   
 - Added function `sessionWindow` to group time-series data based on the session intervals. (**2.00.10**)
@@ -119,9 +119,9 @@ Release Date: 2021-07-31
 
 - Added functions `encodeShortGenomeSeq` and `decodeShortGenomeSeq` to encode and decode DNA sequences. (**2.00.10**)
   
-- Added function `genShortGenomeSeq` to perform DNA sequence encoding within a sliding window. (**2.00.10**)
+- Added function `genShortGenomeSeq` to perform DNA sequences encoding within a sliding window. (**2.00.10**)
   
-- Added function `gramSchmidt` to implement the Gram–Schmidt orthonormalization. (**2.00.10**)
+- Added function `GramSchmidt` to implement the Gram–Schmidt orthonormalization. (**2.00.10**)
   
 - Added function `lassoBasic` that has equivalent function to `lasso` but takes vectors as input arguments. (**2.00.10**)
   
@@ -473,6 +473,20 @@ Release Date: 2021-07-31
 
 ### Improvements
 
+- A user-defined function allows the default value of a parameter to be an empty tuple (represented as []). (**2.00.10.1**)
+
+- Added user access control to the `loadText` function. (**2.00.10.1**)
+
+- Modifications made to user access privileges are logged. (**2.00.10.1**)
+
+- The resample function can take a matrix with non-strictly increasing row indices as an input argument.  (**2.00.10.1**)
+
+- Optimized the join behavior for tuples. (**2.00.10.1**)
+
+- A ternary function can be passed as an input argument to the template accumulate in a reactive state engine. (**2.00.10.1**)
+
+- Added parameter validation to `streamEngineParser`: If triggeringPattern='keyCount', then keepOrder must be true. (**2.00.10.1**)
+  
 - Configuration parameters *localExecutors* and *maxDynamicLocalExecutor* were discarded. (**2.00.10**)
 
 - Functions `window` and `percentChange` can be used as state functions in the reactive state engine. (**2.00.10**)
@@ -947,6 +961,28 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- On Windows, the files function returned inaccurate _fileSize_ values for files exceeding 2 GB. (**2.00.10.1**)
+
+- In a high-availability cluster, if an error occurred during serialization when using `addFunctionView`, the function was not cleared from memory. (**2.00.10.1**)
+
+- In a high-availability cluster, adding a function view containing plugin methods to a controller caused failures in other controllers. (**2.00.10.1**)
+
+- Users with DB_MANAGE privilege failed to grant permissions to other users. (**2.00.10.1**)
+
+- Adding a node may cause backup errors. (**2.00.10.1**)
+
+- Queries on DFS tables using COMPO partitioning may return incorrect results if the query: (**2.00.10.1**)
+
+  - Did not use aggregate functions, order-sensitive functions, row reduce functions (such as `rowSum`), or fill functions (such as `ffill`) in the select statement.
+
+  - Used one of the partitioning columns (except the last one for COMPO partitioning) as a pivot-by column.
+  
+- Parsing errors occurred in certain cases using and not like(id, '%a'), not like, not in, or not between. This bug was introduced in version 2.00.10. (**2.00.10.1**)
+
+- If an error occurred in a symbol base file, reloading the file caused server crash. (**2.00.10.1**)
+
+- Specifying a tuple containing functions or expressions with multiple returns for the metrics parameter of `createReactiveStateEngine` caused the server to crash. (**2.00.10.1**)
 
 - When querying a large DFS table using the SQL keyword TOP or GROUP BY, an error was potentially raised.  (**2.00.10**)
 
