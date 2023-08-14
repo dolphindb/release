@@ -18,11 +18,11 @@
 
 发行日期： 2023-07-20
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.1_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.1_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.1_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.10.zip)|
 
 版本号： 2.00.9 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.8 和 1.30.20
@@ -334,6 +334,13 @@
 
 ### 改进
 
+* 自定义函数支持空的 tuple（[]）作为参数默认值。（**2.00.10.1**）
+* 在使用 `loadText` 函数时，添加对用户权限的检查机制。（**2.00.10.1**）
+* 记录用户权限发生变更的信息到日志中。（**2.00.10.1**）
+* `resample` 函数支持输入具有非严格递增行索引的矩阵。（**2.00.10.1**）
+* 优化 any vector 拼接的行为。（**2.00.10.1**）
+* 在状态引擎中，可以指定一个三元函数作为 `accumulate` 的参数。（**2.00.10.1**）
+* `streamEngineParser` 增加参数校验：若 *triggeringPattern*='keyCount'，则 *keepOrder* 必须为 true。（**2.00.10.1**）
 * 配置项 `localExecutors` 和 `maxDynamicLocalExecutor` 停止使用。（**2.00.10**） 
 * 响应式状态引擎新增支持状态函数 `window` 和 `percentChange`。（**2.00.10**）
 * 支持多个分区表之间进行连接。（**2.00.10**）
@@ -683,6 +690,17 @@
 
 ### 故障修复
 
+* Windows 系统下，通过 `files` 函数查询大于 2GB 的文件时，返回的 fileSize 值不正确。（**2.00.10.1**）
+* 在高可用集群下，使用 `addFunctionView` 时，若序列化出现问题，则不会清理序列化未完成的函数。（**2.00.10.1**）
+* 在高可用集群下，一个控制节点添加使用了插件的函数视图时，会导致其它控制节点宕机。（**2.00.10.1**）
+* 拥有 DB_MANAGE 权限的用户无法给其它用户赋权。（**2.00.10.1**）
+* 添加节点后，进行备份可能会报错。（**2.00.10.1**）
+* 查询采用 COMPO 分区的分布式表，若查询语句满足以下条件，则查询结果可能不正确：（**2.00.10.1**）
+  * select 不使用聚合函数、序列相关函数、row reduce 函数（如 rowSum）、填充函数（如 ffill）
+  * 使用了 pivot by 语句，且 pivot by 的列是 COMPO 分区列中除最后一个分区列外的其他列。
+* 2.00.10版本，使用例如 `... and not like(id, '%a')，not like, not in, not between` 的语句时，解析会出现报错。（**2.00.10.1**）
+* `createReactiveStateEngine` 的 *metrics* 参数以 tuple 形式给出，且 tuple 中包含返回多个值的函数或表达式时，会出现 server 崩溃。（**2.00.10.1**）
+* 当 symbolbase 文件出现问题时，再次加载该文件会导致 server 崩溃。（**2.00.10.1**）
 * 当查询分布式表的数据量比较大时，若查询语句中使用了 `TOP` 和 `GROUP BY`，则可能报错找不到某列。（**2.00.10**）
 * SQL 查询时报错找不到某个列，但列名可能不正确。（**2.00.10**）
 * 向列数较多的分布式表的一个分区写入较多数据时，可能出现因写入失败而导致系统崩溃的问题。（**2.00.10**）
