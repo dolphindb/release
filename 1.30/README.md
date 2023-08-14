@@ -654,17 +654,17 @@ Release Date: 2020-12-29
 
 - A user-defined function allows the default value of a parameter to be an empty tuple (represented as []). (**1.30.22.1**)
 
-- Added user access control to the loadText function. (**1.30.22.1**)
+- Added user access control to the `loadText` function. (**1.30.22.1**)
 
 - Modifications made to user access privileges are logged. (**1.30.22.1**)
 
-- The resample function can take a matrix with non-strictly increasing row indices as an input argument.  (**1.30.22.1**)
+- The `resample` function can take a matrix with non-strictly increasing row indices as an input argument.  (**1.30.22.1**)
 
 - Optimized the join behavior for tuples. (**1.30.22.1**)
 
-- A ternary function can be passed as an input argument to the template accumulate in a reactive state engine. (**1.30.22.1**)
+- A ternary function can be passed as an input argument to the template `accumulate` in a reactive state engine. (**1.30.22.1**)
 
-- Added parameter validation to streamEngineParser: If triggeringPattern='keyCount', then keepOrder must be true. (**1.30.22.1**)
+- Added parameter validation to `streamEngineParser`: If _triggeringPattern_='keyCount', then _keepOrder_ must be true. (**1.30.22.1**)
 
 - Configuration parameters *localExecutors* and *maxDynamicLocalExecutor* were discarded. (**1.30.22**)
 
@@ -1267,7 +1267,7 @@ Release Date: 2020-12-29
 
 - On Windows, the files function returned inaccurate fileSize values for files exceeding 2 GB. (**1.30.22.1**)
 
-- In a high-availability cluster, if an error occurred during serialization when using addFunctionView, the function was not cleared from memory. (**1.30.22.1**)
+- In a high-availability cluster, if an error occurred during serialization when using `addFunctionView`, the function was not cleared from memory. (**1.30.22.1**)
 
 - In a high-availability cluster, adding a function view containing plugin methods to a controller caused failures in other controllers. (**1.30.22.1**)
 
@@ -1277,15 +1277,13 @@ Release Date: 2020-12-29
 
 - Queries on DFS tables using COMPO partitioning may return incorrect results if the query: (**1.30.22.1**)
 
-  - Did not use aggregate functions, order-sensitive functions, row reduce functions (such as rowSum), or fill functions (such as ffill) in the select statement.
+  - Did not use aggregate functions, order-sensitive functions, row reduce functions (such as `rowSum`), or fill functions (such as `ffill`) in the `select` statement.
 
-  -  Used one of the partitioning columns (except the last one for COMPO partitioning) as a pivot-by column.
-  
+  - Used one of the partitioning columns (except the last one for COMPO partitioning) as a pivot-by column.
 
 - If an error occurred in a symbol base file, reloading the file caused server crash. (**1.30.22.1**)
 
-- Specifying a tuple containing functions or expressions with multiple returns for the metrics parameter of createReactiveStateEngine caused the server to crash. (**1.30.22.1**)
-
+- Specifying a tuple containing functions or expressions with multiple returns for the _metrics_ parameter of `createReactiveStateEngine` caused the server to crash. (**1.30.22.1**)
 
 - When querying a large DFS table using the SQL keyword TOP or GROUP BY, an error was potentially raised. (**1.30.22**)
 
