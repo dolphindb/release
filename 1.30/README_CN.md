@@ -27,7 +27,7 @@
 
 发行日期： 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.zip) | 
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.1.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.1_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.1_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.1.zip) |
