@@ -4,15 +4,40 @@ This file provides an overview of the new features and changes (including update
 
 Please review the file carefully to understand how your current setup may be affected by upgrading to this version.
 
+- [Version 2.00.10.1](#version-200101)
 - [Version 2.00.10](#version-20010)
-  - [Changes Made to Match Industry Practices or SQL Standards](#changes-made-to-match-industry-practices-or-sql-standards)
-  - [System Impacts Caused by Bug Fixes](#system-impacts-caused-by-bug-fixes)
-  - [Plguins](#plguins)
+- [Version 1.30.22.1](#version-130221)
 - [Version 1.30.22](#version-13022)
-  - [Changes Made to Match Industry Practices or SQL Standards](#changes-made-to-match-industry-practices-or-sql-standards-1)
-  - [System Impacts Caused by Bug Fixes](#system-impacts-caused-by-bug-fixes-1)
-  - [Plguins](#plguins-1)
 
+## Version 2.00.10.1
+
+### Changes Made to Match Industry Practices or SQL Standards
+
+- Changed the behaviors of the `join`, `join!` and `append!` functions when merging two tuples.
+
+    ```
+    a =  [[1,2],[3,4]]
+    b = [[5,6],[7,8]]
+    a.join(b)
+    //Output (previous versions): ([1,2],[3,4],([5,6],[7,8]))
+    //Output (since this version): ([1,2],[3,4],[5,6],[7,8])
+    
+    a.join!(b)
+    a
+    //Output (previous versions):([1,2],[3,4],([5,6],[7,8]))
+    //Output (since this version): ([1,2],[3,4],[5,6],[7,8])
+    
+    a.append!(b)
+    a
+    //Output (previous versions):([1,2],[3,4],([5,6],[7,8]))
+    //Output (since this version): ([1,2],[3,4],[5,6],[7,8])
+  ```
+
+### System Impacts Caused by Bug Fixes
+
+- When the *triggeringPattern* parameter of `streamEngineParser` is set to ‘keyCount', the *keepOrder* parameter now must be set to true. Setting *triggeringPattern* = 'keyCount’ with *keepOrder* = false raises an error.
+
+- When using the `accumulate` higher-order function in the *metrics* parameter of `createReactiveStateEngine`, the *consistent* parameter of `accumulate` can no longer be set to false. 
 
 ## Version 2.00.10
 
@@ -250,6 +275,37 @@ Please review the file carefully to understand how your current setup may be aff
 - Removed methods `httpCreateSubJob`,` httpCreateMultiParserSubJob`, `httpCancelSubJob` and `httpGetJobStat` from the httpClient plugin.
 
 ---
+
+## Version 1.30.22.1
+
+### Changes Made to Match Industry Practices or SQL Standards
+
+- Changed the behaviors of the `join`, `join!` and `append!` functions when merging two tuples.
+
+    ```
+    a =  [[1,2],[3,4]]
+    b = [[5,6],[7,8]]
+    a.join(b)
+    //Output (previous versions): ([1,2],[3,4],([5,6],[7,8]))
+    //Output (since this version): ([1,2],[3,4],[5,6],[7,8])
+    
+    a.join!(b)
+    a
+    //Output (previous versions):([1,2],[3,4],([5,6],[7,8]))
+    //Output (since this version): ([1,2],[3,4],[5,6],[7,8])
+    
+    a.append!(b)
+    a
+    //Output (previous versions):([1,2],[3,4],([5,6],[7,8]))
+    //Output (since this version): ([1,2],[3,4],[5,6],[7,8])
+  ```
+
+### System Impacts Caused by Bug Fixes
+
+- When the *triggeringPattern* parameter of `streamEngineParser` is set to ‘keyCount', the *keepOrder* parameter now must be set to true. Setting *triggeringPattern* = 'keyCount’ with *keepOrder* = false raises an error.
+
+- When using the `accumulate` higher-order function in the *metrics* parameter of `createReactiveStateEngine`, the *consistent* parameter of `accumulate` can no longer be set to false. 
+
 ## Version 1.30.22
 
 ### Changes Made to Match Industry Practices or SQL Standards
