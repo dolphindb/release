@@ -15,15 +15,15 @@
 
 ## DolphinDB Server
 
-Version: **1.30.22** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-1) with 1.30.21 &nbsp;&nbsp;&nbsp; For details, see [Compatibility Changes in Version 1.30.22](https://github.com/dolphindb/release/blob/master/compatibility_changes.md#version-13022)
+Version: **1.30.22** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-1) with 1.30.21  &nbsp;&nbsp;&nbsp; For details, see [Compatibility Changes in Version 1.30.22](https://github.com/dolphindb/release/blob/master/compatibility_changes.md#version-13022)
 
 Release Date: 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22_JIT.zip)
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.1.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.1_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.1_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.1.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.1_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.22.zip)
 
 Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.20
@@ -34,7 +34,7 @@ Release Date: 2023-02-15
 [Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.6_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.21.6_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.6.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.6_JIT.zip)
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.21.6_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.21.1.zip)
 
 Version: **1.30.20** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.19
@@ -247,11 +247,11 @@ Release Date: 2020-12-29
 - Added configuration parameter *disableCoreDumpOnShutdown* to specify whether to generate core dumps on a graceful shutdown. It is only supported on Linux. (**1.30.22**)
   
 - Added configuration parameter *allowMissingPartitions* to specify the behavior when incoming data contains new partition values that do not match any existing partitions. (**1.30.22**)
-  
-- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**1.30.22**)
 
 - Added function `listRemotePlugins` to obtain a list of available plugins. Added function `installPlugin` to download a plugin. (**1.30.22**)
-
+  
+- Added configuration parameter *volumeUsageThreshold* to set the upper limit of the disk usage of a data node. (**1.30.22**)
+  
 - Added function `writeLogLevel` to write logs of the specified level to the log file. (**1.30.22**)
   
 - Added function `sessionWindow` to group time-series data based on the session intervals. (**1.30.22**)
@@ -651,6 +651,20 @@ Release Date: 2020-12-29
 
 
 ### Improvements
+
+- A user-defined function allows the default value of a parameter to be an empty tuple (represented as []). (**1.30.22.1**)
+
+- Added user access control to the loadText function. (**1.30.22.1**)
+
+- Modifications made to user access privileges are logged. (**1.30.22.1**)
+
+- The resample function can take a matrix with non-strictly increasing row indices as an input argument.  (**1.30.22.1**)
+
+- Optimized the join behavior for tuples. (**1.30.22.1**)
+
+- A ternary function can be passed as an input argument to the template accumulate in a reactive state engine. (**1.30.22.1**)
+
+- Added parameter validation to streamEngineParser: If triggeringPattern='keyCount', then keepOrder must be true. (**1.30.22.1**)
 
 - Configuration parameters *localExecutors* and *maxDynamicLocalExecutor* were discarded. (**1.30.22**)
 
@@ -1250,6 +1264,28 @@ Release Date: 2020-12-29
 * STRING longer than 65535 bytes will be automatically converted to BLOB during serialization. (**1.30.1**)
 
 ### Issues Fixed
+
+- On Windows, the files function returned inaccurate fileSize values for files exceeding 2 GB. (**1.30.22.1**)
+
+- In a high-availability cluster, if an error occurred during serialization when using addFunctionView, the function was not cleared from memory. (**1.30.22.1**)
+
+- In a high-availability cluster, adding a function view containing plugin methods to a controller caused failures in other controllers. (**1.30.22.1**)
+
+- Users with DB_MANAGE privilege failed to grant permissions to other users. (**1.30.22.1**)
+
+- Adding a node may cause backup errors. (**1.30.22.1**)
+
+- Queries on DFS tables using COMPO partitioning may return incorrect results if the query: (**1.30.22.1**)
+
+  - Did not use aggregate functions, order-sensitive functions, row reduce functions (such as rowSum), or fill functions (such as ffill) in the select statement.
+
+  -  Used one of the partitioning columns (except the last one for COMPO partitioning) as a pivot-by column.
+  
+
+- If an error occurred in a symbol base file, reloading the file caused server crash. (**1.30.22.1**)
+
+- Specifying a tuple containing functions or expressions with multiple returns for the metrics parameter of createReactiveStateEngine caused the server to crash. (**1.30.22.1**)
+
 
 - When querying a large DFS table using the SQL keyword TOP or GROUP BY, an error was potentially raised. (**1.30.22**)
 
