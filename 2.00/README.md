@@ -479,7 +479,7 @@ Release Date: 2021-07-31
 
 - Modifications made to user access privileges are logged. (**2.00.10.1**)
 
-- The resample function can take a matrix with non-strictly increasing row indices as an input argument.  (**2.00.10.1**)
+- The resample function can take a matrix with non-strictly increasing row labels as an input argument.  (**2.00.10.1**)
 
 - Optimized the join behavior for tuples. (**2.00.10.1**)
 
