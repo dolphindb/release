@@ -1733,7 +1733,7 @@ Release Date: 2020-12-29
 
 - Added "refresh" option to refresh variables. (**1.30.22.1**)
 
-- Added "Synchronize module to server" option to synchronize a module to server and save it as an encrypted *.dom* file. (**1.30.22.1**)
+- Added "Encrypt and synchronize to server" option to synchronize a module to server and save it as an encrypted *.dom* file. (**1.30.22.1**)
 
 - Support `select NULL` statement.  (**1.30.22.1**)
 
