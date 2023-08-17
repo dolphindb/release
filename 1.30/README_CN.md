@@ -1266,7 +1266,7 @@
     JOIN、FULL JOIN、LEFT SEMI JOIN、DECIMAL128、DATEHOUR、IS、CREATE DATABASE、create database、inner join、sub、full outer join、right outer join、left outer join、drop table、if exists 、drop database、update...set、alter xxx drop/rename/add、create table、nulls first
 
   * 新增 refresh 选项 ，支持刷新功能。（**1.30.22.1**）
-  * 新增加密同步选项“Synchronize module to server”，支持同步 module 到 server 并保存为加密 .dom 文件。（**1.30.22.1**）
+  * 新增加密同步选项“Encrypt and synchronized to server”，支持同步 module 到 server 并保存为加密 .dom 文件。（**1.30.22.1**）
   * 优化了 #include 导入脚本的逻辑。（**1.30.22.1**）
   * 优化了 SSL 功能相关的报错信息。（**1.30.22.1**）
   * 修复了同步 modules 时目标路径错误的问题。（**1.30.21.3**）
