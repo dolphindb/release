@@ -179,7 +179,7 @@
 
 **功能优化**
 
-* 优化了部分报错信息。（**1.30.22**）
+* 优化了部分报错信息。
 * 加强了 mongodb::aggregate, mongodb::load, mongodb::connect 的参数校检。
 
 ## MQTT
