@@ -5,7 +5,6 @@
     - [New Features](#new-features)
     - [Improvements](#improvements)
     - [Issues Fixed](#issues-fixed)
-  - [Web-Based User Interface](#web-based-user-interface)
 
 ## DolphinDB Server
 
@@ -972,7 +971,7 @@ Release Date: 2021-07-31
 
 - Adding a node may cause backup errors. (**2.00.10.1**)
 
-- Queries on DFS tables using COMPO partitioning may return incorrect results if the query: (**2.00.10.1**)
+- Queries on DFS tables using COMPO partitioning may cause data loss if the query: (**2.00.10.1**)
 
   - Did not use aggregate functions, order-sensitive functions, row reduce functions (such as `rowSum`), or fill functions (such as `ffill`) in the select statement.
 

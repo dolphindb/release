@@ -1275,7 +1275,7 @@ Release Date: 2020-12-29
 
 - Adding a node may cause backup errors. (**1.30.22.1**)
 
-- Queries on DFS tables using COMPO partitioning may return incorrect results if the query: (**1.30.22.1**)
+- Queries on DFS tables using COMPO partitioning may cause data loss if the query: (**1.30.22.1**)
 
   - Did not use aggregate functions, order-sensitive functions, row reduce functions (such as `rowSum`), or fill functions (such as `ffill`) in the `select` statement.
 
