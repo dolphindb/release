@@ -1377,6 +1377,13 @@
 
 ### Java API
 
+  - 新功能：新增支持通过字符串构造 BasicDecimal32, BasicDecimal64型数据。（**1.30.22.3**）
+  - 新功能：新增支持调用 fastjson 库的 JSONObject.toJSONString 方法序列化 Java API 中定义的 DolphinDB 数据类型。（**1.30.22.3**）
+  - 新功能：BasicDecimal32Vector, BasicDecimal64Vector 类的 add 方法新增支持调用 String 类型数据。（**1.30.22.3**）
+  - 新功能：BasicDecimal32Vector, BasicDecimal64Vector 类的 addRange 方法新增支持调用 String 类型数组类型数据。（**1.30.22.3**）
+  - 功能优化：轻量化 DolphinDB Java API 依赖的 jar 包。（**1.30.22.3**）
+  - 功能优化：tableAppender 调整名字为 AutoFitTableAppender。（**1.30.22.3**）
+  - 功能优化：优化 ErrorCodeInfo 代码，其属性修改为 public 访问修饰符。（**1.30.22.3**）
   - 新功能：新增开启高可用后，API 将优先随机连接低负载节点。（**1.30.22.2**）
   - 新功能：部分数据类型新增获取数值的方法。（**1.30.22.2**）
 
