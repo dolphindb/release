@@ -18,11 +18,11 @@
 
 发行日期： 2023-07-20
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.1.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.1_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.1_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.1.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.1_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.2_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.2_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.2_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.10.zip)|
 
 版本号： 2.00.9 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.8 和 1.30.20
@@ -128,6 +128,13 @@
 
 ### 新功能
 
+* 新增函数 `parseJsonTable`，用于将 JSON 对象解析为内存表。（**2.00.10.2**）
+* 新增函数 `loadModuleFromScript`，用于通过脚本自动解析包含模块定义的字符串并加载模块。（**2.00.10.2**）
+* `transaction` 语句支持 MVCC 表。（**2.00.10.2**）
+* 新增配置 `tcpUserTimeout`，可以设置套接字选项 TCP_USER_TIMEOUT。（**2.00.10.2**）
+* 新增函数 `getSlaveReplicationSlaveQueueStatus`，用于获取从集群每个执行队列的任务执行状态。（**2.00.10.2**）
+* 新增配置项 `clusterReplicationQueue`，用于设置控制节点上执行队列的数量。（**2.00.10.2**）
+* 新增配置项 `clusterReplicationWorkerNum`，用于设置每个数据节点上执行任务的工作线程数。（**2.00.10.2**）
 * 支持多个分布式表进行右连接（`right join`）。（**2.00.10**）
 * 新增配置项 *memLimitOfTempResult* 及函数 `setMemLimitOfTempResult`，设置表连接操作中产生的每个临时数据表允许占用的内存上限。（**2.00.10**）
 * 新增配置项 *tempResultsSpillDir*，指定计算过程中产生的中间结果表的临时存储目录。（**2.00.10**）
@@ -334,6 +341,17 @@
 
 ### 改进
 
+* 优化计算节点事务机制。（**2.00.10.2**）
+* `rmdir` 新增参数 *keepRootDir*，可以指定删除文件时是否保留根目录。（**2.00.10.2**）
+* 使用 `license` 函数时如果不指定文件名，将获取内存中的 license 信息。（**2.00.10.2**）
+* 使用 `getClusterDFSTables` 函数能够显示表所有者创建的表，无论该表所有者对其创建的表是否都有读写权限。（**2.00.10.2**）
+* 通过文件拷贝方式可以备份整个空表。（**2.00.10.2**）
+* 优化异步复制功能（**2.00.10.2**）：
+  * 启动异步复制后，从集群可以对不参与异步复制的数据库执行各种操作。
+  * 优化从集群拉取主集群任务数据的时机。
+* 改进错误信息"<DataNodeNotAvail>"以提供更详细的信息。（**2.00.10.2**）
+* 优化订阅（`subscribeTable`）的输出日志。（**2.00.10.2**）
+* 优化 TSDB 并发读写性能。（**2.00.10.2**）
 * 自定义函数支持空的 tuple（[]）作为参数默认值。（**2.00.10.1**）
 * 在使用 `loadText` 函数时，添加对用户权限的检查机制。（**2.00.10.1**）
 * 记录用户权限发生变更的信息到日志中。（**2.00.10.1**）
@@ -690,6 +708,21 @@
 
 ### 故障修复
 
+* 高可用环境下，设置权限导致控制节点内存泄露。（**2.00.10.2**）
+* 单节点模式下，TSDB 写入时发生 OOM，导致事务状态不一致。（**2.00.10.2**）
+* parseExpr 无法解析 JSON 对象中的空值“{}”。（**2.00.10.2**）
+* createReactiveStateEngine 的 *dummyTable* 参数直接赋值一个流表（streamTable(…)）时，访问创建引擎的句柄会造成连接断开。（**2.00.10.2**）
+* 恢复数据到一个新的数据库时会报错“getSubChunks failed, path'/xx' does not exist”。（**2.00.10.2**）
+* `loc` 函数通过行、列标签获取矩阵元素的结果不正确，此为2.00.10版本引入的问题。（**2.00.10.2**）
+* 恢复备份时，因未使用表结构中的 extra 字段导致 DECIMAL 数据的 scale 丢失。（**2.00.10.2**）
+* 当 `database` 的 *atomic*='CHUNK' 时，若一个事务涉及多个 chunk，可能出现元数据版本不一致。（**2.00.10.2**）
+* 将非字符串变量传入 `interval` 函数的 *label* 参数，导致服务器崩溃。（**2.00.10.2**）
+* 查询以时间列进行值分区的表时，通过 `where` 条件对分区列进行过滤的耗时比较长，此为2.00.10版本引入的问题。（**2.00.10.2**）
+* `mprod` 函数的中间结果溢出导致服务器宕机。（**2.00.10.2**）
+* 当 `in(X,Y)` 中 *Y* 为集合且 *Y* 包含了超过11位数的长整型时，结果不正确。（**2.00.10.2**）
+* 并发执行 `restore` 事务或 `restore` 事务与其他事务并发执行时，重启后可能导致元数据不正确。（**2.00.10.2**）
+* 修复了响应式状态引擎在输入数据分组数多于1024个时应用 `genericStateIterate` 出现错误结果的问题。（**2.00.10.2**）
+* 查询分布式表时对某些列使用了带有”@JIT”标识的自定义因子函数，导致服务器宕机。（**2.00.10.2**）
 * 查下 TSDB 引擎下的分布式标，若查询语句同时使用了 context by 和 where，且 context by 的列包含了sortKey 时，会报错：Unrecognized column name。（**2.00.10.1**）
 * Windows 系统下，通过 `files` 函数查询大于 2GB 的文件时，返回的 fileSize 值不正确。（**2.00.10.1**）
 * 在高可用集群下，使用 `addFunctionView` 时，若序列化出现问题，则不会清理序列化未完成的函数。（**2.00.10.1**）
