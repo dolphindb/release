@@ -19,11 +19,11 @@ Version: **1.30.22** &nbsp;&nbsp;&nbsp; [Compatibility Level 1](https://github.c
 
 Release Date: 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.1.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.1_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.1_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.1.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.1_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.2_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V1.30.22.2_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V1.30.22.2_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V1.30.22.zip)
 
 Version: **1.30.21** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 1.30.20
@@ -241,6 +241,20 @@ Release Date: 2020-12-29
 
 
 ### New Features
+
+<!--
+- Added function `loadModuleFromScript` to parse a module dynamically. (**1.30.22.3**)
+-->
+
+- Added function `parseJsonTable` to parse a JSON object to an in-memory table. (**1.30.22.2**)
+
+- Added new configuration parameter *tcpUserTimeout* to set the socket option TCP_USER_TIMEOUT. (**1.30.22.2**)
+
+- Added function `getSlaveReplicationQueueStatus` to obtain the status of each execution queue in the slave clusters. (**1.30.22.2**)
+
+- Added configuration parameter *clusterReplicationQueue* to set the number of execution queues on each controller of the slave clusters. (**1.30.22.2**)
+
+- Added configuration parameter *clusterReplicationWorkerNum* to set the number of workers on each data node of the slave clusters. (**1.30.22.2**)
 
 - Added configuration parameter *enableCoreDump* to enable core dumps. It is only supported on Linux. (**1.30.22**)
 
@@ -511,7 +525,7 @@ Release Date: 2020-12-29
 
 * Added new function `oneHot` to implement one hot encoding. (**1.30.15**)
 
-* Added new command `setAtomicLevel` to set the *atomic* parameter of a database. If *atomic* parameter is set to ‘CHUNK’, it means concurrent writes to a chunk are allowed, but the atomicity at transaction level is no longer guaranteed. Only the atomicity at chunk level is guaranteed. (**1.30.15**)
+* Added new command `setAtomicLevel` to set the *atomic* parameter of a database. If *atomic* parameter is set to 'CHUNK', it means concurrent writes to a chunk are allowed, but the atomicity at transaction level is no longer guaranteed. Only the atomicity at chunk level is guaranteed. (**1.30.15**)
 
 * Streaming engines `ReactiveStateEngine`, `AnomalyDetectionEngine`, `SessionWindowEngine`, `DailyTimeSeriesEngine` and `TimeSeriesEnginereactive` support high availability. (**1.30.14**)
 
@@ -651,6 +665,24 @@ Release Date: 2020-12-29
 
 
 ### Improvements
+
+<!--
+- The `getClusterDFSTables` function returns all tables created by the user regardless of the table permissions. (**1.30.22.3**)
+-->
+
+- Optimized transactions on compute nodes. (**1.30.22.2**)
+
+- Added parameter *keepRootDir* to function `rmdir` to specify whether to keep the root directory when deleting files. (**1.30.22.2**)
+
+- The `license` function obtains license information from memory by default. (**1.30.22.2**)
+
+- An empty table can be backed up by copying files. (**1.30.22.2**)
+
+- Optimized asynchronous replication (**1.30.22.2**):
+  - After asynchronous replication is enabled globally, the system now allows operations on slave cluster databases which are not included in the replication scope.
+  - The mechanism for pulling replication tasks from the master to the slave clusters has been improved.
+
+- \<DataNodeNotAvail> error message now provides more details. (**1.30.22.2**)
 
 - A user-defined function allows the default value of a parameter to be an empty tuple (represented as []). (**1.30.22.1**)
 
@@ -1121,7 +1153,7 @@ Release Date: 2020-12-29
 
 * DURATION window is supported in some sliding window functions such as `msum` with an indexed matrix or indexed series. (**1.30.14**)
 
-* Added an optional parameter *atomic* to function `database`. If *atomic* parameter is set to ‘CHUNK’, it means concurrent writes to a partition (chunk) are allowed, but the atomicity at transaction level is no longer guaranteed. Only the atomicity at chunk level is guaranteed. (**1.30.14**)
+* Added an optional parameter *atomic* to function `database`. If *atomic* parameter is set to 'CHUNK', it means concurrent writes to a partition (chunk) are allowed, but the atomicity at transaction level is no longer guaranteed. Only the atomicity at chunk level is guaranteed. (**1.30.14**)
 
 * Added new parameter *forceTriggerTime* to functions `createTimeSeriesEngine` and `createDailyTimeSeriesEngine`. (**1.30.13**)
 
@@ -1265,6 +1297,32 @@ Release Date: 2020-12-29
 
 ### Issues Fixed
 
+<!--
+- Setting user access in a high-availability cluster led to memory leaks on the controller. (**1.30.22.3**)
+
+- The `parseExpr` function failed to parse the empty value "{}" in a JSON object. (**1.30.22.3**)
+
+- When passing a stream table to the parameter *dummyTable* of function `createReactiveStateEngine`, accessing the engine handle caused a disconnection. (**1.30.22.3**)
+
+- The result of `in(X,Y)` was incorrect when Y was a set that contains a LONG value with more than 11 digits. (**1.30.22.3**)
+-->
+
+- An error message "getSubChunks failed, path'/xx' does not exist" was reported when restoring data to a newly-created database. (**1.30.22.2**)
+
+- The elements accessed based on labels by `loc` function were incorrect. This issue was introduced in version 1.30.22. (**1.30.22.2**)
+
+- Scale loss occurred when restoring DECIMAL data. (**1.30.22.2**)
+
+- If the parameter *atomic* of function `database` was set to 'CHUNK', the versions of metadata on the controller and data nodes may be inconsistent if a transaction involved multiple chunks. (**1.30.22.2**)
+
+- Passing a non-string variable to the parameter *label* of function `interval` crashed the server. (**1.30.22.2**)
+
+- For a table partitioned by temporal values, queries with where conditions on the partitioning column were slow. This issue was introduced in version 1.30.22. (**1.30.22.2**)
+
+- The overflowed intermediate result of function `mprod` caused server crash. (**1.30.22.2**)
+
+- Concurrent execution of restore (and other) transactions may result in inconsistent metadata after server restart. (**1.30.22.2**)
+
 - On Windows, the files function returned inaccurate fileSize values for files exceeding 2 GB. (**1.30.22.1**)
 
 - In a high-availability cluster, if an error occurred during serialization when using `addFunctionView`, the function was not cleared from memory. (**1.30.22.1**)
@@ -1287,7 +1345,7 @@ Release Date: 2020-12-29
 
 - When querying a large DFS table using the SQL keyword TOP or GROUP BY, an error was potentially raised. (**1.30.22**)
 
-- When a SQL query specified a column name that couldn’t be recognized, the error message returned contained an incorrect column name instead of the actual unrecognized column name from the query. (**1.30.22**)
+- When a SQL query specified a column name that couldn't be recognized, the error message returned contained an incorrect column name instead of the actual unrecognized column name from the query. (**1.30.22**)
 
 - Failures to write to a partition of a DFS table with many columns could cause the server to crash. (**1.30.22**)
 
@@ -1437,7 +1495,7 @@ Release Date: 2020-12-29
 
 - For a DFS table value-partitioned by month,  an incorrect result was output when filtering the data on the first day of a month by the `where` condition. (**1.30.21.3**)
 
-- Server crashed when using `order by` in conjunction with `limit` to sort column “DATE (case-sensitive)” in reverse order. (**1.30.21.3**)
+- Server crashed when using `order by` in conjunction with `limit` to sort column "DATE (case-sensitive)" in reverse order. (**1.30.21.3**)
 
 - An incorrect result was output when performing time-series aggregate functions (e.g., `pre`, `rank`, etc.) on multiple columns. (**1.30.21.3**)
 
@@ -1579,7 +1637,7 @@ Release Date: 2020-12-29
 
 - Function `cast` returned empty when converting a vector of STRING type to a tuple. (**1.30.19**)
 
-- When aggregating multiple INT128 columns of an in-memory table, an error “The function min for reductive operations does not support data type INT128” occurred. (**1.30.19**)
+- When aggregating multiple INT128 columns of an in-memory table, an error "The function min for reductive operations does not support data type INT128" occurred. (**1.30.19**)
 
 - `getFunctionView` did not return some function view bodies. (**1.30.19**)
 
@@ -1621,7 +1679,7 @@ Release Date: 2020-12-29
 
 - Inconsistent STRING columns between replicas after online recovery. (**1.30.19**)
 
-- When passing TIME type data to *index* of `resample` and setting *origin*=”end” and *rule*=”D”, an error "Invalid value for HourOfDay (valid values 0 - 23): 39" was reported. (**1.30.19**)
+- When passing TIME type data to *index* of `resample` and setting *origin*="end" and *rule*="D", an error "Invalid value for HourOfDay (valid values 0 - 23): 39" was reported. (**1.30.19**)
 
 - An error was reported when administrators (except the super admin) granted/denied/revoked permissions to themselves. (**1.30.19**)
 
@@ -1942,7 +2000,7 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 - Fixed incorrect month data when Java API parses month(0)~month(11) returned from server. (**1.30.21.1**)
 
-- Fixed an issue where “connection has been closed” is reported when array vectors are written to a DFS table with `MultithreadedTableWriter`. (**1.30.21.1**)
+- Fixed an issue where "connection has been closed" is reported when array vectors are written to a DFS table with `MultithreadedTableWriter`. (**1.30.21.1**)
 
 - Fixed data corruption when the size of results exceeds 268,435,455 (i.e., (2^32-1)/16 ). (**1.30.21.1**)
 
@@ -1997,17 +2055,17 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 - Improvement: Enhanced message texts. (**1.30.22.1**)
 
-- Bugfix: Fixed an issue with the order of execution for queries containing multiple “where“ conditions. (**1.30.22.1**)
+- Bugfix: Fixed an issue with the order of execution for queries containing multiple "where" conditions. (**1.30.22.1**)
 
 - Bugfix: Fixed memory leak when uploading DataFrames containing DECIMAL columns. (**1.30.22.1**)
 
 - New feature: The MultithreadedTableWriter now supports automatic reconnection when writing to stream tables. (**1.30.22.1**)
 
-- Improvement: The class “session” has been renamed to “Session”. The old class name is still supported for backwards compatibility. (**1.30.22.1**)
+- Improvement: The class "session" has been renamed to "Session". The old class name is still supported for backwards compatibility. (**1.30.22.1**)
 
-- Improvement: The class previously named “tableAppender” has been renamed to “TableAppender”. The old class name is still supported for backwards compatibility. (**1.30.22.1**)
+- Improvement: The class previously named "tableAppender" has been renamed to "TableAppender". The old class name is still supported for backwards compatibility. (**1.30.22.1**)
 
-- Improvement: The class previously named “tableUpsert” has been renamed to “TableUpserter”. The old class name is still supported for backwards compatibility. (**1.30.22.1**)
+- Improvement: The class previously named "tableUpsert" has been renamed to "TableUpserter". The old class name is still supported for backwards compatibility. (**1.30.22.1**)
 
 - New feature: A `__DolphinDB_Type__` attribute can now be specified when uploading DataFrames to explicitly cast columns into particular DolphinDB data types. (**1.30.22.1**)
 
@@ -2037,7 +2095,7 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 - Fixed a segmentation error when downloading BLOB sets using the PROTOCOL_DDB protocol. （**1.30.21.2**）
 
-- Fixed an issues where a session variable named “db“ was overwritten when calling the `loadTableBySQL` method. （**1.30.21.2**）
+- Fixed an issues where a session variable named "db" was overwritten when calling the `loadTableBySQL` method. （**1.30.21.2**）
 
 - Fixed an issue where the process would be stuck when data was not retrieved after calling the `addTask` method of DBConnectionPool. （**1.30.21.2**）
 

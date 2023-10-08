@@ -12,11 +12,11 @@ Version: **2.00.10** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.c
 
 Release Date: 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.1.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.1_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.1_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.1.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.1_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.2.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.2_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.2_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.2.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.2_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V2.00.10.zip)
 
 Version: **2.00.9** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.8/1.30.20
@@ -93,6 +93,20 @@ Release Date: 2021-07-31
 
 
 ### New Features
+
+- Added function `parseJsonTable` to parse a JSON object to an in-memory table. (**2.00.10.2**)
+
+- Added function `loadModuleFromScript` to parse a module dynamically. (**2.00.10.2**)
+
+- The `transaction` statement can be used on MVCC tables. (**2.00.10.2**)
+
+- Added new configuration parameter *tcpUserTimeout* to set the socket option TCP_USER_TIMEOUT. (**2.00.10.2**)
+
+- Added function `getSlaveReplicationQueueStatus` to obtain the status of each execution queue in the slave clusters. (**2.00.10.2**)
+
+- Added configuration parameter *clusterReplicationQueue* to set the number of execution queues on each controller of the slave clusters. (**2.00.10.2**)
+
+- Added configuration parameter *clusterReplicationWorkerNum* to set the number of workers on each data node of the slave clusters. (**2.00.10.2**)
 
 - Added support for `RIGHT JOIN` on multiple DFS tables. (**2.00.10**)
 
@@ -472,6 +486,26 @@ Release Date: 2021-07-31
 
 ### Improvements
 
+- Optimized transactions on compute nodes. (**2.00.10.2**)
+
+- Added parameter *keepRootDir* to function `rmdir` to specify whether to keep the root directory when deleting files. (**2.00.10.2**)
+
+- The `license` function obtains license information from memory by default. (**2.00.10.2**)
+
+- The `getClusterDFSTables` function returns all tables created by the user regardless of the table permissions. (**2.00.10.2**)
+
+- An empty table can be backed up by copying files. (**2.00.10.2**)
+
+- Optimized asynchronous replication (**2.00.10.2**):
+  - After asynchronous replication is enabled globally, the system now allows operations on slave cluster databases which are not included in the replication scope.
+  - The mechanism for pulling replication tasks from the master to the slave clusters has been improved.
+
+- \<DataNodeNotAvail> error message now provides more details. (**2.00.10.2**)
+
+- Optimized the output log of `subscribeTable`. (**2.00.10.2**)
+
+- Optimized the performance of concurrent read and write operations for the TSDB engine. (**2.00.10.2**)
+
 - A user-defined function allows the default value of a parameter to be an empty tuple (represented as []). (**2.00.10.1**)
 
 - Added user access control to the `loadText` function. (**2.00.10.1**)
@@ -500,7 +534,7 @@ Release Date: 2021-07-31
   
 - Enhanced support for standard SQL joins. The join column can be any column from tables or the column that is applied with functions or filtered by conditional expressions. (**2.00.10**)
   
-- Support LEFT JOIN, FULL JOIN, and INNER JOIN on two tables with one table’s join column of STRING type and the other table’s of integral type. (**2.00.10**)
+- Support LEFT JOIN, FULL JOIN, and INNER JOIN on two tables with one table's join column of STRING type and the other table's of integral type. (**2.00.10**)
   
 - Support SELECT NOT on DFS tables. (**2.00.10**)
   
@@ -528,11 +562,11 @@ Release Date: 2021-07-31
   
 - Added new parameters *defaultValues* and *allowNull* for function `mvccTable` to set the default values for columns and determine whether its columns can contain NULL values, respectively. It is now supported to modify column names and types, and delete columns of MVCC tables. (**2.00.10**)
   
-- For the “Status” column returned by function `getRecoveryTaskStatus`, the previous status “Finish” is now changed to “Finished”, “Abort” to “Aborted”. (**2.00.10**)
+- For the "Status" column returned by function `getRecoveryTaskStatus`, the previous status "Finish" is now changed to "Finished", "Abort" to "Aborted". (**2.00.10**)
   
 - Optimized graceful shutdown, before which all symbol bases will be flushed to the disk. (**2.00.10**)
   
-- Added inplace optimization fields, i.e., *inplaceOptimization* and *optimizedColumns*, when using `HINT_EXPLAIN` to check the execution plan of a GROUP BY clause when *algo* is “sort“. (**2.00.10**)
+- Added inplace optimization fields, i.e., *inplaceOptimization* and *optimizedColumns*, when using `HINT_EXPLAIN` to check the execution plan of a GROUP BY clause when *algo* is "sort". (**2.00.10**)
   
 - Function `addColumn` now can add a column of DECIMAL type. (**2.00.10**)
   
@@ -961,6 +995,36 @@ Release Date: 2021-07-31
 
 ### Issues Fixed
 
+- Setting user access in a high-availability cluster led to memory leaks on the controller. (**2.00.10.2**)
+
+- The `parseExpr` function failed to parse the empty value "{}" in a JSON object. (**2.00.10.2**)
+
+- When passing a stream table to the parameter *dummyTable* of function `createReactiveStateEngine`, accessing the engine handle caused a disconnection. (**2.00.10.2**)
+
+- An OOM error occurred when writing to TSDB databases in a single-machine cluster, causing inconsistent transaction states. (**2.00.10.2**)
+
+- An error message "getSubChunks failed, path'/xx' does not exist" was reported when restoring data to a newly-created database. (**2.00.10.2**)
+
+- The elements accessed based on labels by `loc` function were incorrect. This issue was introduced in version 2.00.10. (**2.00.10.2**)
+
+- Scale loss occurred when restoring DECIMAL data. (**2.00.10.2**)
+
+- If the parameter *atomic* of function `database` was set to 'CHUNK', the versions of metadata on the controller and data nodes may be inconsistent if a transaction involved multiple chunks. (**2.00.10.2**)
+
+- Passing a non-string variable to the parameter *label* of function `interval` crashed the server. (**2.00.10.2**)
+
+- For a table partitioned by temporal values, queries with where conditions on the partitioning column were slow. This issue was introduced in version 2.00.10. (**2.00.10.2**)
+
+- The overflowed intermediate result of function `mprod` caused server crash. (**2.00.10.2**)
+
+- The result of `in(X,Y)` was incorrect when Y was a set that contains a LONG value with more than 11 digits. (**2.00.10.2**)
+
+- Concurrent execution of restore (and other) transactions may result in inconsistent metadata after server restart. (**2.00.10.2**)
+
+- The reactive state engine returned incorrect results when calculating `genericStateIterate` on input data with over 1024 groups. (**2.00.10.2**)
+
+- Using a user-defined function with the "@JIT" identifier to query a DFS table caused server crash. (**2.00.10.2**)
+
 - On Windows, the files function returned inaccurate _fileSize_ values for files exceeding 2 GB. (**2.00.10.1**)
 
 - In a high-availability cluster, if an error occurred during serialization when using `addFunctionView`, the function was not cleared from memory. (**2.00.10.1**)
@@ -985,7 +1049,7 @@ Release Date: 2021-07-31
 
 - When querying a large DFS table using the SQL keyword TOP or GROUP BY, an error was potentially raised.  (**2.00.10**)
 
-- When a SQL query specified a column name that couldn’t be recognized, the error message returned contained an incorrect column name instead of the actual unrecognized column name from the query. (**2.00.10**)
+- When a SQL query specified a column name that couldn't be recognized, the error message returned contained an incorrect column name instead of the actual unrecognized column name from the query. (**2.00.10**)
 
 - Failures to write to a partition of a DFS table with many columns could cause the server to crash. (**2.00.10**)
 
@@ -1170,7 +1234,7 @@ Release Date: 2021-07-31
 
 - For a DFS table value-partitioned by month,  an incorrect result was output when filtering the data on the first day of a month by the `where` condition. (**2.00.9.3**)
 
-- Server crashed when using `order by` in conjunction with `limit` to sort column “DATE (case-sensitive)” in reverse order. (**2.00.9.3**)
+- Server crashed when using `order by` in conjunction with `limit` to sort column "DATE (case-sensitive)" in reverse order. (**2.00.9.3**)
 
 - For a DECIMAL column being rearranged by a `pivot by` clause, an incorrect result was output when performing distributed computing such as `rowSum` on a column specified in `select`. (**2.00.9.3**)
 
@@ -1344,7 +1408,7 @@ Release Date: 2021-07-31
 
 - Function `cast` returned empty when converting a vector of STRING type to a tuple. (**2.00.7**)
 
-- When aggregating multiple INT128 columns of an in-memory table, an error “The function min for reductive operations does not support data type INT128” occurred. (**2.00.7**)
+- When aggregating multiple INT128 columns of an in-memory table, an error "The function min for reductive operations does not support data type INT128" occurred. (**2.00.7**)
 
 - `getFunctionView` did not return some function view bodies. (**2.00.7**)
 
@@ -1392,7 +1456,7 @@ Release Date: 2021-07-31
 
 - Inconsistent STRING columns between replicas after online recovery. (**2.00.7**)
 
-- When passing TIME type data to *index* of `resample` and setting *origin*=”end” and *rule*=”D”, an error "Invalid value for HourOfDay (valid values 0 - 23): 39" was reported. (**2.00.7**)
+- When passing TIME type data to *index* of `resample` and setting *origin*="end" and *rule*="D", an error "Invalid value for HourOfDay (valid values 0 - 23): 39" was reported. (**2.00.7**)
 
 - An error was reported when administrators (except the super admin) granted/denied/revoked permissions to themselves. (**2.00.7**)
 
