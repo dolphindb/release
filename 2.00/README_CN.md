@@ -132,8 +132,8 @@
 * 新增函数 `loadModuleFromScript`，用于通过脚本自动解析包含模块定义的字符串并加载模块。（**2.00.10.2**）
 * `transaction` 语句支持 MVCC 表。（**2.00.10.2**）
 * 新增配置 `tcpUserTimeout`，可以设置套接字选项 TCP_USER_TIMEOUT。（**2.00.10.2**）
-* 新增函数 `getSlaveReplicationSlaveQueueStatus`，用于获取从集群每个执行队列的任务执行状态。（**2.00.10.2**）
-* 新增配置项 `clusterReplicationQueue`，用于设置控制节点上执行队列的数量。（**2.00.10.2**）
+* 新增函数 `getSlaveReplicationQueueStatus`，用于获取从集群的每个执行队列的任务执行状态。（**2.00.10.2**）
+* 新增配置项 `clusterReplicationQueue`，用于设置从集群的控制节点上执行队列的数量。（**2.00.10.2**）
 * 新增配置项 `clusterReplicationWorkerNum`，用于设置每个数据节点上执行任务的工作线程数。（**2.00.10.2**）
 * 支持多个分布式表进行右连接（`right join`）。（**2.00.10**）
 * 新增配置项 *memLimitOfTempResult* 及函数 `setMemLimitOfTempResult`，设置表连接操作中产生的每个临时数据表允许占用的内存上限。（**2.00.10**）
@@ -714,7 +714,7 @@
 * createReactiveStateEngine 的 *dummyTable* 参数直接赋值一个流表（streamTable(…)）时，访问创建引擎的句柄会造成连接断开。（**2.00.10.2**）
 * 恢复数据到一个新的数据库时会报错“getSubChunks failed, path'/xx' does not exist”。（**2.00.10.2**）
 * `loc` 函数通过行、列标签获取矩阵元素的结果不正确，此为2.00.10版本引入的问题。（**2.00.10.2**）
-* 恢复备份时，因未使用表结构中的 extra 字段导致 DECIMAL 数据的 scale 丢失。（**2.00.10.2**）
+* 恢复 DECIMAL 类型数据发生 scale 丢失。（**2.00.10.2**）
 * 当 `database` 的 *atomic*='CHUNK' 时，若一个事务涉及多个 chunk，可能出现元数据版本不一致。（**2.00.10.2**）
 * 将非字符串变量传入 `interval` 函数的 *label* 参数，导致服务器崩溃。（**2.00.10.2**）
 * 查询以时间列进行值分区的表时，通过 `where` 条件对分区列进行过滤的耗时比较长，此为2.00.10版本引入的问题。（**2.00.10.2**）
