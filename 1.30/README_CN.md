@@ -250,7 +250,7 @@
 ### 新功能
 
 * 新增配置 `tcpUserTimeout`，可以设置套接字选项 TCP_USER_TIMEOUT。（**1.30.22.2**）
-* 新增函数 `getSlaveReplicationQueueStatus`，用于获取从集群的每个执行队列的任务执行状态。（**1.30.22.2**）
+* 删除 `getClusterReplicationMetrics` 函数，引入新的 `getSlaveReplicationQueueStatus` 函数，用于检索从集群中每个执行队列的任务执行状态，并继承了 `getClusterReplicationMetrics` 函数的功能。（**1.30.22.2**）
 * 新增配置项 `clusterReplicationQueue`，用于设置从集群的控制节点上执行队列的数量。（**1.30.22.2**）
 * 新增配置项 `clusterReplicationWorkerNum`，用于设置每个数据节点上执行任务的工作线程数。（**1.30.22.2**）
 * 新增配置项 *enableCoreDump*，设置是否生成 coredump。仅支持 Linux 系统。（**1.30.22**）

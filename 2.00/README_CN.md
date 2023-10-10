@@ -132,7 +132,7 @@
 * 新增函数 `loadModuleFromScript`，用于通过脚本自动解析包含模块定义的字符串并加载模块。（**2.00.10.2**）
 * `transaction` 语句支持 MVCC 表。（**2.00.10.2**）
 * 新增配置 `tcpUserTimeout`，可以设置套接字选项 TCP_USER_TIMEOUT。（**2.00.10.2**）
-* 新增函数 `getSlaveReplicationQueueStatus`，用于获取从集群的每个执行队列的任务执行状态。（**2.00.10.2**）
+* 删除 `getClusterReplicationMetrics` 函数，引入新的 `getSlaveReplicationQueueStatus` 函数，用于检索从集群中每个执行队列的任务执行状态，并继承了 `getClusterReplicationMetrics` 函数的功能。（**2.00.10.2**）
 * 新增配置项 `clusterReplicationQueue`，用于设置从集群的控制节点上执行队列的数量。（**2.00.10.2**）
 * 新增配置项 `clusterReplicationWorkerNum`，用于设置每个数据节点上执行任务的工作线程数。（**2.00.10.2**）
 * 支持多个分布式表进行右连接（`right join`）。（**2.00.10**）
