@@ -1446,7 +1446,7 @@
   - `MultithreadedTableWriter` 对象写入内存表时，参数 *dbPath* 和 *tableName* 的设置发生改变：*dbPath* 需设置为空，*tableName* 需为内存表表名。（**1.30.19.1**）
   - `subscribe` 函数支持批量处理订阅消息。（**1.30.19.1**）
   - 提供分布式库并行写入接口，数据自动按分区规划通过连接池并行入库。
-  - 新增支持 COMPLEX, POINT, SYMBOL 数据类型；（**1.30.17.1**）
+  - 新增支持 COMPLEX, POINT, SYMBOL 数据类型，具体对应实现类：BasicComplex、BasicPoint、BasicSymbolVector。（**1.30.17.1**）
   - 增加 `MultithreadedTableWriter` 类，支持对分布式表、内存表、维度表的多线程写入。且实现了加密通信、压缩传输和写入高可用等功能。（**1.30.17.1**）
   - `DBConnection` 对象增加 *compress* 参数，支持数据的压缩上传与下载。（**1.30.17.1**）
   - 修复 API 高可用模式下，当数据节点安全关机后，Java API 无法切换到正常节点继续写入的问题。（**1.30.17.1**）
