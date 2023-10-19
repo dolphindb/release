@@ -249,6 +249,8 @@
 
 ### 新功能
 
+* 新增函数 `cumdenseRank`，支持计算元素在累计窗口内的密集排序。（**1.30.22.3**）
+* `createCrossSectionalEngine` 的参数 *triggeringPattern* 新增选项 "dataInterval"，支持按照数据时间间隔触发引擎的计算。（**1.30.22.3**）
 * 新增配置 `tcpUserTimeout`，可以设置套接字选项 TCP_USER_TIMEOUT。（**1.30.22.2**）
 * 删除 `getClusterReplicationMetrics` 函数，引入新的 `getSlaveReplicationQueueStatus` 函数，用于检索从集群中每个执行队列的任务执行状态，并继承了 `getClusterReplicationMetrics` 函数的功能。（**1.30.22.2**）
 * 新增配置项 `clusterReplicationQueue`，用于设置从集群的控制节点上执行队列的数量。（**1.30.22.2**）
