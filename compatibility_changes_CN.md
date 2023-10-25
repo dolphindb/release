@@ -17,17 +17,13 @@
 ### 为匹配行业实践或 SQL 标准而进行的更改
 
 - 移除 `getClusterReplicationMetrics` 函数，其功能由 `getSlaveReplicationQueueStatus` 函数继承。
-- 使用 `toStdJson` 进行值转换： 
-  - 转化 bool 值时，过去版本中改转化行为返回 1 和 0；此版本后，返回 true 或 false 值。
-  - 转换空值时，之前的版本只有 Integral, Floating 以及布尔类型的空值会转化为 json 里面的 null，而其他类型会转化为 ""，现在将除了 string 类型空值以外的其他所有类型空值都转换为 null，包括 NULL 
-
-- getStreamEngineStat：
-  - 过去版本中，返回的用于描述流数据分发引擎的状态的 key 名为 StreamingDispatchEngine；因其不符合实际引擎名称，此版本后改为 StreamDispatchEngine。
-  - 删除了返回的 StreamDispatchEngine 表中的无用字段，只保留了 "name", "user", "status", "lastErrMsg", "numRows", "memoryUsed" 字段。
+- 使用 `toStdJson` 函数时： 
+  - 对 bool 值的转换，从返回 1 和 0 修改为返回 true 或 false。
+  - 对空值的转换，在之前的版本中，只有 Integral, Floating 以及布尔类型的空值会被转换为 null，而其他类型的空值会被转换为 ""；现在除了 STRING 类型外，所有其它类型的空值都将被转换为 null
 
 ### Bug 修复造成的系统影响
 
-- 使用 `license` 函数时如果仅使用默认参数，过去版本中，返回.lic 文件中的 license 信息；此版本后，返回内存中的 license 信息。
+- `license` 函数的默认行为由返回 .lic 文件中的 license 信息修改为返回内存中的 license 信息。
 
 ## 2.00.10.1 版本
 
@@ -294,18 +290,14 @@
 ### 为匹配行业实践或 SQL 标准而进行的更改
 
 - 移除 `getClusterReplicationMetrics` 函数，其功能由 `getSlaveReplicationQueueStatus` 函数继承。
-- 使用 `toStdJson` 进行值转换： 
-  - 转化 bool 值时，过去版本中改转化行为返回 1 和 0；此版本后，返回 true 或 false 值。
-  - 转换空值时，之前的版本只有 Integral, Floating 以及布尔类型的空值会转化为 json 里面的 null，而其他类型会转化为 ""，现在将除了 string 类型空值以外的其他所有类型空值都转换为 null，包括 NULL 
-
-- getStreamEngineStat：
-  - 过去版本中，返回的用于描述流数据分发引擎的状态的 key 名为 StreamingDispatchEngine；因其不符合实际引擎名称，此版本后改为 StreamDispatchEngine。
-  - 删除了返回的 StreamDispatchEngine 表中的无用字段，只保留了 "name", "user", "status", "lastErrMsg", "numRows", "memoryUsed" 字段。
+- 使用 `toStdJson` 函数时： 
+  - 对 bool 值的转换，从返回 1 和 0 修改为返回 true 或 false。
+  - 对空值的转换，在之前的版本中，只有 Integral, Floating 以及布尔类型的空值会被转换为 null，而其他类型的空值会被转换为 ""；现在除了 STRING 类型外，所有其它类型的空值都将被转换为 null
 
 ### Bug 修复造成的系统影响
 
-- 使用 `license` 函数时如果仅使用默认参数，过去版本中，返回.lic 文件中的 license 信息；此版本后，返回内存中的 license 信息。
- 
+- `license` 函数的默认行为由返回 .lic 文件中的 license 信息修改为返回内存中的 license 信息。
+
 ## 1.30.22.1 版本
 ### 为匹配行业实践或 SQL 标准而进行的更改
 
