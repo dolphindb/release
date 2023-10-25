@@ -102,7 +102,7 @@ Release Date: 2021-07-31
 
 - Added new configuration parameter *tcpUserTimeout* to set the socket option TCP_USER_TIMEOUT. (**2.00.10.2**)
 
-- Added function `getSlaveReplicationQueueStatus` to obtain the status of each execution queue in the slave clusters. (**2.00.10.2**)
+- Removed function `getClusterReplicationMetrics`. Added function `getSlaveReplicationQueueStatus` as an inheritance of `getClusterReplicationMetrics`.`getSlaveReplicationQueueStatus` retrieves the status of each execution queue in the slave clusters. (**2.00.10.2**)
 
 - Added configuration parameter *clusterReplicationQueue* to set the number of execution queues on each controller of the slave clusters. (**2.00.10.2**)
 

@@ -4,10 +4,26 @@ This file provides an overview of the new features and changes (including update
 
 Please review the file carefully to understand how your current setup may be affected by upgrading to this version.
 
+- [Version 2.00.10.2](#version-200102)
 - [Version 2.00.10.1](#version-200101)
 - [Version 2.00.10](#version-20010)
+- [Version 1.30.22.2](#version-130222)
 - [Version 1.30.22.1](#version-130221)
 - [Version 1.30.22](#version-13022)
+
+## Version 2.00.10.2
+
+### Changes Made to Match Industry Practices or SQL Standards
+
+- Removed function `getClusterReplicationMetrics`. Added function `getSlaveReplicationQueueStatus` as an inheritance of `getClusterReplicationMetrics`.
+
+- When calling function `toStdJson`:
+  - For Boolean values, previous versions returned 1 and 0, but now returns true and false.
+  - For NULL values, previous versions only converted Integral, Floating and Boolean NULL values to JSON null, other types were converted to "". Now NULL values of all types except STRING are converted to null.
+
+### System Impacts Caused by Bug Fixes
+
+- The `license` function now returns the license information in memory by default, instead of that from the .lic file as in previous versions.
 
 ## Version 2.00.10.1
 
@@ -275,6 +291,21 @@ Please review the file carefully to understand how your current setup may be aff
 - Removed methods `httpCreateSubJob`,` httpCreateMultiParserSubJob`, `httpCancelSubJob` and `httpGetJobStat` from the httpClient plugin.
 
 ---
+
+## Version 1.30.22.2
+
+### Changes Made to Match Industry Practices or SQL Standards
+
+- Removed function `getClusterReplicationMetrics`. Added function `getSlaveReplicationQueueStatus` as an inheritance of `getClusterReplicationMetrics`.
+
+- When calling function `toStdJson`:
+  - For Boolean values, previous versions returned 1 and 0, but now returns true and false.
+  - For NULL values, previous versions only converted Integral, Floating and Boolean NULL values to JSON null, other types were converted to "". Now NULL values of all types except STRING are converted to null.
+
+### System Impacts Caused by Bug Fixes
+
+- The `license` function now returns the license information in memory by default, instead of that from the .lic file as in previous versions.
+
 
 ## Version 1.30.22.1
 
