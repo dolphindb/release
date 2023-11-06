@@ -2047,6 +2047,36 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 ### Python
 
+- The PROTOCOL_ARROW serialization protocol is now supported on all operating systems for the DolphinDB Python API.  (**1.30.22.4**)
+
+- Added support for uploading Pandas 2.0 DataFrames that use PyArrow as the storage backend.  (**1.30.22.4**)
+
+- Explicit type conversions to Decimal32 and Decimal64 now support specifying scale.  (**1.30.22.4**)
+
+- The data transmission protocol PROTOCOL_DDB now supports uploading and downloading array vectors of Decimal32 and Decimal64 data types. (**1.30.22.3**)
+
+- - The `run()` method for `Session` and `DBConnection` classes has new parameters for specifying task parallelism and priority. (**1.30.22.2**)
+
+- `Session` objects now implement locks to ensure thread safety. (**1.30.22.2**)
+
+- The Table `where` method now generates SQL queries without adding parentheses around the passed condition when only a single condition is provided. (**1.30.22.2**)
+
+- Constructing a Table object with the *dbPath* and *data* parameters now loads the table using the same logic as the Session `loadTable` method. (**1.30.22.2**)
+
+- The DolphinDB Python API now supports NumPy 1.24.4. The previous version was compatible with NumPy 1.18 - 1.23.4. (**1.30.22.2**)
+
+- Fixed SQL query generation when combining multiple filtering conditions with the ``Table.where`` method to match the intended logic. (**1.30.22.2**)
+
+- Fixed an issue that previously caused the `Table.drop` method to not execute as expected under certain conditions. (**1.30.22.2**)
+
+- The `Table.showSQL` method now generates the correct SQL statement after applying the `where` method to TableUpdate and TableDelete objects (which are returned by `update` and `delete`). (**1.30.22.2**)
+
+- Fixed an issue where non-Table objects were incorrectly compressed when being uploaded using the `Session.upload` method. (**1.30.22.2**)
+
+- Fixed an issue where the SQL statements generated from Table methods were incorrectly concatenated. (**1.30.22.2**)
+
+- Fixed internal parameter handling issues that previously caused the `Table.showSQL` method to generate SQL statements with incorrect logic.  (**1.30.22.2**)
+  
 - The old README file for the DolphinDB Python API is deprecated and no longer maintained. Please use the new DolphinDB Python API manual going forward for up-to-date documentation on the latest version. (**1.30.22.1**)
 
 - Bugfix: Fixed an issue where a TableAppender (previously known as: tableAppender), TableUpserter (previously known as: tableUpsert), or PartitionedTableAppender failed to obtain a reference to a Session or a DBConnectionPool as the object had already been destructed. (**1.30.22.1**)
