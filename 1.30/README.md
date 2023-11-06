@@ -2055,7 +2055,7 @@ JOIN, FULL JOIN, LEFT SEMI JOIN, DECIMAL128, DATEHOUR, IS, CREATE DATABASE, crea
 
 - The data transmission protocol PROTOCOL_DDB now supports uploading and downloading array vectors of Decimal32 and Decimal64 data types. (**1.30.22.3**)
 
-- - The `run()` method for `Session` and `DBConnection` classes has new parameters for specifying task parallelism and priority. (**1.30.22.2**)
+- The `run()` method for `Session` and `DBConnection` classes has new parameters for specifying task parallelism and priority. (**1.30.22.2**)
 
 - `Session` objects now implement locks to ensure thread safety. (**1.30.22.2**)
 
