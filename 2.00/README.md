@@ -94,6 +94,8 @@ Release Date: 2021-07-31
 
 ### New Features
 
+- Added a new “dataInterval" option to the `triggeringPattern` parameter of the `createCrossSectionalEngine` function. This option enables calculations to be triggered based on timestamps from the input data.（**2.00.10.3**）
+
 - Added function `parseJsonTable` to parse a JSON object to an in-memory table. (**2.00.10.2**)
 
 - Added function `loadModuleFromScript` to parse a module dynamically. (**2.00.10.2**)
@@ -994,6 +996,8 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- An “unrecognized column“ error was raised when the system was executing a distributed query which: (1) involved a reduce phase; (2) queried data on remote nodes. This issue was introduced in the 2.00.10 version.（**2.00.10.3**）
 
 - Setting user access in a high-availability cluster led to memory leaks on the controller. (**2.00.10.2**)
 
