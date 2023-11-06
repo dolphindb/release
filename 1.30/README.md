@@ -246,6 +246,10 @@ Release Date: 2020-12-29
 - Added function `loadModuleFromScript` to parse a module dynamically. (**1.30.22.3**)
 -->
 
+- Added the `cumdenseRank` function to perform dense ranking of elements within cumulative windows.（**1.30.22.3**）
+
+- Added a new “dataInterval" option to the `triggeringPattern` parameter of the `createCrossSectionalEngine` function. This option enables calculations to be triggered based on timestamps from the input data.（**1.30.22.3**）
+  
 - Added function `parseJsonTable` to parse a JSON object to an in-memory table. (**1.30.22.2**)
 
 - Added new configuration parameter *tcpUserTimeout* to set the socket option TCP_USER_TIMEOUT. (**1.30.22.2**)
