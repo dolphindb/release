@@ -19,7 +19,7 @@
 发行日期： 2023-07-20
  
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.3_JIT.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.4.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.4_JIT.zip) |
@@ -128,6 +128,7 @@
 
 ### 新功能
 
+* 新增函数 `appendTuple!`，用于将一个元组追加到另一个元组中，同时新增配置项 `appendTupleAsAWhole`，用于设置元组是作为整体还是展开后进行追加/合并。（**2.00.10.4**）
 * 新增配置项 *parseDecimalAsFloatingNumber*，用于设置系统解析小数常量类型的默认行为。（**2.00.10.4**）
 * 支持直接对分区 MVCC 内存表进行更新、插入和删除操作。（**2.00.10.4**）
 * 支持中途快速取消耗时长的分布式表 `select` 查询任务或随时快速取消 `pivot by` 重组任务。（**2.00.10.4**）
@@ -726,14 +727,12 @@
 
 * 对 *sortColumns* 列进行 `group by` 分组后执行 `limit` 子句没有生效。（**2.00.10.4**）
 * 更新表结构时出现数据竞争导致内存耗尽并崩溃。（**2.00.10.4**）
-* 在新建表之后立刻进行多个并发写入操作后，重启后进行日志回放的过程可能导致服务器崩溃。（**2.00.10.4**）
 * 若存放备份数据的目录（*backupDir* 指定的路径）在 NFS上，则备份可能会卡住。（**2.00.10.4**）
 * 通过 `setMaxConnections` 设置最大连接数，创建连接后再关闭连接时发生内存访问越界。（**2.00.10.4**）
-* 使用函数 `in(X,Y)`，当 *X* 是 CHAR 类型，*Y* 是 FAST INT VECTOR 类型时会导致 server 崩溃。（**2.00.10.4**）
 * 使用非 SQL-92 标准的 `join` 写法对分区表进行连接，且 `where` 语句中引用了左表的列，导致 server 崩溃（**2.00.10.4**）
+* 跨进程共享内存表的 SYMBOL 类型与 STRING 类型不兼容。（**2.00.10.4**）
 * 创建跨进程共享内存表失败后，再次创建同名跨进程共享内存表，导致 server 崩溃。（**2.00.10.4**）
 * 分布式查询的过滤条件中包含 SECOND 类型与 INT 类型的比较时会报错。（**2.00.10.4**）
-* 跨进程共享内存表的 SYMBOL 类型与 STRING 类型不兼容。（**2.00.10.4**）
 * 在集群中使用 SQL 查询数据时，若执行过程包含 reduce 阶段，且查询的数据不在本地节点时，会报错 'unrecognized column'。此为2.00.10版本引入的问题。（**2.00.10.3**）
 * 高可用环境下，设置权限导致控制节点内存泄露。（**2.00.10.2**）
 * 单节点模式下，TSDB 写入时发生 OOM，导致事务状态不一致。（**2.00.10.2**）

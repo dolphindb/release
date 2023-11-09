@@ -27,11 +27,11 @@
 
 发行日期： 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.2.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.2_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.2_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.2.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.2_JIT.zip)
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.4.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.3_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.4_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.4.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.3_JIT.zip)
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V1.30.22.zip)
 
 版本号： 1.30.21 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#32-二级兼容性标准) 1.30.20
@@ -249,6 +249,10 @@
 
 ### 新功能
 
+* 新增函数 `appendTuple!`，用于将一个元组追加到另一个元组中，同时新增配置项 `appendTupleAsAWhole`，用于设置元组是作为整体还是展开后进行追加/合并。（**1.30.22.4**）
+* 新增 *VIEW_OWNER* 权限，支持为普通用户（组）赋予该权限以允许用户通过 `addFunctionView` 创建函数视图。（**1.30.22.4**）
+* 分区列类型为 NANOTIMESTAMP 时，在查询时支持分区剪枝。（**1.30.22.4**）
+* 支持在插件信息 .txt 文件中增加参数 *isSequential*，用于标记函数是否为序列函数。（**1.30.22.4**）
 * 新增函数 `cumdenseRank`，支持计算元素在累计窗口内的密集排序。（**1.30.22.3**）
 * `createCrossSectionalEngine` 的参数 *triggeringPattern* 新增选项 "dataInterval"，支持按照数据时间间隔触发引擎的计算。（**1.30.22.3**）
 * 新增配置 `tcpUserTimeout`，可以设置套接字选项 TCP_USER_TIMEOUT。（**1.30.22.2**）
@@ -460,6 +464,7 @@
   
 ### 改进
 
+* 提升 `dropTable` 在删除一个包含大量分区（超过10万个）的表时的性能。（**1.30.22.4**）
 * 优化计算节点事务机制。（**1.30.22.2**）
 * `rmdir` 新增参数 *keepRootDir*，可以指定删除文件时是否保留根目录。（**1.30.22.2**）
 * 使用 `license` 函数时如果不指定文件名，将获取内存中的 license 信息。（**1.30.22.2**）
@@ -806,6 +811,13 @@
   
 ### 故障修复
 
+* 更新表结构时出现数据竞争导致内存耗尽并崩溃。（**1.30.22.4**）
+* 若存放备份数据的目录（*backupDir* 指定的路径）在 NFS上，则备份可能会卡住。（**1.30.22.4**）
+* 通过 `setMaxConnections` 设置最大连接数，创建连接后再关闭连接时发生内存访问越界。（**1.30.22.4**）
+* 使用非 SQL-92 标准的 `join` 写法对分区表进行连接，且 `where` 语句中引用了左表的列，导致 server 崩溃（**1.30.22.4**）
+* 创建跨进程共享内存表失败后，再次创建同名跨进程共享内存表，导致 server 崩溃。（**1.30.22.4**）
+* 跨进程共享内存表的 SYMBOL 类型与 STRING 类型不兼容。（**1.30.22.4**）
+* 分布式查询的过滤条件中包含 SECOND 类型与 INT 类型的比较时会报错。（**1.30.22.4**）
 * 恢复数据到一个新的数据库时会报错“getSubChunks failed, path'/xx' does not exist”。（**1.30.22.2**）
 * `loc` 函数通过行、列标签获取矩阵元素的结果不正确，此为1.30.22版本引入的问题。（**1.30.22.2**）
 * 恢复 DECIMAL 类型数据发生 scale 丢失。（**1.30.22.2**）
