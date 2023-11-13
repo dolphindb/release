@@ -4,12 +4,25 @@ This file provides an overview of the new features and changes (including update
 
 Please review the file carefully to understand how your current setup may be affected by upgrading to this version.
 
+- [Version 2.00.10.4](#version-200104)
 - [Version 2.00.10.2](#version-200102)
 - [Version 2.00.10.1](#version-200101)
 - [Version 2.00.10](#version-20010)
 - [Version 1.30.22.2](#version-130222)
 - [Version 1.30.22.1](#version-130221)
 - [Version 1.30.22](#version-13022)
+
+## Version 2.00.10.4
+
+### Changes Made to Match Industry Practices or SQL Standards
+
+- In previous versions, function div and mod returned NULL when the divisor (parameter Y) is negative. Since this version, function div and mod return the correct results, which is consistent with the behavior of Python operators '/' and '%'.
+
+### System Impacts Caused by Bug Fixes
+
+- For a table returned by pivot by, an error is now reported when `ffill`, `bfill`, or `lfill` with parameter *limit* specified is used as a nested function in a `select` statement. Incorrect results were returned in previous versions.
+
+- Modified function `cumlastNot`: If the input argument is an array vector, an error is now reported. Incorrect results were returned in previous versions.
 
 ## Version 2.00.10.2
 
