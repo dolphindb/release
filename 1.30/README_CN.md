@@ -1413,6 +1413,19 @@
 
 ### Java API
 
+  - `MultithreadedTableWriter`  类新增支持创建包含基本数据类型 boolean[]、byte[]、char[]、short[]、int[]、long[]、double[]、float[]的 array vector。（**1.30.22.4**）
+  - `ThreadPooledClient` 类新增支持构造方法 `public ThreadPooledClient(int threadCount)` ，发布端可通过订阅端的请求连接推送数据。（**1.30.22.4**）
+  - `PollingClient` 类新增支持无参构造方法 `public PollingClient()`，发布端可通过订阅端的请求连接推送数据。（**1.30.22.4**）
+  - `BasicTable` 类新增：
+    - `addColumn` 禁止添加重复列；
+    - 支持 `replaceColumn` 替换已存在的单列；
+    - 支持 `replaceColName` 替换已存在单列的列名。（**1.30.22.4**）
+  - `DBConnection` 类私有化参数 *isReverseStreaming*，下个版本起将不再提供。（**1.30.22.4**）
+  - `DBConnection` 类优化：
+    - `login` 方法中 *userID* 参数重命名为 *userId*；
+    - `getUserID()` 方法重命名为 `getUserId()`。（**1.30.22.4**）
+  - 修复了 BasicDecimal32Vector,  BasicDecimal64Vector,  BasicDecimal128Vector 型数据通过 `Append` 方法写入结果错误的问题。（**1.30.22.4**）
+  - 修复了没有空值的 `BasicSymbolVector` 类执行完 `setNull` 后，在后续获取数据时出现报错、并导致连接断开、异常抛出等问题。（**1.30.22.4**）
   - 新功能：新增支持通过字符串构造 BasicDecimal32, BasicDecimal64型数据。（**1.30.22.3**）
   - 新功能：新增支持调用 fastjson 库的 JSONObject.toJSONString 方法序列化 Java API 中定义的 DolphinDB 数据类型。（**1.30.22.3**）
   - 新功能：BasicDecimal32Vector, BasicDecimal64Vector 类的 add 方法新增支持调用 String 类型数据。（**1.30.22.3**）
