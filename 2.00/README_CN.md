@@ -18,7 +18,7 @@
 
 发行日期： 2023-07-20
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.5.zip) | 
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.6.zip) | 
 [Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.4.zip) |
@@ -725,6 +725,8 @@
 
 ### 故障修复
 
+* 使用 `pack` 函数出现内存泄漏。（**2.00.10.6**）
+* 执行 `cross(func, a, b)` 时，若 a 或 b 的数据量过大，会导致 server 崩溃。（**2.00.10.6**）
 * 使用 `unpack` 函数出现内存泄漏。（**2.00.10.5**）
 * 当 `withNullFill` 的参数 *func* 指定为 `or` 时，若输入参数是布尔类型，则结果不正确。（**2.00.10.5**）
 * 对 *sortColumns* 列进行 `group by` 分组后执行 `limit` 子句没有生效。（**2.00.10.4**）
