@@ -18,11 +18,11 @@
 
 发行日期： 2023-07-20
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.6.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.4_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.4.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.4_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.7.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.7_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.7_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.7.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.7_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.10.zip)|
 
 版本号： 2.00.9 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.8 和 1.30.20
@@ -725,6 +725,7 @@
 
 ### 故障修复
 
+* 通过 web 查询库表时，小概率发生错误：“connection closed, code: 1006”。（**2.00.10.7**）
 * 使用 `pack` 函数出现内存泄漏。（**2.00.10.6**）
 * 执行 `cross(func, a, b)` 时，若 a 或 b 的数据量过大，会导致 server 崩溃。（**2.00.10.6**）
 * 使用 `unpack` 函数出现内存泄漏。（**2.00.10.5**）
