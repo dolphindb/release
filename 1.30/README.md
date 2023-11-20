@@ -246,9 +246,21 @@ Release Date: 2020-12-29
 - Added function `loadModuleFromScript` to parse a module dynamically. (**1.30.22.3**)
 -->
 
-- Added the `cumdenseRank` function to perform dense ranking of elements within cumulative windows.（**1.30.22.3**）
+- Added new function `appendTuple!` to append a tuple to another. (**1.30.22.4**)
 
-- Added a new “dataInterval" option to the `triggeringPattern` parameter of the `createCrossSectionalEngine` function. This option enables calculations to be triggered based on timestamps from the input data.（**1.30.22.3**）
+- Added new configuration parameter *appendTupleAsAWhole* to set whether to specify whether the tuple should be appended as an embedded tuple element, or if each of its elements should be appended independently to the target tuple. (**1.30.22.4**)
+
+- Added login information in logs, including login user, IP, port, status, etc. (**1.30.22.4**)
+
+- Added privilege `VIEW_OWNER` to support a user/group to create function views using `addFunctionView`. (**1.30.22.4**)
+
+- Support for partition pruning when the partitioning column is of the NANOTIMESTAMP type. (**1.30.22.4**)
+
+- Added new parameter *isSequential* to the plugin.txt to mark a function as order-sensitive or not. (**1.30.22.4**)
+
+- Added the `cumdenseRank` function to perform dense ranking of elements within cumulative windows. (**1.30.22.3**)
+
+- Added a new “dataInterval" option to the `triggeringPattern` parameter of the `createCrossSectionalEngine` function. This option enables calculations to be triggered based on timestamps from the input data. (**1.30.22.3**)
   
 - Added function `parseJsonTable` to parse a JSON object to an in-memory table. (**1.30.22.2**)
 
@@ -673,6 +685,10 @@ Release Date: 2020-12-29
 <!--
 - The `getClusterDFSTables` function returns all tables created by the user regardless of the table permissions. (**1.30.22.3**)
 -->
+
+- Optimized the performance of function `dropTable` when deleting a partitioned table with over 100,000 partitions. (**1.30.22.4**)
+
+- The divisor of `div/mod` now can be negative numbers. (**1.30.22.4**)
 
 - Optimized transactions on compute nodes. (**1.30.22.2**)
 
@@ -1310,6 +1326,20 @@ Release Date: 2020-12-29
 
 - The result of `in(X,Y)` was incorrect when Y was a set that contains a LONG value with more than 11 digits. (**1.30.22.3**)
 -->
+
+- Data contention when updating a table schema led to OOM problem and server crash. (**1.30.22.4**)
+
+- The backup might get stuck when the backup directory (*backupDir*) is on NFS. (**1.30.22.4**)
+
+- The memory access out of bounds error occured when attempting to close a connection that was created after setting the maximum number of connections using `setMaxConnections`. (**1.30.22.4**)
+
+- When joining partitioned tables using a statement that did not conform to SQL standards,  referencing a column from the left table in the `where` clasue caused the server to crash. (**1.30.22.4**)
+
+- If creating an IPC in-memory table failed, creating another one with the same name caused the server to crash. (**1.30.22.4**)
+
+- An error was reported when the filtering condition in a distributed query contained a comparison between operands of SECOND and INT type. (**1.30.22.4**)
+
+- The SYMBOL type in an IPC in-memory table was not compatible with the STRING type. (**1.30.22.4**)
 
 - An error message "getSubChunks failed, path'/xx' does not exist" was reported when restoring data to a newly-created database. (**1.30.22.2**)
 
