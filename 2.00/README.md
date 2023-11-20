@@ -96,7 +96,7 @@ Release Date: 2021-07-31
 
 - Added new function `appendTuple!` to append a tuple to another. (**2.00.10.4**)
 
-- Added new configuration parameter *appendTupleAsAWhole* to set whether to specify whether the tuple should be appended as an embedded tuple element, or if each of its elements should be appended independently to the target tuple. (**2.00.10.4**)
+- Added new configuration parameter *appendTupleAsAWhole* to specify whether the tuple should be appended as an embedded tuple element, or if each of its elements should be appended independently to the target tuple. (**2.00.10.4**)
 
 - Added new configuration parameter *parseDecimalAsFloatingNumber* which sets the default behavior for parsing decimals as the DECIMAL type. (**2.00.10.4**)
 
