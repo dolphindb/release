@@ -248,7 +248,7 @@ Release Date: 2020-12-29
 
 - Added new function `appendTuple!` to append a tuple to another. (**1.30.22.4**)
 
-- Added new configuration parameter *appendTupleAsAWhole* to set whether to specify whether the tuple should be appended as an embedded tuple element, or if each of its elements should be appended independently to the target tuple. (**1.30.22.4**)
+- Added new configuration parameter *appendTupleAsAWhole* to specify whether the tuple should be appended as an embedded tuple element, or if each of its elements should be appended independently to the target tuple. (**1.30.22.4**)
 
 - Added login information in logs, including login user, IP, port, status, etc. (**1.30.22.4**)
 
