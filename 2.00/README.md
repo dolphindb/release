@@ -94,6 +94,30 @@ Release Date: 2021-07-31
 
 ### New Features
 
+- Added new function `appendTuple!` to append a tuple to another. (**2.00.10.4**)
+
+- Added new configuration parameter *appendTupleAsAWhole* to set whether to specify whether the tuple should be appended as an embedded tuple element, or if each of its elements should be appended independently to the target tuple. (**2.00.10.4**)
+
+- Added new configuration parameter *parseDecimalAsFloatingNumber* which sets the default behavior for parsing decimals as the DECIMAL type. (**2.00.10.4**)
+
+- Support for update, insert, and delete operations on partitioned MVCC tables. (**2.00.10.4**)
+
+- Long-running distributed queris using `select` or `pivot by` clause now can be canceled at any time during execution. (**2.00.10.4**)
+
+- Added new function `cumdenseRank` to return the position ranking from the first element to the current element. (**2.00.10.4**)
+
+- Added login information in logs, including login user, IP, port, status, etc. (**2.00.10.4**)
+
+- Added privilege `VIEW_OWNER` to support a user/group to create function views using `addFunctionView`. (**2.00.10.4**)
+
+- In SQL queries with the `PIVOT BY` clause, you can now use the `asis` function to retain all duplicate records in the result. Previously, `PIVOT BY` would perform deduplication. (**2.00.10.4**)
+
+- In SQL queries with the `PIVOT BY` clause, an array vector now can be specified in a `select/exec` statement. (**2.00.10.4**)
+
+- Support for partition pruning when the partitioning column is of the NANOTIMESTAMP type. (**2.00.10.4**)
+
+- Added new parameter *isSequential* to the plugin.txt to mark a function as order-sensitive or not. (**2.00.10.4**)
+
 - Added a new “dataInterval" option to the `triggeringPattern` parameter of the `createCrossSectionalEngine` function. This option enables calculations to be triggered based on timestamps from the input data.（**2.00.10.3**）
 
 - Added function `parseJsonTable` to parse a JSON object to an in-memory table. (**2.00.10.2**)
@@ -487,6 +511,16 @@ Release Date: 2021-07-31
 * The data based on the TSDB storage engine supports the new data type BLOB. (**2.00.0**)
 
 ### Improvements
+
+- Optimized the write performance of TSDB engine. (**2.00.10.4**)
+
+- Optimized the performance of function `dropTable` when deleting a partitioned table with over 100,000 partitions. (**2.00.10.4**)
+
+- The divisor of `div/mod` now can be negative numbers. (**2.00.10.4**)
+
+- A new directory will be created automatically if the configured *persostenceOffsetDir* cannot be found. (**2.00.10.4**)
+
+- Long-running replay tasks can now be canceled more promptly. (**2.00.10.4**)
 
 - Optimized transactions on compute nodes. (**2.00.10.2**)
 
@@ -996,6 +1030,34 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- In rare occasions, queries submitted through the web-based cluster manager failed, displaying the error: "connection closed, code: 1006."(**2.00.10.7**)
+
+- When parsing a JSON string, if the first 10 rows of a field were all NULLs, the `parseJsonTable` function returned an incorrect parsing result.(**2.00.10.7**)
+
+- Using function `pack` led to memory leaks. (**2.00.10.6**)
+
+- Executing `cross(func, a, b)` could cause the server to crash if the size of *a* or *b* was too large. (**2.00.10.6**)
+
+- Using function `unpack` led to memory leaks. (**2.00.10.5**)
+
+- If the *func* parameter of function `withNullFill` was the `or` operator, incorrect results were returned when its operands were Boolean values. (**2.00.10.5**)
+
+- The `limit` clause did not take effect when the grouping column was *sortColumns*. (**2.00.10.4**)
+
+- Data contention when updating a table schema led to OOM problem and server crash. (**2.00.10.4**)
+
+- The backup might get stuck when the backup directory (*backupDir*) is on NFS. (**2.00.10.4**)
+
+- The memory access out of bounds error occured when attempting to close a connection that was created after setting the maximum number of connections using `setMaxConnections`. (**2.00.10.4**)
+
+- When joining partitioned tables using a statement that did not conform to SQL standards,  referencing a column from the left table in the `where` clasue caused the server to crash. (**2.00.10.4**)
+
+- If creating an IPC in-memory table failed, creating another one with the same name caused the server to crash. (**2.00.10.4**)
+
+- An error was reported when the filtering condition in a distributed query contained a comparison between operands of SECOND and INT type. (**2.00.10.4**)
+
+- The SYMBOL type in an IPC in-memory table was not compatible with the STRING type. (**2.00.10.4**)
 
 - An “unrecognized column“ error was raised when the system was executing a distributed query which: (1) involved a reduce phase; (2) queried data on remote nodes. This issue was introduced in the 2.00.10 version.（**2.00.10.3**）
 
