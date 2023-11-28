@@ -18,11 +18,11 @@
 
 发行日期： 2023-07-20
  
-[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.7.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.7_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.7_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.7.zip) |
-[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.7_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.8.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.8_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V2.00.10.8_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.8.zip) |
+[Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V2.00.10.8_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.cn/downloads/DolphinDB_ARM64_V2.00.10.zip)|
 
 版本号： 2.00.9 &nbsp;&nbsp;&nbsp; [二级兼容](./../DolphinDB_compatibility_levels.md/#33-二级兼容性标准) 2.00.8 和 1.30.20
@@ -354,6 +354,8 @@
 
 ### 改进
 
+* 权限管理对象是全局时，支持输入 '\*'。（**2.00.10.8**）
+* 在异步复制场景下，从集群对没有数据的表进行操作将会抛出异常。（**2.00.10.8**）
 * 提升 TSDB 读性能。（**2.00.10.4**）
 * 提升 `dropTable` 在删除一个包含大量分区（超过10万个）的表时的性能。（**2.00.10.4**）
 * `div/mod` 允许负数作为除数。（**2.00.10.4**）
@@ -725,6 +727,12 @@
 
 ### 故障修复
 
+* 在高度并发执行函数 `login` 和 `getDynamicPublicKey` 时，有时可能导致 server 崩溃。（**2.00.10.8**）
+* `bar` 函数设置 *closed*='right' 时，对分区表里的跨天数据分组错误。（**2.00.10.8**）
+* `ParseJsonTable` 将 JSON 中 string 类型的 NULL 解析为字符串 “NULL” 而非空值。（**2.00.10.8**）
+* 当持久化流表中的 BLOB 字段过大时，即使设置了较小的 *preCache*，仍可能导致大量数据被加载到内存中。（**2.00.10.8**）
+* 查询内存表数据时，在不使用 group by 语句的情况下嵌套使用聚合函数出现报错。（**2.00.10.8**）
+* 在异步复制并发场景下，从集群极低概率出现控制节点不下发任务的情况。（**2.00.10.8**）
 * 通过 web 查询库表时，小概率发生错误：“connection closed, code: 1006”。（**2.00.10.7**）
 * 当 JSON 中某个字段的前十行数据均为 NULL 时，`parseJsonTable` 将推导出错误的格式，并据此格式进行表解析。（**2.00.10.7**）
 * 使用 `pack` 函数出现内存泄漏。（**2.00.10.6**）
