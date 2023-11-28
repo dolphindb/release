@@ -12,11 +12,25 @@ Please review the file carefully to understand how your current setup may be aff
 - [Version 1.30.22.1](#version-130221)
 - [Version 1.30.22](#version-13022)
 
+## Version 2.00.10.8
+
+### System Impacts Caused by Bug Fixes
+
+- In versions before 2.00.10.8, an error would be thrown when using a nested aggregate function in a query on an in-memory table with a `group by` clause. As of version 2.00.10.8 and later, this problem has been fixed.
+- In version before 2.00.10.8, the `streamEngineParser` function would run without reporting an error when an index out of bounds was specified for parameter *metrics*. As of version 2.00.10.8 and later, it will throw an "out of index" error.
+
+## Version 2.00.10.5
+
+### System Impacts Caused by Bug Fixes
+
+- In version 2.00.10.4, attempting to perform null-filling operations (such as `ffill`) on array vectors that did not actually contain any null values would result in an error. Since this version, this issue has been addressed.
+
 ## Version 2.00.10.4
 
 ### Changes Made to Match Industry Practices or SQL Standards
 
 - In previous versions, function div and mod returned NULL when the divisor (parameter Y) is negative. Since this version, function div and mod return the correct results, which is consistent with the behavior of Python operators '/' and '%'.
+- The behaviors of `join`, `join!`, and `append!` when merging two tuples have been reverted to match how they worked in versions earlier than 2.00.10.1.
 
 ### System Impacts Caused by Bug Fixes
 
@@ -304,6 +318,12 @@ Please review the file carefully to understand how your current setup may be aff
 - Removed methods `httpCreateSubJob`,` httpCreateMultiParserSubJob`, `httpCancelSubJob` and `httpGetJobStat` from the httpClient plugin.
 
 ---
+
+## Version 1.30.22.4
+
+### Changes Made to Match Industry Practices or SQL Standards
+
+- The behaviors of `join`, `join!`, and `append!` when merging two tuples have been reverted to match how they worked in versions earlier than 2.00.10.1.
 
 ## Version 1.30.22.2
 
