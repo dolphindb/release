@@ -1485,6 +1485,18 @@
 
 ### Python API
 
+  - 新增支持 Python 3.11。(**1.30.22.6**)
+  - PROTOCOL_DDB 协议新增支持数据类型 DECIMAL128。(**1.30.22.6**)
+  - 新增上传字符串不能超过 64KB 的限制。(**1.30.22.6**)
+  - drop 函数调整对于 STRING 型和不同长度的 list 型的输入值的处理逻辑。(**1.30.22.6**)
+  - 修复下载字典中若包含 UUID/IPADDR/INT128 等类型数据时出现段错误的问题。(**1.30.22.6**)
+  - 修复 `MultithreadedTableWriter`` 类成员未正常析构的问题。(**1.30.22.6**)
+  - 修复 `MultithreadedTableWriter`` 在部分场景下插入错误类型的数据导致 Abort 的问题。(**1.30.22.6**)
+  - 修复上传 DataFrame 时指定列类型为 DECIMAL32/64/128，若该列第一个数据为空值则导致段错误的问题。(**1.30.22.6**)
+  - 修复上传 DataFrame 时若某列 dtype=datetime64[us] 则出现列长不匹配或报错的问题。(**1.30.22.6**)
+  - 修复 Numpy ndarray 在指定不同内存布局时，上传数据出现乱序的问题。(**1.30.22.5**)
+  - 修复 TableAppender/TableUpserter/PartitionedTableAppender 类向低版本的 DolphinDB 追加数据时出现的兼容性问题。(**1.30.22.5**)
+  - 修复特定情况下上传 ArrayVector 列丢失空值数据的问题。(**1.30.22.5**)
   - 全平台支持使用 PROTOCOL_ARROW 协议。（**1.30.22.4**）
   - 支持上传 Pandas 2.0 PyArrow 后端的数据。（**1.30.22.4**）
   - 强制类型转换支持指定数据类型为 Decimal32 / Decimal64 的精度。（**1.30.22.4**）
