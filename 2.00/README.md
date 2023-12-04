@@ -512,6 +512,10 @@ Release Date: 2021-07-31
 
 ### Improvements
 
+- The permission object (parameter *objs*) can be specified as '*' when the access is applied at global level. (**2.00.10.8**)
+
+- When asynchronous cluster replication is enabled, operations on empty tables in the slave cluster will throw an exception. (**2.00.10.8**)
+
 - Optimized the write performance of TSDB engine. (**2.00.10.4**)
 
 - Optimized the performance of function `dropTable` when deleting a partitioned table with over 100,000 partitions. (**2.00.10.4**)
@@ -1030,6 +1034,18 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- Executing the `login` and `getDynamicPublicKey` functions with high concurrency could cause the server to crash. (**2.00.10.8**)
+
+- The `bar` function incorrectly grouped data spanning multiple days from a DFS table when the parameter *closed* is set to 'right'. (**2.00.10.8**)
+
+- The `ParseJsonTable` function converted JSON null values of string type into the literal "NULL" rather than empty values. (**2.00.10.8**)
+
+- Overly-large BLOB fields from persisted stream tables can lead to substantial data loads into memory, even when a small *preCache* value was configured. (**2.00.10.8**)
+
+- An error occurred if a nested aggregate function was used with a `group by` clause when querying data from an in-memory table. (**2.00.10.8**)
+
+- For concurrent asynchronous replication, the controller of the slave cluster failed to assign tasks in rare cases. (**2.00.10.8**)
 
 - In rare occasions, queries submitted through the web-based cluster manager failed, displaying the error: "connection closed, code: 1006."(**2.00.10.7**)
 
