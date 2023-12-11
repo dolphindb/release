@@ -12,11 +12,11 @@ Version: **2.00.10** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.c
 
 Release Date: 2023-07-20
 
-[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.2.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.2_JIT.zip) | 
-[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.2_ABI.zip) | 
-[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.2.zip) |
-[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.2_JIT.zip) |
+[Linux64 binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.9.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.9_JIT.zip) | 
+[Linux64 ABI binary](https://www.dolphindb.com/downloads/DolphinDB_Linux64_V2.00.10.9_ABI.zip) | 
+[Windows64 binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.9.zip) |
+[Windows64 JIT binary](https://www.dolphindb.com/downloads/DolphinDB_Win64_V2.00.10.9_JIT.zip) |
 [Linux ARM64](https://www.dolphindb.com/downloads/DolphinDB_ARM64_V2.00.10.zip)
 
 Version: **2.00.9** &nbsp;&nbsp;&nbsp; [Compatibility Level 2](https://github.com/dolphindb/release/blob/master/DolphinDB_compatibility_levels_EN.md#32-compatibility-level-2) with 2.00.8/1.30.20
@@ -511,6 +511,8 @@ Release Date: 2021-07-31
 * The data based on the TSDB storage engine supports the new data type BLOB. (**2.00.0**)
 
 ### Improvements
+
+- Added configuration parameter _strictSecurityVerification_ to enable password strength checker and limit the number of failed login attempts. (**2.00.10.9**)
 
 - The permission object (parameter *objs*) can be specified as '*' when the access is applied at global level. (**2.00.10.8**)
 
@@ -1034,6 +1036,10 @@ Release Date: 2021-07-31
 * UI enhancements for the Web-Based Cluster Manager. With the integrated user interface, you can now view, suspend and cancel jobs (running, submitted or scheduled) in DolphinDB. Note that after you have upgraded the server version, the "web" folder must be updated as well. The new version of Web-Based Cluster Manager uses the WebSocket protocol to enhance its support for binary protocols. Your web browser may need to be updated to the latest version. We recommend using the latest version of Chrome or Edge.  (**2.00.4**)
 
 ### Issues Fixed
+
+- The controller could crash during startup if it continued to receive login requests from other nodes. (**2.00.10.9**)
+
+- For local multi-threaded subscription, publishing data at excessively high rates could overwhelm local subscription queues, preventing reception of new messages and leading to data loss. (**2.00.10.9**)
 
 - Executing the `login` and `getDynamicPublicKey` functions with high concurrency could cause the server to crash. (**2.00.10.8**)
 
