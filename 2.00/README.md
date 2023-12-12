@@ -512,8 +512,6 @@ Release Date: 2021-07-31
 
 ### Improvements
 
-- Added configuration parameter _strictSecurityVerification_ to enable password strength checker and limit the number of failed login attempts. (**2.00.10.9**)
-
 - The permission object (parameter *objs*) can be specified as '*' when the access is applied at global level. (**2.00.10.8**)
 
 - When asynchronous cluster replication is enabled, operations on empty tables in the slave cluster will throw an exception. (**2.00.10.8**)
