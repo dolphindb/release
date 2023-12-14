@@ -997,7 +997,7 @@
 * 对内存表的多个类型为 INT128 的列进行聚合计算时，出现报错：“The function min for reductive operations does not support data type INT128”。（**1.30.19**）
 * 通过 `getFunctionView` 获取函数视图时，返回结果中部分函数没有显示 body。（**1.30.19**）
 * 向一个空的 tuple append 它自己后，再加载该 tuple，server 发生 crash。（**1.30.19**）
-* SQL 查询调用 `interval` 插值场景下，当 where 子句指定的时间范围数据类型的粒度比 `interval` 的 *duration* 参数指定的时间粒度更大时，导致的 sever crash。（**1.30.19**）
+* SQL 查询调用 `interval` 插值场景下，当 where 子句指定的时间范围数据类型的粒度比 `interval` 的 *duration* 参数指定的时间粒度更大时，导致的 server crash。（**1.30.19**）
 * sql 查询语句中调用 `twindow` 函数时，server 会 crash。（**1.30.19**）
 * update 分布式表时，set 后的列名与分布式表的列名大小写不一致，导致数据更新失败。（**1.30.19**）
 * 响应式状态引擎的 metrics 中包含函数 `iterate` 时，若启用了数据清理机制，且正在清理数据时插入了数据会报错："vector::_M_default_append"。（**1.30.19**）
