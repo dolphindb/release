@@ -1819,6 +1819,33 @@ Release Date: 2020-12-29
 
 ### GUI
 
+- Added support for uploading a CSV file as an in-memory table, with a popup CSV editor for confirming the schema before creating the table. (**1.30.22.2**)
+
+- Added autosave feature to save scripts at scheduled intervals of 5 seconds. (**1.30.22.2**)
+
+- Added support for displaying the entire record by double-clicking the cell in the Data Browser. (**1.30.22.2**)
+
+- Added support for automatically wrapping excessively long log messages. (**1.30.22.2**)
+
+- Enhanced the error messages when the GUI fails to connect to the server. (**1.30.22.2**)
+
+- Enhanced the error messages when synchronizing modules to the server. (**1.30.22.2**)
+
+- Optimized the `plot` function for generating graphs by (**1.30.22.2**):
+
+  - Retaining the right numerical axis when the x-axis is of temporal type.
+  - Removing default symbols from the breakpoints in line charts.
+
+- When displaying negative numbers or DECIMAL32/64/128 data in the Log or Data Browser, commas are now used as the thousands separator for the integer part of values. (**1.30.22.2**)
+
+- Fixed an error with creating dimension tables using the Python Parser. (**1.30.22.2**)
+
+- Fixed an issue where negative values copied from cells in the Data Browser would be pasted as wrong values. (**1.30.22.2**)
+
+- Fixed an issue where the GUI would freeze after failing to connect to server. A limit has been added for the reconnection time. (**1.30.22.2**)
+
+- Fixed an issue where renaming a file in GUI would not actually change the file name in the file system as expected. (**1.30.22.2**)
+
 - Added support for DECIMAL128 data type. (**1.30.22.1**)
 
 - Added "Oracle" and "MySQL" options to the language dropdown for SQL parsing. (**1.30.22.1**)
