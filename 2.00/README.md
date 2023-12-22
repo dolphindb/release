@@ -1666,3 +1666,6 @@ Release Date: 2021-07-31
 
 * Null flag is not set after `replace!` a vector with NULL values. (**2.00.4**)
 
+## GUI
+
+- Fixed the lag in displaying large data sets. (**2.00.10.1**)
