@@ -1819,6 +1819,8 @@ Release Date: 2020-12-29
 
 ### GUI
 
+> Note: The version number of DolphinDB GUI has been adjusted to improve user experience. The new version number aligns with DolphinDB Server 200 and is forward compatible.
+
 - Added support for uploading a CSV file as an in-memory table, with a popup CSV editor for confirming the schema before creating the table. (**1.30.22.2**)
 
 - Added autosave feature to save scripts at scheduled intervals of 5 seconds. (**1.30.22.2**)
