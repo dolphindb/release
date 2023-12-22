@@ -5,6 +5,7 @@
     - [New Features](#new-features)
     - [Improvements](#improvements)
     - [Issues Fixed](#issues-fixed)
+  - [GUI](#gui)
 
 ## DolphinDB Server
 
