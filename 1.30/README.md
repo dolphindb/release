@@ -1,5 +1,11 @@
 # DolphinDB Release Notes
 
+============================================================================================
+
+> Note: This file contains release nots for DolphinDB Server version **1.30.22** and earlier. As of version **1.30.23**, this file is no longer maintained. For release notes and documentation on the latest DolphinDB Server, please refer to the new [DolphinDB Documentation](https://docs.dolphindb.com/en/index.html).
+
+============================================================================================
+
 - [DolphinDB Release Notes](#dolphindb-release-notes)
   - [DolphinDB Server](#dolphindb-server)
     - [New Features](#new-features)
