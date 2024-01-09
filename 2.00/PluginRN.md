@@ -1,28 +1,35 @@
 # Release Notes for DolphinDB Plugins
 
-- [AWSS3](#awss3)
-- [HBase](#hbase)
-- [HDFS](#hdfs)
-- [HDF5](#hdf5)
-- [HTTP Client](#http-client)
-- [Kafka](#kafka)
-- [kdb+](#kdb)
-- [mat](#mat)
-- [MongoDB](#mongodb)
-- [MQTT](#mqtt)
-- [mseed](#mseed)
-- [MySQL](#mysql)
-- [ODBC](#odbc)
-- [OPC](#opc)
-- [OPCUA](#opcua)
-- [ORC](#orc)
-- [Parquet](#parquet)
-- [SchemalessWriter](#schemalesswriter)
-- [Signal](#signal)
-- [SVM](#svm)
-- [Zlib](#zlib)
-- [Zip](#zip)
-- [ZMQ](#zmq)
+============================================================================================
+
+> Note: This README file contains release notes for DolphinDB plugin version **2.00.10** and earlier. As of version **2.00.11**, this file is no longer maintained. For release notes and documentation on the latest DolphinDB Server, please refer to the new [DolphinDB Documentation](https://docs.dolphindb.com/en/index.html).
+
+============================================================================================
+
+- [Release Notes for DolphinDB Plugins](#release-notes-for-dolphindb-plugins)
+  - [AWSS3](#awss3)
+  - [HBase](#hbase)
+  - [HDFS](#hdfs)
+  - [HDF5](#hdf5)
+  - [HTTP Client](#http-client)
+  - [Kafka](#kafka)
+  - [kdb+](#kdb)
+  - [mat](#mat)
+  - [MongoDB](#mongodb)
+  - [MQTT](#mqtt)
+  - [mseed](#mseed)
+  - [MySQL](#mysql)
+  - [ODBC](#odbc)
+  - [OPC](#opc)
+  - [OPCUA](#opcua)
+  - [ORC](#orc)
+  - [Parquet](#parquet)
+  - [SchemalessWriter](#schemalesswriter)
+  - [Signal](#signal)
+  - [SVM](#svm)
+  - [Zlib](#zlib)
+  - [Zip](#zip)
+  - [ZMQ](#zmq)
 
 
 
