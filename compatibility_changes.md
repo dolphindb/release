@@ -1,5 +1,11 @@
 # Compatibility Changes
 
+============================================================================================
+
+> Note: This file contains compatibility changes for DolphinDB Server version **1.30.22/2.00.10** and earlier. As of version **1.30.23/2.00.11**, this file is no longer maintained. For release notes and documentation on the latest DolphinDB Server, please refer to the new [DolphinDB Documentation](https://docs.dolphindb.com/en/index.html).
+
+============================================================================================
+
 This file provides an overview of the new features and changes (including updates to match industry standards) in version 1.30.22/2.00.10 that may impact your existing scripts and configurations. 
 
 Please review the file carefully to understand how your current setup may be affected by upgrading to this version.
