@@ -2,7 +2,7 @@
 
 ============================================================================================
 
-> Note: This README file contains release notes for DolphinDB plugin version **2.00.10** and earlier. As of version **2.00.11**, this file is no longer maintained. For release notes and documentation on the latest DolphinDB Server, please refer to the new [DolphinDB Documentation](https://docs.dolphindb.com/en/index.html).
+> Note: This file contains release notes for DolphinDB plugin version **2.00.10** and earlier. As of version **2.00.11**, this file is no longer maintained. For release notes and documentation on the latest DolphinDB Server, please refer to the new [DolphinDB Documentation](https://docs.dolphindb.com/en/index.html).
 
 ============================================================================================
 
