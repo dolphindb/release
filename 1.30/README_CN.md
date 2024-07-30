@@ -1,5 +1,11 @@
 # DolphinDB 发行说明
 
+============================================================================================
+
+注意：此仓库仅包含 DolphinDB server **1.30.22** 及更早版本的发行说明。从 **1.30.23** 版本开始，不再维护此仓库。有关 DolphinDB server 的发行说明和文档，请参考[DolphinDB Documentation](https://docs.dolphindb.cn/zh/index.html)。
+
+============================================================================================
+
 - [DolphinDB 发行说明](#dolphindb-发行说明)
   - [版本兼容性说明列表](#版本兼容性说明列表)
   - [DolphinDB 服务器](#dolphindb-服务器)
@@ -28,7 +34,7 @@
 发行日期： 2023-07-20
 
 [Linux64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.4.zip) | 
-[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.3_JIT.zip) | 
+[Linux64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.4_JIT.zip) | 
 [Linux64 ABI binary](https://www.dolphindb.cn/downloads/DolphinDB_Linux64_V1.30.22.4_ABI.zip) | 
 [Windows64 binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.4.zip) |
 [Windows64 JIT binary](https://www.dolphindb.cn/downloads/DolphinDB_Win64_V1.30.22.3_JIT.zip)
@@ -1293,6 +1299,7 @@
 ## 客户端工具
 
 ### GUI
+
   为提升用户体验，DolphinDB GUI 客户端的版本号现已调整。新的版本号与 DolphinDB Server 200 系列对齐，并向前兼容。
   * 新增支持上传 CSV 文件为内存表、并配备引导确认其 schema 的功能。（**1.30.22.2**）
   * 新增支持定时自动保存文件功能，时间间隔为5s。（**1.30.22.2**）
