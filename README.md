@@ -1,3 +1,10 @@
+
+============================================================================================
+
+> Note: This README file contains release notes for DolphinDB Server version **1.30.22/2.00.10** and earlier. As of version **1.30.23/2.00.11**, this file is no longer maintained. For release notes and documentation on the latest DolphinDB Server, please refer to the new [DolphinDB Documentation](https://docs.dolphindb.com/en/index.html).
+
+============================================================================================
+
 This document lists the release notes from DolphinDB version 0.60 and all subsequent versions. Each notes includes updates and download links of DolphinDB server, GUI, APIs and plugins.
 
 ---
@@ -5,7 +12,7 @@ This document lists the release notes from DolphinDB version 0.60 and all subseq
 
 [DolphinDB V2.00 Release Notes](2.00/README.md) (release date : 2021-07-31)
 
-[DolphinDB V1.30 Release Notes](1.30/README.md) (release date : 2020-12-29)
+[DolphinDB V1.30 Release Notes](1.30/README_CN.md) (release date : 2020-12-29)
 
 [DolphinDB V1.20 Release Notes](1.20/README.md) (release date : 2020-07-07)
 
@@ -46,5 +53,3 @@ This document lists the release notes from DolphinDB version 0.60 and all subseq
 Server & API help document: http://www.dolphindb.com/help/  
 
 GUI & cluster manager help document: http://www.dolphindb.com/gui_help/  
-
-Slack community: https://dolphindb.slack.com/join/shared_invite/zt-1e9w27dfl-3W2hYVIU4~HTfhCF4pE1Dg#/shared-invite/email
